@@ -89,6 +89,7 @@ const pillars = [
 
 export default function Programs() {
   return (
+    <>
     <PageShell
       eyebrow="Our work"
       title="Seven program areas. One coherent mission."
