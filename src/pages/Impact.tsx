@@ -77,5 +77,8 @@ export default function Impact() {
         </div>
       </section>
     </PageShell>
+    <ScalePrinciplesSection />
+    <CostEfficiencySection />
+    </>
   );
 }
