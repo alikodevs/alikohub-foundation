@@ -71,11 +71,15 @@ const Index = () => {
         <SystemicBarriersSection />
         <CurrentApproachesGapSection />
         <SystemicSolutionsBand />
+        <SolutionPositioningSection />
         <SevenPrioritiesSection />
         <DeliveryModelSection />
+        <OperationalizingFlowSection />
         <ImplementationPartnerSection />
+        <WhyDifferentSection />
         <ProgramPillarsSection />
         <WhereWeWorkPreview />
+        <PartnershipModelComparisonSection />
         <WhyPartnershipSection />
         <TransparencyBand />
         <LegalSeparationStrip />
