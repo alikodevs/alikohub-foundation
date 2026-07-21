@@ -68,22 +68,26 @@ export default function Partnership() {
         </ul>
       </section>
 
-      <section className="mt-16 rounded-xl border border-border bg-secondary/60 p-8">
-        <h2 className="font-heading text-2xl font-semibold text-foreground">Start a conversation</h2>
+      <section className="mt-16" aria-labelledby="partnership-inquiry">
+        <h2 id="partnership-inquiry" className="font-heading text-2xl font-semibold text-foreground">
+          Start a partnership conversation.
+        </h2>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          A structured partnership inquiry form is being finalized alongside our accessibility and privacy review. Until then, reach us directly by email and we will respond personally.
+          Share a brief about your organization, the community you serve, and the collaboration you have in mind. A member of our team will respond personally. You can also email us at{" "}
+          <a href={`mailto:${foundation.contactEmail}?subject=Partnership%20Inquiry`} className="font-semibold text-primary hover:underline">
+            {foundation.contactEmail}
+          </a>
+          .
         </p>
-        <a
-          href={`mailto:${foundation.contactEmail}?subject=Partnership%20Inquiry`}
-          className="mt-5 inline-flex items-center rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
-        >
-          Email {foundation.contactEmail}
-        </a>
+        <div className="mt-8">
+          <InquiryForm sourcePage="/partnership" defaultType="partnership" lockType />
+        </div>
       </section>
 
       <div className="mt-12">
         <InDevelopmentNote note="Standard partnership templates, MOUs, and due-diligence materials are in preparation and will be linked here once approved." />
       </div>
+
 
       <div className="mt-16">
         <LegalSeparationStrip />
