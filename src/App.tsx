@@ -17,6 +17,17 @@ const Signup = lazy(() => import("./pages/Signup"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 
+// Foundation pages
+const Impact = lazy(() => import("./pages/Impact"));
+const WhereWeWork = lazy(() => import("./pages/WhereWeWork"));
+const Stories = lazy(() => import("./pages/Stories"));
+const GetInvolved = lazy(() => import("./pages/GetInvolved"));
+const Resources = lazy(() => import("./pages/Resources"));
+const Transparency = lazy(() => import("./pages/Transparency"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Governance = lazy(() => import("./pages/Governance"));
+const Ethics = lazy(() => import("./pages/Ethics"));
+
 // Admin pages
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminHero = lazy(() => import("./pages/admin/AdminHero"));
