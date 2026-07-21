@@ -36,6 +36,7 @@ const AdminTeam = lazy(() => import("./pages/admin/AdminTeam"));
 const AdminServices = lazy(() => import("./pages/admin/AdminServices"));
 const AdminPrograms = lazy(() => import("./pages/admin/AdminPrograms"));
 const AdminMedia = lazy(() => import("./pages/admin/AdminMedia"));
+const AdminInquiries = lazy(() => import("./pages/admin/AdminInquiries"));
 
 const queryClient = new QueryClient();
 
