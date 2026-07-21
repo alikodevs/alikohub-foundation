@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { StatusAwareCTA } from "@/components/foundation/StatusAwareCTA";
+import foundationMark from "@/assets/foundation-mark.png";
 import { LegalStatusNotice } from "@/components/foundation/LegalStatusNotice";
 import { foundation } from "@/config/foundation";
 
