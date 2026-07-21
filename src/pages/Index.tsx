@@ -8,6 +8,7 @@ import {
   TransparencyBand,
   FinalCTASection,
 } from "@/components/foundation/HomeSections";
+import { DeliveryModelSection } from "@/components/foundation/DeliveryModelSection";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
 import { Seo } from "@/components/Seo";
 import { foundation } from "@/config/foundation";
@@ -51,6 +52,7 @@ const Index = () => {
       <main>
         <FoundationHero />
         <MissionBand />
+        <DeliveryModelSection />
         <ProgramPillarsSection />
         <WhereWeWorkPreview />
         <TransparencyBand />

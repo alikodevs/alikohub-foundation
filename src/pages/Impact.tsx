@@ -1,12 +1,13 @@
 import { PageShell } from "@/components/foundation/PageShell";
-import { Users, Briefcase, Building2, Target, TrendingUp, CheckCircle2, BookOpenCheck, ShieldCheck } from "lucide-react";
+import { Users, Briefcase, Building2, Target, TrendingUp, CheckCircle2, BookOpenCheck, ShieldCheck, Globe2 } from "lucide-react";
 
 const outcomeKPIs = [
-  { label: "Youth reached (five-year target)", endline: "50,000", icon: Users, note: "Cumulative youth served across ten hub countries." },
-  { label: "Employment outcome rate", endline: "75–85%", icon: Briefcase, note: "Learners moving into jobs, apprenticeships, or enterprise." },
+  { label: "Youth reached (five-year target)", endline: "50,000", icon: Users, note: "Cumulative youth served across our country programs." },
+  { label: "Country programs by Year 5", endline: "15", icon: Globe2, note: "Flagships in the U.S. and Ethiopia, expanding across Africa." },
+  { label: "Employment / income outcome rate", endline: "75–85%", icon: Briefcase, note: "Learners moving into jobs, apprenticeships, or enterprise." },
   { label: "Female participation rate", endline: "≥45%", icon: Target, note: "Program-wide floor for gender inclusion." },
   { label: "Youth-led enterprises", endline: "25–40", icon: TrendingUp, note: "New ventures incubated through our hubs." },
-  { label: "Innovation hubs operational", endline: "10+", icon: Building2, note: "Regional hubs across Africa, Europe, and the Middle East." },
+  { label: "Innovation hubs operational", endline: "10+", icon: Building2, note: "Locally led hubs across Africa and North America." },
 ];
 
 const outputKPIs = [
