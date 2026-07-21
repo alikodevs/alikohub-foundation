@@ -1,15 +1,21 @@
 import { ReactNode } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { Seo } from "@/components/Seo";
 
 interface PageShellProps {
   title: string;
   intro?: string;
   eyebrow?: string;
   children?: ReactNode;
+  seo?: {
+    title: string;
+    description: string;
+    path: string;
+  };
 }
 
-export function PageShell({ title, intro, eyebrow, children }: PageShellProps) {
+export function PageShell({ title, intro, eyebrow, children, seo }: PageShellProps) {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
