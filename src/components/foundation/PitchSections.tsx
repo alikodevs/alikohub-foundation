@@ -15,6 +15,10 @@ import {
   Compass,
   BarChart3,
   Handshake,
+  CheckCircle2,
+  XCircle,
+  ArrowRight,
+  CircleCheck,
 } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
