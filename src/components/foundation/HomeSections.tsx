@@ -1,0 +1,227 @@
+import { approach, programPillars, foundation } from "@/config/foundation";
+import { Link } from "react-router-dom";
+import { ArrowRight, Compass, Wrench, Rocket, LineChart, Move } from "lucide-react";
+
+const stageIcons = {
+  Listen: Compass,
+  Equip: Wrench,
+  Implement: Rocket,
+  Measure: LineChart,
+  Scale: Move,
+} as const;
+
+export function MissionBand() {
+  return (
+    <section className="border-b border-border bg-secondary py-20">
+      <div className="container mx-auto px-6">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary">Our mission</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Locally grounded programs, global partnerships.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              {foundation.mission}
+            </p>
+            <p className="mt-4 text-sm italic text-muted-foreground">
+              &ldquo;{foundation.tagline}&rdquo;
+            </p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary">Our approach</p>
+            <h3 className="mt-3 font-heading text-xl font-semibold text-foreground">
+              Listen. Equip. Implement. Measure. Scale.
+            </h3>
+            <ol className="mt-6 space-y-3">
+              {approach.map((s) => {
+                const Icon = stageIcons[s.stage as keyof typeof stageIcons];
+                return (
+                  <li
+                    key={s.stage}
+                    className="flex items-start gap-4 rounded-lg border border-border bg-background p-4"
+                  >
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                      <Icon className="h-4 w-4" aria-hidden />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{s.stage}</p>
+                      <p className="text-sm text-muted-foreground">{s.meaning}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ProgramPillarsSection() {
+  return (
+    <section className="border-b border-border py-20">
+      <div className="container mx-auto px-6">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary">Program areas</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Seven interconnected pillars.
+            </h2>
+            <p className="mt-4 text-base text-muted-foreground">
+              Draft program areas aligned with our mission. Specific initiatives are launched
+              only when partners, funding, and community consent are in place.
+            </p>
+          </div>
+          <Link
+            to="/programs"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+          >
+            View all programs
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {programPillars.map((p) => (
+            <article
+              key={p.slug}
+              className="group rounded-xl border border-border bg-card p-6 transition-shadow hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <h3 className="font-heading text-lg font-semibold text-foreground">{p.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.summary}</p>
+              <p className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-primary opacity-70 group-hover:opacity-100">
+                In development
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function WhereWeWorkPreview() {
+  return (
+    <section
+      className="border-b border-border py-20"
+      style={{ background: "var(--gradient-navy)" }}
+    >
+      <div className="container mx-auto px-6">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary-foreground/80">
+              Where we work
+            </p>
+            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
+              Rooted in place. Connected globally.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-primary-foreground/80">
+              Our first operating geographies are Washington State in the United States and Ethiopia.
+              We will only claim presence in additional regions once approved partnerships and
+              legal permissions are documented.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              {
+                place: "Washington State, USA",
+                role: "Organizational home, governance, diaspora engagement, and U.S.-based partnerships.",
+              },
+              {
+                place: "Ethiopia",
+                role: "Priority region for community-designed programs across education, WASH, and workforce development.",
+              },
+            ].map((r) => (
+              <div key={r.place} className="rounded-xl border border-white/15 bg-white/5 p-5">
+                <h3 className="font-heading text-lg font-semibold text-primary-foreground">
+                  {r.place}
+                </h3>
+                <p className="mt-2 text-sm text-primary-foreground/80">{r.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function TransparencyBand() {
+  return (
+    <section className="border-b border-border bg-secondary py-20">
+      <div className="container mx-auto px-6">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+              Trust & transparency
+            </p>
+            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Credibility we build, not claim.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              We publish our legal status, governing board, safeguarding commitments, and policies
+              openly. Financial reporting will be added as the organization matures and audited
+              records become available.
+            </p>
+            <Link
+              to="/transparency"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+            >
+              View transparency
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {[
+              "Legal status disclosed",
+              "Board of directors listed",
+              "Separation from AlikoHub LLC stated",
+              "Safeguarding commitment forthcoming",
+              "Privacy & accessibility notices",
+              "Financial reports when available",
+            ].map((item) => (
+              <li
+                key={item}
+                className="rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium text-foreground"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function FinalCTASection() {
+  return (
+    <section className="py-20">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card p-10 text-center shadow-[var(--shadow-card)]">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Build lasting opportunity with us.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground">
+            Whether you represent an institution, a community, or bring skills and mentorship,
+            there is a role for you in the Foundation&rsquo;s next chapter.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              to="/partnership"
+              className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition hover:brightness-110"
+            >
+              Partner With Us
+            </Link>
+            <Link
+              to="/programs"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-border bg-background px-6 text-sm font-semibold text-foreground transition hover:bg-secondary"
+            >
+              Explore Our Work
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

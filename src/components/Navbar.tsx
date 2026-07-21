@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Phone, Globe, Menu, X, ExternalLink, Sun, Moon, User, LogOut, Settings } from "lucide-react";
+import { Menu, X, Sun, Moon, User, LogOut, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
 import { useAuth } from "@/hooks/useAuth";
@@ -12,14 +12,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import alikohubLogo from "@/assets/alikohub-logo.png";
+import { StatusAwareCTA } from "@/components/foundation/StatusAwareCTA";
+import { LegalStatusNotice } from "@/components/foundation/LegalStatusNotice";
+import { foundation } from "@/config/foundation";
 
-const navLinks = [
-  { label: "Home", href: "/" },
+const primaryNav = [
   { label: "About", href: "/about" },
-  { label: "Ventures", href: "/programs" },
-  { label: "Partnership", href: "/partnership" },
-  { label: "Career", href: "https://career.alikohub.com/", external: true },
+  { label: "Our Work", href: "/programs" },
+  { label: "Impact", href: "/impact" },
+  { label: "Where We Work", href: "/where-we-work" },
+  { label: "Stories & Insights", href: "/stories" },
+  { label: "Partnerships", href: "/partnership" },
+  { label: "Get Involved", href: "/get-involved" },
+];
+
+const utilityNav = [
+  { label: "Resources", href: "/resources" },
+  { label: "Transparency", href: "/transparency" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -34,81 +44,68 @@ export function Navbar() {
     navigate("/");
   };
 
+  const isActive = (href: string) =>
+    href === "/" ? location.pathname === "/" : location.pathname.startsWith(href);
+
   return (
     <>
-      {/* Top bar */}
-      <div className="border-b border-border/50 bg-[hsl(var(--navbar-bg))] dark:bg-card/50 backdrop-blur-sm">
-        <div className="container mx-auto flex items-center justify-between px-6 py-2 text-sm text-[hsl(var(--navbar-fg))] dark:text-muted-foreground">
-          <div className="flex items-center gap-6">
-            <a href="mailto:info@alikohub.com" className="flex items-center gap-1.5 hover:text-primary transition-colors text-[hsl(var(--navbar-fg))] dark:text-muted-foreground">
-              <Mail className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">info@alikohub.com</span>
-            </a>
-            <a href="tel:+12063535373" className="flex items-center gap-1.5 hover:text-primary transition-colors text-[hsl(var(--navbar-fg))] dark:text-muted-foreground">
-              <Phone className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">+1 206 353 5373</span>
-            </a>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Globe className="h-3.5 w-3.5" />
-            <span>English</span>
-          </div>
+      <LegalStatusNotice />
+
+      {/* Utility bar */}
+      <div className="hidden border-b border-border bg-secondary/60 lg:block">
+        <div className="container mx-auto flex items-center justify-end gap-6 px-6 py-1.5 text-xs text-muted-foreground">
+          {utilityNav.map((l) => (
+            <Link key={l.href} to={l.href} className="transition-colors hover:text-primary">
+              {l.label}
+            </Link>
+          ))}
         </div>
       </div>
 
       {/* Main nav */}
-      <nav className="sticky top-0 z-50 border-b border-border/50 bg-[hsl(var(--navbar-bg))] dark:bg-background/80 backdrop-blur-xl">
-        <div className="container mx-auto flex items-center justify-between px-6 py-4">
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img src={alikohubLogo} alt="AlikoHub" className="h-16" />
+      <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
+        <div className="container mx-auto flex items-center justify-between gap-6 px-6 py-4">
+          <Link to="/" className="flex items-center gap-2" aria-label={`${foundation.legalName} home`}>
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-primary font-heading text-base font-bold text-primary-foreground">
+              A
+            </span>
+            <span className="flex flex-col leading-tight">
+              <span className="font-heading text-sm font-bold text-foreground">AlikoHub</span>
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-primary">
+                Foundation
+              </span>
+            </span>
           </Link>
 
-          {/* Desktop links */}
-          <div className="hidden items-center gap-7 lg:flex">
-            {navLinks.map((link) =>
-              link.external ? (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm font-semibold text-[hsl(var(--navbar-fg))] transition-colors hover:text-primary"
-                >
-                  {link.label}
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              ) : (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className={`text-sm font-semibold transition-colors hover:text-primary ${
-                    location.pathname === link.href ? "text-primary" : "text-[hsl(var(--navbar-fg))]"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
+          <div className="hidden items-center gap-5 xl:flex">
+            {primaryNav.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={`text-sm font-semibold transition-colors hover:text-primary ${
+                  isActive(link.href) ? "text-primary" : "text-foreground"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-2 lg:flex">
             <Button
-              variant="outline"
-              size="sm"
+              variant="ghost"
+              size="icon"
               onClick={toggleTheme}
-              className="text-navy dark:text-white border-navy/40 dark:border-white/30 hover:bg-navy/10 dark:hover:bg-white/10 font-semibold"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             >
-              {theme === "dark" ? <Sun className="h-4 w-4 mr-2" /> : <Moon className="h-4 w-4 mr-2" />}
-              {theme === "dark" ? "Light Mode" : "Dark Mode"}
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
-            
+
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-[hsl(var(--navbar-fg))] hover:text-primary">
-                    <User className="h-4 w-4 mr-2" />
+                  <Button variant="ghost" size="sm">
+                    <User className="mr-2 h-4 w-4" />
                     Account
                   </Button>
                 </DropdownMenuTrigger>
@@ -116,115 +113,101 @@ export function Navbar() {
                   {isAdmin && (
                     <>
                       <DropdownMenuItem onClick={() => navigate("/admin")}>
-                        <Settings className="h-4 w-4 mr-2" />
+                        <Settings className="mr-2 h-4 w-4" />
                         Admin Dashboard
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                     </>
                   )}
                   <DropdownMenuItem onClick={handleSignOut}>
-                    <LogOut className="h-4 w-4 mr-2" />
+                    <LogOut className="mr-2 h-4 w-4" />
                     Sign Out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <>
-                <Button variant="ghost" size="sm" className="text-[hsl(var(--navbar-fg))] hover:text-primary" asChild>
-                  <Link to="/login">Login</Link>
-                </Button>
-                <Button size="sm" className="bg-primary text-primary-foreground hover:bg-amber-light shadow-[var(--shadow-amber)]" asChild>
-                  <Link to="/signup">Sign Up</Link>
-                </Button>
-              </>
-            )}
+            ) : null}
+
+            <StatusAwareCTA size="sm" />
           </div>
 
-          {/* Mobile toggle */}
           <button
-            className="lg:hidden text-[hsl(var(--navbar-fg))]"
+            className="text-foreground xl:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden border-t border-white/10 lg:hidden bg-[hsl(var(--navbar-bg))]"
+              className="overflow-hidden border-t border-border bg-background xl:hidden"
             >
-              <div className="flex flex-col gap-1 px-6 py-6">
-                {navLinks.map((link) =>
-                  link.external ? (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 rounded-lg px-3 py-2.5 text-sm font-semibold text-[hsl(var(--navbar-fg))] hover:text-primary transition-colors"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {link.label}
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                  ) : (
+              <div className="container mx-auto flex flex-col gap-1 px-6 py-6">
+                {primaryNav.map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className={`block rounded-md px-3 py-2.5 text-sm font-semibold transition-colors ${
+                      isActive(link.href)
+                        ? "bg-secondary text-primary"
+                        : "text-foreground hover:bg-secondary"
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="mt-2 border-t border-border pt-2">
+                  {utilityNav.map((link) => (
                     <Link
-                      key={link.label}
+                      key={link.href}
                       to={link.href}
-                      className={`block rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors hover:text-primary ${
-                        location.pathname === link.href ? "text-primary bg-primary/10" : "text-[hsl(var(--navbar-fg))]"
-                      }`}
+                      className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-primary"
                       onClick={() => setMobileOpen(false)}
                     >
                       {link.label}
                     </Link>
-                  )
-                )}
-                <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-2">
+                  ))}
+                </div>
+                <div className="mt-4 flex flex-col gap-2 border-t border-border pt-4">
                   <button
                     onClick={toggleTheme}
-                    className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-semibold text-[hsl(var(--navbar-fg))] hover:text-primary transition-colors"
-                    aria-label="Toggle theme"
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-secondary"
                   >
                     {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                    {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                    {theme === "dark" ? "Light mode" : "Dark mode"}
                   </button>
-                  
-                  {user ? (
-                    <>
-                      {isAdmin && (
-                        <Link
-                          to="/admin"
-                          className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-semibold text-[hsl(var(--navbar-fg))] hover:text-primary transition-colors"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          <Settings className="h-4 w-4" />
-                          Admin Dashboard
-                        </Link>
-                      )}
-                      <button
-                        onClick={() => { handleSignOut(); setMobileOpen(false); }}
-                        className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-semibold text-[hsl(var(--navbar-fg))] hover:text-primary transition-colors"
-                      >
-                        <LogOut className="h-4 w-4" />
-                        Sign Out
-                      </button>
-                    </>
-                  ) : (
-                    <div className="flex gap-3">
-                      <Button variant="ghost" size="sm" className="flex-1 text-[hsl(var(--navbar-fg))]" asChild>
-                        <Link to="/login" onClick={() => setMobileOpen(false)}>Login</Link>
-                      </Button>
-                      <Button size="sm" className="flex-1 bg-primary text-primary-foreground" asChild>
-                        <Link to="/signup" onClick={() => setMobileOpen(false)}>Sign Up</Link>
-                      </Button>
-                    </div>
+                  {user && isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-secondary"
+                    >
+                      <Settings className="h-4 w-4" />
+                      Admin Dashboard
+                    </Link>
                   )}
+                  {user && (
+                    <button
+                      onClick={() => {
+                        handleSignOut();
+                        setMobileOpen(false);
+                      }}
+                      className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-secondary"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Sign out
+                    </button>
+                  )}
+                  <div className="pt-2">
+                    <StatusAwareCTA size="default" className="w-full" />
+                  </div>
                 </div>
               </div>
             </motion.div>

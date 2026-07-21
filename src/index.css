@@ -6,67 +6,80 @@
 
 @layer base {
   :root {
+    /* AlikoHub Foundation palette
+       Deep Navy #0F2A44, Trust Blue #1E5A8A, Warm Surface #F7F5F0,
+       Text Charcoal #1D2935, Muted #5F6B75, Border #D8E0E6, Accent Amber (sparing) */
     --background: 0 0% 100%;
-    --foreground: 215 28% 11%;
+    --foreground: 210 30% 16%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 28% 11%;
+    --card-foreground: 210 30% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 28% 11%;
+    --popover-foreground: 210 30% 16%;
 
-    --primary: 37 78% 56%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary = Deep Navy for authority/trust; amber is now an accent, not primary */
+    --primary: 211 65% 16%;
+    --primary-foreground: 43 24% 96%;
 
-    --secondary: 50 20% 97%;
-    --secondary-foreground: 215 28% 11%;
+    /* Secondary = Warm editorial surface */
+    --secondary: 43 24% 96%;
+    --secondary-foreground: 210 30% 16%;
 
-    --muted: 50 15% 97%;
-    --muted-foreground: 215 16% 34%;
+    --muted: 43 24% 96%;
+    --muted-foreground: 210 11% 42%;
 
-    --accent: 200 70% 55%;
+    /* Accent = Trust Blue for links and quiet emphasis */
+    --accent: 208 65% 33%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 74% 42%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 10% 88%;
-    --input: 220 10% 88%;
-    --ring: 37 78% 56%;
+    --border: 205 18% 87%;
+    --input: 205 18% 87%;
+    --ring: 211 65% 16%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Custom AlikoHub tokens */
-    --navy: 220 40% 18%;
-    --navy-light: 0 0% 100%;
-    --navy-medium: 50 15% 95%;
-    --amber: 37 78% 56%;
-    --amber-light: 37 85% 65%;
-    --amber-glow: 37 90% 70%;
-    --sky: 204 60% 45%;
-    --sky-light: 204 70% 60%;
+    /* Foundation semantic tokens */
+    --navy: 211 65% 16%;          /* Deep Navy */
+    --navy-light: 208 55% 26%;
+    --navy-medium: 211 45% 22%;
+    --trust-blue: 208 65% 33%;
+    --warm-surface: 43 24% 96%;
+    --charcoal: 210 30% 16%;
+    --muted-text: 210 11% 42%;
 
-    /* Navbar-specific token for light mode */
-    --navbar-bg: 220 40% 18%;
-    --navbar-fg: 210 30% 90%;
+    /* Accent amber — reserved for sparing highlights, never large fields */
+    --amber: 32 78% 48%;
+    --amber-light: 32 78% 58%;
+    --amber-glow: 32 90% 62%;
+    --sky: 208 65% 45%;
+    --sky-light: 208 70% 60%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(204 70% 93%) 0%, hsl(204 60% 90%) 40%, hsl(210 50% 95%) 100%);
-    --gradient-amber: linear-gradient(135deg, hsl(37 78% 56%) 0%, hsl(30 85% 50%) 100%);
-    --gradient-card: linear-gradient(160deg, hsl(0 0% 100%) 0%, hsl(50 15% 98%) 100%);
+    /* Navbar */
+    --navbar-bg: 211 65% 16%;
+    --navbar-fg: 43 24% 96%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(43 24% 96%) 0%, hsl(0 0% 100%) 60%, hsl(205 30% 95%) 100%);
+    --gradient-navy: linear-gradient(135deg, hsl(211 65% 16%) 0%, hsl(211 55% 22%) 100%);
+    --gradient-amber: linear-gradient(135deg, hsl(32 78% 48%) 0%, hsl(28 82% 42%) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(0 0% 100%) 0%, hsl(43 24% 97%) 100%);
     --gradient-glow: none;
 
-    --shadow-card: 0 2px 12px -2px hsl(220 20% 50% / 0.08);
-    --shadow-card-hover: 0 8px 30px -6px hsl(37 78% 56% / 0.12);
-    --shadow-amber: 0 4px 16px -4px hsl(37 78% 56% / 0.25);
+    --shadow-card: 0 2px 12px -2px hsl(211 40% 20% / 0.08);
+    --shadow-card-hover: 0 10px 30px -8px hsl(211 40% 20% / 0.15);
+    --shadow-amber: 0 4px 16px -4px hsl(32 78% 48% / 0.25);
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 215 28% 11%;
-    --sidebar-primary: 37 78% 56%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 50 15% 93%;
-    --sidebar-accent-foreground: 215 28% 11%;
-    --sidebar-border: 220 10% 88%;
-    --sidebar-ring: 37 78% 56%;
+    --sidebar-foreground: 210 30% 16%;
+    --sidebar-primary: 211 65% 16%;
+    --sidebar-primary-foreground: 43 24% 96%;
+    --sidebar-accent: 43 24% 94%;
+    --sidebar-accent-foreground: 210 30% 16%;
+    --sidebar-border: 205 18% 87%;
+    --sidebar-ring: 211 65% 16%;
   }
 
   .dark {
