@@ -1,5 +1,6 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { Users, Briefcase, Target, TrendingUp, CheckCircle2, BookOpenCheck, ShieldCheck, HeartHandshake } from "lucide-react";
+import { ScalePrinciplesSection, CostEfficiencySection } from "@/components/foundation/ProgramSections";
 
 const outcomeAreas = [
   { icon: Users, title: "Youth reached", note: "Learners engaged through Foundation-supported programs based in Seattle, Washington and Ethiopia." },
