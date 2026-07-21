@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      foundation_inquiries: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          inquiry_type: Database["public"]["Enums"]["inquiry_type"]
+          message: string
+          name: string
+          organization: string | null
+          source_page: string | null
+          status: Database["public"]["Enums"]["inquiry_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          inquiry_type?: Database["public"]["Enums"]["inquiry_type"]
+          message: string
+          name: string
+          organization?: string | null
+          source_page?: string | null
+          status?: Database["public"]["Enums"]["inquiry_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          inquiry_type?: Database["public"]["Enums"]["inquiry_type"]
+          message?: string
+          name?: string
+          organization?: string | null
+          source_page?: string | null
+          status?: Database["public"]["Enums"]["inquiry_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       hero_content: {
         Row: {
           background_image_url: string | null
@@ -272,6 +311,8 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      inquiry_status: "new" | "in_review" | "responded" | "archived"
+      inquiry_type: "partnership" | "volunteer" | "media" | "general"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -400,6 +441,8 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      inquiry_status: ["new", "in_review", "responded", "archived"],
+      inquiry_type: ["partnership", "volunteer", "media", "general"],
     },
   },
 } as const
