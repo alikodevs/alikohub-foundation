@@ -1,5 +1,10 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { GraduationCap, Heart, Cpu, Briefcase, Droplets, CalendarDays, Leaf, ArrowRight } from "lucide-react";
+import {
+  ImplementationJourneySection,
+  DeliveryPathwaysSection,
+  ProgramDesignPrinciplesSection,
+} from "@/components/foundation/ProgramSections";
 
 const pillars = [
   {
