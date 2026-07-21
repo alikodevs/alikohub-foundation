@@ -1,8 +1,6 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { InquiryForm } from "@/components/foundation/InquiryForm";
-import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
-import { foundationStatus } from "@/config/foundation";
-import { Handshake, HeartHandshake, Newspaper } from "lucide-react";
+import { Handshake, HeartHandshake, Newspaper, Heart } from "lucide-react";
 
 const pathways = [
   {
@@ -14,6 +12,11 @@ const pathways = [
     icon: HeartHandshake,
     title: "Volunteer skills & mentorship",
     body: "Advisors, mentors, and practitioners can offer time and expertise to strengthen program design and delivery.",
+  },
+  {
+    icon: Heart,
+    title: "Donate",
+    body: "Support education, WASH, health, and workforce programs across our hub countries. Contributions are tax-deductible to the extent allowed by law.",
   },
   {
     icon: Newspaper,
@@ -29,7 +32,7 @@ export default function GetInvolved() {
       title="There is a role for you."
       intro="Choose the pathway that best matches how you can contribute. Every submission is read by a member of the Foundation team."
     >
-      <section aria-label="Ways to get involved" className="grid gap-6 md:grid-cols-3">
+      <section aria-label="Ways to get involved" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {pathways.map((p) => (
           <article key={p.title} className="rounded-xl border border-border bg-card p-6">
             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
@@ -52,18 +55,7 @@ export default function GetInvolved() {
           <InquiryForm sourcePage="/get-involved" defaultType="volunteer" />
         </div>
       </section>
-
-      {!foundationStatus.donationsEnabled && (
-        <div className="mt-12 rounded-xl border border-border bg-secondary/60 p-6 text-sm text-muted-foreground">
-          <p>
-            <span className="font-semibold text-foreground">Donations:</span> We are not currently accepting donations. Financial giving will be enabled only after Washington nonprofit registration and 501(c)(3) recognition are confirmed and appropriate compliance workflows are in place.
-          </p>
-        </div>
-      )}
-
-      <div className="mt-16">
-        <LegalSeparationStrip />
-      </div>
     </PageShell>
   );
 }
+

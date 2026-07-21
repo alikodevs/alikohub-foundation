@@ -89,16 +89,13 @@ export function Footer() {
         </div>
       </div>
 
-      <LegalSeparationStrip compact />
-
       <div className="border-t border-white/10">
         <div className="container mx-auto flex flex-col gap-3 px-6 py-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {new Date().getFullYear()} {foundation.legalName}. All rights reserved.
           </p>
-          <p>
-            <span className="font-semibold text-white/80">Status:</span>{" "}
-            Washington nonprofit formation and 501(c)(3) recognition pending.
+          <p className="text-white/70">
+            A 501(c)(3) nonprofit organization.
           </p>
           <div className="flex gap-4">
             <Link to="/ethics" className="hover:text-white">
