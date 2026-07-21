@@ -16,7 +16,7 @@ const pathways = [
   {
     icon: Heart,
     title: "Donate",
-    body: "Support education, WASH, health, and workforce programs across our hub countries. Contributions are tax-deductible to the extent allowed by law.",
+    body: "Support education, WASH, health, and workforce programs delivered by the Foundation. Contributions are tax-deductible to the extent allowed by law.",
   },
   {
     icon: Newspaper,
