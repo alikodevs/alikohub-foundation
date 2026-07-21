@@ -1,10 +1,12 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
+import { EcosystemArchitectureSection } from "@/components/foundation/ProgramSections";
 import { foundation, approach } from "@/config/foundation";
 import { Link } from "react-router-dom";
 
 export default function About() {
   return (
+    <>
     <PageShell
       eyebrow="About"
       title="A foundation built on listening."
@@ -62,5 +64,7 @@ export default function About() {
         <LegalSeparationStrip />
       </div>
     </PageShell>
+    <EcosystemArchitectureSection />
+    </>
   );
 }

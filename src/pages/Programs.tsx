@@ -1,5 +1,10 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { GraduationCap, Heart, Cpu, Briefcase, Droplets, CalendarDays, Leaf, ArrowRight } from "lucide-react";
+import {
+  ImplementationJourneySection,
+  DeliveryPathwaysSection,
+  ProgramDesignPrinciplesSection,
+} from "@/components/foundation/ProgramSections";
 
 const pillars = [
   {
@@ -84,6 +89,7 @@ const pillars = [
 
 export default function Programs() {
   return (
+    <>
     <PageShell
       eyebrow="Our work"
       title="Seven program areas. One coherent mission."
@@ -119,5 +125,9 @@ export default function Programs() {
         ))}
       </div>
     </PageShell>
+      <DeliveryPathwaysSection />
+      <ImplementationJourneySection />
+      <ProgramDesignPrinciplesSection />
+    </>
   );
 }

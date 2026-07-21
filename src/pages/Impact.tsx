@@ -1,5 +1,6 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { Users, Briefcase, Target, TrendingUp, CheckCircle2, BookOpenCheck, ShieldCheck, HeartHandshake } from "lucide-react";
+import { ScalePrinciplesSection, CostEfficiencySection } from "@/components/foundation/ProgramSections";
 
 const outcomeAreas = [
   { icon: Users, title: "Youth reached", note: "Learners engaged through Foundation-supported programs based in Seattle, Washington and Ethiopia." },
@@ -27,6 +28,7 @@ const principles = [
 
 export default function Impact() {
   return (
+    <>
     <PageShell
       eyebrow="Impact"
       title="What we measure, and how."
@@ -75,5 +77,8 @@ export default function Impact() {
         </div>
       </section>
     </PageShell>
+    <ScalePrinciplesSection />
+    <CostEfficiencySection />
+    </>
   );
 }
