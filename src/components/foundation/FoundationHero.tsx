@@ -44,7 +44,7 @@ export function FoundationHero() {
           >
             <img
               src={heroImage}
-              alt="A young learner engaged in study — representative image of the communities the Foundation aims to serve."
+              alt="Community members in East Africa collaborating on a solar and agriculture project at sunset."
               className="h-full w-full object-cover"
               loading="eager"
             />
