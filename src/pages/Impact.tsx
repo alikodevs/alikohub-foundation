@@ -1,22 +1,21 @@
 import { PageShell } from "@/components/foundation/PageShell";
-import { Users, Briefcase, Building2, Target, TrendingUp, CheckCircle2, BookOpenCheck, ShieldCheck, Globe2 } from "lucide-react";
+import { Users, Briefcase, Target, TrendingUp, CheckCircle2, BookOpenCheck, ShieldCheck, HeartHandshake } from "lucide-react";
 
-const outcomeKPIs = [
-  { label: "Youth reached (five-year target)", endline: "50,000", icon: Users, note: "Cumulative youth served across our country programs." },
-  { label: "Country programs by Year 5", endline: "15", icon: Globe2, note: "Flagships in the U.S. and Ethiopia, expanding across Africa." },
-  { label: "Employment / income outcome rate", endline: "75–85%", icon: Briefcase, note: "Learners moving into jobs, apprenticeships, or enterprise." },
-  { label: "Female participation rate", endline: "≥45%", icon: Target, note: "Program-wide floor for gender inclusion." },
-  { label: "Youth-led enterprises", endline: "25–40", icon: TrendingUp, note: "New ventures incubated through our hubs." },
-  { label: "Innovation hubs operational", endline: "10+", icon: Building2, note: "Locally led hubs across Africa and North America." },
+const outcomeAreas = [
+  { icon: Users, title: "Youth reached", note: "Learners engaged through Foundation-supported programs based in Seattle, Washington and Ethiopia." },
+  { icon: Briefcase, title: "Employment & income pathways", note: "Participants moving into jobs, apprenticeships, or youth-led enterprise after completing a program." },
+  { icon: Target, title: "Gender inclusion", note: "A program-wide floor for young women's participation, with equal access to mentorship and opportunity." },
+  { icon: TrendingUp, title: "Youth-led ventures", note: "New enterprises incubated with mentorship, seed support, and market access." },
+  { icon: HeartHandshake, title: "Community partnerships", note: "Formal partnerships with local institutions, employers, and community leaders." },
 ];
 
-const outputKPIs = [
-  { label: "Training programs delivered", target: "12–20 per year" },
-  { label: "Mentors & experts engaged", target: "100+ annually" },
-  { label: "Internships & placements", target: "1,500–8,000 per year" },
-  { label: "Matchmaking events", target: "8+ per year" },
-  { label: "Public-private partnerships formalized", target: "8–15 per year" },
-  { label: "Programs aligned with SDGs", target: "100% annually" },
+const reportingCommitments = [
+  { label: "Learning-aligned curricula co-designed with local partners" },
+  { label: "Mentors and technical experts engaged each year" },
+  { label: "Internships and placements coordinated with employers" },
+  { label: "Matchmaking and community events hosted" },
+  { label: "Public-private partnerships formalized annually" },
+  { label: "Programs mapped to the UN Sustainable Development Goals" },
 ];
 
 const principles = [
@@ -30,32 +29,30 @@ export default function Impact() {
   return (
     <PageShell
       eyebrow="Impact"
-      title="Five-year outcome targets."
-      intro="A performance framework designed to measure reach, quality, equity, and long-term impact across the ten hub countries we serve."
+      title="What we measure, and how."
+      intro="A performance framework designed to measure reach, quality, equity, and long-term impact across the communities we serve. Baseline numbers will be published once independently verified."
     >
-      <section aria-labelledby="outcome-kpis">
-        <h2 id="outcome-kpis" className="font-heading text-2xl font-semibold text-foreground">Outcome targets</h2>
+      <section aria-labelledby="outcome-areas">
+        <h2 id="outcome-areas" className="font-heading text-2xl font-semibold text-foreground">Outcome areas</h2>
         <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {outcomeKPIs.map((k) => (
-            <article key={k.label} className="rounded-xl border border-border bg-card p-6">
+          {outcomeAreas.map((k) => (
+            <article key={k.title} className="rounded-xl border border-border bg-card p-6">
               <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
                 <k.icon className="h-5 w-5 text-primary" aria-hidden />
               </div>
-              <p className="mt-4 font-heading text-3xl font-bold text-primary">{k.endline}</p>
-              <h3 className="mt-1 font-heading text-sm font-semibold text-foreground">{k.label}</h3>
+              <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">{k.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{k.note}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="mt-16" aria-labelledby="output-kpis">
-        <h2 id="output-kpis" className="font-heading text-2xl font-semibold text-foreground">Annual output targets</h2>
+      <section className="mt-16" aria-labelledby="commitments">
+        <h2 id="commitments" className="font-heading text-2xl font-semibold text-foreground">Annual reporting commitments</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {outputKPIs.map((k) => (
-            <article key={k.label} className="rounded-xl border border-border bg-secondary/60 p-5 text-center">
-              <p className="font-heading text-xl font-bold text-primary">{k.target}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{k.label}</p>
+          {reportingCommitments.map((k) => (
+            <article key={k.label} className="rounded-xl border border-border bg-secondary/60 p-5">
+              <p className="text-sm text-foreground">{k.label}</p>
             </article>
           ))}
         </div>

@@ -113,15 +113,13 @@ export function WhereWeWorkPreview() {
               Rooted in place. Connected globally.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-primary-foreground/80">
-              Ten regional hubs across Africa, Europe, and the Middle East, headquartered
-              in Washington State with priority delivery in Ethiopia and expanding
-              partnerships across the continent.
+              Based in Seattle, Washington, with priority delivery in Ethiopia. Every program is locally led and community-designed, built to travel as partnerships grow.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
-                place: "Washington State, USA",
+                place: "Seattle, Washington · USA",
                 role: "Organizational home, governance, diaspora engagement, and U.S.-based partnerships.",
               },
               {

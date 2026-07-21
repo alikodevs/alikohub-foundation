@@ -48,7 +48,7 @@ export const programPillars = [
     slug: "education",
     title: "Education & Learning",
     summary:
-      "Expanding access to quality learning through localized curricula, teacher support, and open educational resources across ten hub countries.",
+      "Expanding access to quality learning through localized curricula, teacher support, and open educational resources.",
   },
   {
     slug: "workforce",
