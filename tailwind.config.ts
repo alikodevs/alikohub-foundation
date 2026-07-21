@@ -65,6 +65,9 @@ export default {
           DEFAULT: "hsl(var(--sky))",
           light: "hsl(var(--sky-light))",
         },
+        terracotta: "hsl(var(--terracotta))",
+        sage: "hsl(var(--sage))",
+        plum: "hsl(var(--plum))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
