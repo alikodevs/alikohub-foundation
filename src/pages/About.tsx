@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   return (
+    <>
     <PageShell
       eyebrow="About"
       title="A foundation built on listening."
