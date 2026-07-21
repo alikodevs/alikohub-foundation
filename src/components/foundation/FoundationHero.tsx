@@ -3,7 +3,7 @@ import { StatusAwareCTA } from "./StatusAwareCTA";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/hero-student.png";
+import heroImage from "@/assets/foundation-hero.jpg";
 
 export function FoundationHero() {
   return (
