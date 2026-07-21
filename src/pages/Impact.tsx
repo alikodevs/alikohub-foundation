@@ -28,6 +28,7 @@ const principles = [
 
 export default function Impact() {
   return (
+    <>
     <PageShell
       eyebrow="Impact"
       title="What we measure, and how."
