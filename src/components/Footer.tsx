@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, MapPin } from "lucide-react";
 import { foundation } from "@/config/foundation";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
+import foundationMark from "@/assets/foundation-mark.png";
 
 const footerNav = {
   Foundation: [
