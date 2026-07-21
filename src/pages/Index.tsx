@@ -18,6 +18,10 @@ import {
   ImplementationPartnerSection,
   WhyPartnershipSection,
   SystemicSolutionsBand,
+  SolutionPositioningSection,
+  OperationalizingFlowSection,
+  PartnershipModelComparisonSection,
+  WhyDifferentSection,
 } from "@/components/foundation/PitchSections";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
 import { Seo } from "@/components/Seo";
