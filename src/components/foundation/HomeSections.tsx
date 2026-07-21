@@ -106,7 +106,7 @@ export function WhereWeWorkPreview() {
       className="border-b border-border py-20"
       style={{ background: "var(--gradient-navy)" }}
     >
-      <div className="container mx-auto px-6 text-warm-surface">
+      <div className="container mx-auto px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-primary-foreground/80">
