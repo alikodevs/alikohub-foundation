@@ -51,16 +51,7 @@ export function PageShell({ title, intro, eyebrow, children, seo }: PageShellPro
   );
 }
 
-export function InDevelopmentNote({ note }: { note?: string }) {
-  return (
-    <section aria-label="In development" className="mx-auto max-w-2xl rounded-xl border border-dashed border-border bg-secondary/40 p-8 text-center">
-      <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-        In development
-      </p>
-      <p className="mt-2 text-sm text-muted-foreground">
-        {note ??
-          "This section is being drafted. Content will be published once approved by the Foundation board."}
-      </p>
-    </section>
-  );
+// Retired for public launch. Inert export preserves existing imports.
+export function InDevelopmentNote(_props: { note?: string }) {
+  return null;
 }
