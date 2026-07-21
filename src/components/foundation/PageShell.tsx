@@ -18,6 +18,7 @@ interface PageShellProps {
 export function PageShell({ title, intro, eyebrow, children, seo }: PageShellProps) {
   return (
     <div className="min-h-screen bg-background">
+      {seo && <Seo title={seo.title} description={seo.description} path={seo.path} />}
       <Navbar />
       <header className="border-b border-border bg-secondary/60">
         <div className="container mx-auto px-6 py-16 lg:py-20">
