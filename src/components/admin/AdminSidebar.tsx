@@ -6,6 +6,7 @@ import {
   Briefcase, 
   GraduationCap, 
   FileImage,
+  Inbox,
   LogOut,
   Home
 } from "lucide-react";
