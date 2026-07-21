@@ -15,6 +15,10 @@ import {
   Compass,
   BarChart3,
   Handshake,
+  CheckCircle2,
+  XCircle,
+  ArrowRight,
+  CircleCheck,
 } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
@@ -591,6 +595,315 @@ export function SystemicSolutionsBand() {
           >
             Explore the AlikoHub Model →
           </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Solution — Not Duplication. Implementation.                                */
+/* -------------------------------------------------------------------------- */
+
+export function SolutionPositioningSection() {
+  const cards = [
+    {
+      icon: Layers,
+      title: "Integrated Platform",
+      body:
+        "One-window ecosystem connecting learning, guidance, employer networks, and opportunities through unified digital and physical infrastructure.",
+      tone: "blue",
+    },
+    {
+      icon: Globe,
+      title: "Local + Scalable",
+      body:
+        "Physical innovation hubs paired with digital reach. A standardized core model with local adaptation for cost-efficient delivery.",
+      tone: "amber",
+    },
+    {
+      icon: Target,
+      title: "Outcome-Driven",
+      body:
+        "Employment-linked targets, real-time monitoring, and third-party evaluation aligned with international standards.",
+      tone: "blue",
+    },
+  ] as const;
+
+  return (
+    <section className="border-b border-border bg-[hsl(var(--secondary))] py-20">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
+            Solution
+          </p>
+          <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            AlikoHub turns fragmented access into coordinated pathways.
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground">
+            Skills, jobs, and enterprise, connected through one workforce platform.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-12 max-w-4xl rounded-2xl border border-[hsl(var(--trust-blue)/0.25)] bg-card p-8 shadow-[var(--shadow-card)]">
+          <span className="inline-flex rounded-full bg-[hsl(var(--amber)/0.15)] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[hsl(var(--amber))]">
+            Positioning
+          </span>
+          <h3 className="mt-4 font-heading text-2xl font-bold text-foreground sm:text-3xl">
+            Not Duplication.{" "}
+            <span className="text-[hsl(var(--amber))]">Implementation.</span>
+          </h3>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            AlikoHub is a delivery organization that translates global youth-development
+            frameworks into practical, locally owned systems with direct employment
+            outcomes. Our role is to build the infrastructure, digital platforms,
+            innovation hubs, employer networks, and MEL systems, that operationalize
+            Dignified and Fulfilling Work priorities at scale.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {cards.map((c) => {
+            const isAmber = c.tone === "amber";
+            const wash = isAmber
+              ? "bg-[hsl(var(--amber)/0.08)] border-[hsl(var(--amber)/0.35)]"
+              : "bg-[hsl(var(--trust-blue)/0.08)] border-[hsl(var(--trust-blue)/0.35)]";
+            const chip = isAmber
+              ? "bg-[hsl(var(--amber)/0.15)] text-[hsl(var(--amber))]"
+              : "bg-[hsl(var(--trust-blue)/0.12)] text-[hsl(var(--trust-blue))]";
+            const head = isAmber
+              ? "text-[hsl(var(--amber))]"
+              : "text-[hsl(var(--trust-blue))]";
+            return (
+              <article key={c.title} className={`rounded-xl border p-6 ${wash}`}>
+                <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${chip}`}>
+                  <c.icon className="h-5 w-5" aria-hidden />
+                </div>
+                <h3 className={`mt-5 font-heading text-lg font-bold ${head}`}>
+                  {c.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {c.body}
+                </p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  The Flow — Global Framework → Translation → Delivery → Outcomes            */
+/* -------------------------------------------------------------------------- */
+
+export function OperationalizingFlowSection() {
+  const steps = [
+    {
+      title: "Global Framework",
+      body: "Strategic priorities. Technical standards. Policy frameworks. National youth strategies alignment.",
+    },
+    {
+      title: "AlikoHub Translation",
+      body: "Program design. Curriculum development. Hub infrastructure. Partner mobilization.",
+    },
+    {
+      title: "Local Delivery",
+      body: "Market-aligned training. Job placement. Enterprise incubation. Outcome tracking.",
+    },
+    {
+      title: "Measurable Outcomes",
+      body: "Youth employed. Enterprises created. Skills certified. Data reported.",
+    },
+  ];
+
+  return (
+    <section className="border-b border-border bg-background py-20">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
+            The flow
+          </p>
+          <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            How AlikoHub Operationalizes Global Youth Priorities
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground">
+            From global frameworks to measurable outcomes, a four-step delivery flow.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-4 md:grid-cols-4">
+          {steps.map((s, i) => (
+            <div key={s.title} className="relative">
+              <article className="h-full rounded-xl border border-[hsl(var(--trust-blue)/0.35)] bg-card p-6 shadow-[var(--shadow-card)]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[hsl(var(--trust-blue))]">
+                  {s.title}
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  {s.body}
+                </p>
+              </article>
+              {i < steps.length - 1 && (
+                <ArrowRight
+                  className="absolute -right-3 top-1/2 hidden h-6 w-6 -translate-y-1/2 text-[hsl(var(--amber))] md:block"
+                  aria-hidden
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Comparison — The Partnership Model (Traditional vs Integrated)             */
+/* -------------------------------------------------------------------------- */
+
+export function PartnershipModelComparisonSection() {
+  const traditional = [
+    "Fragmented programs operating in isolation",
+    "Training without guaranteed placement pathways",
+    "Limited employer engagement in design",
+    "Weak data systems and outcome tracking",
+    "Donor dependency without sustainability plan",
+    "Generic curricula not aligned with local markets",
+  ];
+  const integrated = [
+    "Integrated ecosystem with coordinated delivery",
+    "Employer-linked pipelines with employment outcomes",
+    "Employers co-design curricula and commit to hiring",
+    "Real-time MEL with third-party evaluation",
+    "Blended finance model with local ownership",
+    "Market-responsive programs with local adaptation",
+  ];
+
+  return (
+    <section className="border-b border-border bg-[hsl(var(--secondary))] py-20">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
+            Comparison
+          </p>
+          <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            The Partnership Model
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground">
+            What the integrated AlikoHub approach changes versus business as usual.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <article className="rounded-xl border border-[hsl(0_75%_55%/0.35)] bg-[hsl(0_75%_55%/0.06)] p-8">
+            <h3 className="font-heading text-xl font-bold text-[hsl(0_65%_45%)]">
+              Traditional Approach
+            </h3>
+            <ul className="mt-6 space-y-3">
+              {traditional.map((t) => (
+                <li key={t} className="flex items-start gap-3 text-sm text-muted-foreground">
+                  <XCircle className="mt-0.5 h-4 w-4 flex-none text-[hsl(0_65%_50%)]" aria-hidden />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="rounded-xl border border-[hsl(var(--trust-blue)/0.35)] bg-[hsl(var(--trust-blue)/0.06)] p-8">
+            <h3 className="font-heading text-xl font-bold text-[hsl(var(--trust-blue))]">
+              AlikoHub Integrated Approach
+            </h3>
+            <ul className="mt-6 space-y-3">
+              {integrated.map((t) => (
+                <li key={t} className="flex items-start gap-3 text-sm text-muted-foreground">
+                  <CircleCheck className="mt-0.5 h-4 w-4 flex-none text-[hsl(var(--trust-blue))]" aria-hidden />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </article>
+        </div>
+
+        <div className="mx-auto mt-10 max-w-3xl rounded-xl bg-[hsl(var(--trust-blue)/0.08)] p-6 text-center">
+          <p className="font-heading text-base font-semibold text-[hsl(var(--trust-blue))] sm:text-lg">
+            From global frameworks to local impact. From policy priorities to youth
+            employment. This is how global strategies become measurable outcomes.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Structural Differentiation — Why AlikoHub Will Be Different                */
+/* -------------------------------------------------------------------------- */
+
+export function WhyDifferentSection() {
+  const cards = [
+    {
+      icon: Layers,
+      title: "One-Window Ecosystem",
+      body: "Single access point to training, mentorship, jobs, and enterprise pathways.",
+      tone: "blue",
+    },
+    {
+      icon: Building2,
+      title: "Physical + Digital Infrastructure",
+      body: "Regional hubs and an LMS platform enabling scale and inclusion.",
+      tone: "amber",
+    },
+    {
+      icon: CheckCircle2,
+      title: "Outcome-Linked Design",
+      body: "Programs designed backward from employment and enterprise outcomes.",
+      tone: "blue",
+    },
+  ] as const;
+
+  return (
+    <section className="border-b border-border bg-background py-20">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
+            Structural differentiation
+          </p>
+          <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Why AlikoHub Will Be Different
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground">
+            Unlike fragmented interventions, AlikoHub operates as an integrated ecosystem
+            where each component reinforces the others.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {cards.map((c) => {
+            const isAmber = c.tone === "amber";
+            const wash = isAmber
+              ? "bg-[hsl(var(--amber)/0.08)] border-[hsl(var(--amber)/0.35)]"
+              : "bg-[hsl(var(--trust-blue)/0.08)] border-[hsl(var(--trust-blue)/0.35)]";
+            const chip = isAmber
+              ? "bg-[hsl(var(--amber)/0.15)] text-[hsl(var(--amber))]"
+              : "bg-[hsl(var(--trust-blue)/0.12)] text-[hsl(var(--trust-blue))]";
+            const head = isAmber
+              ? "text-[hsl(var(--amber))]"
+              : "text-[hsl(var(--trust-blue))]";
+            return (
+              <article key={c.title} className={`rounded-xl border p-6 ${wash}`}>
+                <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${chip}`}>
+                  <c.icon className="h-5 w-5" aria-hidden />
+                </div>
+                <h3 className={`mt-5 font-heading text-lg font-bold ${head}`}>
+                  {c.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {c.body}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -18,6 +18,10 @@ import {
   ImplementationPartnerSection,
   WhyPartnershipSection,
   SystemicSolutionsBand,
+  SolutionPositioningSection,
+  OperationalizingFlowSection,
+  PartnershipModelComparisonSection,
+  WhyDifferentSection,
 } from "@/components/foundation/PitchSections";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
 import { Seo } from "@/components/Seo";
@@ -67,11 +71,15 @@ const Index = () => {
         <SystemicBarriersSection />
         <CurrentApproachesGapSection />
         <SystemicSolutionsBand />
+        <SolutionPositioningSection />
         <SevenPrioritiesSection />
         <DeliveryModelSection />
+        <OperationalizingFlowSection />
         <ImplementationPartnerSection />
+        <WhyDifferentSection />
         <ProgramPillarsSection />
         <WhereWeWorkPreview />
+        <PartnershipModelComparisonSection />
         <WhyPartnershipSection />
         <TransparencyBand />
         <LegalSeparationStrip />
