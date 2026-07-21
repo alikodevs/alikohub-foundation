@@ -1,5 +1,6 @@
 import { PageShell, InDevelopmentNote } from "@/components/foundation/PageShell";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
+import { InquiryForm } from "@/components/foundation/InquiryForm";
 import { foundation } from "@/config/foundation";
 import { Building2, Users, Handshake, GraduationCap } from "lucide-react";
 
