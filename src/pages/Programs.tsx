@@ -1,135 +1,30 @@
-import { motion } from "framer-motion";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { GraduationCap, Heart, Cpu, Briefcase, Droplets } from "lucide-react";
-import { cardColors } from "@/lib/card-colors";
+import { PageShell, InDevelopmentNote } from "@/components/foundation/PageShell";
+import { programPillars } from "@/config/foundation";
 
-const pillars = [
-  {
-    icon: GraduationCap,
-    title: "Aliko Academy",
-    description: "The primary implementation arm for workforce development, delivering market-aligned training programs that evolve with labor market needs.",
-    bullets: [
-      "AI, Machine Learning, Data Analytics, Cloud Computing",
-      "Software Development, Databases, Testing",
-      "Finance, Accounting, Design, Marketing",
-      "Academic Preparation and Language Learning",
-    ],
-  },
-  {
-    icon: Heart,
-    title: "Digital Health & One Health",
-    description: "Strengthening public health systems and climate resilience by preparing youth for emerging roles in health technology and surveillance.",
-    bullets: [
-      "Public health workforce pipelines",
-      "Mobile health for prevention and behavior change",
-      "Health data analytics and population health",
-      "Climate-linked and zoonotic disease monitoring",
-    ],
-  },
-  {
-    icon: Cpu,
-    title: "STEM & Engineering",
-    description: "Preparing youth for roles in infrastructure, energy, construction technology, and sustainable development with industry-standard tools.",
-    bullets: [
-      "Engineering fundamentals and digital design",
-      "Modeling, simulation, and GIS",
-      "Civil, electrical, mechanical, and architectural fields",
-      "Applied problem-solving aligned with employer expectations",
-    ],
-  },
-  {
-    icon: Briefcase,
-    title: "Consultancy & Events",
-    description: "Guiding youth through personalized career pathways and connecting them to employers, investors, and public sector partners.",
-    bullets: [
-      "Career advice, skill assessment, resume building",
-      "Employer and talent matchmaking",
-      "Investor forums and innovation challenges",
-      "Government and private sector partnership spaces",
-    ],
-  },
-  {
-    icon: Droplets,
-    title: "Aliko WASH",
-    description: "Water, sanitation, and hygiene solutions driving public health impact and community resilience across Africa.",
-    bullets: [
-      "Clean water access and infrastructure",
-      "Sanitation systems and hygiene education",
-      "Community health and disease prevention",
-      "Sustainable WASH technology solutions",
-    ],
-    link: "https://alikowash.lovable.app/",
-  },
-];
-
-const Programs = () => {
+export default function Programs() {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-
-      <section className="py-24 lg:py-32">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="mx-auto mb-16 max-w-2xl text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+    <PageShell
+      eyebrow="Our work"
+      title="Seven program areas. One coherent mission."
+      intro="Our program pillars follow directly from our mission. Each area will roll out only where community partnerships, funding, and safeguards are in place."
+    >
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {programPillars.map((p) => (
+          <article
+            key={p.slug}
+            className="flex flex-col rounded-xl border border-border bg-card p-6"
           >
-            <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-primary">
-              AlikoHub Ventures
-            </span>
-            <h1 className="font-heading text-4xl font-bold text-foreground sm:text-5xl">
-              Five Pillars of <span className="text-gradient-amber">Youth Empowerment</span>
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Integrated pathways in Digital Health, One Health, STEM, and entrepreneurship, designed to reach 50,000 youth across Africa.
-            </p>
-          </motion.div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary">Program area</p>
+            <h2 className="mt-2 font-heading text-lg font-semibold text-foreground">{p.title}</h2>
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.summary}</p>
+            <p className="mt-4 text-xs italic text-muted-foreground">Program design in development.</p>
+          </article>
+        ))}
+      </div>
 
-          <div className="grid gap-8 lg:grid-cols-2">
-            {pillars.map((pillar, i) => {
-              const color = cardColors[i % cardColors.length];
-              return (
-                <motion.div
-                  key={pillar.title}
-                  className={`group rounded-2xl ${color.bg} p-8 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg dark:bg-card dark:border dark:border-border/50`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <div className={`mb-4 flex h-14 w-14 items-center justify-center rounded-xl ${color.iconBg} dark:bg-primary/10`}>
-                    <pillar.icon className={`h-7 w-7 ${color.text} dark:text-primary`} />
-                  </div>
-                  <h3 className={`font-heading text-2xl font-bold ${color.text} dark:text-foreground`}>{pillar.title}</h3>
-                  <p className={`mt-3 text-sm leading-relaxed ${color.text} dark:text-muted-foreground`}>{pillar.description}</p>
-                  <ul className="mt-5 space-y-2">
-                    {pillar.bullets.map((b, j) => (
-                      <li key={j} className={`flex items-start gap-2 text-sm ${color.text} dark:text-muted-foreground`}>
-                        <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${color.iconBg} dark:bg-primary`} />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href={(pillar as any).link || "#"}
-                    target={(pillar as any).link ? "_blank" : undefined}
-                    rel={(pillar as any).link ? "noopener noreferrer" : undefined}
-                    className={`mt-6 inline-flex items-center gap-1 text-sm font-medium ${color.text} dark:text-primary hover:opacity-80 transition-opacity`}
-                  >
-                    {(pillar as any).link ? "View Website →" : "Learn More →"}
-                  </a>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+      <div className="mt-12">
+        <InDevelopmentNote note="Detailed program briefs, target outcomes, delivery partners, and geographic scope will publish here as each program is approved for launch." />
+      </div>
+    </PageShell>
   );
-};
-
-export default Programs;
+}
