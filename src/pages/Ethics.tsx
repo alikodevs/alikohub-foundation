@@ -1,4 +1,4 @@
-import { PageShell, InDevelopmentNote } from "@/components/foundation/PageShell";
+import { PageShell } from "@/components/foundation/PageShell";
 import { Heart, ShieldCheck, Home, Handshake, Lock, FileText } from "lucide-react";
 
 const principles = [
@@ -9,8 +9,8 @@ const principles = [
   },
   {
     icon: Home,
-    title: "Safe Environments",
-    body: "Our programs are designed to be free of harassment, discrimination, and exploitation. Concerns can be raised safely and are acted on promptly.",
+    title: "Safe Learning Environments",
+    body: "Our programs are designed to be free of harassment, discrimination, and exploitation. Concerns can be raised safely and are acted on promptly through clear reporting channels.",
   },
   {
     icon: Lock,
@@ -25,7 +25,7 @@ const principles = [
   {
     icon: ShieldCheck,
     title: "Safeguarding First",
-    body: "A safeguarding framework covering children, vulnerable adults, staff, and partners is under active development and will be approved by the board before program delivery.",
+    body: "A safeguarding framework covering children, vulnerable adults, staff, and partners guides every program, with trained staff and clear escalation paths.",
   },
   {
     icon: FileText,
@@ -51,10 +51,6 @@ export default function Ethics() {
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
           </article>
         ))}
-      </div>
-
-      <div className="mt-12">
-        <InDevelopmentNote note="Formal safeguarding, code of conduct, conflict-of-interest, whistleblower, and data-protection policies are being drafted and will be published once approved by the board." />
       </div>
     </PageShell>
   );

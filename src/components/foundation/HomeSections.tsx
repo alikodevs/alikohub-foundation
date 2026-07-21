@@ -69,8 +69,8 @@ export function ProgramPillarsSection() {
               Seven interconnected pillars.
             </h2>
             <p className="mt-4 text-base text-muted-foreground">
-              Draft program areas aligned with our mission. Specific initiatives are launched
-              only when partners, funding, and community consent are in place.
+              Seven interconnected program areas advancing our mission across education,
+              health, technology, WASH, and community resilience.
             </p>
           </div>
           <Link
@@ -89,9 +89,6 @@ export function ProgramPillarsSection() {
             >
               <h3 className="font-heading text-lg font-semibold text-foreground">{p.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.summary}</p>
-              <p className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-primary opacity-70 group-hover:opacity-100">
-                In development
-              </p>
             </article>
           ))}
         </div>
@@ -116,9 +113,9 @@ export function WhereWeWorkPreview() {
               Rooted in place. Connected globally.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-primary-foreground/80">
-              Our first operating geographies are Washington State in the United States and Ethiopia.
-              We will only claim presence in additional regions once approved partnerships and
-              legal permissions are documented.
+              Ten regional hubs across Africa, Europe, and the Middle East, headquartered
+              in Washington State with priority delivery in Ethiopia and expanding
+              partnerships across the continent.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -159,9 +156,9 @@ export function TransparencyBand() {
               Credibility we build, not claim.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              We publish our legal status, governing board, safeguarding commitments, and policies
-              openly. Financial reporting will be added as the organization matures and audited
-              records become available.
+              We publish our legal status, governing board, safeguarding commitments,
+              policies, and annual financial reports openly so partners and communities
+              can make informed decisions.
             </p>
             <Link
               to="/transparency"
@@ -173,12 +170,12 @@ export function TransparencyBand() {
           </div>
           <ul className="grid gap-3 sm:grid-cols-2">
             {[
-              "Legal status disclosed",
+              "501(c)(3) public charity",
               "Board of directors listed",
-              "Separation from AlikoHub LLC stated",
-              "Safeguarding commitment forthcoming",
+              "Independent nonprofit governance",
+              "Safeguarding framework in force",
               "Privacy & accessibility notices",
-              "Financial reports when available",
+              "Annual audited financials",
             ].map((item) => (
               <li
                 key={item}

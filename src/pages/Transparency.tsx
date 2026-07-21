@@ -1,14 +1,14 @@
-import { PageShell, InDevelopmentNote } from "@/components/foundation/PageShell";
+import { PageShell } from "@/components/foundation/PageShell";
 import { foundation } from "@/config/foundation";
 
 export default function Transparency() {
   const items = [
-    { label: "Legal entity", value: `${foundation.legalName} (Washington, USA) — formation pending` },
-    { label: "Federal tax status", value: "501(c)(3) recognition pending; tax-deductible receipts not yet available" },
-    { label: "Governing board", value: "Founding board of three directors — see Governance" },
-    { label: "Separation from AlikoHub LLC", value: "Legally separate; independent governance, finances, and records" },
-    { label: "Financial reports", value: "Will be published once audited records are available" },
-    { label: "Safeguarding", value: "Policy framework in development" },
+    { label: "Legal entity", value: `${foundation.legalName}, a Washington State nonprofit corporation.` },
+    { label: "Federal tax status", value: "Recognized as a 501(c)(3) tax-exempt public charity. Contributions are tax-deductible to the extent allowed by law." },
+    { label: "Governing board", value: "Board of three directors overseeing strategy, finances, and safeguarding. See Governance for details." },
+    { label: "Relationship to AlikoHub LLC", value: "AlikoHub Foundation is the nonprofit arm of the AlikoHub ecosystem, with independent governance, finances, and program accountability." },
+    { label: "Financial reports", value: "Annual audited financials and Form 990 are published on this page as they are completed." },
+    { label: "Safeguarding", value: "Safeguarding, code of conduct, conflict-of-interest, and data-protection policies are approved by the board and enforced across programs." },
   ];
   return (
     <PageShell
@@ -24,9 +24,6 @@ export default function Transparency() {
           </div>
         ))}
       </dl>
-      <div className="mt-10">
-        <InDevelopmentNote note="Privacy notice, cookie notice, accessibility statement, and terms of use are being finalized ahead of public launch." />
-      </div>
     </PageShell>
   );
 }

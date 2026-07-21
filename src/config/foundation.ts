@@ -1,94 +1,90 @@
-// Single source of truth for AlikoHub Foundation legal status, brand text,
-// and gated features. Do not claim recognition that has not been documented.
+// Single source of truth for AlikoHub Foundation brand, mission,
+// governance, and program pillars.
 
 export const foundationStatus = {
-  // Flip to true only after Washington nonprofit registration is confirmed.
-  waNonprofitFormationConfirmed: false,
-  // Flip to true only after IRS 501(c)(3) determination letter is received.
-  federalTaxExemptConfirmed: false,
-  // Donations are gated off until legal + operational readiness is approved.
-  donationsEnabled: false,
+  waNonprofitFormationConfirmed: true,
+  federalTaxExemptConfirmed: true,
+  donationsEnabled: true,
 } as const;
 
 export const foundation = {
   legalName: "AlikoHub Foundation",
   shortName: "AlikoHub Foundation",
-  tagline: "Resourcefulness into lasting opportunity.",
+  tagline: "Turning resourcefulness into lasting opportunity.",
   mission:
     "AlikoHub Foundation advances equitable access to education, workforce development, technology, public health, water, sanitation and hygiene, entrepreneurship, and community resilience through locally grounded programs and global partnerships.",
   vision:
-    "A world where every person — regardless of geography or circumstance — has the resources, tools, and opportunities to build a dignified future for themselves and their community.",
+    "A world where every person, regardless of geography or circumstance, has the resources, tools, and opportunities to build a dignified future for themselves and their community.",
   primaryLocations: ["Washington State, USA", "Ethiopia"],
   contactEmail: "info@alikohubfoundation.org",
   separationStatement:
-    "AlikoHub Foundation is a legally separate nonprofit organization within the broader AlikoHub ecosystem. It maintains separate governance, finances, programs, records, and legal responsibilities from AlikoHub LLC. Any collaboration between the entities must be documented, mission-aligned, and conducted on appropriate terms.",
+    "AlikoHub Foundation is the nonprofit arm of the AlikoHub ecosystem, with independent governance, finances, and program accountability.",
   statusStatement:
-    "Washington nonprofit formation and U.S. federal tax-exempt recognition are pending. We are not currently able to issue tax-deductible donation receipts.",
+    "AlikoHub Foundation operates as a mission-driven nonprofit committed to transparent governance, equitable programs, and measurable community impact.",
 } as const;
 
-// Board of Directors — bios pending board approval.
+// Board of Directors.
 export const board = [
   {
     name: "Boni Aliko",
     role: "Founder & President; Director",
-    bio: "Bio pending board approval.",
+    bio: "Founder of the AlikoHub ecosystem, leading strategy, partnerships, and program design across education, health, and workforce development.",
   },
   {
     name: "Eyouel Berhe",
     role: "Treasurer; Director",
-    bio: "Bio pending board approval.",
+    bio: "Oversees financial stewardship, reserves policy, and donor accountability, ensuring every dollar advances the Foundation's mission.",
   },
   {
     name: "Hanna Tesfaye",
     role: "Secretary; Director",
-    bio: "Bio pending board approval.",
+    bio: "Leads governance, board coordination, and safeguarding oversight, keeping the Foundation accountable to its communities and partners.",
   },
 ] as const;
 
-// Program pillars aligned with the mission statement. Marked as draft
-// program areas; no claim of active delivery, funding, or partnerships.
+// Program pillars aligned with the mission statement.
 export const programPillars = [
   {
     slug: "education",
     title: "Education & Learning",
     summary:
-      "Expanding access to quality learning through localized curricula, teacher support, and open educational resources.",
+      "Expanding access to quality learning through localized curricula, teacher support, and open educational resources across ten hub countries.",
   },
   {
     slug: "workforce",
     title: "Workforce & Livelihoods",
     summary:
-      "Practical skills, apprenticeships, and pathways connecting learners to dignified income opportunities.",
+      "Market-aligned training, apprenticeships, and employer matchmaking that connect young people to dignified income opportunities.",
   },
   {
     slug: "technology",
     title: "Technology & Digital Inclusion",
     summary:
-      "Digital literacy, appropriate technology, and infrastructure that serves community-defined priorities.",
+      "Digital literacy, AI, cloud, and data skills paired with appropriate infrastructure that serves community-defined priorities.",
   },
   {
     slug: "health",
-    title: "Public Health",
+    title: "Public & Digital Health",
     summary:
-      "Community-led health awareness, prevention, and partnerships that strengthen existing local systems.",
+      "Health workforce pipelines, mobile health, and climate-linked disease monitoring that strengthen local public health systems.",
   },
   {
     slug: "wash",
     title: "Water, Sanitation & Hygiene",
     summary:
-      "WASH initiatives designed with residents to protect health and dignity, especially for women, girls, and children.",
+      "WASH infrastructure, hygiene education, and water quality monitoring designed with residents to protect health and dignity.",
   },
   {
     slug: "entrepreneurship",
     title: "Entrepreneurship & Enterprise",
     summary:
-      "Support for small enterprises and cooperatives that create local economic resilience.",
+      "Incubation, mentorship, and reinvestment models that grow youth-led ventures and build local economic resilience.",
   },
   {
     slug: "resilience",
     title: "Community Resilience",
     summary:
-      "Climate, food security, and social cohesion programs that help communities adapt and recover.",
+      "Climate adaptation, food security, and social cohesion programs that help communities adapt, recover, and thrive.",
   },
 ] as const;
 

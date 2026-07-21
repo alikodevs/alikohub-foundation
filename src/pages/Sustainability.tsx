@@ -1,36 +1,36 @@
-import { PageShell, InDevelopmentNote } from "@/components/foundation/PageShell";
-import { Leaf, Users, Recycle, Scale, Sprout, Compass } from "lucide-react";
+import { PageShell } from "@/components/foundation/PageShell";
+import { Handshake, Award, Briefcase, BookOpen, Users, RefreshCw } from "lucide-react";
 
-const pillars = [
+const models = [
   {
-    icon: Compass,
-    title: "Locally Led Design",
-    body: "Programs are shaped by the communities they serve, so continuity does not depend on our permanent presence.",
+    icon: Handshake,
+    title: "Public–Private Partnerships",
+    body: "Co-financing of innovation hubs and training programs, reducing reliance on any single donor and building continuous capacity.",
+  },
+  {
+    icon: Award,
+    title: "Advanced Certifications",
+    body: "Specialized, high-value professional development that generates program income while expanding access to industry-recognized credentials.",
+  },
+  {
+    icon: Briefcase,
+    title: "Mission-Aligned Consulting",
+    body: "Technical expertise offered to industry, government, and development partners, with proceeds reinvested into program delivery.",
+  },
+  {
+    icon: BookOpen,
+    title: "Advisory & Placement Services",
+    body: "International placement support and global exposure for learners, generating revenue through career advisory services.",
   },
   {
     icon: Users,
-    title: "Diversified Support",
-    body: "We plan to combine grants, partnerships, and in-kind support so no single funder or channel is a single point of failure.",
+    title: "Alumni Network",
+    body: "Graduates contribute through mentorship, peer support, and giving, strengthening community ownership and long-term continuity.",
   },
   {
-    icon: Sprout,
-    title: "Capacity Transfer",
-    body: "Skills, systems, and knowledge are intentionally transferred to local staff and partners as programs mature.",
-  },
-  {
-    icon: Recycle,
-    title: "Reinvestment Discipline",
-    body: "Any surplus is directed back into mission-aligned programs, safeguards, and community priorities.",
-  },
-  {
-    icon: Scale,
-    title: "Right-Sized Growth",
-    body: "We scale only what has been shown to work, and only at a pace we can safeguard, staff, and evaluate.",
-  },
-  {
-    icon: Leaf,
-    title: "Environmental Responsibility",
-    body: "Program design considers climate, natural resources, and community environmental priorities.",
+    icon: RefreshCw,
+    title: "Incubation Reinvestment",
+    body: "Revenue from youth-founded ventures is reinvested into future cohorts, creating a self-reinforcing cycle of empowerment.",
   },
 ];
 
@@ -39,22 +39,18 @@ export default function Sustainability() {
     <PageShell
       eyebrow="Sustainability"
       title="Built to last, not just to launch."
-      intro="A nonprofit is only useful if it can keep serving its community over time. Our sustainability approach protects the mission from over-dependence on any single funder, partner, or moment."
+      intro="A model designed to thrive beyond initial grant funding, ensuring long-term continuity, financial independence, and community-driven growth."
     >
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {pillars.map((p) => (
-          <article key={p.title} className="rounded-xl border border-border bg-card p-6">
+        {models.map((m) => (
+          <article key={m.title} className="rounded-xl border border-border bg-card p-6">
             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
-              <p.icon className="h-5 w-5 text-primary" aria-hidden />
+              <m.icon className="h-5 w-5 text-primary" aria-hidden />
             </div>
-            <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">{p.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+            <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">{m.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
           </article>
         ))}
-      </div>
-
-      <div className="mt-12">
-        <InDevelopmentNote note="Financial policies, reserves policy, and long-term funding strategy will publish here once approved by the board." />
       </div>
     </PageShell>
   );
