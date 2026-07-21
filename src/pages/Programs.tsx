@@ -124,5 +124,9 @@ export default function Programs() {
         ))}
       </div>
     </PageShell>
+      <DeliveryPathwaysSection />
+      <ImplementationJourneySection />
+      <ProgramDesignPrinciplesSection />
+    </>
   );
 }
