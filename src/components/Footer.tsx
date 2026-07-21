@@ -35,9 +35,9 @@ export function Footer() {
       <div className="container mx-auto px-6 py-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10 font-heading text-lg font-bold text-white">
-                A
+            <div className="flex items-center gap-2.5">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-md bg-white/10 p-1.5">
+                <img src={foundationMark} alt="" className="h-full w-full brightness-0 invert" width={32} height={32} />
               </span>
               <div className="leading-tight">
                 <div className="font-heading text-base font-bold text-white">AlikoHub</div>
