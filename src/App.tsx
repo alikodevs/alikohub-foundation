@@ -27,6 +27,7 @@ const Transparency = lazy(() => import("./pages/Transparency"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Governance = lazy(() => import("./pages/Governance"));
 const Ethics = lazy(() => import("./pages/Ethics"));
+const Sustainability = lazy(() => import("./pages/Sustainability"));
 
 // Admin pages
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -67,6 +68,7 @@ const App = () => (
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/governance" element={<Governance />} />
                 <Route path="/ethics" element={<Ethics />} />
+                <Route path="/sustainability" element={<Sustainability />} />
                 
                 
                 {/* Admin routes */}

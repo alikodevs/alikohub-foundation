@@ -1,93 +1,61 @@
-import { motion } from "framer-motion";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { Handshake, Award, Briefcase, BookOpen, Users, RefreshCw } from "lucide-react";
-import { cardColors } from "@/lib/card-colors";
+import { PageShell, InDevelopmentNote } from "@/components/foundation/PageShell";
+import { Leaf, Users, Recycle, Scale, Sprout, Compass } from "lucide-react";
 
-const revenueModels = [
+const pillars = [
   {
-    icon: Handshake,
-    title: "Public–Private Partnerships",
-    description: "Co-financing of innovation hubs and training programs, ensuring continuous capacity building and reduced reliance on donor funding.",
-  },
-  {
-    icon: Award,
-    title: "Advanced Certifications",
-    description: "Specialized, high-value professional development courses that generate income while expanding access to industry-recognized credentials.",
-  },
-  {
-    icon: Briefcase,
-    title: "Consulting Services",
-    description: "Technical expertise to industry, government, and development partners, creating a sustainable revenue stream aligned with sectoral needs.",
-  },
-  {
-    icon: BookOpen,
-    title: "Advisory Services",
-    description: "International placement support and global exposure for students, generating revenue through academic and career advisory services.",
+    icon: Compass,
+    title: "Locally Led Design",
+    body: "Programs are shaped by the communities they serve, so continuity does not depend on our permanent presence.",
   },
   {
     icon: Users,
-    title: "Alumni Network",
-    description: "Graduates contribute through mentorship, peer support, and financial contributions, strengthening community ownership and long-term continuity.",
+    title: "Diversified Support",
+    body: "We plan to combine grants, partnerships, and in-kind support so no single funder or channel is a single point of failure.",
   },
   {
-    icon: RefreshCw,
-    title: "Incubation Reinvestment",
-    description: "Revenue from youth-founded ventures is reinvested into future cohorts, creating a self-reinforcing cycle of empowerment.",
+    icon: Sprout,
+    title: "Capacity Transfer",
+    body: "Skills, systems, and knowledge are intentionally transferred to local staff and partners as programs mature.",
+  },
+  {
+    icon: Recycle,
+    title: "Reinvestment Discipline",
+    body: "Any surplus is directed back into mission-aligned programs, safeguards, and community priorities.",
+  },
+  {
+    icon: Scale,
+    title: "Right-Sized Growth",
+    body: "We scale only what has been shown to work, and only at a pace we can safeguard, staff, and evaluate.",
+  },
+  {
+    icon: Leaf,
+    title: "Environmental Responsibility",
+    body: "Program design considers climate, natural resources, and community environmental priorities.",
   },
 ];
 
-const Sustainability = () => {
+export default function Sustainability() {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageShell
+      eyebrow="Sustainability"
+      title="Built to last, not just to launch."
+      intro="A nonprofit is only useful if it can keep serving its community over time. Our sustainability approach protects the mission from over-dependence on any single funder, partner, or moment."
+    >
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {pillars.map((p) => (
+          <article key={p.title} className="rounded-xl border border-border bg-card p-6">
+            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
+              <p.icon className="h-5 w-5 text-primary" aria-hidden />
+            </div>
+            <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">{p.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+          </article>
+        ))}
+      </div>
 
-      <section className="py-24 lg:py-32">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="mx-auto mb-16 max-w-2xl text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-primary">
-              Long-Term Viability
-            </span>
-            <h1 className="font-heading text-4xl font-bold text-foreground sm:text-5xl">
-              Sustainability <span className="text-gradient-amber">Plan</span>
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
-              A model designed to thrive beyond initial grant funding, ensuring long-term continuity, financial independence, and community-driven growth.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {revenueModels.map((model, i) => {
-              const color = cardColors[i % cardColors.length];
-              return (
-                <motion.div
-                  key={model.title}
-                  className={`group rounded-2xl ${color.bg} p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg dark:bg-card dark:border dark:border-border/50`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${color.iconBg} dark:bg-primary/10`}>
-                    <model.icon className={`h-6 w-6 ${color.text} dark:text-primary`} />
-                  </div>
-                  <h3 className={`font-heading text-lg font-semibold ${color.text} dark:text-foreground`}>{model.title}</h3>
-                  <p className={`mt-2 text-sm leading-relaxed ${color.text} dark:text-muted-foreground`}>{model.description}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+      <div className="mt-12">
+        <InDevelopmentNote note="Financial policies, reserves policy, and long-term funding strategy will publish here once approved by the board." />
+      </div>
+    </PageShell>
   );
-};
-
-export default Sustainability;
+}
