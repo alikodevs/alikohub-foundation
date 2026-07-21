@@ -9,6 +9,16 @@ import {
   FinalCTASection,
 } from "@/components/foundation/HomeSections";
 import { DeliveryModelSection } from "@/components/foundation/DeliveryModelSection";
+import {
+  ResourcefulnessEcosystemSection,
+  ScaleOfTheGapSection,
+  SystemicBarriersSection,
+  CurrentApproachesGapSection,
+  SevenPrioritiesSection,
+  ImplementationPartnerSection,
+  WhyPartnershipSection,
+  SystemicSolutionsBand,
+} from "@/components/foundation/PitchSections";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
 import { Seo } from "@/components/Seo";
 import { foundation } from "@/config/foundation";
@@ -52,9 +62,17 @@ const Index = () => {
       <main>
         <FoundationHero />
         <MissionBand />
+        <ResourcefulnessEcosystemSection />
+        <ScaleOfTheGapSection />
+        <SystemicBarriersSection />
+        <CurrentApproachesGapSection />
+        <SystemicSolutionsBand />
+        <SevenPrioritiesSection />
         <DeliveryModelSection />
+        <ImplementationPartnerSection />
         <ProgramPillarsSection />
         <WhereWeWorkPreview />
+        <WhyPartnershipSection />
         <TransparencyBand />
         <LegalSeparationStrip />
         <FinalCTASection />
