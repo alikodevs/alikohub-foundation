@@ -34,6 +34,7 @@ const menuItems = [
   { title: "Services", url: "/admin/services", icon: Briefcase },
   { title: "Programs", url: "/admin/programs", icon: GraduationCap },
   { title: "Media Library", url: "/admin/media", icon: FileImage },
+  { title: "Inquiries", url: "/admin/inquiries", icon: Inbox },
 ];
 
 export function AdminSidebar() {
