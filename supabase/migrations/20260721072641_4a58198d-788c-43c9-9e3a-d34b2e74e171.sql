@@ -1,0 +1,1 @@
+ALTER TABLE public.foundation_inquiries ADD COLUMN IF NOT EXISTS admin_notes text;
