@@ -63,5 +63,7 @@ export default function About() {
         <LegalSeparationStrip />
       </div>
     </PageShell>
+    <EcosystemArchitectureSection />
+    </>
   );
 }
