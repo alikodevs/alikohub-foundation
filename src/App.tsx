@@ -56,6 +56,18 @@ const App = () => (
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
+
+                {/* Foundation pages */}
+                <Route path="/impact" element={<Impact />} />
+                <Route path="/where-we-work" element={<WhereWeWork />} />
+                <Route path="/stories" element={<Stories />} />
+                <Route path="/get-involved" element={<GetInvolved />} />
+                <Route path="/resources" element={<Resources />} />
+                <Route path="/transparency" element={<Transparency />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/governance" element={<Governance />} />
+                <Route path="/ethics" element={<Ethics />} />
+                
                 
                 {/* Admin routes */}
                 <Route path="/admin" element={<AdminDashboard />} />
