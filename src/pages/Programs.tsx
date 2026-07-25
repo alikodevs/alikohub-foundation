@@ -5,8 +5,31 @@ import {
   DeliveryPathwaysSection,
   ProgramDesignPrinciplesSection,
 } from "@/components/foundation/ProgramSections";
+import serviceAcademy from "@/assets/service-academy.jpg";
+import serviceConsultancy from "@/assets/service-consultancy.png";
+import serviceContech from "@/assets/service-contech.png";
+import serviceEvents from "@/assets/service-events.jpg";
+import serviceAlikowash from "@/assets/service-alikowash.png";
 
-const pillars = [
+type Pillar = {
+  icon: typeof GraduationCap;
+  title: string;
+  description: string;
+  bullets: string[];
+  image?: string;
+  link?: string;
+  theme: {
+    ring: string;      // header band background
+    chip: string;      // small icon chip bg
+    chipFg: string;    // icon color
+    dot: string;       // bullet dot
+    link: string;      // link text color
+    border: string;    // card border accent
+  };
+};
+
+// Vibrant, foundation-aligned palettes (blue / amber / sage / terracotta / plum / sky)
+const pillars: Pillar[] = [
   {
     icon: GraduationCap,
     title: "Aliko Academy",
@@ -17,6 +40,15 @@ const pillars = [
       "Finance, Accounting, Design, Marketing",
       "Academic preparation and language learning",
     ],
+    image: serviceAcademy,
+    theme: {
+      ring: "bg-[hsl(var(--trust-blue))]",
+      chip: "bg-white/20",
+      chipFg: "text-white",
+      dot: "bg-[hsl(var(--trust-blue))]",
+      link: "text-[hsl(var(--trust-blue))]",
+      border: "border-[hsl(var(--trust-blue)/0.35)]",
+    },
   },
   {
     icon: Heart,
@@ -28,6 +60,14 @@ const pillars = [
       "Health data analytics and population health",
       "Climate-linked and zoonotic disease monitoring",
     ],
+    theme: {
+      ring: "bg-[hsl(var(--terracotta))]",
+      chip: "bg-white/20",
+      chipFg: "text-white",
+      dot: "bg-[hsl(var(--terracotta))]",
+      link: "text-[hsl(var(--terracotta))]",
+      border: "border-[hsl(var(--terracotta)/0.35)]",
+    },
   },
   {
     icon: Cpu,
@@ -39,6 +79,15 @@ const pillars = [
       "Civil, electrical, mechanical, and architectural fields",
       "Applied problem-solving aligned with employer expectations",
     ],
+    image: serviceContech,
+    theme: {
+      ring: "bg-[hsl(var(--plum))]",
+      chip: "bg-white/20",
+      chipFg: "text-white",
+      dot: "bg-[hsl(var(--plum))]",
+      link: "text-[hsl(var(--plum))]",
+      border: "border-[hsl(var(--plum)/0.35)]",
+    },
   },
   {
     icon: Briefcase,
@@ -50,6 +99,15 @@ const pillars = [
       "Investor forums and innovation challenges",
       "Government and private sector partnership spaces",
     ],
+    image: serviceConsultancy,
+    theme: {
+      ring: "bg-[hsl(var(--amber))]",
+      chip: "bg-white/25",
+      chipFg: "text-white",
+      dot: "bg-[hsl(var(--amber))]",
+      link: "text-[hsl(25,90%,32%)]",
+      border: "border-[hsl(var(--amber)/0.4)]",
+    },
   },
   {
     icon: CalendarDays,
@@ -61,6 +119,15 @@ const pillars = [
       "Ecosystem-building engagements",
       "Government and private sector partnership spaces",
     ],
+    image: serviceEvents,
+    theme: {
+      ring: "bg-[hsl(var(--sky))]",
+      chip: "bg-white/20",
+      chipFg: "text-white",
+      dot: "bg-[hsl(var(--sky))]",
+      link: "text-[hsl(var(--sky))]",
+      border: "border-[hsl(var(--sky)/0.35)]",
+    },
   },
   {
     icon: Droplets,
@@ -72,7 +139,16 @@ const pillars = [
       "Community health and disease prevention",
       "Sustainable WASH technology solutions",
     ],
+    image: serviceAlikowash,
     link: "https://alikowash.lovable.app/",
+    theme: {
+      ring: "bg-gradient-to-br from-[hsl(var(--trust-blue))] to-[hsl(var(--sky))]",
+      chip: "bg-white/25",
+      chipFg: "text-white",
+      dot: "bg-[hsl(var(--trust-blue))]",
+      link: "text-[hsl(var(--trust-blue))]",
+      border: "border-[hsl(var(--trust-blue)/0.35)]",
+    },
   },
   {
     icon: Leaf,
@@ -84,6 +160,14 @@ const pillars = [
       "Youth leadership and civic participation",
       "Cross-sector partnerships with governments and NGOs",
     ],
+    theme: {
+      ring: "bg-[hsl(var(--sage))]",
+      chip: "bg-white/25",
+      chipFg: "text-white",
+      dot: "bg-[hsl(var(--sage))]",
+      link: "text-[hsl(var(--sage))]",
+      border: "border-[hsl(var(--sage)/0.4)]",
+    },
   },
 ];
 
@@ -102,33 +186,56 @@ export default function Programs() {
       }
     >
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {pillars.map((p) => (
-          <article key={p.title} className="flex flex-col rounded-xl border border-border bg-card p-6">
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
-              <p.icon className="h-5 w-5 text-primary" aria-hidden />
-            </div>
-            <h2 className="mt-4 font-heading text-lg font-semibold text-foreground">{p.title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
-            <ul className="mt-4 space-y-1.5">
-              {p.bullets.map((b) => (
-                <li key={b} className="flex items-start gap-2 text-xs text-muted-foreground">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  {b}
-                </li>
-              ))}
-            </ul>
-            {p.link && (
-              <a
-                href={p.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
-              >
-                Visit program <ArrowRight className="h-3.5 w-3.5" />
-              </a>
-            )}
-          </article>
-        ))}
+        {pillars.map((p) => {
+          const Icon = p.icon;
+          return (
+            <article
+              key={p.title}
+              className={`group flex flex-col overflow-hidden rounded-2xl border ${p.theme.border} bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]`}
+            >
+              {/* Header band: image + colored overlay, or solid colored band */}
+              <div className={`relative h-36 ${p.theme.ring}`}>
+                {p.image && (
+                  <>
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="absolute inset-0 h-full w-full object-cover opacity-80 mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  </>
+                )}
+                <div className={`absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-xl ${p.theme.chip} backdrop-blur-sm ring-1 ring-white/30`}>
+                  <Icon className={`h-5 w-5 ${p.theme.chipFg}`} aria-hidden />
+                </div>
+              </div>
+
+              <div className="flex flex-1 flex-col p-6">
+                <h2 className="font-heading text-lg font-bold text-foreground">{p.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
+                <ul className="mt-4 space-y-1.5">
+                  {p.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-2 text-xs text-muted-foreground">
+                      <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${p.theme.dot}`} />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                {p.link && (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`mt-5 inline-flex items-center gap-1.5 text-xs font-semibold ${p.theme.link} transition-all hover:gap-2.5`}
+                  >
+                    Visit program <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                )}
+              </div>
+            </article>
+          );
+        })}
       </div>
     </PageShell>
   );
