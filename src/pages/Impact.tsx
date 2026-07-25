@@ -3,11 +3,11 @@ import { Users, Briefcase, Target, TrendingUp, CheckCircle2, BookOpenCheck, Shie
 import { ScalePrinciplesSection, CostEfficiencySection } from "@/components/foundation/ProgramSections";
 
 const outcomeAreas = [
-  { icon: Users, title: "Youth reached", note: "Learners engaged through Foundation-supported programs based in Seattle, Washington and Ethiopia." },
-  { icon: Briefcase, title: "Employment & income pathways", note: "Participants moving into jobs, apprenticeships, or youth-led enterprise after completing a program." },
-  { icon: Target, title: "Gender inclusion", note: "A program-wide floor for young women's participation, with equal access to mentorship and opportunity." },
-  { icon: TrendingUp, title: "Youth-led ventures", note: "New enterprises incubated with mentorship, seed support, and market access." },
-  { icon: HeartHandshake, title: "Community partnerships", note: "Formal partnerships with local institutions, employers, and community leaders." },
+  { icon: Users, title: "Youth reached", note: "Learners engaged through Foundation-supported programs based in Seattle, Washington and Ethiopia.", tone: "bg-[hsl(var(--trust-blue))]" },
+  { icon: Briefcase, title: "Employment & income pathways", note: "Participants moving into jobs, apprenticeships, or youth-led enterprise after completing a program.", tone: "bg-[hsl(var(--amber))]" },
+  { icon: Target, title: "Gender inclusion", note: "A program-wide floor for young women's participation, with equal access to mentorship and opportunity.", tone: "bg-[hsl(var(--terracotta))]" },
+  { icon: TrendingUp, title: "Youth-led ventures", note: "New enterprises incubated with mentorship, seed support, and market access.", tone: "bg-[hsl(var(--sage))]" },
+  { icon: HeartHandshake, title: "Community partnerships", note: "Formal partnerships with local institutions, employers, and community leaders.", tone: "bg-gradient-to-br from-[hsl(var(--trust-blue))] to-[hsl(var(--amber))]" },
 ];
 
 const reportingCommitments = [
@@ -20,10 +20,10 @@ const reportingCommitments = [
 ];
 
 const principles = [
-  { icon: CheckCircle2, title: "Verified before published", body: "Numbers appear here only after they are documented, checked against source records, and validated with community partners." },
-  { icon: BookOpenCheck, title: "Methodology in the open", body: "Each figure links to how it was collected, what it does and does not measure, and known limitations." },
-  { icon: Users, title: "Community-defined outcomes", body: "The outcomes that matter are chosen with the communities we serve, not imposed from outside." },
-  { icon: ShieldCheck, title: "Privacy protected", body: "We collect the minimum data needed, obtain informed consent, and never publish information that could put participants at risk." },
+  { icon: CheckCircle2, title: "Verified before published", body: "Numbers appear here only after they are documented, checked against source records, and validated with community partners.", tone: "bg-[hsl(var(--trust-blue))]" },
+  { icon: BookOpenCheck, title: "Methodology in the open", body: "Each figure links to how it was collected, what it does and does not measure, and known limitations.", tone: "bg-[hsl(var(--plum))]" },
+  { icon: Users, title: "Community-defined outcomes", body: "The outcomes that matter are chosen with the communities we serve, not imposed from outside.", tone: "bg-[hsl(var(--sage))]" },
+  { icon: ShieldCheck, title: "Privacy protected", body: "We collect the minimum data needed, obtain informed consent, and never publish information that could put participants at risk.", tone: "bg-[hsl(var(--amber))]" },
 ];
 
 export default function Impact() {
