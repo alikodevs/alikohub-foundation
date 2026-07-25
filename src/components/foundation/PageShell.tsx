@@ -63,7 +63,9 @@ export function PageShell({ title, intro, eyebrow, children, afterContent, seo }
         </div>
       </header>
       <main className="container mx-auto px-6 py-16">{children}</main>
+      {afterContent}
       <Footer />
+
     </div>
   );
 }
