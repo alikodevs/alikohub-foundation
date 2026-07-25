@@ -44,12 +44,19 @@ export default function Impact() {
         <h2 id="outcome-areas" className="font-heading text-2xl font-semibold text-foreground">Outcome areas</h2>
         <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {outcomeAreas.map((k) => (
-            <article key={k.title} className="rounded-xl border border-border bg-card p-6">
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
-                <k.icon className="h-5 w-5 text-primary" aria-hidden />
+            <article
+              key={k.title}
+              className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <div className={`relative h-24 ${k.tone}`}>
+                <div className="absolute bottom-3 left-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/25 ring-1 ring-white/40 backdrop-blur-md shadow-lg">
+                  <k.icon className="h-5 w-5 text-white" aria-hidden />
+                </div>
               </div>
-              <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">{k.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{k.note}</p>
+              <div className="p-6">
+                <h3 className="font-heading text-lg font-bold text-foreground">{k.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{k.note}</p>
+              </div>
             </article>
           ))}
         </div>
