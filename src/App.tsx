@@ -76,6 +76,12 @@ const App = () => (
                 <Route path="/governance" element={<Governance />} />
                 <Route path="/ethics" element={<Ethics />} />
                 <Route path="/sustainability" element={<Sustainability />} />
+                <Route path="/annual-report" element={<AnnualReport />} />
+                <Route path="/financials" element={<Financials />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/press" element={<Press />} />
                 
                 
                 {/* Admin routes */}
