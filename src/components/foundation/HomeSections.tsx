@@ -82,15 +82,23 @@ export function ProgramPillarsSection() {
           </Link>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {programPillars.map((p) => (
-            <article
-              key={p.slug}
-              className="group rounded-xl border border-border bg-card p-6 transition-shadow hover:shadow-[var(--shadow-card-hover)]"
-            >
-              <h3 className="font-heading text-lg font-semibold text-foreground">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.summary}</p>
-            </article>
-          ))}
+          {programPillars.map((p, i) => {
+            const cycle = [
+              { bg: "bg-[hsl(var(--trust-blue))]", fg: "text-white" },
+              { bg: "bg-[hsl(var(--amber))]", fg: "text-white" },
+              { bg: "bg-gradient-to-br from-[hsl(var(--trust-blue))] via-[hsl(var(--navy-light))] to-[hsl(var(--amber))]", fg: "text-white" },
+            ];
+            const s = cycle[i % 3];
+            return (
+              <article
+                key={p.slug}
+                className={`${s.bg} ${s.fg} group rounded-2xl p-6 shadow-[var(--shadow-card)] transition-transform hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]`}
+              >
+                <h3 className="font-heading text-lg font-bold">{p.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed opacity-95">{p.summary}</p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
