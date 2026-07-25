@@ -28,18 +28,33 @@ export function PageShell({ title, intro, eyebrow, children, seo }: PageShellPro
     <div className="min-h-screen bg-background">
       <Seo title={seoTitle} description={seoDescription} path={seoPath} />
       <Navbar />
-      <header className="border-b border-border bg-secondary/60">
-        <div className="container mx-auto px-6 py-16 lg:py-20">
+      <header
+        className="relative overflow-hidden border-b border-border"
+        style={{
+          background:
+            "linear-gradient(120deg, hsl(var(--trust-blue)) 0%, hsl(var(--navy-light)) 55%, hsl(var(--amber)) 100%)",
+        }}
+      >
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 15% 20%, hsl(var(--amber) / 0.55), transparent 45%), radial-gradient(circle at 85% 80%, hsl(var(--trust-blue) / 0.6), transparent 50%)",
+          }}
+          aria-hidden
+        />
+        <div className="container relative mx-auto px-6 py-16 lg:py-20">
           {eyebrow && (
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-primary">
+            <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--amber))]" aria-hidden />
               {eyebrow}
             </p>
           )}
-          <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-white sm:text-5xl">
             {title}
           </h1>
           {intro && (
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/85">
               {intro}
             </p>
           )}
