@@ -55,12 +55,6 @@ export default function Governance() {
         </div>
       </section>
 
-      <div className="mt-16 rounded-xl border border-border bg-secondary p-6">
-        <h2 className="font-heading text-lg font-semibold text-foreground">Legal identity</h2>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          {foundation.separationStatement}
-        </p>
-      </div>
     </PageShell>
   );
 }
