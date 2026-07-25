@@ -1,6 +1,6 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { Crown, Settings, MapPin, GraduationCap, BarChart3, DollarSign, Users } from "lucide-react";
-import { foundation, board } from "@/config/foundation";
+import { board } from "@/config/foundation";
 
 const levels = [
   { icon: Crown, title: "Board of Directors", role: "Strategic Oversight", description: "Sets vision and strategy, approves policy, oversees the President, and safeguards mission alignment." },
