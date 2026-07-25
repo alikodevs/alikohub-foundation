@@ -50,15 +50,15 @@
     --charcoal: 211 55% 12%;
     --muted-text: 211 20% 34%;
 
-    /* Vivid accents — used across cards, KPIs, section washes */
-    --amber: 32 88% 52%;
-    --amber-light: 36 92% 62%;
-    --amber-glow: 40 95% 68%;
-    --sky: 200 82% 48%;
-    --sky-light: 200 85% 66%;
-    --terracotta: 14 72% 52%;
-    --sage: 148 32% 42%;
-    --plum: 268 42% 40%;
+    /* Muted, editorial accents — toned down for readability */
+    --amber: 36 65% 44%;
+    --amber-light: 38 60% 55%;
+    --amber-glow: 40 55% 72%;
+    --sky: 200 72% 42%;
+    --sky-light: 200 70% 60%;
+    --terracotta: 14 50% 46%;
+    --sage: 148 32% 38%;
+    --plum: 268 38% 38%;
 
     /* Navbar stays deep navy for contrast */
     --navbar-bg: 211 70% 14%;
@@ -66,14 +66,14 @@
 
     --gradient-hero: linear-gradient(135deg, hsl(205 60% 95%) 0%, hsl(205 55% 92%) 50%, hsl(200 65% 90%) 100%);
     --gradient-navy: linear-gradient(135deg, hsl(211 70% 18%) 0%, hsl(208 60% 28%) 100%);
-    --gradient-amber: linear-gradient(135deg, hsl(32 88% 52%) 0%, hsl(14 72% 52%) 100%);
+    --gradient-amber: linear-gradient(135deg, hsl(205 78% 38%) 0%, hsl(36 65% 44%) 100%);
     --gradient-card: linear-gradient(160deg, hsl(0 0% 100%) 0%, hsl(205 45% 96%) 100%);
-    --gradient-sky: linear-gradient(135deg, hsl(200 82% 48%) 0%, hsl(205 78% 38%) 100%);
+    --gradient-sky: linear-gradient(135deg, hsl(200 72% 42%) 0%, hsl(205 78% 38%) 100%);
     --gradient-glow: none;
 
     --shadow-card: 0 2px 14px -3px hsl(211 60% 20% / 0.10);
     --shadow-card-hover: 0 14px 34px -10px hsl(211 60% 20% / 0.18);
-    --shadow-amber: 0 6px 20px -6px hsl(32 88% 52% / 0.32);
+    --shadow-amber: 0 6px 20px -6px hsl(36 55% 40% / 0.22);
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 211 55% 12%;
