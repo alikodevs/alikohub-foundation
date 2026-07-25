@@ -6,9 +6,9 @@
 
 @layer base {
   :root {
-    /* AlikoHub Foundation — colorful light palette
-       Warm cream base + Deep Navy authority + vivid Trust Blue, Amber, Terracotta, Sage accents. */
-    --background: 43 40% 97%;
+    /* AlikoHub Foundation — soft-blue editorial palette (aligned to alikohub.com)
+       Airy sky-blue base + Deep Navy authority + Trust Blue, Amber, Terracotta, Sage accents. */
+    --background: 205 55% 94%;
     --foreground: 211 55% 12%;
 
     --card: 0 0% 100%;
@@ -19,14 +19,14 @@
 
     /* Primary = Deep Navy for authority/trust */
     --primary: 211 70% 18%;
-    --primary-foreground: 43 40% 97%;
+    --primary-foreground: 205 55% 96%;
 
-    /* Secondary = Warm cream editorial surface */
-    --secondary: 39 45% 93%;
+    /* Secondary = soft sky editorial surface */
+    --secondary: 205 50% 90%;
     --secondary-foreground: 211 55% 12%;
 
-    --muted: 39 30% 94%;
-    --muted-foreground: 211 20% 38%;
+    --muted: 205 40% 92%;
+    --muted-foreground: 211 20% 34%;
 
     /* Accent = vivid Trust Blue for links/quiet emphasis */
     --accent: 205 78% 38%;
@@ -35,8 +35,8 @@
     --destructive: 0 74% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 39 25% 86%;
-    --input: 39 25% 88%;
+    --border: 205 35% 82%;
+    --input: 205 35% 85%;
     --ring: 205 78% 38%;
 
     --radius: 0.5rem;
@@ -46,9 +46,9 @@
     --navy-light: 208 60% 28%;
     --navy-medium: 211 55% 22%;
     --trust-blue: 205 78% 38%;
-    --warm-surface: 39 45% 93%;
+    --warm-surface: 205 50% 90%;
     --charcoal: 211 55% 12%;
-    --muted-text: 211 20% 38%;
+    --muted-text: 211 20% 34%;
 
     /* Vivid accents — used across cards, KPIs, section washes */
     --amber: 32 88% 52%;
@@ -62,12 +62,12 @@
 
     /* Navbar stays deep navy for contrast */
     --navbar-bg: 211 70% 14%;
-    --navbar-fg: 43 40% 97%;
+    --navbar-fg: 205 55% 96%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(39 55% 94%) 0%, hsl(43 40% 97%) 45%, hsl(200 60% 93%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(205 60% 95%) 0%, hsl(205 55% 92%) 50%, hsl(200 65% 90%) 100%);
     --gradient-navy: linear-gradient(135deg, hsl(211 70% 18%) 0%, hsl(208 60% 28%) 100%);
     --gradient-amber: linear-gradient(135deg, hsl(32 88% 52%) 0%, hsl(14 72% 52%) 100%);
-    --gradient-card: linear-gradient(160deg, hsl(0 0% 100%) 0%, hsl(39 40% 96%) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(0 0% 100%) 0%, hsl(205 45% 96%) 100%);
     --gradient-sky: linear-gradient(135deg, hsl(200 82% 48%) 0%, hsl(205 78% 38%) 100%);
     --gradient-glow: none;
 
