@@ -8,14 +8,20 @@ const footerNav = {
   Foundation: [
     { label: "About", href: "/about" },
     { label: "Governance", href: "/governance" },
-    { label: "Transparency", href: "/transparency" },
     { label: "Ethics & Safeguarding", href: "/ethics" },
+    { label: "Press & Media", href: "/press" },
   ],
   "Our Work": [
     { label: "Programs", href: "/programs" },
     { label: "Where We Work", href: "/where-we-work" },
     { label: "Impact", href: "/impact" },
     { label: "Stories & Insights", href: "/stories" },
+  ],
+  Transparency: [
+    { label: "Annual Report", href: "/annual-report" },
+    { label: "Financials", href: "/financials" },
+    { label: "Transparency", href: "/transparency" },
+    { label: "FAQ", href: "/faq" },
   ],
   Engage: [
     { label: "Partnerships", href: "/partnership" },
