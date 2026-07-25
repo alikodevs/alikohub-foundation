@@ -77,9 +77,12 @@ export default function Impact() {
         <h2 id="how-we-report" className="font-heading text-2xl font-semibold text-foreground">How we report</h2>
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           {principles.map((p) => (
-            <article key={p.title} className="flex gap-4 rounded-xl border border-border bg-card p-6">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                <p.icon className="h-5 w-5 text-primary" aria-hidden />
+            <article
+              key={p.title}
+              className="flex gap-4 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${p.tone} shadow-md ring-1 ring-white/30`}>
+                <p.icon className="h-5 w-5 text-white" aria-hidden />
               </div>
               <div>
                 <h3 className="font-heading text-lg font-semibold text-foreground">{p.title}</h3>
