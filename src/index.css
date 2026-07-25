@@ -124,6 +124,15 @@
     --sky: 200 70% 55%;
     --sky-light: 200 80% 70%;
 
+    /* Semantic tokens that MUST exist in dark mode too (used across cards/sections) */
+    --trust-blue: 205 70% 48%;
+    --warm-surface: 215 30% 13%;
+    --charcoal: 210 40% 96%;
+    --muted-text: 215 20% 65%;
+    --terracotta: 14 65% 58%;
+    --sage: 148 30% 52%;
+    --plum: 268 45% 62%;
+
     --navbar-bg: 220 30% 6%;
     --navbar-fg: 210 40% 96%;
     --gradient-hero: linear-gradient(135deg, hsl(220 30% 6%) 0%, hsl(215 35% 12%) 50%, hsl(220 30% 8%) 100%);
