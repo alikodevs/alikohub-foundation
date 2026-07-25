@@ -28,6 +28,12 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Governance = lazy(() => import("./pages/Governance"));
 const Ethics = lazy(() => import("./pages/Ethics"));
 const Sustainability = lazy(() => import("./pages/Sustainability"));
+const AnnualReport = lazy(() => import("./pages/AnnualReport"));
+const Financials = lazy(() => import("./pages/Financials"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Press = lazy(() => import("./pages/Press"));
 
 // Admin pages
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
