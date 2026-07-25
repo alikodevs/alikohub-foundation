@@ -189,15 +189,15 @@
 
 @layer utilities {
   .text-gradient-amber {
-    background: linear-gradient(135deg, hsl(37 78% 56%), hsl(37 90% 70%));
+    background: linear-gradient(135deg, hsl(40 60% 70%), hsl(40 70% 82%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Light mode: high-contrast amber gradient for light blue bg readability */
+  /* Light mode: high-contrast, deeper navy→amber gradient for readability */
   :root:not(.dark) .text-gradient-amber {
-    background: linear-gradient(135deg, hsl(25 90% 30%), hsl(30 85% 38%));
+    background: linear-gradient(135deg, hsl(211 70% 20%), hsl(36 55% 35%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
