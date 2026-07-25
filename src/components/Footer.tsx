@@ -8,14 +8,20 @@ const footerNav = {
   Foundation: [
     { label: "About", href: "/about" },
     { label: "Governance", href: "/governance" },
-    { label: "Transparency", href: "/transparency" },
     { label: "Ethics & Safeguarding", href: "/ethics" },
+    { label: "Press & Media", href: "/press" },
   ],
   "Our Work": [
     { label: "Programs", href: "/programs" },
     { label: "Where We Work", href: "/where-we-work" },
     { label: "Impact", href: "/impact" },
     { label: "Stories & Insights", href: "/stories" },
+  ],
+  Transparency: [
+    { label: "Annual Report", href: "/annual-report" },
+    { label: "Financials", href: "/financials" },
+    { label: "Transparency", href: "/transparency" },
+    { label: "FAQ", href: "/faq" },
   ],
   Engage: [
     { label: "Partnerships", href: "/partnership" },
@@ -33,7 +39,7 @@ export function Footer() {
       style={{ background: "var(--gradient-navy)" }}
     >
       <div className="container mx-auto px-6 py-16">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-md bg-white/10 p-1.5">
@@ -98,14 +104,17 @@ export function Footer() {
             A 501(c)(3) nonprofit organization.
           </p>
           <div className="flex gap-4">
+            <Link to="/privacy" className="hover:text-white">
+              Privacy
+            </Link>
+            <Link to="/terms" className="hover:text-white">
+              Terms
+            </Link>
             <Link to="/ethics" className="hover:text-white">
               Ethics
             </Link>
-            <Link to="/transparency" className="hover:text-white">
-              Privacy
-            </Link>
-            <Link to="/transparency" className="hover:text-white">
-              Terms
+            <Link to="/faq" className="hover:text-white">
+              FAQ
             </Link>
           </div>
         </div>

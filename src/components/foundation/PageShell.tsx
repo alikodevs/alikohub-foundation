@@ -34,14 +34,14 @@ export function PageShell({ title, intro, eyebrow, children, afterContent, seo }
         className="relative overflow-hidden border-b border-border"
         style={{
           background:
-            "linear-gradient(120deg, hsl(var(--trust-blue)) 0%, hsl(var(--navy-light)) 55%, hsl(var(--amber)) 100%)",
+            "linear-gradient(120deg, hsl(var(--navy)) 0%, hsl(var(--trust-blue)) 65%, hsl(var(--navy-light)) 100%)",
         }}
       >
         <div
-          className="pointer-events-none absolute inset-0 opacity-20"
+          className="pointer-events-none absolute inset-0 opacity-25"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 15% 20%, hsl(var(--amber) / 0.55), transparent 45%), radial-gradient(circle at 85% 80%, hsl(var(--trust-blue) / 0.6), transparent 50%)",
+              "radial-gradient(circle at 15% 20%, hsl(var(--amber) / 0.28), transparent 50%), radial-gradient(circle at 85% 80%, hsl(var(--trust-blue) / 0.45), transparent 55%)",
           }}
           aria-hidden
         />

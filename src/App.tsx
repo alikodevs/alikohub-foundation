@@ -28,6 +28,12 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Governance = lazy(() => import("./pages/Governance"));
 const Ethics = lazy(() => import("./pages/Ethics"));
 const Sustainability = lazy(() => import("./pages/Sustainability"));
+const AnnualReport = lazy(() => import("./pages/AnnualReport"));
+const Financials = lazy(() => import("./pages/Financials"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Press = lazy(() => import("./pages/Press"));
 
 // Admin pages
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -70,6 +76,12 @@ const App = () => (
                 <Route path="/governance" element={<Governance />} />
                 <Route path="/ethics" element={<Ethics />} />
                 <Route path="/sustainability" element={<Sustainability />} />
+                <Route path="/annual-report" element={<AnnualReport />} />
+                <Route path="/financials" element={<Financials />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/press" element={<Press />} />
                 
                 
                 {/* Admin routes */}
