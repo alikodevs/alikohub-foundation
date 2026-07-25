@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   return (
-    <>
     <PageShell
       eyebrow="About"
       title="A foundation built on listening."
       intro="AlikoHub Foundation exists to help communities turn their own resourcefulness into lasting opportunity. We work alongside local leaders, not around them."
+      afterContent={<EcosystemArchitectureSection />}
     >
+
       <section className="grid gap-6 lg:grid-cols-2">
         <article className="rounded-2xl bg-[hsl(var(--trust-blue))] p-8 text-white shadow-[var(--shadow-card)] transition-transform hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/80">Our mission</p>
@@ -79,7 +80,6 @@ export default function About() {
         <LegalSeparationStrip />
       </div>
     </PageShell>
-    <EcosystemArchitectureSection />
-    </>
   );
 }
+

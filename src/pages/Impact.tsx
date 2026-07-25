@@ -28,12 +28,18 @@ const principles = [
 
 export default function Impact() {
   return (
-    <>
     <PageShell
       eyebrow="Impact"
       title="What we measure, and how."
       intro="A performance framework designed to measure reach, quality, equity, and long-term impact across the communities we serve. Baseline numbers will be published once independently verified."
+      afterContent={
+        <>
+          <ScalePrinciplesSection />
+          <CostEfficiencySection />
+        </>
+      }
     >
+
       <section aria-labelledby="outcome-areas">
         <h2 id="outcome-areas" className="font-heading text-2xl font-semibold text-foreground">Outcome areas</h2>
         <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -77,8 +83,6 @@ export default function Impact() {
         </div>
       </section>
     </PageShell>
-    <ScalePrinciplesSection />
-    <CostEfficiencySection />
-    </>
   );
 }
+

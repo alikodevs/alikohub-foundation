@@ -89,11 +89,17 @@ const pillars = [
 
 export default function Programs() {
   return (
-    <>
     <PageShell
       eyebrow="Our work"
       title="Seven program areas. One coherent mission."
       intro="Integrated pathways across education, health, technology, WASH, and entrepreneurship, delivered through community-designed programs based in Seattle, Washington and Ethiopia."
+      afterContent={
+        <>
+          <DeliveryPathwaysSection />
+          <ImplementationJourneySection />
+          <ProgramDesignPrinciplesSection />
+        </>
+      }
     >
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {pillars.map((p) => (
@@ -125,9 +131,6 @@ export default function Programs() {
         ))}
       </div>
     </PageShell>
-      <DeliveryPathwaysSection />
-      <ImplementationJourneySection />
-      <ProgramDesignPrinciplesSection />
-    </>
   );
 }
+
