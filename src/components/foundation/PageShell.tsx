@@ -10,6 +10,7 @@ interface PageShellProps {
   intro?: string;
   eyebrow?: string;
   children?: ReactNode;
+  afterContent?: ReactNode;
   seo?: {
     title?: string;
     description?: string;
@@ -17,7 +18,8 @@ interface PageShellProps {
   };
 }
 
-export function PageShell({ title, intro, eyebrow, children, seo }: PageShellProps) {
+export function PageShell({ title, intro, eyebrow, children, afterContent, seo }: PageShellProps) {
+
   const location = useLocation();
   const seoTitle = seo?.title ?? `${title} — ${foundation.legalName}`;
   const seoDescription =
