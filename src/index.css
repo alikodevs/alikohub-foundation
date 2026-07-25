@@ -96,16 +96,16 @@
     --popover: 220 28% 10%;
     --popover-foreground: 210 40% 96%;
 
-    --primary: 37 78% 56%;
+    --primary: 40 55% 62%;
     --primary-foreground: 220 30% 6%;
 
     --secondary: 215 30% 16%;
     --secondary-foreground: 210 40% 96%;
 
     --muted: 215 25% 14%;
-    --muted-foreground: 215 20% 55%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 200 70% 55%;
+    --accent: 200 65% 60%;
     --accent-foreground: 220 30% 6%;
 
     --destructive: 0 84% 60%;
@@ -113,36 +113,36 @@
 
     --border: 215 25% 18%;
     --input: 215 25% 18%;
-    --ring: 37 78% 56%;
+    --ring: 40 55% 62%;
 
     --navy: 220 30% 6%;
     --navy-light: 220 28% 10%;
     --navy-medium: 215 30% 16%;
-    --amber: 37 78% 56%;
-    --amber-light: 37 85% 65%;
-    --amber-glow: 37 90% 70%;
-    --sky: 200 70% 55%;
-    --sky-light: 200 80% 70%;
+    --amber: 40 55% 62%;
+    --amber-light: 40 60% 70%;
+    --amber-glow: 40 65% 78%;
+    --sky: 200 65% 60%;
+    --sky-light: 200 75% 72%;
 
     /* Semantic tokens that MUST exist in dark mode too (used across cards/sections) */
-    --trust-blue: 205 70% 48%;
+    --trust-blue: 205 65% 55%;
     --warm-surface: 215 30% 13%;
     --charcoal: 210 40% 96%;
-    --muted-text: 215 20% 65%;
-    --terracotta: 14 65% 58%;
-    --sage: 148 30% 52%;
-    --plum: 268 45% 62%;
+    --muted-text: 215 20% 72%;
+    --terracotta: 14 50% 58%;
+    --sage: 148 28% 55%;
+    --plum: 268 40% 65%;
 
     --navbar-bg: 220 30% 6%;
     --navbar-fg: 210 40% 96%;
     --gradient-hero: linear-gradient(135deg, hsl(220 30% 6%) 0%, hsl(215 35% 12%) 50%, hsl(220 30% 8%) 100%);
-    --gradient-amber: linear-gradient(135deg, hsl(37 78% 56%) 0%, hsl(30 85% 50%) 100%);
+    --gradient-amber: linear-gradient(135deg, hsl(205 65% 45%) 0%, hsl(40 55% 55%) 100%);
     --gradient-card: linear-gradient(160deg, hsl(220 28% 12%) 0%, hsl(220 28% 8%) 100%);
-    --gradient-glow: radial-gradient(ellipse at 30% 50%, hsl(37 78% 56% / 0.08) 0%, transparent 60%);
+    --gradient-glow: radial-gradient(ellipse at 30% 50%, hsl(40 55% 62% / 0.06) 0%, transparent 60%);
 
     --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.3);
-    --shadow-card-hover: 0 12px 40px -8px hsl(37 78% 56% / 0.2);
-    --shadow-amber: 0 4px 20px -4px hsl(37 78% 56% / 0.4);
+    --shadow-card-hover: 0 12px 40px -8px hsl(40 55% 62% / 0.15);
+    --shadow-amber: 0 4px 20px -4px hsl(40 55% 62% / 0.25);
 
     --sidebar-background: 220 28% 10%;
     --sidebar-foreground: 210 40% 96%;
