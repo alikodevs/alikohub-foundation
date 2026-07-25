@@ -194,19 +194,20 @@ export default function Programs() {
               className={`group flex flex-col overflow-hidden rounded-2xl border ${p.theme.border} bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]`}
             >
               {/* Header band: image + colored overlay, or solid colored band */}
-              <div className={`relative h-36 ${p.theme.ring}`}>
+              <div className={`relative h-44 overflow-hidden ${p.theme.ring}`}>
                 {p.image && (
                   <>
                     <img
                       src={p.image}
                       alt={p.title}
-                      className="absolute inset-0 h-full w-full object-cover opacity-80 mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                    {/* subtle color wash so brand palette still reads without hiding the photo */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                   </>
                 )}
-                <div className={`absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-xl ${p.theme.chip} backdrop-blur-sm ring-1 ring-white/30`}>
+                <div className={`absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-xl ${p.theme.chip} backdrop-blur-md ring-1 ring-white/40 shadow-lg`}>
                   <Icon className={`h-5 w-5 ${p.theme.chipFg}`} aria-hidden />
                 </div>
               </div>
