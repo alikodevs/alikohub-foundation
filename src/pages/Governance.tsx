@@ -1,6 +1,6 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { Crown, Settings, MapPin, GraduationCap, BarChart3, DollarSign, Users } from "lucide-react";
-import { foundation, board } from "@/config/foundation";
+import { board } from "@/config/foundation";
 
 const levels = [
   { icon: Crown, title: "Board of Directors", role: "Strategic Oversight", description: "Sets vision and strategy, approves policy, oversees the President, and safeguards mission alignment." },
@@ -55,12 +55,6 @@ export default function Governance() {
         </div>
       </section>
 
-      <div className="mt-16 rounded-xl border border-border bg-secondary p-6">
-        <h2 className="font-heading text-lg font-semibold text-foreground">Legal identity</h2>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          {foundation.separationStatement}
-        </p>
-      </div>
     </PageShell>
   );
 }
