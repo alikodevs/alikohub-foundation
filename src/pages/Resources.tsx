@@ -21,7 +21,7 @@ export default function Resources() {
           { k: "Libraries", v: "4 collections" },
           { k: "License", v: "Adaptable" },
           { k: "Access", v: "On request" },
-          { k: "Language", v: "English (more soon)" },
+          { k: "Language", v: "English" },
         ].map((s) => (
           <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
