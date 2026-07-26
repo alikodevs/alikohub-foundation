@@ -30,6 +30,7 @@ const primaryNav = [
 const utilityNav = [
   { label: "Resources", href: "/resources" },
   { label: "Transparency", href: "/transparency" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ];
 

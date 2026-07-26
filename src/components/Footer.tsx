@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
 import { foundation } from "@/config/foundation";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import foundationMark from "@/assets/foundation-mark.png";
 
 const footerNav = {
@@ -9,6 +13,7 @@ const footerNav = {
     { label: "About", href: "/about" },
     { label: "Governance", href: "/governance" },
     { label: "Ethics & Safeguarding", href: "/ethics" },
+    { label: "Careers", href: "/careers" },
     { label: "Press & Media", href: "/press" },
   ],
   "Our Work": [
@@ -16,6 +21,7 @@ const footerNav = {
     { label: "Where We Work", href: "/where-we-work" },
     { label: "Impact", href: "/impact" },
     { label: "Stories & Insights", href: "/stories" },
+    { label: "Sustainability", href: "/sustainability" },
   ],
   Transparency: [
     { label: "Annual Report", href: "/annual-report" },
@@ -24,6 +30,7 @@ const footerNav = {
     { label: "FAQ", href: "/faq" },
   ],
   Engage: [
+    { label: "Donate", href: "/donate" },
     { label: "Partnerships", href: "/partnership" },
     { label: "Get Involved", href: "/get-involved" },
     { label: "Resources", href: "/resources" },
