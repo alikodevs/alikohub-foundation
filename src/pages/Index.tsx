@@ -59,24 +59,16 @@ const Index = () => {
         <FoundationHero />
         <MissionBand />
         <ResourcefulnessEcosystemSection />
-        <ScaleOfTheGapSection />
-        <SystemicBarriersSection />
-        <CurrentApproachesGapSection />
-        <SystemicSolutionsBand />
-        <SolutionPositioningSection />
-        <SevenPrioritiesSection />
+        <HomeStorySection />
         <DeliveryModelSection />
-        <OperationalizingFlowSection />
         <ImplementationPartnerSection />
-        <WhyDifferentSection />
         <ProgramPillarsSection />
         <WhereWeWorkPreview />
-        <PartnershipModelComparisonSection />
-        <WhyPartnershipSection />
         <TransparencyBand />
         <LegalSeparationStrip />
         <FinalCTASection />
       </main>
+
       <Footer />
     </div>
   );
