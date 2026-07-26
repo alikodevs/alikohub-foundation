@@ -1,7 +1,8 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { InquiryForm } from "@/components/foundation/InquiryForm";
-import { VolunteerImpactRibbon, VolunteerRoles, WaysToSupport, PartnerVoices } from "@/components/foundation/PartnershipEnhancements";
-import { Handshake, HeartHandshake, Newspaper, Heart, ArrowRight } from "lucide-react";
+import { VolunteerImpactRibbon, VolunteerRoles } from "@/components/foundation/PartnershipEnhancements";
+import { Handshake, HeartHandshake, Newspaper, Heart, ArrowRight, Calendar, Share2, Mail, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const pathways = [
   {
