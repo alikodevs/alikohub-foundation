@@ -4,21 +4,24 @@ import { foundation } from "@/config/foundation";
 
 const releases = [
   {
-    date: "Coming soon",
-    title: "Foundation launches its inaugural program cohort",
-    summary: "An overview of the pilot cohort, the priority areas represented, and the partners co-designing the work.",
+    date: "Founding release",
+    title: "AlikoHub Foundation launches to advance a youth resourcefulness ecosystem",
+    summary:
+      "The Foundation formalizes its nonprofit mandate to expand equitable access to education, workforce development, digital and public health, WASH, and community resilience, anchored in Seattle and Ethiopia.",
     accent: "hsl(var(--trust-blue))",
   },
   {
-    date: "Coming soon",
-    title: "New partnership framework for outcome-linked programs",
-    summary: "How the Foundation is structuring employer, academic, and public-sector partnerships around measurable outcomes.",
+    date: "Program note",
+    title: "Partnership framework built around Train, Guide, Connect, Scale",
+    summary:
+      "How the Foundation structures employer, academic, and public-sector partnerships around the four-stage learning-to-leadership pathway that guides every cohort.",
     accent: "hsl(var(--amber))",
   },
   {
-    date: "Coming soon",
-    title: "Annual Impact review published",
-    summary: "The Foundation's first annual review covering programs, learnings, financials, and forward priorities.",
+    date: "Ecosystem update",
+    title: "Foundation aligns with the seven priority-area program pillars",
+    summary:
+      "A summary of how the Foundation's programs advance Education, Workforce, Technology, Public and Digital Health, WASH, Entrepreneurship, and Community Resilience with local partners.",
     accent: "hsl(160,55%,42%)",
   },
 ];
@@ -32,7 +35,7 @@ export default function Press() {
     >
       <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
         {[
-          { k: "Releases", v: "3 upcoming" },
+          { k: "Releases", v: `${releases.length} published` },
           { k: "Media kit", v: "On request" },
           { k: "Interviews", v: "Board & President" },
           { k: "Response", v: "Priority routing" },
@@ -43,6 +46,7 @@ export default function Press() {
           </div>
         ))}
       </div>
+
 
       <section>
         <div>
