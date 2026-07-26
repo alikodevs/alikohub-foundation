@@ -1,94 +1,119 @@
-import { motion } from "framer-motion";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { MapPin, Globe } from "lucide-react";
-import { cardColors } from "@/lib/card-colors";
+import { PageShell } from "@/components/foundation/PageShell";
+import { MapPin, Building2, Users, Cpu, Leaf, GraduationCap, Sparkles } from "lucide-react";
 
-const hubs = [
-  { country: "Ethiopia", city: "Addis Ababa", target: "10,000", focus: "Digital Health, One Health, STEM, FinTech, AgriTech", status: "Active", timeline: "Year 1", region: "Africa" },
-  { country: "Kenya", city: "Nairobi", target: "7,000", focus: "FinTech, Digital Skills, Entrepreneurship", status: "Planned", timeline: "Years 2–3", region: "Africa" },
-  { country: "Nigeria", city: "Lagos", target: "8,000", focus: "Creative Economy, FinTech", status: "Planned", timeline: "Years 2–3", region: "Africa" },
-  { country: "Rwanda", city: "Kigali", target: "5,000", focus: "Smart Tech, AI", status: "Planned", timeline: "Years 2–3", region: "Africa" },
-  { country: "Ghana", city: "Accra", target: "5,000", focus: "Pan-African Digital Skills", status: "Planned", timeline: "Years 2–3", region: "Africa" },
-  { country: "South Africa", city: "Johannesburg", target: "5,000", focus: "Advanced Digital Skills", status: "Future", timeline: "Years 4–5", region: "Africa" },
-  { country: "Tanzania", city: "Dar es Salaam", target: "3,000", focus: "Blue Economy", status: "Future", timeline: "Years 4–5", region: "Africa" },
-  { country: "Senegal", city: "Dakar", target: "3,000", focus: "Francophone Digital Skills", status: "Future", timeline: "Years 4–5", region: "Africa" },
-  { country: "Uganda", city: "Kampala", target: "2,000", focus: "AgriTech", status: "Future", timeline: "Years 4–5", region: "Africa" },
-  { country: "Morocco", city: "Casablanca", target: "2,000", focus: "North Africa Digital Skills", status: "Future", timeline: "Years 4–5", region: "Africa" },
-  { country: "UAE", city: "Dubai", target: "1,500", focus: "FinTech, Innovation Partnerships, Diaspora Engagement", status: "Planned", timeline: "Years 3–4", region: "Middle East" },
-  { country: "Germany", city: "Berlin", target: "1,000", focus: "Tech Transfer, Diaspora Skills Bridge", status: "Planned", timeline: "Years 3–4", region: "Europe" },
-  { country: "United Kingdom", city: "London", target: "1,000", focus: "Impact Investment, Policy & Advocacy", status: "Future", timeline: "Years 4–5", region: "Europe" },
+const anchors = [
+  {
+    place: "Seattle, Washington",
+    country: "United States",
+    role: "Organizational home",
+    body: "Governance, diaspora engagement, U.S.-based partnerships, and program coordination for the Foundation's global work.",
+    image:
+      "https://images.unsplash.com/photo-1502175353174-a7a1a9308ff2?auto=format&fit=crop&w=1600&q=80",
+    accent: "hsl(var(--trust-blue))",
+  },
+  {
+    place: "Ethiopia",
+    country: "East Africa",
+    role: "Priority delivery region",
+    body: "Community-designed programs across education, workforce development, digital health, WASH, and STEM with local partners.",
+    image:
+      "https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=1600&q=80",
+    accent: "hsl(var(--amber))",
+  },
 ];
 
-const statusColors: Record<string, string> = {
-  Active: "bg-green-500/20 text-green-700 dark:text-green-400",
-  Planned: "bg-primary/20 text-primary",
-  Future: "bg-muted text-muted-foreground",
-};
+const hubModel = [
+  { icon: Building2, title: "Physical Delivery Space", body: "Community-anchored space equipped for training, mentorship, and collaboration." },
+  { icon: Cpu, title: "Digital Infrastructure", body: "LMS access, connectivity, devices, and technical support powered by shared systems." },
+  { icon: GraduationCap, title: "Local Trainers & Mentors", body: "Certified local practitioners deliver programs alongside diaspora advisors." },
+  { icon: Users, title: "Employer & Partner Network", body: "Job placement, apprenticeships, and enterprise partnerships anchored to the hub." },
+  { icon: Leaf, title: "Community Programs", body: "Health, WASH, and resilience initiatives integrated into hub operations." },
+  { icon: MapPin, title: "Governance Alignment", body: "Local ministry, academic, and civil-society partnerships that ground each hub." },
+];
 
-const Hubs = () => {
+export default function Hubs() {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-
-      <section className="py-24 lg:py-32">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="mx-auto mb-16 max-w-2xl text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-primary">
-              Regional Presence
-            </span>
-            <h1 className="font-heading text-4xl font-bold text-foreground sm:text-5xl">
-              Innovation Hubs Across <span className="text-gradient-amber">Africa</span>
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
-              10+ regional hubs across Africa, Europe, and the Middle East — with 90% of our footprint rooted in Africa — where youth learn, practice, innovate, and connect with real opportunity.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {hubs.map((hub, i) => {
-              const color = cardColors[i % cardColors.length];
-              return (
-                <motion.div
-                  key={hub.country}
-                  className={`group rounded-2xl ${color.bg} p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg dark:bg-card dark:border dark:border-border/50`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className={`font-heading text-xl font-bold ${color.text} dark:text-foreground`}>{hub.country}</h3>
-                    <span className={`rounded-full px-3 py-1 text-xs font-semibold ${statusColors[hub.status]}`}>
-                      {hub.status}
-                    </span>
-                  </div>
-                  <div className={`flex items-center gap-1.5 text-sm ${color.text} dark:text-muted-foreground mb-3`}>
-                    <MapPin className="h-4 w-4" />
-                    {hub.city} · {hub.timeline}
-                    <span className="ml-auto flex items-center gap-1 text-xs opacity-70">
-                      <Globe className="h-3 w-3" />
-                      {hub.region}
-                    </span>
-                  </div>
-                  <p className={`text-sm ${color.text} dark:text-muted-foreground mb-3`}>{hub.focus}</p>
-                  <div className={`text-2xl font-heading font-bold ${color.text} dark:text-primary`}>{hub.target}</div>
-                  <p className={`text-xs ${color.text} dark:text-muted-foreground`}>Youth Target</p>
-                </motion.div>
-              );
-            })}
+    <PageShell
+      eyebrow="Delivery footprint"
+      title="Hubs where community priorities meet capacity."
+      intro="The Foundation delivers its programs through community-anchored hubs. Our organizational home is Seattle, Washington and our priority delivery region is Ethiopia. Additional locations will be announced as partnerships are formalized."
+    >
+      {/* Ribbon */}
+      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+        {[
+          { k: "Headquarters", v: "Seattle, WA" },
+          { k: "Priority region", v: "Ethiopia" },
+          { k: "Delivery model", v: "Community-anchored" },
+          { k: "Expansion", v: "Partner-led" },
+        ].map((s) => (
+          <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
+            <p className="mt-1 font-heading text-sm font-bold text-foreground">{s.v}</p>
           </div>
+        ))}
+      </div>
+
+      {/* Anchors */}
+      <div className="grid gap-6 md:grid-cols-2">
+        {anchors.map((a) => (
+          <article
+            key={a.place}
+            className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
+          >
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <img src={a.image} alt={a.place} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div
+                className="absolute inset-0"
+                style={{ background: `linear-gradient(180deg, transparent 40%, ${a.accent} 130%)`, opacity: 0.55 }}
+                aria-hidden
+              />
+              <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/20 backdrop-blur">
+                    <MapPin className="h-4 w-4" aria-hidden />
+                  </span>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-90">{a.country}</p>
+                </div>
+                <h2 className="mt-2 font-heading text-2xl font-bold">{a.place}</h2>
+                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "hsl(var(--amber))" }}>{a.role}</p>
+              </div>
+            </div>
+            <div className="p-6">
+              <p className="text-sm leading-relaxed text-muted-foreground">{a.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* Hub model */}
+      <section className="mt-16">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">The hub model</p>
+          <h2 className="mt-2 font-heading text-2xl font-semibold text-foreground">What makes a Foundation hub</h2>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            Every hub is built around six components so quality stays consistent as the network grows.
+          </p>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {hubModel.map((h) => (
+            <article key={h.title} className="rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-[var(--shadow-card-hover)]">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[hsl(var(--trust-blue))]/10 text-[hsl(var(--trust-blue))]">
+                <h.icon className="h-5 w-5" aria-hidden />
+              </div>
+              <h3 className="mt-3 font-heading text-sm font-semibold text-foreground">{h.title}</h3>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{h.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <Footer />
-    </div>
+      <div className="mt-10 flex items-start gap-3 rounded-xl border border-[hsl(var(--amber))]/30 bg-[hsl(var(--amber))]/10 p-5">
+        <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-[hsl(var(--amber))]" aria-hidden />
+        <p className="text-sm text-foreground">
+          Additional hub locations will be announced as partnerships are formalized. Our expansion is deliberate,
+          partner-led, and grounded in community demand.
+        </p>
+      </div>
+    </PageShell>
   );
-};
-
-export default Hubs;
+}
