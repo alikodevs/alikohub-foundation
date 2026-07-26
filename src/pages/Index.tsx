@@ -11,19 +11,11 @@ import {
 import { DeliveryModelSection } from "@/components/foundation/DeliveryModelSection";
 import {
   ResourcefulnessEcosystemSection,
-  ScaleOfTheGapSection,
-  SystemicBarriersSection,
-  CurrentApproachesGapSection,
-  SevenPrioritiesSection,
   ImplementationPartnerSection,
-  WhyPartnershipSection,
-  SystemicSolutionsBand,
-  SolutionPositioningSection,
-  OperationalizingFlowSection,
-  PartnershipModelComparisonSection,
-  WhyDifferentSection,
 } from "@/components/foundation/PitchSections";
+import { HomeStorySection } from "@/components/foundation/HomeStorySection";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
+
 import { Seo } from "@/components/Seo";
 import { foundation } from "@/config/foundation";
 
