@@ -29,6 +29,12 @@ export function PageShell({ title, intro, eyebrow, children, afterContent, seo }
   return (
     <div className="min-h-screen bg-background">
       <Seo title={seoTitle} description={seoDescription} path={seoPath} />
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[hsl(var(--trust-blue))] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
+      >
+        Skip to content
+      </a>
       <Navbar />
       <header
         className="relative overflow-hidden border-b border-border"
@@ -62,7 +68,7 @@ export function PageShell({ title, intro, eyebrow, children, afterContent, seo }
           )}
         </div>
       </header>
-      <main className="container mx-auto px-6 py-16">{children}</main>
+      <main id="main-content" className="container mx-auto px-6 py-16">{children}</main>
       {afterContent}
       <Footer />
 

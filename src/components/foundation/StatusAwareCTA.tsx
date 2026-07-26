@@ -20,7 +20,7 @@ export function StatusAwareCTA({
   if (foundationStatus.donationsEnabled) {
     return (
       <Button asChild size={size} variant={variant} className={className}>
-        <Link to="/get-involved#donate">
+        <Link to="/donate">
           <Heart className="mr-2 h-4 w-4" aria-hidden />
           Donate
         </Link>
