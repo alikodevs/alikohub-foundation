@@ -79,6 +79,12 @@ export default function GetInvolved() {
         ))}
       </section>
 
+      <VolunteerImpactRibbon />
+      <VolunteerRoles />
+      <WaysToSupport />
+      <PartnerVoices />
+
+
       <section className="mt-16" aria-labelledby="get-involved-form">
         <div className="rounded-2xl border border-[hsl(var(--trust-blue))]/25 bg-[hsl(var(--warm-surface))] p-8 lg:p-10">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Tell us more</p>
