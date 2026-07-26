@@ -1,7 +1,8 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { InquiryForm } from "@/components/foundation/InquiryForm";
-import { VolunteerImpactRibbon, VolunteerRoles, WaysToSupport, PartnerVoices } from "@/components/foundation/PartnershipEnhancements";
-import { Handshake, HeartHandshake, Newspaper, Heart, ArrowRight } from "lucide-react";
+import { VolunteerImpactRibbon, VolunteerRoles } from "@/components/foundation/PartnershipEnhancements";
+import { Handshake, HeartHandshake, Newspaper, Heart, ArrowRight, Calendar, Share2, Mail, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const pathways = [
   {
@@ -81,8 +82,47 @@ export default function GetInvolved() {
 
       <VolunteerImpactRibbon />
       <VolunteerRoles />
-      <WaysToSupport />
-      <PartnerVoices />
+
+      {/* Simple everyday actions - unique to individuals */}
+      <section className="mt-16" aria-labelledby="everyday-actions">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Small actions, real impact</p>
+          <h2 id="everyday-actions" className="mt-2 font-heading text-2xl font-semibold text-foreground">
+            Ways to help in five minutes or less
+          </h2>
+        </div>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { icon: Share2, title: "Share our stories", body: "Amplify learner journeys on your networks to widen our reach.", accent: "hsl(var(--trust-blue))" },
+            { icon: Mail, title: "Subscribe to updates", body: "Get quarterly progress notes and cohort milestones by email.", accent: "hsl(var(--amber))" },
+            { icon: Calendar, title: "Attend an event", body: "Join a demo day, community convening, or open house.", accent: "hsl(160,55%,42%)" },
+            { icon: BookOpen, title: "Read the research", body: "Explore our reports and resources to inform your own work.", accent: "hsl(280,45%,55%)" },
+          ].map((a) => (
+            <div key={a.title} className="rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-0.5">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg text-white" style={{ background: a.accent }}>
+                <a.icon className="h-5 w-5" aria-hidden />
+              </div>
+              <h3 className="mt-3 font-heading text-sm font-semibold text-foreground">{a.title}</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{a.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Redirect institutions to Partnership page */}
+      <section className="mt-16">
+        <div className="rounded-2xl border border-border bg-[hsl(var(--warm-surface))] p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Representing an organization?</p>
+            <h3 className="mt-1 font-heading text-lg font-semibold text-foreground">Institutional partnerships live on a dedicated page.</h3>
+            <p className="mt-1 text-sm text-muted-foreground">Explore partnership tiers, principles, and onboarding for foundations, NGOs, and academic partners.</p>
+          </div>
+          <Link to="/partnership" className="inline-flex items-center gap-2 rounded-lg bg-[hsl(var(--trust-blue))] px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90">
+            Visit Partnerships <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
+      </section>
+
 
 
       <section className="mt-16" aria-labelledby="get-involved-form">
