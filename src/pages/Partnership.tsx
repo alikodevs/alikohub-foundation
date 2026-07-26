@@ -141,6 +141,11 @@ export default function Partnership() {
         </ul>
       </section>
 
+      <PartnershipTiers />
+      <WaysToSupport />
+      <PartnerVoices />
+
+
       {/* Inquiry */}
       <section className="mt-16" aria-labelledby="partnership-inquiry">
         <div className="rounded-2xl border border-[hsl(var(--trust-blue))]/25 bg-[hsl(var(--warm-surface))] p-8 lg:p-10">
