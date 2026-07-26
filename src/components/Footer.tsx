@@ -39,12 +39,60 @@ const footerNav = {
 };
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubmitting(true);
+    // Placeholder subscribe flow; a mailing-list provider can be wired later.
+    setTimeout(() => {
+      toast({
+        title: "You're on the list",
+        description: "Thanks for subscribing. We'll share program updates a few times a year.",
+      });
+      setEmail("");
+      setSubmitting(false);
+    }, 400);
+  };
+
   return (
     <footer
       id="contact"
       className="border-t border-white/10 text-white"
       style={{ background: "var(--gradient-navy)" }}
     >
+      {/* Newsletter band */}
+      <div className="border-b border-white/10">
+        <div className="container mx-auto grid gap-6 px-6 py-10 md:grid-cols-2 md:items-center">
+          <div>
+            <h3 className="font-heading text-xl font-bold text-white">Stay informed</h3>
+            <p className="mt-1.5 text-sm text-white/70">
+              A short, honest update on programs, learning, and opportunities. A few emails a year. No spam.
+            </p>
+          </div>
+          <form onSubmit={handleSubscribe} className="flex flex-col gap-3 sm:flex-row">
+            <label htmlFor="footer-email" className="sr-only">
+              Email address
+            </label>
+            <Input
+              id="footer-email"
+              type="email"
+              required
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="h-11 border-white/20 bg-white/10 text-white placeholder:text-white/50"
+            />
+            <Button type="submit" disabled={submitting} className="h-11 shrink-0">
+              <Send className="mr-2 h-4 w-4" aria-hidden />
+              {submitting ? "Subscribing…" : "Subscribe"}
+            </Button>
+          </form>
+        </div>
+      </div>
+
       <div className="container mx-auto px-6 py-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
@@ -110,12 +158,18 @@ export function Footer() {
           <p className="text-white/70">
             A 501(c)(3) nonprofit organization.
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <Link to="/privacy" className="hover:text-white">
               Privacy
             </Link>
+            <Link to="/cookies" className="hover:text-white">
+              Cookies
+            </Link>
             <Link to="/terms" className="hover:text-white">
               Terms
+            </Link>
+            <Link to="/accessibility" className="hover:text-white">
+              Accessibility
             </Link>
             <Link to="/ethics" className="hover:text-white">
               Ethics
