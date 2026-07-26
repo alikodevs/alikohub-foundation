@@ -179,23 +179,28 @@ export function ProgramDesignPrinciplesSection() {
 
 export function EcosystemArchitectureSection() {
   const inner = [
-    { label: "Aliko Academy", role: "Train" },
-    { label: "Aliko LMS", role: "Deliver at Scale" },
-    { label: "Aliko Consultancy", role: "Guide" },
-    { label: "Aliko Events", role: "Connect" },
-    { label: "Career Portal", role: "Match to Jobs" },
-    { label: "AlikoTech", role: "Digital Infrastructure" },
-    { label: "AlikoWash", role: "Social Impact" },
+    { label: "Aliko Academy", role: "Train", icon: GraduationCap },
+    { label: "Aliko LMS", role: "Deliver at Scale", icon: BookOpen },
+    { label: "Aliko Consultancy", role: "Guide", icon: ClipboardCheck },
+    { label: "Aliko Events", role: "Connect", icon: Handshake },
+    { label: "Career Portal", role: "Match to Jobs", icon: Rocket },
+    { label: "AlikoTech", role: "Digital Infrastructure", icon: Cpu },
+    { label: "AlikoWash", role: "Social Impact", icon: Leaf },
   ];
   const outer = [
-    { label: "Ecosystem Partners", role: "Proposed Strategy Alignment" },
-    { label: "Technology & AI Capacity", role: "Applied research and tooling" },
-    { label: "Government Agencies", role: "Policy Alignment" },
-    { label: "Academic Institutions", role: "Curriculum & Research" },
-    { label: "Employers / Private Sector", role: "Job Placement & Demand" },
-    { label: "Development Partners", role: "Funding & Scale" },
-    { label: "Worker / Employer Organizations", role: "Multi-stakeholder Governance" },
+    { label: "Worker / Employer Organizations", role: "Multi-stakeholder Governance", icon: UsersRound },
+    { label: "Ecosystem Partners", role: "Proposed Strategy Alignment", icon: Handshake },
+    { label: "GenShifter Technologies", role: "Technology & AI Capacity", icon: Zap },
+    { label: "Government Agencies", role: "Policy Alignment", icon: Building2 },
+    { label: "Academic Institutions", role: "Curriculum & Research", icon: GraduationCap },
+    { label: "Employers / Private Sector", role: "Job Placement & Demand", icon: Building2 },
+    { label: "Development Partners / DFIs", role: "Funding & Scale", icon: Globe },
   ];
+
+  const placeOn = (count: number, radius: number, i: number, offset = -90) => {
+    const angle = (offset + (360 / count) * i) * (Math.PI / 180);
+    return { left: `calc(50% + ${Math.cos(angle) * radius}px)`, top: `calc(50% + ${Math.sin(angle) * radius}px)` };
+  };
 
   return (
     <section className="border-t border-border bg-[hsl(var(--warm-surface))] py-20">
@@ -210,41 +215,80 @@ export function EcosystemArchitectureSection() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-card p-8">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[hsl(var(--trust-blue))] text-white">
-                <Globe className="h-5 w-5" aria-hidden />
+        {/* Orbital diagram */}
+        <div className="relative mx-auto mt-14 hidden aspect-square w-full max-w-[820px] md:block">
+          {/* Rings */}
+          <div className="absolute inset-[6%] rounded-full border border-dashed border-[hsl(var(--trust-blue))]/30" />
+          <div className="absolute inset-[22%] rounded-full border border-[hsl(var(--trust-blue))]/20 bg-gradient-to-br from-[hsl(var(--trust-blue))]/5 to-transparent" />
+
+          {/* Orbiting dots on outer ring */}
+          <div className="absolute inset-[6%] animate-[spin_40s_linear_infinite]">
+            <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--amber))] shadow-[0_0_0_4px_hsl(var(--amber)/0.15)]" />
+            <span className="absolute right-0 top-1/2 h-2 w-2 translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--trust-blue))]" />
+          </div>
+          <div className="absolute inset-[22%] animate-[spin_28s_linear_infinite_reverse]">
+            <span className="absolute left-0 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--trust-blue))]/70" />
+            <span className="absolute left-1/2 bottom-0 h-2 w-2 -translate-x-1/2 translate-y-1/2 rounded-full bg-[hsl(var(--amber))]/80" />
+          </div>
+
+          {/* Center node */}
+          <div className="absolute left-1/2 top-1/2 flex h-[28%] w-[28%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[hsl(var(--trust-blue))]/20 bg-card text-center shadow-[0_20px_60px_-20px_hsl(var(--trust-blue)/0.35)]">
+            <p className="font-heading text-xl font-extrabold text-[hsl(var(--trust-blue))] sm:text-2xl">AlikoHub</p>
+            <p className="mt-1 px-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
+          </div>
+
+          {/* Inner ring nodes (delivery brands) */}
+          {inner.map((n, i) => {
+            const pos = placeOn(inner.length, 210, i);
+            return (
+              <div key={n.label} className="absolute w-32 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[hsl(var(--trust-blue))]/20 bg-card shadow-[0_10px_30px_-12px_hsl(var(--trust-blue)/0.35)]">
+                  <n.icon className="h-6 w-6 text-[hsl(var(--trust-blue))]" aria-hidden />
+                </div>
+                <p className="mt-2 font-heading text-[11px] font-semibold text-[hsl(var(--trust-blue))]">{n.label}</p>
+                <p className="text-[9px] font-bold uppercase tracking-wider text-[hsl(var(--amber))]">{n.role}</p>
               </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Inner Ring</p>
-                <h3 className="font-heading text-lg font-semibold text-foreground">Delivery Brands</h3>
+            );
+          })}
+
+          {/* Outer ring nodes (partner institutions) */}
+          {outer.map((n, i) => {
+            const pos = placeOn(outer.length, 340, i, -90 + 360 / outer.length / 2);
+            return (
+              <div key={n.label} className="absolute w-36 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card shadow-[0_8px_24px_-12px_hsl(var(--trust-blue)/0.25)]">
+                  <n.icon className="h-5 w-5 text-[hsl(var(--amber))]" aria-hidden />
+                </div>
+                <p className="mt-2 text-[11px] font-semibold text-foreground leading-tight">{n.label}</p>
+                <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">{n.role}</p>
               </div>
-            </div>
-            <ul className="grid gap-3 sm:grid-cols-2">
+            );
+          })}
+        </div>
+
+        {/* Mobile fallback: stacked lists */}
+        <div className="mt-10 grid gap-6 md:hidden">
+          <div className="rounded-2xl border border-border bg-card p-6 text-center">
+            <p className="font-heading text-xl font-extrabold text-[hsl(var(--trust-blue))]">AlikoHub</p>
+            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Inner Ring · Delivery Brands</p>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {inner.map((i) => (
                 <li key={i.label} className="rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
                   <p className="font-heading text-sm font-semibold text-[hsl(var(--trust-blue))]">{i.label}</p>
-                  <p className="mt-0.5 text-xs uppercase tracking-wider text-[hsl(var(--amber))]">{i.role}</p>
+                  <p className="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-[hsl(var(--amber))]">{i.role}</p>
                 </li>
               ))}
             </ul>
           </div>
-
-          <div className="rounded-2xl border border-border bg-card p-8">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[hsl(var(--amber))] text-white">
-                <Handshake className="h-5 w-5" aria-hidden />
-              </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Outer Ring</p>
-                <h3 className="font-heading text-lg font-semibold text-foreground">Partner Institutions</h3>
-              </div>
-            </div>
-            <ul className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Outer Ring · Partner Institutions</p>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {outer.map((i) => (
                 <li key={i.label} className="rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
-                  <p className="font-heading text-sm font-semibold text-foreground">{i.label}</p>
+                  <p className="text-sm font-semibold text-foreground">{i.label}</p>
                   <p className="mt-0.5 text-xs text-muted-foreground">{i.role}</p>
                 </li>
               ))}
