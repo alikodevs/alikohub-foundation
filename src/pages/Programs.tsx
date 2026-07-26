@@ -185,7 +185,22 @@ export default function Programs() {
         </>
       }
     >
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {/* Compact overview strip */}
+      <section className="mb-10 grid gap-3 sm:grid-cols-4">
+        {[
+          { v: "7", l: "Program pillars", c: "text-[hsl(var(--trust-blue))]" },
+          { v: "3", l: "Delivery pathways", c: "text-[hsl(var(--amber))]" },
+          { v: "8", l: "Implementation steps", c: "text-[hsl(var(--terracotta))]" },
+          { v: "5", l: "Design principles", c: "text-[hsl(var(--sage))]" },
+        ].map((s) => (
+          <div key={s.l} className="rounded-xl border border-border bg-card px-4 py-3 text-center shadow-[var(--shadow-card)]">
+            <div className={`font-heading text-2xl font-extrabold ${s.c}`}>{s.v}</div>
+            <div className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{s.l}</div>
+          </div>
+        ))}
+      </section>
+
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {pillars.map((p) => {
           const Icon = p.icon;
           return (
@@ -194,7 +209,7 @@ export default function Programs() {
               className={`group flex flex-col overflow-hidden rounded-2xl border ${p.theme.border} bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]`}
             >
               {/* Header band: image + colored overlay, or solid colored band */}
-              <div className={`relative h-44 overflow-hidden ${p.theme.ring}`}>
+              <div className={`relative h-36 overflow-hidden ${p.theme.ring}`}>
                 {p.image && (
                   <>
                     <img
@@ -203,22 +218,21 @@ export default function Programs() {
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
-                    {/* subtle color wash so brand palette still reads without hiding the photo */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                   </>
                 )}
-                <div className={`absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-xl ${p.theme.chip} backdrop-blur-md ring-1 ring-white/40 shadow-lg`}>
-                  <Icon className={`h-5 w-5 ${p.theme.chipFg}`} aria-hidden />
+                <div className={`absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl ${p.theme.chip} backdrop-blur-md ring-1 ring-white/40 shadow-lg`}>
+                  <Icon className={`h-4 w-4 ${p.theme.chipFg}`} aria-hidden />
                 </div>
               </div>
 
-              <div className="flex flex-1 flex-col p-6">
-                <h2 className="font-heading text-lg font-bold text-foreground">{p.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
-                <ul className="mt-4 space-y-1.5">
+              <div className="flex flex-1 flex-col p-5">
+                <h2 className="font-heading text-base font-bold text-foreground">{p.title}</h2>
+                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.description}</p>
+                <ul className="mt-3 space-y-1">
                   {p.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2 text-xs text-muted-foreground">
-                      <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${p.theme.dot}`} />
+                    <li key={b} className="flex items-start gap-2 text-[11px] leading-snug text-muted-foreground">
+                      <span className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full ${p.theme.dot}`} />
                       {b}
                     </li>
                   ))}
@@ -228,7 +242,7 @@ export default function Programs() {
                     href={p.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`mt-5 inline-flex items-center gap-1.5 text-xs font-semibold ${p.theme.link} transition-all hover:gap-2.5`}
+                    className={`mt-4 inline-flex items-center gap-1.5 text-xs font-semibold ${p.theme.link} transition-all hover:gap-2.5`}
                   >
                     Visit program <ArrowRight className="h-3.5 w-3.5" />
                   </a>
@@ -241,4 +255,5 @@ export default function Programs() {
     </PageShell>
   );
 }
+
 
