@@ -34,6 +34,10 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Press = lazy(() => import("./pages/Press"));
+const Donate = lazy(() => import("./pages/Donate"));
+const Careers = lazy(() => import("./pages/Careers"));
+const Accessibility = lazy(() => import("./pages/Accessibility"));
+const Cookies = lazy(() => import("./pages/Cookies"));
 
 // Admin pages
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -82,6 +86,10 @@ const App = () => (
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/press" element={<Press />} />
+                <Route path="/donate" element={<Donate />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/accessibility" element={<Accessibility />} />
+                <Route path="/cookies" element={<Cookies />} />
                 
                 
                 {/* Admin routes */}
