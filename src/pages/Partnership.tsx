@@ -1,6 +1,7 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
 import { InquiryForm } from "@/components/foundation/InquiryForm";
+import { PartnershipTiers, WaysToSupport, PartnerVoices } from "@/components/foundation/PartnershipEnhancements";
 import { foundation } from "@/config/foundation";
 import { Building2, Users, Handshake, GraduationCap, CheckCircle2, Mail, ArrowRight } from "lucide-react";
 
