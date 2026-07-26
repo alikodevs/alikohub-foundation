@@ -28,7 +28,7 @@ export default function AnnualReport() {
           { k: "Format", v: "Narrative + data" },
           { k: "Cadence", v: "Annual" },
           { k: "Sections", v: `${sections.length} chapters` },
-          { k: "Availability", v: "Coming soon" },
+          { k: "Availability", v: "On request" },
         ].map((s) => (
           <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
