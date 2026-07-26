@@ -1,5 +1,6 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { InquiryForm } from "@/components/foundation/InquiryForm";
+import { VolunteerImpactRibbon, VolunteerRoles, WaysToSupport, PartnerVoices } from "@/components/foundation/PartnershipEnhancements";
 import { Handshake, HeartHandshake, Newspaper, Heart, ArrowRight } from "lucide-react";
 
 const pathways = [
@@ -77,6 +78,12 @@ export default function GetInvolved() {
           </article>
         ))}
       </section>
+
+      <VolunteerImpactRibbon />
+      <VolunteerRoles />
+      <WaysToSupport />
+      <PartnerVoices />
+
 
       <section className="mt-16" aria-labelledby="get-involved-form">
         <div className="rounded-2xl border border-[hsl(var(--trust-blue))]/25 bg-[hsl(var(--warm-surface))] p-8 lg:p-10">
