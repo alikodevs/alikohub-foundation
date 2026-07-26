@@ -1,0 +1,111 @@
+import { PageShell } from "@/components/foundation/PageShell";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Briefcase, HeartHandshake, Globe2, Sparkles, Scale, GraduationCap, Mail } from "lucide-react";
+import { foundation } from "@/config/foundation";
+
+const values = [
+  { icon: HeartHandshake, title: "Community-first", body: "We design with communities, not for them, and we hire people who share that commitment." },
+  { icon: Scale, title: "Equity & safeguarding", body: "We uphold rigorous safeguarding, non-discrimination, and inclusion standards across every role." },
+  { icon: Globe2, title: "Locally grounded, globally connected", body: "We operate across Washington State and Ethiopia and partner globally." },
+  { icon: Sparkles, title: "Learning organization", body: "We invest in staff growth, mentorship, and honest reflection on what works." },
+];
+
+const benefits = [
+  "Mission-driven work with measurable community outcomes",
+  "Flexible, hybrid work arrangements where roles allow",
+  "Professional development and mentorship budget",
+  "Safeguarding, ethics, and DEI training for all staff",
+  "Paid time off, holidays, and wellness support",
+  "Inclusive parental leave and caregiving support",
+];
+
+export default function Careers() {
+  return (
+    <PageShell
+      eyebrow="Careers"
+      title="Work with AlikoHub Foundation"
+      intro="Build a career that turns resourcefulness into lasting opportunity. We hire practitioners who bring humility, rigor, and community accountability to every program we deliver."
+      seo={{
+        title: "Careers — AlikoHub Foundation",
+        description:
+          "Explore careers at AlikoHub Foundation. Join a team advancing education, workforce, health, and WASH programs across Washington State and Ethiopia.",
+      }}
+    >
+      {/* Current openings */}
+      <section className="mb-14">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Open Roles</p>
+            <h2 className="mt-2 font-heading text-2xl font-bold text-foreground sm:text-3xl">Current openings</h2>
+          </div>
+        </div>
+
+        <Card className="mt-6 border-dashed p-8 text-center">
+          <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-[hsl(var(--warm-surface))] text-[hsl(var(--trust-blue))]">
+            <Briefcase className="h-5 w-5" aria-hidden />
+          </div>
+          <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">No open positions listed today</h3>
+          <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
+            We are actively scaling programs in Washington State and Ethiopia and expect to post roles in program delivery,
+            partnerships, monitoring & evaluation, and operations. We welcome expressions of interest at any time.
+          </p>
+          <div className="mt-5">
+            <Button asChild>
+              <a href={`mailto:${foundation.contactEmail}?subject=Expression%20of%20interest`}>
+                <Mail className="mr-2 h-4 w-4" aria-hidden />
+                Send an expression of interest
+              </a>
+            </Button>
+          </div>
+        </Card>
+      </section>
+
+      {/* Values */}
+      <section className="mb-14">
+        <div className="max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">How We Work</p>
+          <h2 className="mt-2 font-heading text-2xl font-bold text-foreground sm:text-3xl">What you can expect from us</h2>
+        </div>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {values.map((v) => (
+            <Card key={v.title} className="p-5">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[hsl(var(--trust-blue))] text-white">
+                <v.icon className="h-5 w-5" aria-hidden />
+              </div>
+              <h3 className="mt-3 font-heading text-base font-semibold text-foreground">{v.title}</h3>
+              <p className="mt-1.5 text-sm text-muted-foreground">{v.body}</p>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="mb-14 rounded-2xl border border-border bg-[hsl(var(--warm-surface))] p-8">
+        <h2 className="font-heading text-xl font-bold text-[hsl(var(--trust-blue))]">Benefits & support</h2>
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+          {benefits.map((b) => (
+            <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground">
+              <GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-[hsl(var(--amber))]" aria-hidden />
+              {b}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Benefits vary by role, location, and employment type, and are confirmed in individual offers.
+        </p>
+      </section>
+
+      {/* Equal opportunity */}
+      <section>
+        <h2 className="font-heading text-lg font-semibold text-foreground">Equal opportunity employer</h2>
+        <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+          AlikoHub Foundation is an equal opportunity employer. We do not discriminate on the basis of race, color, religion,
+          gender, gender identity or expression, sexual orientation, national origin, genetics, disability, age, veteran status,
+          or any other protected characteristic. We actively encourage applications from people whose backgrounds reflect the
+          communities we serve.
+        </p>
+      </section>
+    </PageShell>
+  );
+}
