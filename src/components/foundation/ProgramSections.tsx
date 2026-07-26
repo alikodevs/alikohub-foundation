@@ -75,19 +75,63 @@ export function ImplementationJourneySection() {
 
 export function DeliveryPathwaysSection() {
   const pathways = [
-    { label: "Short-Term", duration: "3–9 Months", sub: "Immediate Workforce Entry", icon: Zap, tone: "bg-[hsl(var(--amber))] text-white" },
-    { label: "Mid-Term", duration: "9–18 Months", sub: "Specialization & Career Growth", icon: TrendingUp, tone: "bg-card text-foreground border border-border" },
-    { label: "Advanced Workforce", duration: "6–12 Months", sub: "In-Demand Specializations & Career Mobility", icon: Award, tone: "bg-card text-foreground border border-border" },
-  ];
+    {
+      key: "short",
+      label: "Short-Term",
+      duration: "3–9 Months",
+      sub: "Immediate Workforce Entry",
+      icon: Zap,
+      accent: "hsl(var(--amber))",
+    },
+    {
+      key: "mid",
+      label: "Mid-Term",
+      duration: "9–18 Months",
+      sub: "Specialization & Career Growth",
+      icon: TrendingUp,
+      accent: "hsl(var(--trust-blue))",
+    },
+    {
+      key: "adv",
+      label: "Advanced Workforce",
+      duration: "6–12 Months",
+      sub: "In-Demand Specializations & Career Mobility",
+      icon: Award,
+      accent: "hsl(160,55%,42%)",
+    },
+  ] as const;
 
-  const tracks = [
-    { icon: Cpu, color: "bg-[hsl(var(--trust-blue))]", title: "Technology & Digital Skills", items: ["Digital Literacy & Productivity", "Web Development Fundamentals", "Data Entry & Analytics Assistant", "Cybersecurity Awareness"] },
-    { icon: Heart, color: "bg-[hsl(15,75%,55%)]", title: "Health & One Health", items: ["Certified Nursing Assistant (CNA)", "Community Health Worker (CHW)", "Health Data Assistant", "Medical Billing & Coding"] },
-    { icon: Wrench, color: "bg-[hsl(174,60%,45%)]", title: "Engineering & STEM", items: ["Construction Site Technician", "Solar PV Installer", "CAD Drafting Assistant", "Industrial Maintenance Basics"] },
-    { icon: Building2, color: "bg-[hsl(var(--amber))]", title: "Dignified Work & Labor Systems", items: ["TVET Instructor Foundations", "Workplace Rights & OSH", "HR & Payroll Assistant", "Workforce Compliance Basics"] },
-    { icon: Leaf, color: "bg-[hsl(140,45%,45%)]", title: "Green Jobs & Climate Transition", items: ["Climate-Smart Agriculture", "WASH Field Worker", "Waste Management Operator", "Renewable Energy Helper"] },
-    { icon: UsersRound, color: "bg-[hsl(260,45%,55%)]", title: "Inclusive Workforce Programs", items: ["Women in Trades Bootcamp", "Refugee Livelihoods Track", "Youth Entrepreneurship 101", "Disability Inclusion at Work"] },
-  ];
+  type Track = { icon: typeof Cpu; color: string; title: string; items: string[] };
+  const tracksByPathway: Record<(typeof pathways)[number]["key"], Track[]> = {
+    short: [
+      { icon: Cpu, color: "bg-[hsl(var(--trust-blue))]", title: "Technology & Digital Skills", items: ["Digital Literacy & Productivity", "Web Development Fundamentals", "Data Entry & Analytics Assistant", "Cybersecurity Awareness"] },
+      { icon: Heart, color: "bg-[hsl(15,75%,55%)]", title: "Health & One Health", items: ["Certified Nursing Assistant (CNA)", "Community Health Worker (CHW)", "Health Data Assistant", "Medical Billing & Coding"] },
+      { icon: Wrench, color: "bg-[hsl(174,60%,45%)]", title: "Engineering & STEM", items: ["Construction Site Technician", "Solar PV Installer", "CAD Drafting Assistant", "Industrial Maintenance Basics"] },
+      { icon: Building2, color: "bg-[hsl(var(--amber))]", title: "Dignified Work & Labor Systems", items: ["TVET Instructor Foundations", "Workplace Rights & OSH", "HR & Payroll Assistant", "Workforce Compliance Basics"] },
+      { icon: Leaf, color: "bg-[hsl(140,45%,45%)]", title: "Green Jobs & Climate Transition", items: ["Climate-Smart Agriculture", "WASH Field Worker", "Waste Management Operator", "Renewable Energy Helper"] },
+      { icon: UsersRound, color: "bg-[hsl(260,45%,55%)]", title: "Inclusive Workforce Programs", items: ["Women in Trades Bootcamp", "Refugee Livelihoods Track", "Youth Entrepreneurship 101", "Disability Inclusion at Work"] },
+    ],
+    mid: [
+      { icon: Cpu, color: "bg-[hsl(var(--trust-blue))]", title: "Technology & Digital Skills", items: ["Software Developer (Full-Stack)", "Cloud & DevOps Practitioner", "Data Analyst", "Cybersecurity Analyst"] },
+      { icon: Heart, color: "bg-[hsl(15,75%,55%)]", title: "Health & One Health", items: ["Licensed Practical Nurse Pathway", "Public Health Officer", "Digital Health Specialist", "One Health Field Coordinator"] },
+      { icon: Wrench, color: "bg-[hsl(174,60%,45%)]", title: "Engineering & STEM", items: ["Civil Works Supervisor", "Renewable Energy Technician", "Mechanical Maintenance Technician", "Quality Assurance Inspector"] },
+      { icon: Building2, color: "bg-[hsl(var(--amber))]", title: "Dignified Work & Labor Systems", items: ["Labor Standards Practitioner", "OSH Officer", "Workforce Systems Coordinator", "Social Protection Specialist"] },
+      { icon: Leaf, color: "bg-[hsl(140,45%,45%)]", title: "Green Jobs & Climate Transition", items: ["Sustainability Officer", "Climate Resilience Practitioner", "Green Construction Specialist", "Environmental Health Officer"] },
+      { icon: UsersRound, color: "bg-[hsl(260,45%,55%)]", title: "Inclusive Workforce Programs", items: ["Women's Leadership Accelerator", "Inclusive Enterprise Manager", "Refugee Integration Coordinator", "Youth Cooperative Lead"] },
+    ],
+    adv: [
+      { icon: Cpu, color: "bg-[hsl(var(--trust-blue))]", title: "Technology & Digital Skills", items: ["Advanced AI & Machine Learning Practitioner", "Senior Cloud & DevOps Engineer", "Advanced Cybersecurity Operations", "Data Engineering & MLOps"] },
+      { icon: Heart, color: "bg-[hsl(15,75%,55%)]", title: "Health & One Health", items: ["Advanced Community Health Practitioner", "Digital Health Systems Specialist", "Public Health Surveillance & Data", "One Health Field Lead"] },
+      { icon: Wrench, color: "bg-[hsl(174,60%,45%)]", title: "Engineering & STEM", items: ["Senior Renewable Energy Technician", "Advanced Construction Site Lead", "Industrial Automation Specialist", "Quality Assurance & Inspection Lead"] },
+      { icon: Building2, color: "bg-[hsl(var(--amber))]", title: "Dignified Work & Labor Systems", items: ["Advanced Labor Standards Practitioner", "Senior OSH Officer", "Workforce Systems Lead", "Social Protection Field Lead"] },
+      { icon: Leaf, color: "bg-[hsl(140,45%,45%)]", title: "Green Jobs & Climate Transition", items: ["Climate Resilience Specialist", "Advanced Sustainability Practitioner", "Green Construction Lead", "Environmental Health Field Lead"] },
+      { icon: UsersRound, color: "bg-[hsl(260,45%,55%)]", title: "Inclusive Workforce Programs", items: ["Women Enterprise Accelerator Lead", "Refugee Livelihoods Program Lead", "Youth Cooperative Manager", "Inclusive Workforce Trainer"] },
+    ],
+  };
+
+  const [active, setActive] = useState<(typeof pathways)[number]["key"]>("mid");
+  const activePath = pathways.find((p) => p.key === active)!;
+  const tracks = tracksByPathway[active];
 
   return (
     <section className="border-t border-border bg-[hsl(var(--warm-surface))] py-20">
@@ -95,39 +139,74 @@ export function DeliveryPathwaysSection() {
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Choose a Pathway</p>
           <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Three Delivery Pathways</h2>
-          <p className="mt-3 text-base text-muted-foreground">Top programs across six priority tracks, adaptable to local labor markets.</p>
+          <p className="mt-3 text-base text-muted-foreground">Select a pathway to reveal the top four programs across all six priority tracks.</p>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {pathways.map((p) => (
-            <article key={p.label} className={`rounded-xl p-6 ${p.tone}`}>
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/20">
-                <p.icon className="h-5 w-5" aria-hidden />
-              </div>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-wider opacity-80">{p.duration}</p>
-              <h3 className="mt-1 font-heading text-2xl font-bold">{p.label}</h3>
-              <p className="mt-2 text-sm opacity-90">{p.sub}</p>
-            </article>
-          ))}
+          {pathways.map((p) => {
+            const isActive = p.key === active;
+            return (
+              <button
+                key={p.key}
+                type="button"
+                onClick={() => setActive(p.key)}
+                aria-pressed={isActive}
+                className={`group relative overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--trust-blue))] ${
+                  isActive
+                    ? "scale-[1.02] text-white shadow-[0_18px_40px_-16px_rgba(15,42,68,0.45)]"
+                    : "bg-card text-foreground border border-border hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)]"
+                }`}
+                style={isActive ? { backgroundColor: p.accent } : undefined}
+              >
+                {isActive && (
+                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/15 via-transparent to-black/10" aria-hidden />
+                )}
+                <div className="relative">
+                  <div
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${
+                      isActive ? "bg-white/20" : "bg-[hsl(var(--warm-surface))] text-[hsl(var(--trust-blue))]"
+                    }`}
+                    style={!isActive ? { color: p.accent } : undefined}
+                  >
+                    <p.icon className="h-5 w-5" aria-hidden />
+                  </div>
+                  <p className={`mt-4 text-xs font-semibold uppercase tracking-wider ${isActive ? "opacity-80" : "text-muted-foreground"}`}>{p.duration}</p>
+                  <h3 className="mt-1 font-heading text-2xl font-bold">{p.label}</h3>
+                  <p className={`mt-2 text-sm ${isActive ? "opacity-90" : "text-muted-foreground"}`}>{p.sub}</p>
+                  {isActive && (
+                    <span className="absolute right-0 top-0 inline-flex h-2.5 w-2.5 rounded-full bg-white/90 shadow-[0_0_0_4px_rgba(255,255,255,0.25)]" aria-hidden />
+                  )}
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         <div className="mt-10 flex justify-center">
-          <span className="inline-flex items-center rounded-full bg-[hsl(var(--amber))] px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
-            Six Priority Tracks
+          <span
+            key={activePath.key}
+            className="inline-flex animate-fade-in items-center rounded-full px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm"
+            style={{ backgroundColor: activePath.accent }}
+          >
+            {activePath.label} · Top 4 per Track
           </span>
         </div>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div key={active} className="mt-8 grid animate-fade-in gap-5 md:grid-cols-2 lg:grid-cols-3">
           {tracks.map((t) => (
-            <article key={t.title} className="rounded-xl border border-border bg-card p-6">
-              <div className={`inline-flex h-11 w-11 items-center justify-center rounded-lg ${t.color} text-white`}>
+            <article
+              key={t.title}
+              className="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-[hsl(var(--trust-blue))]/30 hover:shadow-[var(--shadow-card-hover)]"
+              style={{ borderTop: `3px solid ${activePath.accent}` }}
+            >
+              <div className={`inline-flex h-11 w-11 items-center justify-center rounded-lg ${t.color} text-white transition-transform duration-300 group-hover:scale-105`}>
                 <t.icon className="h-5 w-5" aria-hidden />
               </div>
               <h3 className="mt-4 font-heading text-base font-semibold text-foreground">{t.title}</h3>
               <ul className="mt-3 space-y-1.5">
                 {t.items.map((it) => (
                   <li key={it} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[hsl(var(--amber))]" />
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" style={{ color: activePath.accent }} />
                     {it}
                   </li>
                 ))}
