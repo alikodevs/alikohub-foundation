@@ -114,13 +114,13 @@ export function WhereWeWorkPreview() {
       <div className="container mx-auto px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-primary-foreground/80">
+            <p className="text-xs font-semibold uppercase tracking-wider text-white/80">
               Where we work
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
+            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Rooted in place. Connected globally.
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-primary-foreground/80">
+            <p className="mt-5 text-base leading-relaxed text-white/85">
               Based in Seattle, Washington, with priority delivery in Ethiopia. Every program is locally led and community-designed, built to travel as partnerships grow.
             </p>
           </div>
@@ -135,11 +135,11 @@ export function WhereWeWorkPreview() {
                 role: "Priority region for community-designed programs across education, WASH, and workforce development.",
               },
             ].map((r) => (
-              <div key={r.place} className="rounded-xl border border-white/15 bg-white/5 p-5">
-                <h3 className="font-heading text-lg font-semibold text-primary-foreground">
+              <div key={r.place} className="rounded-xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
+                <h3 className="font-heading text-lg font-semibold text-white">
                   {r.place}
                 </h3>
-                <p className="mt-2 text-sm text-primary-foreground/80">{r.role}</p>
+                <p className="mt-2 text-sm text-white/85">{r.role}</p>
               </div>
             ))}
           </div>

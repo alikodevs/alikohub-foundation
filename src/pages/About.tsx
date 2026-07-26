@@ -9,7 +9,7 @@ import { ArrowRight, Compass, Wrench, Rocket, LineChart, Move, MapPin, Users } f
 const stageIcons = { Listen: Compass, Equip: Wrench, Implement: Rocket, Measure: LineChart, Scale: Move } as const;
 
 const QUICK_FACTS = [
-  { label: "Founded", value: "2024" },
+  { label: "Founded", value: "2026" },
   { label: "HQ", value: "Seattle, WA" },
   { label: "Priority region", value: "Ethiopia" },
   { label: "Program areas", value: "7" },
