@@ -27,66 +27,68 @@ type NavItem = {
 
 const primaryNav: NavItem[] = [
   {
-    label: "About",
+    label: "The Foundation",
     href: "/about",
-    blurb: "Learn about our origins, how we work, our governance, and our role in expanding opportunity.",
+    blurb:
+      "Who we are, how we are governed, and the standards we hold ourselves to as an independent African-rooted foundation.",
     columns: [
       {
-        heading: "About the Foundation",
+        heading: "Identity",
         links: [
-          { label: "Our story", href: "/about" },
-          { label: "Governance & leadership", href: "/governance" },
+          { label: "Origins & mandate", href: "/about" },
+          { label: "Board & leadership", href: "/governance" },
           { label: "Ethics & safeguarding", href: "/ethics" },
-          { label: "Frequently asked questions", href: "/faq" },
+          { label: "Questions we get asked", href: "/faq" },
         ],
       },
       {
-        heading: "People & offices",
+        heading: "Presence",
         links: [
           { label: "Hubs & offices", href: "/hubs" },
-          { label: "Careers", href: "/careers" },
-          { label: "Sustainability", href: "/sustainability" },
-          { label: "Contact", href: "/contact" },
+          { label: "Work with our team", href: "/careers" },
+          { label: "Sustainability commitments", href: "/sustainability" },
+          { label: "Reach the Foundation", href: "/contact" },
         ],
       },
       {
         heading: "Accountability",
         links: [
-          { label: "Transparency", href: "/transparency" },
-          { label: "Financials", href: "/financials" },
-          { label: "Annual report", href: "/annual-report" },
-          { label: "News & announcements", href: "/press" },
+          { label: "How we report", href: "/transparency" },
+          { label: "Finances & stewardship", href: "/financials" },
+          { label: "Annual review", href: "/annual-report" },
+          { label: "Newsroom", href: "/press" },
         ],
       },
     ],
   },
   {
-    label: "Our Work",
+    label: "What We Deliver",
     href: "/programs",
-    blurb: "Seven priority areas delivered through the Train, Guide, Connect, Scale model.",
+    blurb:
+      "Priority areas delivered end to end through the Train, Guide, Connect, Scale model.",
     columns: [
       {
-        heading: "Programs",
+        heading: "Delivery",
         links: [
-          { label: "All program areas", href: "/programs" },
+          { label: "Priority areas", href: "/programs" },
           { label: "Innovation hubs", href: "/hubs" },
-          { label: "Resources & toolkits", href: "/resources" },
+          { label: "Toolkits & guides", href: "/resources" },
         ],
       },
       {
-        heading: "Impact",
+        heading: "Evidence",
         links: [
-          { label: "Our impact", href: "/impact" },
-          { label: "Where we work", href: "/where-we-work" },
-          { label: "Stories & insights", href: "/stories" },
+          { label: "Results & targets", href: "/impact" },
+          { label: "Places we operate", href: "/where-we-work" },
+          { label: "Field stories", href: "/stories" },
         ],
       },
       {
-        heading: "Work with us",
+        heading: "Collaborate",
         links: [
-          { label: "Partnerships", href: "/partnership" },
-          { label: "Our partners", href: "/partners" },
-          { label: "Get involved", href: "/get-involved" },
+          { label: "Institutional partnerships", href: "/partnership" },
+          { label: "Who we work with", href: "/partners" },
+          { label: "Individual involvement", href: "/get-involved" },
           { label: "Ways to give", href: "/donate" },
         ],
       },
@@ -99,6 +101,7 @@ const primaryNav: NavItem[] = [
   { label: "Partnerships", href: "/partnership" },
   { label: "Get Involved", href: "/get-involved" },
 ];
+
 
 const utilityNav = [
   { label: "Resources", href: "/resources" },
