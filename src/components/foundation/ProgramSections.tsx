@@ -6,6 +6,7 @@ import logoTech from "@/assets/brands/alikotech.jpg";
 import logoWash from "@/assets/brands/aliko-wash.png";
 import logoGenshifter from "@/assets/brands/genshifter.jpg";
 import logoLms from "@/assets/brands/aliko-lms.jpg";
+import logoCareer from "@/assets/brands/aliko-career-portal.png";
 import foundationLogo from "@/assets/alikohub-foundation-logo.png";
 
 import {
@@ -272,7 +273,7 @@ export function EcosystemArchitectureSection() {
     { label: "Aliko LMS", role: "Deliver at Scale", icon: BookOpen, logo: logoLms },
     { label: "Aliko Consultancy", role: "Guide", icon: ClipboardCheck, logo: logoConsultancy },
     { label: "Aliko Events", role: "Connect", icon: Handshake, logo: logoEvents },
-    { label: "Career Portal", role: "Match to Jobs", icon: Rocket, logo: null },
+    { label: "Career Portal", role: "Match to Jobs", icon: Rocket, logo: logoCareer },
     { label: "AlikoTech", role: "Digital Infrastructure", icon: Cpu, logo: logoTech },
     { label: "AlikoWash", role: "Social Impact", icon: Leaf, logo: logoWash },
   ];
