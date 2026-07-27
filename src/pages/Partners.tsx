@@ -31,12 +31,10 @@ export default function Partners() {
       intro="Strong partnerships with government, private sector, academia, and development actors to strengthen program design and delivery."
     >
       {/* Ribbon */}
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-2">
         {[
           { k: "Categories", v: `${categories.length} sectors` },
-          { k: "Model", v: "Co-designed" },
           { k: "Accountability", v: "Documented" },
-          { k: "Growth", v: "Deep, not shallow" },
         ].map((s) => (
           <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
