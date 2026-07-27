@@ -52,7 +52,7 @@ export function FoundationHero() {
             <StatusAwareCTA size="lg" />
             <Button asChild size="lg" variant="outline">
               <Link to="/programs">
-                Explore Our Work
+                See What We Deliver
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
               </Link>
             </Button>
