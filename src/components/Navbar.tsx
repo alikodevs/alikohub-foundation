@@ -154,19 +154,40 @@ export function Navbar() {
             </span>
           </Link>
 
-          <div className="hidden items-center gap-5 xl:flex">
-            {primaryNav.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`text-sm font-semibold transition-colors hover:text-primary ${
-                  isActive(link.href) ? "text-primary" : "text-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="hidden items-center gap-5 xl:flex" onMouseLeave={() => setOpenMega(null)}>
+            {primaryNav.map((link) =>
+              link.columns ? (
+                <div key={link.href} onMouseEnter={() => setOpenMega(link.label)}>
+                  <Link
+                    to={link.href}
+                    onClick={() => setOpenMega(null)}
+                    aria-expanded={openMega === link.label}
+                    className={`flex items-center gap-1 py-2 text-sm font-semibold transition-colors hover:text-primary ${
+                      isActive(link.href) || openMega === link.label ? "text-primary" : "text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 transition-transform ${openMega === link.label ? "rotate-180" : ""}`}
+                      aria-hidden
+                    />
+                  </Link>
+                </div>
+              ) : (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  onMouseEnter={() => setOpenMega(null)}
+                  className={`py-2 text-sm font-semibold transition-colors hover:text-primary ${
+                    isActive(link.href) ? "text-primary" : "text-foreground"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
+
 
           <div className="hidden items-center gap-2 lg:flex">
             <Button
