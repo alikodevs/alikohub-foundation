@@ -30,28 +30,30 @@ import biniyamPhoto from "@/assets/team/biniyam-birassa.jpg";
 import lensaPhoto from "@/assets/team/lensa-aliko.jpg";
 import baatiiPhoto from "@/assets/team/baatii-aliko.jpg";
 import hannaPhoto from "@/assets/team/hanna-tesfaye.jpg";
+import eyouelPhoto from "@/assets/team/eyouel-berhe.jpg";
 
 // Board of Directors.
 export const board = [
   {
     name: "Boni Aliko",
-    role: "Founder & President; Director",
+    role: "Chairman and Director",
     bio: "Founder of the AlikoHub ecosystem, leading strategy, partnerships, and program design across education, health, and workforce development.",
     photo: boniPhoto,
   },
   {
-    name: "Bonsa Aliko",
-    role: "Treasurer; Director",
+    name: "Eyouel Berhe, MBA",
+    role: "Treasurer; Board Member",
     bio: "Oversees financial stewardship, reserves policy, and donor accountability, ensuring every dollar advances the Foundation's mission.",
-    photo: bonsaPhoto,
+    photo: eyouelPhoto,
   },
   {
     name: "Hanna Tesfaye",
-    role: "Secretary; Director",
+    role: "Secretary",
     bio: "Leads governance, board coordination, and safeguarding oversight, keeping the Foundation accountable to its communities and partners.",
     photo: hannaPhoto,
   },
 ] as const;
+
 
 // Leadership team.
 export const leadership = [
