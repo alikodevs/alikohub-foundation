@@ -29,18 +29,25 @@ export const board = [
     name: "Boni Aliko",
     role: "Founder & President; Director",
     bio: "Founder of the AlikoHub ecosystem, leading strategy, partnerships, and program design across education, health, and workforce development.",
+    photo:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=85",
   },
   {
     name: "Eyouel Berhe",
     role: "Treasurer; Director",
     bio: "Oversees financial stewardship, reserves policy, and donor accountability, ensuring every dollar advances the Foundation's mission.",
+    photo:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=85",
   },
   {
     name: "Hanna Tesfaye",
     role: "Secretary; Director",
     bio: "Leads governance, board coordination, and safeguarding oversight, keeping the Foundation accountable to its communities and partners.",
+    photo:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=85",
   },
 ] as const;
+
 
 // Program pillars aligned with the mission statement.
 export const programPillars = [
