@@ -28,7 +28,7 @@ export default function FAQ() {
       title="Frequently Asked Questions"
       intro="Answers to the questions we hear most often from partners, donors, participants, and community members."
     >
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-2">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:inline-grid sm:w-fit">
         {[
           { k: "Questions", v: `${faqs.length} answered` },
           { k: "Categories", v: `${Object.keys(catAccent).length} topics` },
