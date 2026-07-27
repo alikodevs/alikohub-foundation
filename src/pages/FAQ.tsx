@@ -28,12 +28,10 @@ export default function FAQ() {
       title="Frequently Asked Questions"
       intro="Answers to the questions we hear most often from partners, donors, participants, and community members."
     >
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-2">
         {[
           { k: "Questions", v: `${faqs.length} answered` },
           { k: "Categories", v: `${Object.keys(catAccent).length} topics` },
-          { k: "Updated", v: "Continuously" },
-          { k: "Missing one?", v: "Email us" },
         ].map((s) => (
           <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
