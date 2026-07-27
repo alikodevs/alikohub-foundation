@@ -1,6 +1,6 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { MapPin, Building2, Users, Cpu, Leaf, GraduationCap, Sparkles } from "lucide-react";
-import seattleAsset from "@/assets/seattle-skyline.jpg.asset.json";
+import seattleImg from "@/assets/seattle-skyline.jpg";
 
 const anchors = [
   {
@@ -8,7 +8,7 @@ const anchors = [
     country: "United States",
     role: "Organizational home",
     body: "Governance, diaspora engagement, U.S.-based partnerships, and program coordination for the Foundation's global work.",
-    image: seattleAsset.url,
+    image: seattleImg,
 
     accent: "hsl(var(--trust-blue))",
   },
