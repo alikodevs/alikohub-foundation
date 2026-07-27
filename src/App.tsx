@@ -38,6 +38,8 @@ const Donate = lazy(() => import("./pages/Donate"));
 const Careers = lazy(() => import("./pages/Careers"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
 const Cookies = lazy(() => import("./pages/Cookies"));
+const Hubs = lazy(() => import("./pages/Hubs"));
+const Partners = lazy(() => import("./pages/Partners"));
 
 // Admin pages
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
