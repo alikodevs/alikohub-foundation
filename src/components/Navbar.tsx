@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { StatusAwareCTA } from "@/components/foundation/StatusAwareCTA";
-import foundationMark from "@/assets/foundation-mark.png";
+import foundationLogo from "@/assets/alikohub-foundation-logo.png.asset.json";
 import { LegalStatusNotice } from "@/components/foundation/LegalStatusNotice";
 import { foundation } from "@/config/foundation";
 
@@ -146,13 +146,11 @@ export function Navbar() {
       >
         <div className="container mx-auto flex items-center justify-between gap-6 px-6 py-4">
           <Link to="/" className="flex items-center gap-2.5" aria-label={`${foundation.legalName} home`}>
-            <img src={foundationMark} alt="" className="h-10 w-10" width={40} height={40} />
-            <span className="flex flex-col leading-tight">
-              <span className="font-heading text-sm font-bold text-foreground">AlikoHub</span>
-              <span className="text-[10px] font-semibold uppercase tracking-widest text-primary">
-                Foundation
-              </span>
-            </span>
+            <img
+              src={foundationLogo.url}
+              alt="AlikoHub Foundation"
+              className="h-12 w-auto object-contain dark:rounded-md dark:bg-white dark:p-1"
+            />
           </Link>
 
           <div className="hidden items-center gap-5 xl:flex">

@@ -6,7 +6,7 @@ import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStr
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import foundationMark from "@/assets/foundation-mark.png";
+import foundationLogo from "@/assets/alikohub-foundation-logo.png.asset.json";
 
 const footerNav = {
   Foundation: [
@@ -106,17 +106,13 @@ export function Footer() {
       <div className="container mx-auto px-6 py-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-md bg-white/10 p-1.5">
-                <img src={foundationMark} alt="" className="h-full w-full brightness-0 invert" width={32} height={32} />
-              </span>
-              <div className="leading-tight">
-                <div className="font-heading text-base font-bold text-white">AlikoHub</div>
-                <div className="text-[10px] font-semibold uppercase tracking-widest text-white/70">
-                  Foundation
-                </div>
-              </div>
-            </div>
+            <span className="inline-flex items-center justify-center rounded-xl bg-white p-3 shadow-lg">
+              <img
+                src={foundationLogo.url}
+                alt="AlikoHub Foundation"
+                className="h-16 w-auto object-contain"
+              />
+            </span>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/75">
               {foundation.mission}
             </p>
