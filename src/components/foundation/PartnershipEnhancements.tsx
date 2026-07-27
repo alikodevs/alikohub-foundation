@@ -109,19 +109,11 @@ export function PartnershipTiers() {
           >
             <div className="h-1.5 w-full" style={{ background: t.accent }} aria-hidden />
             <div className="p-6">
-              <div className="flex items-center justify-between">
-                <div
-                  className="flex h-12 w-12 items-center justify-center rounded-xl text-white"
-                  style={{ background: t.accent }}
-                >
-                  <t.icon className="h-5 w-5" aria-hidden />
-                </div>
-                <span
-                  className="rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider"
-                  style={{ background: `${t.accent}15`, color: t.accent }}
-                >
-                  {t.range}
-                </span>
+              <div
+                className="flex h-12 w-12 items-center justify-center rounded-xl text-white"
+                style={{ background: t.accent }}
+              >
+                <t.icon className="h-5 w-5" aria-hidden />
               </div>
               <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">{t.name}</h3>
               <ul className="mt-4 space-y-2">
