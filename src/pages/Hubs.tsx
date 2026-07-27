@@ -39,7 +39,7 @@ export default function Hubs() {
       intro="The Foundation delivers its programs through community-anchored hubs. Our organizational home is Seattle, Washington and our priority delivery region is Ethiopia. Additional locations will be announced as partnerships are formalized."
     >
       {/* Ribbon */}
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Headquarters", v: "Seattle, WA" },
           { k: "Priority region", v: "Ethiopia" },

@@ -33,7 +33,7 @@ export default function Stories() {
       title="Human stories. Practical insights."
       intro="Field reports, program notes, and community narratives from across our hubs, published with consent and grounded in evidence."
     >
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-3">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-3">
         {[
           { k: "Themes", v: "3 editorial streams" },
           { k: "Publishing", v: "With consent" },

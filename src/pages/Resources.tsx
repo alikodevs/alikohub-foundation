@@ -16,7 +16,7 @@ export default function Resources() {
       title="Practical, shareable knowledge."
       intro="Program briefs, evaluations, curricula, and policies for partners, funders, and communities working alongside us."
     >
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Libraries", v: "4 collections" },
           { k: "License", v: "Adaptable" },

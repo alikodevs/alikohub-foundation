@@ -31,7 +31,7 @@ export default function Partners() {
       intro="Strong partnerships with government, private sector, academia, and development actors to strengthen program design and delivery."
     >
       {/* Ribbon */}
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Categories", v: `${categories.length} sectors` },
           { k: "Model", v: "Co-designed" },

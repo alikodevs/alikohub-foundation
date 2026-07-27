@@ -33,7 +33,7 @@ export default function Press() {
       title="Press & Media"
       intro="Announcements, program updates, and resources for journalists and partners covering the AlikoHub Foundation."
     >
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Releases", v: `${releases.length} published` },
           { k: "Media kit", v: "On request" },

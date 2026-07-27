@@ -70,7 +70,7 @@ export default function Transparency() {
       intro="We disclose our legal status, governance, and policies openly so partners and communities can make informed decisions."
     >
       {/* Compact ribbon */}
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Legal form", v: "WA Nonprofit" },
           { k: "Tax status", v: "501(c)(3)" },

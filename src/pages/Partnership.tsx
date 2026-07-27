@@ -54,7 +54,7 @@ export default function Partnership() {
       intro="We are building a small number of deep, accountable partnerships rather than many shallow ones. If our missions align, we would like to hear from you."
     >
       {/* Compact ribbon */}
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Partner types", v: "4 pathways" },
           { k: "Model", v: "Deep, not shallow" },
