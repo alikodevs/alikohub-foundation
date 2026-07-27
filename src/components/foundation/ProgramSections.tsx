@@ -1,4 +1,12 @@
 import { useState } from "react";
+import logoAcademy from "@/assets/brands/aliko-academy.jpg";
+import logoConsultancy from "@/assets/brands/aliko-consultancy.jpg";
+import logoEvents from "@/assets/brands/aliko-events.jpg";
+import logoTech from "@/assets/brands/alikotech.jpg";
+import logoWash from "@/assets/brands/aliko-wash.png";
+import logoGenshifter from "@/assets/brands/genshifter.jpg";
+import logoHub from "@/assets/brands/alikohub.jpg";
+
 import {
   Users,
   ClipboardCheck,
