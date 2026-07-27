@@ -220,7 +220,7 @@ export function FinalCTASection() {
               to="/programs"
               className="inline-flex h-11 items-center justify-center rounded-md border border-border bg-background px-6 text-sm font-semibold text-foreground transition hover:bg-secondary"
             >
-              Explore Our Work
+              See What We Deliver
             </Link>
           </div>
         </div>
