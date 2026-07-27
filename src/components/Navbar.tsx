@@ -253,38 +253,46 @@ export function Navbar() {
               onMouseLeave={() => setOpenMega(null)}
               className="absolute inset-x-0 top-full hidden border-b border-border bg-[hsl(var(--warm-surface))] shadow-[var(--shadow-card-hover)] xl:block"
             >
-              <div className="container mx-auto grid gap-8 px-6 py-9 lg:grid-cols-[0.9fr_2.4fr]">
+              <div className="container mx-auto grid gap-10 px-6 py-9 lg:grid-cols-[0.85fr_2.4fr]">
                 {primaryNav
                   .filter((n) => n.label === openMega)
                   .map((n) => (
                     <div key={n.label} className="contents">
-                      <div>
-                        <h2 className="font-heading text-xl font-bold text-foreground">{n.label}</h2>
+                      <div className="relative rounded-xl border border-border/70 bg-card/70 p-5">
+                        <span className="inline-flex items-center gap-2 rounded-full bg-[hsl(var(--trust-blue))]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[hsl(var(--trust-blue))]">
+                          AlikoHub Foundation
+                        </span>
+                        <h2 className="mt-3 font-heading text-xl font-bold text-foreground">{n.label}</h2>
                         <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">{n.blurb}</p>
                         <Link
                           to={n.href}
                           onClick={() => setOpenMega(null)}
-                          className="mt-4 inline-flex items-center gap-1.5 border-b-2 border-[hsl(var(--amber))] pb-0.5 text-sm font-semibold text-[hsl(var(--trust-blue))]"
+                          className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[hsl(var(--trust-blue))] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[hsl(var(--trust-blue))]/90"
                         >
-                          Explore {n.label.toLowerCase()}
+                          Open {n.label}
                           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
                         </Link>
                       </div>
                       <div className="grid gap-8 sm:grid-cols-3">
-                        {n.columns?.map((col) => (
-                          <div key={col.heading}>
-                            <p className="font-heading text-sm font-bold text-[hsl(var(--trust-blue))]">
+                        {n.columns?.map((col, ci) => (
+                          <div key={col.heading} className={ci > 0 ? "sm:border-l sm:border-border/60 sm:pl-8" : ""}>
+                            <p className="flex items-center gap-2 font-heading text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                              <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--amber))]" aria-hidden />
                               {col.heading}
                             </p>
-                            <ul className="mt-3 space-y-2.5">
+                            <ul className="mt-3 space-y-1">
                               {col.links.map((l) => (
                                 <li key={l.label}>
                                   <Link
                                     to={l.href}
                                     onClick={() => setOpenMega(null)}
-                                    className="text-sm text-foreground/85 underline-offset-4 transition-colors hover:text-[hsl(var(--amber))] hover:underline"
+                                    className="group flex items-center justify-between gap-3 rounded-lg px-2.5 py-2 text-sm text-foreground/85 transition-colors hover:bg-[hsl(var(--trust-blue))]/8 hover:text-[hsl(var(--trust-blue))]"
                                   >
                                     {l.label}
+                                    <ArrowRight
+                                      className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                                      aria-hidden
+                                    />
                                   </Link>
                                 </li>
                               ))}
@@ -295,6 +303,7 @@ export function Navbar() {
                     </div>
                   ))}
               </div>
+
             </motion.div>
           )}
         </AnimatePresence>
