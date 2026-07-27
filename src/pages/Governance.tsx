@@ -11,7 +11,7 @@ import {
   FileCheck,
   Scale,
 } from "lucide-react";
-import { board } from "@/config/foundation";
+import { board, leadership } from "@/config/foundation";
 import { LeadershipCarousel } from "@/components/foundation/LeadershipCarousel";
 
 
@@ -42,9 +42,9 @@ export default function Governance() {
       <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
         {[
           { k: "Directors", v: `${board.length} on Board` },
+          { k: "Leadership", v: `${leadership.length} Executives` },
           { k: "Structure", v: `${levels.length} Layers` },
           { k: "Safeguards", v: "Board-approved" },
-          { k: "Reporting", v: "Annual disclosure" },
         ].map((s) => (
           <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
@@ -55,6 +55,12 @@ export default function Governance() {
 
       {/* Board */}
       <LeadershipCarousel eyebrow="Leadership" title="Chair and Governing Board" people={board} />
+
+      {/* Leadership team */}
+      <div className="mt-16">
+        <LeadershipCarousel eyebrow="Our people" title="Leadership Team" people={leadership} />
+      </div>
+
 
 
       {/* Operational structure */}

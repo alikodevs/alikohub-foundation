@@ -23,30 +23,82 @@ export const foundation = {
     "AlikoHub Foundation operates as a mission-driven nonprofit committed to transparent governance, equitable programs, and measurable community impact.",
 } as const;
 
+import boniPhoto from "@/assets/team/boni-aliko.jpg";
+import bonsaPhoto from "@/assets/team/bonsa-aliko.jpg";
+import abdiPhoto from "@/assets/team/abdi-aliko.jpg";
+import biniyamPhoto from "@/assets/team/biniyam-birassa.jpg";
+import lensaPhoto from "@/assets/team/lensa-aliko.jpg";
+import baatiiPhoto from "@/assets/team/baatii-aliko.jpg";
+import hannaPhoto from "@/assets/team/hanna-tesfaye.jpg";
+
 // Board of Directors.
 export const board = [
   {
     name: "Boni Aliko",
     role: "Founder & President; Director",
     bio: "Founder of the AlikoHub ecosystem, leading strategy, partnerships, and program design across education, health, and workforce development.",
-    photo:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=85",
+    photo: boniPhoto,
   },
   {
-    name: "Eyouel Berhe",
+    name: "Bonsa Aliko",
     role: "Treasurer; Director",
     bio: "Oversees financial stewardship, reserves policy, and donor accountability, ensuring every dollar advances the Foundation's mission.",
-    photo:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=85",
+    photo: bonsaPhoto,
   },
   {
     name: "Hanna Tesfaye",
     role: "Secretary; Director",
     bio: "Leads governance, board coordination, and safeguarding oversight, keeping the Foundation accountable to its communities and partners.",
-    photo:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=85",
+    photo: hannaPhoto,
   },
 ] as const;
+
+// Leadership team.
+export const leadership = [
+  {
+    name: "Boni Aliko",
+    role: "Founder & Chief Executive Officer",
+    bio: "Sets the Foundation's strategic direction, builds global partnerships, and leads program design across the seven priority areas.",
+    photo: boniPhoto,
+  },
+  {
+    name: "Bonsa Aliko",
+    role: "Chief Operating Officer",
+    bio: "Runs day-to-day operations, finance, and hub delivery, translating strategy into accountable execution on the ground.",
+    photo: bonsaPhoto,
+  },
+  {
+    name: "Abdi Aliko",
+    role: "Chief Technology Officer",
+    bio: "Leads technology, digital inclusion infrastructure, and the data systems that power monitoring, learning, and reporting.",
+    photo: abdiPhoto,
+  },
+  {
+    name: "Biniyam Birassa",
+    role: "Program Director",
+    bio: "Oversees program quality across education, workforce, and enterprise tracks, from curriculum design to outcome measurement.",
+    photo: biniyamPhoto,
+  },
+  {
+    name: "Lensa Aliko",
+    role: "Director of Health Programs",
+    bio: "Directs public and digital health work, including health workforce pipelines, mobile health, and WASH-linked initiatives.",
+    photo: lensaPhoto,
+  },
+  {
+    name: "Baatii Aliko",
+    role: "Director of Strategic Partnership & Development",
+    bio: "Builds institutional partnerships, funding relationships, and the collaborations that extend program reach.",
+    photo: baatiiPhoto,
+  },
+  {
+    name: "Hanna Tesfaye",
+    role: "Marketing Manager & Executive Assistant",
+    bio: "Leads communications, brand stewardship, and executive coordination across the Foundation's teams and partners.",
+    photo: hannaPhoto,
+  },
+] as const;
+
 
 
 // Program pillars aligned with the mission statement.

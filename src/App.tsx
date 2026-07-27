@@ -38,6 +38,8 @@ const Donate = lazy(() => import("./pages/Donate"));
 const Careers = lazy(() => import("./pages/Careers"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
 const Cookies = lazy(() => import("./pages/Cookies"));
+const Hubs = lazy(() => import("./pages/Hubs"));
+const Partners = lazy(() => import("./pages/Partners"));
 
 // Admin pages
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -90,6 +92,9 @@ const App = () => (
                 <Route path="/careers" element={<Careers />} />
                 <Route path="/accessibility" element={<Accessibility />} />
                 <Route path="/cookies" element={<Cookies />} />
+                <Route path="/hubs" element={<Hubs />} />
+                <Route path="/partners" element={<Partners />} />
+
                 
                 
                 {/* Admin routes */}
