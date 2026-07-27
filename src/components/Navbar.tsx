@@ -140,7 +140,10 @@ export function Navbar() {
       </div>
 
       {/* Main nav */}
-      <nav className="relative sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
+      <nav
+        className="relative sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl"
+        onMouseLeave={() => setOpenMega(null)}
+      >
         <div className="container mx-auto flex items-center justify-between gap-6 px-6 py-4">
           <Link to="/" className="flex items-center gap-2.5" aria-label={`${foundation.legalName} home`}>
             <img src={foundationMark} alt="" className="h-10 w-10" width={40} height={40} />
@@ -152,7 +155,8 @@ export function Navbar() {
             </span>
           </Link>
 
-          <div className="hidden items-center gap-5 xl:flex" onMouseLeave={() => setOpenMega(null)}>
+          <div className="hidden items-center gap-5 xl:flex">
+
             {primaryNav.map((link) =>
               link.columns ? (
                 <div key={link.href} onMouseEnter={() => setOpenMega(link.label)}>
