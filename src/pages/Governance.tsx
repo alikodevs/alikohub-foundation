@@ -52,49 +52,8 @@ export default function Governance() {
       </div>
 
       {/* Board */}
-      <section aria-labelledby="board">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Leadership</p>
-            <h2 id="board" className="mt-2 font-heading text-2xl font-semibold text-foreground">Board of Directors</h2>
-          </div>
-        </div>
-        <div className="mt-6 grid gap-6 md:grid-cols-3">
-          {board.map((m, i) => {
-            const accents = ["hsl(var(--trust-blue))", "hsl(var(--amber))", "hsl(var(--navy-light))"];
-            const accent = accents[i % accents.length];
-            return (
-              <article
-                key={m.name}
-                className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
-              >
-                <div className="relative aspect-[4/5] overflow-hidden bg-[hsl(var(--warm-surface))]">
-                  <img
-                    src={m.photo}
-                    alt={`Portrait of ${m.name}, ${m.role}`}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--navy))]/85 via-[hsl(var(--navy))]/10 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <span
-                      className="inline-block rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white"
-                      style={{ background: accent }}
-                    >
-                      {m.role}
-                    </span>
-                    <h3 className="mt-2 font-heading text-xl font-bold leading-tight text-white">{m.name}</h3>
-                  </div>
-                </div>
-                <div className="border-t-2 p-6" style={{ borderColor: accent }}>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{m.bio}</p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+      <LeadershipCarousel eyebrow="Leadership" title="Chair and Governing Board" people={board} />
 
-      </section>
 
       {/* Operational structure */}
       <section className="mt-16" aria-labelledby="structure">
