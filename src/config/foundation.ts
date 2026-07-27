@@ -23,13 +23,13 @@ export const foundation = {
     "AlikoHub Foundation operates as a mission-driven nonprofit committed to transparent governance, equitable programs, and measurable community impact.",
 } as const;
 
-import boniPhoto from "@/assets/team/boni-aliko.jpg.asset.json";
-import bonsaPhoto from "@/assets/team/bonsa-aliko.jpg.asset.json";
-import abdiPhoto from "@/assets/team/abdi-aliko.jpg.asset.json";
-import biniyamPhoto from "@/assets/team/biniyam-birassa.jpg.asset.json";
-import lensaPhoto from "@/assets/team/lensa-aliko.jpg.asset.json";
-import baatiiPhoto from "@/assets/team/baatii-aliko.jpg.asset.json";
-import hannaPhoto from "@/assets/team/hanna-tesfaye.png.asset.json";
+import boniPhoto from "@/assets/team/boni-aliko.jpg";
+import bonsaPhoto from "@/assets/team/bonsa-aliko.jpg";
+import abdiPhoto from "@/assets/team/abdi-aliko.jpg";
+import biniyamPhoto from "@/assets/team/biniyam-birassa.jpg";
+import lensaPhoto from "@/assets/team/lensa-aliko.jpg";
+import baatiiPhoto from "@/assets/team/baatii-aliko.jpg";
+import hannaPhoto from "@/assets/team/hanna-tesfaye.jpg";
 
 // Board of Directors.
 export const board = [
