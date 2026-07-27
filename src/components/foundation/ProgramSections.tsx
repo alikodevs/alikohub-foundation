@@ -5,6 +5,7 @@ import logoEvents from "@/assets/brands/aliko-events.jpg";
 import logoTech from "@/assets/brands/alikotech.jpg";
 import logoWash from "@/assets/brands/aliko-wash.png";
 import logoGenshifter from "@/assets/brands/genshifter.jpg";
+import logoLms from "@/assets/brands/aliko-lms.jpg";
 import logoHub from "@/assets/brands/alikohub.jpg";
 
 import {
@@ -268,7 +269,7 @@ export function ProgramDesignPrinciplesSection() {
 export function EcosystemArchitectureSection() {
   const inner = [
     { label: "Aliko Academy", role: "Train", icon: GraduationCap, logo: logoAcademy },
-    { label: "Aliko LMS", role: "Deliver at Scale", icon: BookOpen, logo: null },
+    { label: "Aliko LMS", role: "Deliver at Scale", icon: BookOpen, logo: logoLms },
     { label: "Aliko Consultancy", role: "Guide", icon: ClipboardCheck, logo: logoConsultancy },
     { label: "Aliko Events", role: "Connect", icon: Handshake, logo: logoEvents },
     { label: "Career Portal", role: "Match to Jobs", icon: Rocket, logo: null },
