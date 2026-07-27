@@ -88,12 +88,12 @@ export function Footer() {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-11 border-[hsl(var(--navy))]/25 bg-white/85 text-[hsl(var(--navy))] placeholder:text-[hsl(var(--navy))]/50"
+              className="h-11 border-white/20 bg-white/10 text-white placeholder:text-white/50"
             />
             <Button
               type="submit"
               disabled={submitting}
-              className="h-11 shrink-0 bg-[hsl(var(--navy))] text-white hover:bg-[hsl(var(--navy-light))]"
+              className="h-11 shrink-0 bg-[hsl(var(--amber))] text-[hsl(var(--navy))] hover:bg-[hsl(var(--amber))]/90"
             >
               <Send className="mr-2 h-4 w-4" aria-hidden />
               {submitting ? "Subscribing…" : "Subscribe"}
