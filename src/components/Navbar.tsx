@@ -149,7 +149,7 @@ export function Navbar() {
             <img
               src={foundationLogo}
               alt="AlikoHub Foundation"
-              className="h-12 w-auto object-contain dark:rounded-md dark:bg-white dark:p-1"
+              className="h-16 w-auto object-contain"
             />
           </Link>
 
