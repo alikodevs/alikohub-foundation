@@ -417,7 +417,7 @@ export function EcosystemArchitectureSection() {
                 <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">{n.role}</p>
               </div>
             );
-          })
+          })}
 
         </div>
 
