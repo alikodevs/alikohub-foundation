@@ -6,7 +6,7 @@ import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStr
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import foundationLogo from "@/assets/alikohub-foundation-logo.png.asset.json";
+import foundationLogo from "@/assets/alikohub-foundation-logo.png";
 
 const footerNav = {
   Foundation: [
@@ -108,7 +108,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <span className="inline-flex items-center justify-center rounded-xl bg-white p-3 shadow-lg">
               <img
-                src={foundationLogo.url}
+                src={foundationLogo}
                 alt="AlikoHub Foundation"
                 className="h-16 w-auto object-contain"
               />

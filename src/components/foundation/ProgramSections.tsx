@@ -6,7 +6,7 @@ import logoTech from "@/assets/brands/alikotech.jpg";
 import logoWash from "@/assets/brands/aliko-wash.png";
 import logoGenshifter from "@/assets/brands/genshifter.jpg";
 import logoLms from "@/assets/brands/aliko-lms.jpg";
-import foundationLogo from "@/assets/alikohub-foundation-logo.png.asset.json";
+import foundationLogo from "@/assets/alikohub-foundation-logo.png";
 
 import {
   Users,
@@ -377,7 +377,7 @@ export function EcosystemArchitectureSection() {
           <div className="absolute left-1/2 top-1/2 flex h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(var(--trust-blue))]/25 via-transparent to-[hsl(var(--amber))]/25 p-[3px] shadow-[0_30px_80px_-30px_hsl(var(--trust-blue)/0.5)]">
             <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-white p-5 text-center">
               <img
-                src={foundationLogo.url}
+                src={foundationLogo}
                 alt="AlikoHub Foundation logo"
                 className="h-[74%] w-auto max-w-[88%] object-contain"
               />
@@ -429,7 +429,7 @@ export function EcosystemArchitectureSection() {
         <div className="mt-10 grid gap-6 md:hidden">
           <div className="rounded-2xl bg-gradient-to-br from-[hsl(var(--trust-blue))]/25 to-[hsl(var(--amber))]/25 p-[2px] shadow-[0_20px_50px_-25px_hsl(var(--trust-blue)/0.5)]">
             <div className="rounded-2xl bg-white p-6 text-center">
-              <img src={foundationLogo.url} alt="AlikoHub Foundation logo" className="mx-auto h-24 w-auto object-contain" />
+              <img src={foundationLogo} alt="AlikoHub Foundation logo" className="mx-auto h-24 w-auto object-contain" />
             </div>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6">

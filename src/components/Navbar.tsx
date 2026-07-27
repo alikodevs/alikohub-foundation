@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { StatusAwareCTA } from "@/components/foundation/StatusAwareCTA";
-import foundationLogo from "@/assets/alikohub-foundation-logo.png.asset.json";
+import foundationLogo from "@/assets/alikohub-foundation-logo.png";
 import { LegalStatusNotice } from "@/components/foundation/LegalStatusNotice";
 import { foundation } from "@/config/foundation";
 
@@ -147,7 +147,7 @@ export function Navbar() {
         <div className="container mx-auto flex items-center justify-between gap-6 px-6 py-4">
           <Link to="/" className="flex items-center gap-2.5" aria-label={`${foundation.legalName} home`}>
             <img
-              src={foundationLogo.url}
+              src={foundationLogo}
               alt="AlikoHub Foundation"
               className="h-12 w-auto object-contain dark:rounded-md dark:bg-white dark:p-1"
             />
