@@ -12,6 +12,8 @@ import {
   Scale,
 } from "lucide-react";
 import { board } from "@/config/foundation";
+import { LeadershipCarousel } from "@/components/foundation/LeadershipCarousel";
+
 
 const levels = [
   { icon: Crown, title: "Board of Directors", role: "Strategic Oversight", description: "Sets vision and strategy, approves policy, oversees the President, and safeguards mission alignment." },
