@@ -259,23 +259,24 @@ export function ProgramDesignPrinciplesSection() {
 
 export function EcosystemArchitectureSection() {
   const inner = [
-    { label: "Aliko Academy", role: "Train", icon: GraduationCap },
-    { label: "Aliko LMS", role: "Deliver at Scale", icon: BookOpen },
-    { label: "Aliko Consultancy", role: "Guide", icon: ClipboardCheck },
-    { label: "Aliko Events", role: "Connect", icon: Handshake },
-    { label: "Career Portal", role: "Match to Jobs", icon: Rocket },
-    { label: "AlikoTech", role: "Digital Infrastructure", icon: Cpu },
-    { label: "AlikoWash", role: "Social Impact", icon: Leaf },
+    { label: "Aliko Academy", role: "Train", icon: GraduationCap, logo: logoAcademy },
+    { label: "Aliko LMS", role: "Deliver at Scale", icon: BookOpen, logo: null },
+    { label: "Aliko Consultancy", role: "Guide", icon: ClipboardCheck, logo: logoConsultancy },
+    { label: "Aliko Events", role: "Connect", icon: Handshake, logo: logoEvents },
+    { label: "Career Portal", role: "Match to Jobs", icon: Rocket, logo: null },
+    { label: "AlikoTech", role: "Digital Infrastructure", icon: Cpu, logo: logoTech },
+    { label: "AlikoWash", role: "Social Impact", icon: Leaf, logo: logoWash },
   ];
   const outer = [
-    { label: "Worker / Employer Organizations", role: "Multi-stakeholder Governance", icon: UsersRound },
-    { label: "Ecosystem Partners", role: "Proposed Strategy Alignment", icon: Handshake },
-    { label: "GenShifter Technologies", role: "Technology & AI Capacity", icon: Zap },
-    { label: "Government Agencies", role: "Policy Alignment", icon: Building2 },
-    { label: "Academic Institutions", role: "Curriculum & Research", icon: GraduationCap },
-    { label: "Employers / Private Sector", role: "Job Placement & Demand", icon: Building2 },
-    { label: "Development Partners / DFIs", role: "Funding & Scale", icon: Globe },
+    { label: "Worker / Employer Organizations", role: "Multi-stakeholder Governance", icon: UsersRound, logo: null },
+    { label: "Ecosystem Partners", role: "Proposed Strategy Alignment", icon: Handshake, logo: null },
+    { label: "GenShifter Technologies", role: "Technology & AI Capacity", icon: Zap, logo: logoGenshifter },
+    { label: "Government Agencies", role: "Policy Alignment", icon: Building2, logo: null },
+    { label: "Academic Institutions", role: "Curriculum & Research", icon: GraduationCap, logo: null },
+    { label: "Employers / Private Sector", role: "Job Placement & Demand", icon: Building2, logo: null },
+    { label: "Development Partners / DFIs", role: "Funding & Scale", icon: Globe, logo: null },
   ];
+
 
   const placeOn = (count: number, radius: number, i: number, offset = -90) => {
     const angle = (offset + (360 / count) * i) * (Math.PI / 180);
