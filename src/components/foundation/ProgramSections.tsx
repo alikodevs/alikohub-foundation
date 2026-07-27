@@ -332,10 +332,10 @@ export function EcosystemArchitectureSection() {
               return (
                 <line
                   key={n.label}
-                  x1={410}
-                  y1={410}
-                  x2={410 + Math.cos(a) * 230}
-                  y2={410 + Math.sin(a) * 230}
+                  x1={410 + Math.cos(a) * 150}
+                  y1={410 + Math.sin(a) * 150}
+                  x2={410 + Math.cos(a) * 202}
+                  y2={410 + Math.sin(a) * 202}
                   stroke="url(#spokeInner)"
                   strokeWidth={1.5}
                 />
@@ -346,12 +346,12 @@ export function EcosystemArchitectureSection() {
               return (
                 <line
                   key={n.label}
-                  x1={410 + Math.cos(a) * 250}
-                  y1={410 + Math.sin(a) * 250}
-                  x2={410 + Math.cos(a) * 350}
-                  y2={410 + Math.sin(a) * 350}
+                  x1={410 + Math.cos(a) * 262}
+                  y1={410 + Math.sin(a) * 262}
+                  x2={410 + Math.cos(a) * 312}
+                  y2={410 + Math.sin(a) * 312}
                   stroke="hsl(var(--amber))"
-                  strokeOpacity={0.25}
+                  strokeOpacity={0.3}
                   strokeWidth={1}
                   strokeDasharray="4 5"
                 />
@@ -360,22 +360,21 @@ export function EcosystemArchitectureSection() {
           </svg>
 
           {/* Rings */}
-          <div className="absolute inset-[6%] rounded-full border border-dashed border-[hsl(var(--amber))]/35" />
-          <div className="absolute inset-[14%] rounded-full border border-[hsl(var(--trust-blue))]/10" />
-          <div className="absolute inset-[22%] rounded-full border border-[hsl(var(--trust-blue))]/25 bg-gradient-to-br from-[hsl(var(--trust-blue))]/8 via-transparent to-[hsl(var(--amber))]/8 shadow-[inset_0_0_60px_-20px_hsl(var(--trust-blue)/0.35)]" />
+          <div className="absolute inset-[5%] rounded-full border border-dashed border-[hsl(var(--amber))]/30" />
+          <div className="absolute inset-[28%] rounded-full border border-[hsl(var(--trust-blue))]/20 bg-gradient-to-br from-[hsl(var(--trust-blue))]/8 via-transparent to-[hsl(var(--amber))]/8 shadow-[inset_0_0_60px_-20px_hsl(var(--trust-blue)/0.35)]" />
 
           {/* Orbiting dots on outer ring */}
-          <div className="absolute inset-[6%] animate-[spin_40s_linear_infinite]">
+          <div className="absolute inset-[5%] animate-[spin_40s_linear_infinite]">
             <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--amber))] shadow-[0_0_0_5px_hsl(var(--amber)/0.18)]" />
             <span className="absolute right-0 top-1/2 h-2 w-2 translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--trust-blue))] shadow-[0_0_0_5px_hsl(var(--trust-blue)/0.15)]" />
           </div>
-          <div className="absolute inset-[22%] animate-[spin_28s_linear_infinite_reverse]">
+          <div className="absolute inset-[28%] animate-[spin_28s_linear_infinite_reverse]">
             <span className="absolute left-0 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--trust-blue))]/70" />
             <span className="absolute left-1/2 bottom-0 h-2 w-2 -translate-x-1/2 translate-y-1/2 rounded-full bg-[hsl(var(--amber))]/80" />
           </div>
 
           {/* Center node */}
-          <div className="absolute left-1/2 top-1/2 flex h-[34%] w-[34%] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+          <div className="absolute left-1/2 top-1/2 flex h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
             <img
               src={foundationLogo}
               alt="AlikoHub Foundation logo"
@@ -386,17 +385,15 @@ export function EcosystemArchitectureSection() {
 
           {/* Inner ring nodes (delivery brands) */}
           {inner.map((n, i) => {
-            const pos = placeOn(inner.length, 230, i);
+            const pos = placeOn(inner.length, 240, i);
             return (
-              <div key={n.label} className="group absolute w-32 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
-                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(var(--trust-blue))]/30 to-[hsl(var(--amber))]/30 p-[2px] shadow-[0_14px_36px_-14px_hsl(var(--trust-blue)/0.45)] transition-transform duration-300 group-hover:scale-110">
-                  <div className="flex h-full w-full items-center justify-center rounded-full bg-white">
-                    {n.logo ? (
-                      <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1" loading="lazy" />
-                    ) : (
-                      <n.icon className="h-9 w-9 text-[hsl(var(--trust-blue))]" aria-hidden />
-                    )}
-                  </div>
+              <div key={n.label} className="group absolute w-36 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
+                <div className="mx-auto flex h-16 w-32 items-center justify-center rounded-2xl border border-[hsl(var(--trust-blue))]/20 bg-card px-3 shadow-[0_14px_36px_-18px_hsl(var(--trust-blue)/0.55)] transition-transform duration-300 group-hover:-translate-y-1">
+                  {n.logo ? (
+                    <img src={n.logo} alt={`${n.label} logo`} className="max-h-11 w-auto max-w-full object-contain" loading="lazy" />
+                  ) : (
+                    <n.icon className="h-8 w-8 text-[hsl(var(--trust-blue))]" aria-hidden />
+                  )}
                 </div>
                 <p className="mt-2 font-heading text-[11px] font-semibold text-[hsl(var(--trust-blue))]">{n.label}</p>
                 <p className="text-[9px] font-bold uppercase tracking-wider text-[hsl(var(--amber))]">{n.role}</p>
@@ -406,23 +403,22 @@ export function EcosystemArchitectureSection() {
 
           {/* Outer ring nodes (partner institutions) */}
           {outer.map((n, i) => {
-            const pos = placeOn(outer.length, 360, i, -90 + 360 / outer.length / 2);
+            const pos = placeOn(outer.length, 344, i, -90 + 360 / outer.length / 2);
             return (
               <div key={n.label} className="group absolute w-36 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(var(--amber))]/35 to-[hsl(var(--trust-blue))]/20 p-[2px] shadow-[0_10px_28px_-14px_hsl(var(--amber)/0.6)] transition-transform duration-300 group-hover:scale-110">
-                  <div className="flex h-full w-full items-center justify-center rounded-full bg-white">
-                    {n.logo ? (
-                      <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1" loading="lazy" />
-                    ) : (
-                      <n.icon className="h-8 w-8 text-[hsl(var(--amber))]" aria-hidden />
-                    )}
-                  </div>
+                <div className="mx-auto flex h-14 w-28 items-center justify-center rounded-xl border border-[hsl(var(--amber))]/25 bg-card px-3 shadow-[0_10px_28px_-16px_hsl(var(--amber)/0.7)] transition-transform duration-300 group-hover:-translate-y-1">
+                  {n.logo ? (
+                    <img src={n.logo} alt={`${n.label} logo`} className="max-h-9 w-auto max-w-full object-contain" loading="lazy" />
+                  ) : (
+                    <n.icon className="h-7 w-7 text-[hsl(var(--amber))]" aria-hidden />
+                  )}
                 </div>
                 <p className="mt-2 text-[11px] font-semibold text-foreground leading-tight">{n.label}</p>
                 <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">{n.role}</p>
               </div>
             );
           })}
+
         </div>
 
         {/* Mobile fallback: stacked lists */}
@@ -435,7 +431,7 @@ export function EcosystemArchitectureSection() {
               {inner.map((i) => (
                 <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
                   {i.logo && (
-                    <img src={i.logo} alt={`${i.label} logo`} className="h-14 w-14 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-20 shrink-0 rounded-lg border border-border bg-card object-contain p-1" loading="lazy" />
                   )}
                   <span>
                     <span className="block font-heading text-sm font-semibold text-[hsl(var(--trust-blue))]">{i.label}</span>
@@ -451,7 +447,7 @@ export function EcosystemArchitectureSection() {
               {outer.map((i) => (
                 <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
                   {i.logo && (
-                    <img src={i.logo} alt={`${i.label} logo`} className="h-14 w-14 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-20 shrink-0 rounded-lg border border-border bg-card object-contain p-1" loading="lazy" />
                   )}
                   <span>
                     <span className="block text-sm font-semibold text-foreground">{i.label}</span>
