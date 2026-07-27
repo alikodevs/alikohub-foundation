@@ -114,7 +114,6 @@ const utilityNav = [
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMega, setOpenMega] = useState<string | null>(null);
-  const [openMega, setOpenMega] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
