@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, User, LogOut, Settings } from "lucide-react";
+import { Menu, X, Sun, Moon, User, LogOut, Settings, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
 import { useAuth } from "@/hooks/useAuth";
@@ -17,9 +17,85 @@ import foundationMark from "@/assets/foundation-mark.png";
 import { LegalStatusNotice } from "@/components/foundation/LegalStatusNotice";
 import { foundation } from "@/config/foundation";
 
-const primaryNav = [
-  { label: "About", href: "/about" },
-  { label: "Our Work", href: "/programs" },
+type MegaColumn = { heading: string; links: { label: string; href: string }[] };
+type NavItem = {
+  label: string;
+  href: string;
+  blurb?: string;
+  columns?: MegaColumn[];
+};
+
+const primaryNav: NavItem[] = [
+  {
+    label: "About",
+    href: "/about",
+    blurb: "Learn about our origins, how we work, our governance, and our role in expanding opportunity.",
+    columns: [
+      {
+        heading: "About the Foundation",
+        links: [
+          { label: "Our story", href: "/about" },
+          { label: "How we work", href: "/programs" },
+          { label: "Governance", href: "/governance" },
+          { label: "Frequently asked questions", href: "/faq" },
+          { label: "Ethics & safeguarding", href: "/ethics" },
+          { label: "News & announcements", href: "/press" },
+        ],
+      },
+      {
+        heading: "People & offices",
+        links: [
+          { label: "Leadership", href: "/governance" },
+          { label: "Hubs & offices", href: "/hubs" },
+          { label: "Careers", href: "/careers" },
+          { label: "Sustainability", href: "/sustainability" },
+          { label: "Contact", href: "/contact" },
+        ],
+      },
+      {
+        heading: "Accountability",
+        links: [
+          { label: "Transparency", href: "/transparency" },
+          { label: "Financials", href: "/financials" },
+          { label: "Annual report", href: "/annual-report" },
+          { label: "Accessibility", href: "/accessibility" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Our Work",
+    href: "/programs",
+    blurb: "Seven priority areas delivered through the Train, Guide, Connect, Scale model.",
+    columns: [
+      {
+        heading: "Programs",
+        links: [
+          { label: "All program areas", href: "/programs" },
+          { label: "Delivery pathways", href: "/programs" },
+          { label: "Innovation hubs", href: "/hubs" },
+          { label: "Resources & toolkits", href: "/resources" },
+        ],
+      },
+      {
+        heading: "Impact",
+        links: [
+          { label: "Our impact", href: "/impact" },
+          { label: "Where we work", href: "/where-we-work" },
+          { label: "Stories & insights", href: "/stories" },
+        ],
+      },
+      {
+        heading: "Work with us",
+        links: [
+          { label: "Partnerships", href: "/partnership" },
+          { label: "Our partners", href: "/partners" },
+          { label: "Get involved", href: "/get-involved" },
+          { label: "Ways to give", href: "/donate" },
+        ],
+      },
+    ],
+  },
   { label: "Impact", href: "/impact" },
   { label: "Where We Work", href: "/where-we-work" },
   { label: "Stories & Insights", href: "/stories" },
@@ -34,8 +110,10 @@ const utilityNav = [
   { label: "Contact", href: "/contact" },
 ];
 
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openMega, setOpenMega] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
@@ -65,7 +143,7 @@ export function Navbar() {
       </div>
 
       {/* Main nav */}
-      <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
+      <nav className="relative sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
         <div className="container mx-auto flex items-center justify-between gap-6 px-6 py-4">
           <Link to="/" className="flex items-center gap-2.5" aria-label={`${foundation.legalName} home`}>
             <img src={foundationMark} alt="" className="h-10 w-10" width={40} height={40} />
@@ -77,19 +155,40 @@ export function Navbar() {
             </span>
           </Link>
 
-          <div className="hidden items-center gap-5 xl:flex">
-            {primaryNav.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`text-sm font-semibold transition-colors hover:text-primary ${
-                  isActive(link.href) ? "text-primary" : "text-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="hidden items-center gap-5 xl:flex" onMouseLeave={() => setOpenMega(null)}>
+            {primaryNav.map((link) =>
+              link.columns ? (
+                <div key={link.href} onMouseEnter={() => setOpenMega(link.label)}>
+                  <Link
+                    to={link.href}
+                    onClick={() => setOpenMega(null)}
+                    aria-expanded={openMega === link.label}
+                    className={`flex items-center gap-1 py-2 text-sm font-semibold transition-colors hover:text-primary ${
+                      isActive(link.href) || openMega === link.label ? "text-primary" : "text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 transition-transform ${openMega === link.label ? "rotate-180" : ""}`}
+                      aria-hidden
+                    />
+                  </Link>
+                </div>
+              ) : (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  onMouseEnter={() => setOpenMega(null)}
+                  className={`py-2 text-sm font-semibold transition-colors hover:text-primary ${
+                    isActive(link.href) ? "text-primary" : "text-foreground"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
+
 
           <div className="hidden items-center gap-2 lg:flex">
             <Button
@@ -139,6 +238,66 @@ export function Navbar() {
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
+
+        {/* Mega menu (desktop) */}
+        <AnimatePresence>
+          {openMega && (
+            <motion.div
+              key={openMega}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18 }}
+              onMouseLeave={() => setOpenMega(null)}
+              className="absolute inset-x-0 top-full hidden border-b border-border bg-[hsl(var(--warm-surface))] shadow-[var(--shadow-card-hover)] xl:block"
+            >
+              <div className="container mx-auto grid gap-8 px-6 py-9 lg:grid-cols-[0.9fr_2.4fr]">
+                {primaryNav
+                  .filter((n) => n.label === openMega)
+                  .map((n) => (
+                    <div key={n.label} className="contents">
+                      <div>
+                        <h2 className="font-heading text-xl font-bold text-foreground">{n.label}</h2>
+                        <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">{n.blurb}</p>
+                        <Link
+                          to={n.href}
+                          onClick={() => setOpenMega(null)}
+                          className="mt-4 inline-flex items-center gap-1.5 border-b-2 border-[hsl(var(--amber))] pb-0.5 text-sm font-semibold text-[hsl(var(--trust-blue))]"
+                        >
+                          Explore {n.label.toLowerCase()}
+                          <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                        </Link>
+                      </div>
+                      <div className="grid gap-8 sm:grid-cols-3">
+                        {n.columns?.map((col) => (
+                          <div key={col.heading}>
+                            <p className="font-heading text-sm font-bold text-[hsl(var(--trust-blue))]">
+                              {col.heading}
+                            </p>
+                            <ul className="mt-3 space-y-2.5">
+                              {col.links.map((l) => (
+                                <li key={l.label}>
+                                  <Link
+                                    to={l.href}
+                                    onClick={() => setOpenMega(null)}
+                                    className="text-sm text-foreground/85 underline-offset-4 transition-colors hover:text-[hsl(var(--amber))] hover:underline"
+                                  >
+                                    {l.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+
 
         <AnimatePresence>
           {mobileOpen && (
