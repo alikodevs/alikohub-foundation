@@ -323,20 +323,20 @@ export function EcosystemArchitectureSection() {
 
           {/* Center node */}
           <div className="absolute left-1/2 top-1/2 flex h-[28%] w-[28%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[hsl(var(--trust-blue))]/20 bg-card p-4 text-center shadow-[0_20px_60px_-20px_hsl(var(--trust-blue)/0.35)]">
-            <img src={logoHub} alt="AlikoHub logo" className="h-9 w-auto max-w-[80%] object-contain mix-blend-multiply dark:mix-blend-normal dark:rounded dark:bg-white dark:p-1" />
+            <img src={logoHub} alt="AlikoHub logo" className="h-16 w-auto max-w-[92%] object-contain mix-blend-multiply dark:mix-blend-normal dark:rounded dark:bg-white dark:p-1" />
             <p className="mt-2 px-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
           </div>
 
           {/* Inner ring nodes (delivery brands) */}
           {inner.map((n, i) => {
-            const pos = placeOn(inner.length, 210, i);
+            const pos = placeOn(inner.length, 230, i);
             return (
               <div key={n.label} className="absolute w-32 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
-                <div className="mx-auto flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-[hsl(var(--trust-blue))]/20 bg-white shadow-[0_10px_30px_-12px_hsl(var(--trust-blue)/0.35)]">
+                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-[hsl(var(--trust-blue))]/20 bg-white shadow-[0_10px_30px_-12px_hsl(var(--trust-blue)/0.35)]">
                   {n.logo ? (
-                    <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full scale-[1.05] object-contain p-1.5" loading="lazy" />
+                    <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1" loading="lazy" />
                   ) : (
-                    <n.icon className="h-6 w-6 text-[hsl(var(--trust-blue))]" aria-hidden />
+                    <n.icon className="h-9 w-9 text-[hsl(var(--trust-blue))]" aria-hidden />
                   )}
                 </div>
                 <p className="mt-2 font-heading text-[11px] font-semibold text-[hsl(var(--trust-blue))]">{n.label}</p>
@@ -347,14 +347,14 @@ export function EcosystemArchitectureSection() {
 
           {/* Outer ring nodes (partner institutions) */}
           {outer.map((n, i) => {
-            const pos = placeOn(outer.length, 340, i, -90 + 360 / outer.length / 2);
+            const pos = placeOn(outer.length, 360, i, -90 + 360 / outer.length / 2);
             return (
               <div key={n.label} className="absolute w-36 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
-                <div className="mx-auto flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-border bg-white shadow-[0_8px_24px_-12px_hsl(var(--trust-blue)/0.25)]">
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-border bg-white shadow-[0_8px_24px_-12px_hsl(var(--trust-blue)/0.25)]">
                   {n.logo ? (
-                    <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1.5" loading="lazy" />
+                    <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1" loading="lazy" />
                   ) : (
-                    <n.icon className="h-5 w-5 text-[hsl(var(--amber))]" aria-hidden />
+                    <n.icon className="h-8 w-8 text-[hsl(var(--amber))]" aria-hidden />
                   )}
                 </div>
                 <p className="mt-2 text-[11px] font-semibold text-foreground leading-tight">{n.label}</p>
@@ -367,7 +367,7 @@ export function EcosystemArchitectureSection() {
         {/* Mobile fallback: stacked lists */}
         <div className="mt-10 grid gap-6 md:hidden">
           <div className="rounded-2xl border border-border bg-card p-6 text-center">
-            <img src={logoHub} alt="AlikoHub logo" className="mx-auto h-10 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:rounded dark:bg-white dark:p-1" />
+            <img src={logoHub} alt="AlikoHub logo" className="mx-auto h-16 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:rounded dark:bg-white dark:p-1" />
             <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6">
@@ -376,7 +376,7 @@ export function EcosystemArchitectureSection() {
               {inner.map((i) => (
                 <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
                   {i.logo && (
-                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-10 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-14 w-14 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
                   )}
                   <span>
                     <span className="block font-heading text-sm font-semibold text-[hsl(var(--trust-blue))]">{i.label}</span>
@@ -392,7 +392,7 @@ export function EcosystemArchitectureSection() {
               {outer.map((i) => (
                 <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
                   {i.logo && (
-                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-10 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-14 w-14 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
                   )}
                   <span>
                     <span className="block text-sm font-semibold text-foreground">{i.label}</span>
