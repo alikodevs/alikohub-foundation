@@ -12,10 +12,10 @@ const stageIcons = {
 
 export function MissionBand() {
   return (
-    <section className="border-b border-border bg-secondary py-20">
+    <section className="border-b border-border bg-secondary py-14 sm:py-20">
       <div className="container mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-          <div>
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
+          <div className="lg:sticky lg:top-28 lg:self-start">
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">Our mission</p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Locally grounded programs, global partnerships.

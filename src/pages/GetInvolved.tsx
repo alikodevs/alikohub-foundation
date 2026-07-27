@@ -42,7 +42,7 @@ export default function GetInvolved() {
       title="There is a role for you."
       intro="Choose the pathway that best matches how you can contribute. Every submission is read by a member of the Foundation team."
     >
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Pathways", v: "4 options" },
           { k: "Tax status", v: "501(c)(3)" },

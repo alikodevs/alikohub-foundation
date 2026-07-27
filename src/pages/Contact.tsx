@@ -11,7 +11,7 @@ export default function Contact() {
       intro="We welcome inquiries from prospective partners, community organizations, media, and volunteers. Choose the reason that best fits your message."
     >
       {/* Ribbon */}
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Email", v: foundation.contactEmail, small: true },
           { k: "HQ", v: "Seattle, WA" },

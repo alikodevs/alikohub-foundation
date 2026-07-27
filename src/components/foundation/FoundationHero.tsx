@@ -2,7 +2,7 @@ import { foundation } from "@/config/foundation";
 import { StatusAwareCTA } from "./StatusAwareCTA";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HERO_IMG =
@@ -11,7 +11,7 @@ const HERO_IMG =
 const HERO_STATS = [
   { value: "7", label: "Program areas" },
   { value: "2", label: "Founding regions" },
-  { value: "100%", label: "Community-designed" },
+  { value: "2026", label: "Founded" },
 ];
 
 export function FoundationHero() {
@@ -38,7 +38,7 @@ export function FoundationHero() {
           transition={{ duration: 0.6 }}
         >
           <p className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[hsl(var(--trust-blue)/0.35)] bg-[hsl(var(--trust-blue)/0.1)] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[hsl(var(--trust-blue))]">
-            <Sparkles className="h-3.5 w-3.5" aria-hidden />
+            <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--amber))]" aria-hidden />
             {foundation.legalName}
           </p>
           <h1 className="font-heading text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">

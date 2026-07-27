@@ -39,7 +39,7 @@ export default function Governance() {
       intro="AlikoHub Foundation is governed by a board of directors and a multi-layered operational structure that pairs centralized leadership with strong local ownership."
     >
       {/* Compact governance ribbon */}
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Directors", v: `${board.length} on Board` },
           { k: "Leadership", v: `${leadership.length} Executives` },

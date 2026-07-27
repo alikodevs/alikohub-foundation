@@ -27,7 +27,7 @@ export default function Financials() {
       title="Financials"
       intro="How the Foundation raises, allocates, and reports on the resources entrusted to us. Detailed filings are posted as they are completed."
     >
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Program ratio", v: "82% target" },
           { k: "Oversight", v: "Board treasurer" },

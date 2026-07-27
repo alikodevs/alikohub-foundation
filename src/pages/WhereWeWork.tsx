@@ -45,7 +45,7 @@ export default function WhereWeWork() {
       intro="The Foundation is based in Seattle, Washington and delivers priority programs in Ethiopia. Every initiative is locally led and community-designed, with a delivery model built to travel as partnerships grow."
     >
       {/* Compact footprint ribbon */}
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Headquarters", v: "Seattle, WA" },
           { k: "Priority region", v: "Ethiopia" },

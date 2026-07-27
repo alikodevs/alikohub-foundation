@@ -51,24 +51,24 @@ export function PageShell({ title, intro, eyebrow, children, afterContent, seo }
           }}
           aria-hidden
         />
-        <div className="container relative mx-auto px-6 py-16 lg:py-20">
+        <div className="container relative mx-auto px-6 py-12 lg:py-16">
           {eyebrow && (
             <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--amber))]" aria-hidden />
               {eyebrow}
             </p>
           )}
-          <h1 className="font-heading text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h1 className="max-w-4xl font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             {title}
           </h1>
           {intro && (
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/85">
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/85">
               {intro}
             </p>
           )}
         </div>
       </header>
-      <main id="main-content" className="container mx-auto px-6 py-16">{children}</main>
+      <main id="main-content" className="container mx-auto px-5 py-10 sm:px-6 sm:py-14 lg:py-16">{children}</main>
       {afterContent}
       <Footer />
 

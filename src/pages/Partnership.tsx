@@ -54,12 +54,10 @@ export default function Partnership() {
       intro="We are building a small number of deep, accountable partnerships rather than many shallow ones. If our missions align, we would like to hear from you."
     >
       {/* Compact ribbon */}
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:inline-grid sm:w-fit">
         {[
           { k: "Partner types", v: "4 pathways" },
-          { k: "Model", v: "Deep, not shallow" },
           { k: "Onboarding", v: "4-step process" },
-          { k: "Response", v: "Personal reply" },
         ].map((s) => (
           <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>

@@ -17,7 +17,7 @@ export default function Sustainability() {
       title="Built to last, not just to launch."
       intro="A model designed to thrive beyond initial grant funding, ensuring long-term continuity, financial independence, and community-driven growth."
     >
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Levers", v: `${models.length} revenue streams` },
           { k: "Design", v: "Diversified" },

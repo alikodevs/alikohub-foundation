@@ -17,7 +17,7 @@ export default function Ethics() {
       title="Integrity is a design choice, not a disclaimer."
       intro="Our commitments to safety, dignity, and honesty shape how we design programs, choose partners, handle data, and communicate results."
     >
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Principles", v: `${principles.length} commitments` },
           { k: "Oversight", v: "Board-approved" },

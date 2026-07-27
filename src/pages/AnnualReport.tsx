@@ -23,7 +23,7 @@ export default function AnnualReport() {
       title="Annual Report"
       intro="A yearly account of what we set out to do, what we delivered, what we learned, and how we stewarded the resources entrusted to us."
     >
-      <div className="mb-10 grid gap-3 rounded-2xl border border-border bg-card p-4 sm:grid-cols-4">
+      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Format", v: "Narrative + data" },
           { k: "Cadence", v: "Annual" },
