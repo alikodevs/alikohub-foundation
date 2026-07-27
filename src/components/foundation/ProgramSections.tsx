@@ -426,11 +426,8 @@ export function EcosystemArchitectureSection() {
 
         {/* Mobile fallback: stacked lists */}
         <div className="mt-10 grid gap-6 md:hidden">
-          <div className="rounded-2xl bg-gradient-to-br from-[hsl(var(--trust-blue))]/25 to-[hsl(var(--amber))]/25 p-[2px] shadow-[0_20px_50px_-25px_hsl(var(--trust-blue)/0.5)]">
-            <div className="rounded-2xl bg-white p-6 text-center">
-              <img src={foundationLogo} alt="AlikoHub Foundation logo" className="mx-auto h-24 w-auto object-contain" />
-            </div>
-          </div>
+          <img src={foundationLogo} alt="AlikoHub Foundation logo" className="mx-auto h-32 w-auto object-contain" />
+
           <div className="rounded-2xl border border-border bg-card p-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Inner Ring · Delivery Brands</p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
