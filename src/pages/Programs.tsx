@@ -60,6 +60,8 @@ const pillars: Pillar[] = [
       "Health data analytics and population health",
       "Climate-linked and zoonotic disease monitoring",
     ],
+    image:
+      "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=80",
     theme: {
       ring: "bg-[hsl(var(--terracotta))]",
       chip: "bg-white/20",
@@ -160,6 +162,8 @@ const pillars: Pillar[] = [
       "Youth leadership and civic participation",
       "Cross-sector partnerships with governments and NGOs",
     ],
+    image:
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
     theme: {
       ring: "bg-[hsl(var(--sage))]",
       chip: "bg-white/25",
