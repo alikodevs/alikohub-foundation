@@ -6,7 +6,6 @@ import logoTech from "@/assets/brands/alikotech.jpg";
 import logoWash from "@/assets/brands/aliko-wash.png";
 import logoGenshifter from "@/assets/brands/genshifter.jpg";
 import logoLms from "@/assets/brands/aliko-lms.jpg";
-import logoHub from "@/assets/brands/alikohub.jpg";
 import foundationLogo from "@/assets/alikohub-foundation-logo.png.asset.json";
 
 import {
