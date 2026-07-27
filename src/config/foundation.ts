@@ -37,19 +37,19 @@ export const board = [
     name: "Boni Aliko",
     role: "Founder & President; Director",
     bio: "Founder of the AlikoHub ecosystem, leading strategy, partnerships, and program design across education, health, and workforce development.",
-    photo: boniPhoto.url,
+    photo: boniPhoto,
   },
   {
     name: "Bonsa Aliko",
     role: "Treasurer; Director",
     bio: "Oversees financial stewardship, reserves policy, and donor accountability, ensuring every dollar advances the Foundation's mission.",
-    photo: bonsaPhoto.url,
+    photo: bonsaPhoto,
   },
   {
     name: "Hanna Tesfaye",
     role: "Secretary; Director",
     bio: "Leads governance, board coordination, and safeguarding oversight, keeping the Foundation accountable to its communities and partners.",
-    photo: hannaPhoto.url,
+    photo: hannaPhoto,
   },
 ] as const;
 
@@ -59,43 +59,43 @@ export const leadership = [
     name: "Boni Aliko",
     role: "Founder & Chief Executive Officer",
     bio: "Sets the Foundation's strategic direction, builds global partnerships, and leads program design across the seven priority areas.",
-    photo: boniPhoto.url,
+    photo: boniPhoto,
   },
   {
     name: "Bonsa Aliko",
     role: "Chief Operating Officer",
     bio: "Runs day-to-day operations, finance, and hub delivery, translating strategy into accountable execution on the ground.",
-    photo: bonsaPhoto.url,
+    photo: bonsaPhoto,
   },
   {
     name: "Abdi Aliko",
     role: "Chief Technology Officer",
     bio: "Leads technology, digital inclusion infrastructure, and the data systems that power monitoring, learning, and reporting.",
-    photo: abdiPhoto.url,
+    photo: abdiPhoto,
   },
   {
     name: "Biniyam Birassa",
     role: "Program Director",
     bio: "Oversees program quality across education, workforce, and enterprise tracks, from curriculum design to outcome measurement.",
-    photo: biniyamPhoto.url,
+    photo: biniyamPhoto,
   },
   {
     name: "Lensa Aliko",
     role: "Director of Health Programs",
     bio: "Directs public and digital health work, including health workforce pipelines, mobile health, and WASH-linked initiatives.",
-    photo: lensaPhoto.url,
+    photo: lensaPhoto,
   },
   {
     name: "Baatii Aliko",
     role: "Director of Strategic Partnership & Development",
     bio: "Builds institutional partnerships, funding relationships, and the collaborations that extend program reach.",
-    photo: baatiiPhoto.url,
+    photo: baatiiPhoto,
   },
   {
     name: "Hanna Tesfaye",
     role: "Marketing Manager & Executive Assistant",
     bio: "Leads communications, brand stewardship, and executive coordination across the Foundation's teams and partners.",
-    photo: hannaPhoto.url,
+    photo: hannaPhoto,
   },
 ] as const;
 
