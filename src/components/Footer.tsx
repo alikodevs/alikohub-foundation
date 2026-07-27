@@ -106,13 +106,12 @@ export function Footer() {
       <div className="container mx-auto px-6 py-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
-            <span className="inline-flex items-center justify-center rounded-xl bg-white p-3 shadow-lg">
-              <img
-                src={foundationLogo}
-                alt="AlikoHub Foundation"
-                className="h-16 w-auto object-contain"
-              />
-            </span>
+            <img
+              src={foundationLogo}
+              alt="AlikoHub Foundation"
+              className="h-24 w-auto object-contain"
+            />
+
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/75">
               {foundation.mission}
             </p>
