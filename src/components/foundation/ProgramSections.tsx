@@ -1,4 +1,12 @@
 import { useState } from "react";
+import logoAcademy from "@/assets/brands/aliko-academy.jpg";
+import logoConsultancy from "@/assets/brands/aliko-consultancy.jpg";
+import logoEvents from "@/assets/brands/aliko-events.jpg";
+import logoTech from "@/assets/brands/alikotech.jpg";
+import logoWash from "@/assets/brands/aliko-wash.png";
+import logoGenshifter from "@/assets/brands/genshifter.jpg";
+import logoHub from "@/assets/brands/alikohub.jpg";
+
 import {
   Users,
   ClipboardCheck,
@@ -259,23 +267,24 @@ export function ProgramDesignPrinciplesSection() {
 
 export function EcosystemArchitectureSection() {
   const inner = [
-    { label: "Aliko Academy", role: "Train", icon: GraduationCap },
-    { label: "Aliko LMS", role: "Deliver at Scale", icon: BookOpen },
-    { label: "Aliko Consultancy", role: "Guide", icon: ClipboardCheck },
-    { label: "Aliko Events", role: "Connect", icon: Handshake },
-    { label: "Career Portal", role: "Match to Jobs", icon: Rocket },
-    { label: "AlikoTech", role: "Digital Infrastructure", icon: Cpu },
-    { label: "AlikoWash", role: "Social Impact", icon: Leaf },
+    { label: "Aliko Academy", role: "Train", icon: GraduationCap, logo: logoAcademy },
+    { label: "Aliko LMS", role: "Deliver at Scale", icon: BookOpen, logo: null },
+    { label: "Aliko Consultancy", role: "Guide", icon: ClipboardCheck, logo: logoConsultancy },
+    { label: "Aliko Events", role: "Connect", icon: Handshake, logo: logoEvents },
+    { label: "Career Portal", role: "Match to Jobs", icon: Rocket, logo: null },
+    { label: "AlikoTech", role: "Digital Infrastructure", icon: Cpu, logo: logoTech },
+    { label: "AlikoWash", role: "Social Impact", icon: Leaf, logo: logoWash },
   ];
   const outer = [
-    { label: "Worker / Employer Organizations", role: "Multi-stakeholder Governance", icon: UsersRound },
-    { label: "Ecosystem Partners", role: "Proposed Strategy Alignment", icon: Handshake },
-    { label: "GenShifter Technologies", role: "Technology & AI Capacity", icon: Zap },
-    { label: "Government Agencies", role: "Policy Alignment", icon: Building2 },
-    { label: "Academic Institutions", role: "Curriculum & Research", icon: GraduationCap },
-    { label: "Employers / Private Sector", role: "Job Placement & Demand", icon: Building2 },
-    { label: "Development Partners / DFIs", role: "Funding & Scale", icon: Globe },
+    { label: "Worker / Employer Organizations", role: "Multi-stakeholder Governance", icon: UsersRound, logo: null },
+    { label: "Ecosystem Partners", role: "Proposed Strategy Alignment", icon: Handshake, logo: null },
+    { label: "GenShifter Technologies", role: "Technology & AI Capacity", icon: Zap, logo: logoGenshifter },
+    { label: "Government Agencies", role: "Policy Alignment", icon: Building2, logo: null },
+    { label: "Academic Institutions", role: "Curriculum & Research", icon: GraduationCap, logo: null },
+    { label: "Employers / Private Sector", role: "Job Placement & Demand", icon: Building2, logo: null },
+    { label: "Development Partners / DFIs", role: "Funding & Scale", icon: Globe, logo: null },
   ];
+
 
   const placeOn = (count: number, radius: number, i: number, offset = -90) => {
     const angle = (offset + (360 / count) * i) * (Math.PI / 180);
@@ -312,9 +321,9 @@ export function EcosystemArchitectureSection() {
           </div>
 
           {/* Center node */}
-          <div className="absolute left-1/2 top-1/2 flex h-[28%] w-[28%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[hsl(var(--trust-blue))]/20 bg-card text-center shadow-[0_20px_60px_-20px_hsl(var(--trust-blue)/0.35)]">
-            <p className="font-heading text-xl font-extrabold text-[hsl(var(--trust-blue))] sm:text-2xl">AlikoHub</p>
-            <p className="mt-1 px-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
+          <div className="absolute left-1/2 top-1/2 flex h-[28%] w-[28%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[hsl(var(--trust-blue))]/20 bg-card p-4 text-center shadow-[0_20px_60px_-20px_hsl(var(--trust-blue)/0.35)]">
+            <img src={logoHub} alt="AlikoHub logo" className="h-9 w-auto max-w-[80%] object-contain mix-blend-multiply dark:mix-blend-normal dark:rounded dark:bg-white dark:p-1" />
+            <p className="mt-2 px-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
           </div>
 
           {/* Inner ring nodes (delivery brands) */}
@@ -322,8 +331,12 @@ export function EcosystemArchitectureSection() {
             const pos = placeOn(inner.length, 210, i);
             return (
               <div key={n.label} className="absolute w-32 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[hsl(var(--trust-blue))]/20 bg-card shadow-[0_10px_30px_-12px_hsl(var(--trust-blue)/0.35)]">
-                  <n.icon className="h-6 w-6 text-[hsl(var(--trust-blue))]" aria-hidden />
+                <div className="mx-auto flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-[hsl(var(--trust-blue))]/20 bg-white shadow-[0_10px_30px_-12px_hsl(var(--trust-blue)/0.35)]">
+                  {n.logo ? (
+                    <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full scale-[1.05] object-contain p-1.5" loading="lazy" />
+                  ) : (
+                    <n.icon className="h-6 w-6 text-[hsl(var(--trust-blue))]" aria-hidden />
+                  )}
                 </div>
                 <p className="mt-2 font-heading text-[11px] font-semibold text-[hsl(var(--trust-blue))]">{n.label}</p>
                 <p className="text-[9px] font-bold uppercase tracking-wider text-[hsl(var(--amber))]">{n.role}</p>
@@ -336,8 +349,12 @@ export function EcosystemArchitectureSection() {
             const pos = placeOn(outer.length, 340, i, -90 + 360 / outer.length / 2);
             return (
               <div key={n.label} className="absolute w-36 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card shadow-[0_8px_24px_-12px_hsl(var(--trust-blue)/0.25)]">
-                  <n.icon className="h-5 w-5 text-[hsl(var(--amber))]" aria-hidden />
+                <div className="mx-auto flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-border bg-white shadow-[0_8px_24px_-12px_hsl(var(--trust-blue)/0.25)]">
+                  {n.logo ? (
+                    <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1.5" loading="lazy" />
+                  ) : (
+                    <n.icon className="h-5 w-5 text-[hsl(var(--amber))]" aria-hidden />
+                  )}
                 </div>
                 <p className="mt-2 text-[11px] font-semibold text-foreground leading-tight">{n.label}</p>
                 <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">{n.role}</p>
@@ -349,16 +366,21 @@ export function EcosystemArchitectureSection() {
         {/* Mobile fallback: stacked lists */}
         <div className="mt-10 grid gap-6 md:hidden">
           <div className="rounded-2xl border border-border bg-card p-6 text-center">
-            <p className="font-heading text-xl font-extrabold text-[hsl(var(--trust-blue))]">AlikoHub</p>
-            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
+            <img src={logoHub} alt="AlikoHub logo" className="mx-auto h-10 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:rounded dark:bg-white dark:p-1" />
+            <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Inner Ring · Delivery Brands</p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {inner.map((i) => (
-                <li key={i.label} className="rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
-                  <p className="font-heading text-sm font-semibold text-[hsl(var(--trust-blue))]">{i.label}</p>
-                  <p className="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-[hsl(var(--amber))]">{i.role}</p>
+                <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
+                  {i.logo && (
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-10 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
+                  )}
+                  <span>
+                    <span className="block font-heading text-sm font-semibold text-[hsl(var(--trust-blue))]">{i.label}</span>
+                    <span className="mt-0.5 block text-[10px] font-bold uppercase tracking-wider text-[hsl(var(--amber))]">{i.role}</span>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -367,14 +389,20 @@ export function EcosystemArchitectureSection() {
             <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Outer Ring · Partner Institutions</p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {outer.map((i) => (
-                <li key={i.label} className="rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
-                  <p className="text-sm font-semibold text-foreground">{i.label}</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">{i.role}</p>
+                <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
+                  {i.logo && (
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-10 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
+                  )}
+                  <span>
+                    <span className="block text-sm font-semibold text-foreground">{i.label}</span>
+                    <span className="mt-0.5 block text-xs text-muted-foreground">{i.role}</span>
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+
       </div>
     </section>
   );
