@@ -16,7 +16,7 @@ const footerNav = {
     { label: "Careers", href: "/careers" },
     { label: "Press & Media", href: "/press" },
   ],
-  "Our Work": [
+  "What We Deliver": [
     { label: "Programs", href: "/programs" },
     { label: "Where We Work", href: "/where-we-work" },
     { label: "Impact", href: "/impact" },
