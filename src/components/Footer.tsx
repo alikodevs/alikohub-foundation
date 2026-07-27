@@ -65,15 +65,15 @@ export function Footer() {
     >
       {/* Newsletter band */}
       <div className="container mx-auto px-6 pt-12">
-        <div className="grid gap-6 rounded-2xl bg-[hsl(var(--amber))] px-7 py-9 md:grid-cols-2 md:items-center md:px-10">
+        <div className="grid gap-6 rounded-2xl border border-white/10 border-l-4 border-l-[hsl(var(--amber))] bg-white/[0.06] px-6 py-8 md:grid-cols-2 md:items-center md:px-10">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--navy))]/70">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
               Newsletter
             </p>
-            <h3 className="mt-2 font-heading text-2xl font-bold leading-tight text-[hsl(var(--navy))]">
+            <h3 className="mt-2 font-heading text-2xl font-bold leading-tight text-white">
               Stay informed on our work
             </h3>
-            <p className="mt-2 max-w-sm text-sm leading-relaxed text-[hsl(var(--navy))]/80">
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/75">
               A short, honest update on programs, learning, and opportunities. A few emails a year. No spam.
             </p>
           </div>

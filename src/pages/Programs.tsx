@@ -186,7 +186,7 @@ export default function Programs() {
       }
     >
       {/* Compact overview strip */}
-      <section className="mb-10 grid gap-3 sm:grid-cols-4">
+      <section className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
           { v: "7", l: "Program pillars", c: "text-[hsl(var(--trust-blue))]" },
           { v: "3", l: "Delivery pathways", c: "text-[hsl(var(--amber))]" },
