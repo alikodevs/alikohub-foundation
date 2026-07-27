@@ -35,17 +35,14 @@ const primaryNav: NavItem[] = [
         heading: "About the Foundation",
         links: [
           { label: "Our story", href: "/about" },
-          { label: "How we work", href: "/programs" },
-          { label: "Governance", href: "/governance" },
-          { label: "Frequently asked questions", href: "/faq" },
+          { label: "Governance & leadership", href: "/governance" },
           { label: "Ethics & safeguarding", href: "/ethics" },
-          { label: "News & announcements", href: "/press" },
+          { label: "Frequently asked questions", href: "/faq" },
         ],
       },
       {
         heading: "People & offices",
         links: [
-          { label: "Leadership", href: "/governance" },
           { label: "Hubs & offices", href: "/hubs" },
           { label: "Careers", href: "/careers" },
           { label: "Sustainability", href: "/sustainability" },
@@ -58,7 +55,7 @@ const primaryNav: NavItem[] = [
           { label: "Transparency", href: "/transparency" },
           { label: "Financials", href: "/financials" },
           { label: "Annual report", href: "/annual-report" },
-          { label: "Accessibility", href: "/accessibility" },
+          { label: "News & announcements", href: "/press" },
         ],
       },
     ],
@@ -72,7 +69,6 @@ const primaryNav: NavItem[] = [
         heading: "Programs",
         links: [
           { label: "All program areas", href: "/programs" },
-          { label: "Delivery pathways", href: "/programs" },
           { label: "Innovation hubs", href: "/hubs" },
           { label: "Resources & toolkits", href: "/resources" },
         ],
@@ -96,6 +92,7 @@ const primaryNav: NavItem[] = [
       },
     ],
   },
+
   { label: "Impact", href: "/impact" },
   { label: "Where We Work", href: "/where-we-work" },
   { label: "Stories & Insights", href: "/stories" },
@@ -143,7 +140,10 @@ export function Navbar() {
       </div>
 
       {/* Main nav */}
-      <nav className="relative sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
+      <nav
+        className="relative sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl"
+        onMouseLeave={() => setOpenMega(null)}
+      >
         <div className="container mx-auto flex items-center justify-between gap-6 px-6 py-4">
           <Link to="/" className="flex items-center gap-2.5" aria-label={`${foundation.legalName} home`}>
             <img src={foundationMark} alt="" className="h-10 w-10" width={40} height={40} />
@@ -155,7 +155,8 @@ export function Navbar() {
             </span>
           </Link>
 
-          <div className="hidden items-center gap-5 xl:flex" onMouseLeave={() => setOpenMega(null)}>
+          <div className="hidden items-center gap-5 xl:flex">
+
             {primaryNav.map((link) =>
               link.columns ? (
                 <div key={link.href} onMouseEnter={() => setOpenMega(link.label)}>
