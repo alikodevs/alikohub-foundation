@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, User, LogOut, Settings } from "lucide-react";
+import { Menu, X, Sun, Moon, User, LogOut, Settings, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
 import { useAuth } from "@/hooks/useAuth";
@@ -113,6 +113,7 @@ const utilityNav = [
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openMega, setOpenMega] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
