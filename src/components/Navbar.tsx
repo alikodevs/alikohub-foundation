@@ -17,9 +17,85 @@ import foundationMark from "@/assets/foundation-mark.png";
 import { LegalStatusNotice } from "@/components/foundation/LegalStatusNotice";
 import { foundation } from "@/config/foundation";
 
-const primaryNav = [
-  { label: "About", href: "/about" },
-  { label: "Our Work", href: "/programs" },
+type MegaColumn = { heading: string; links: { label: string; href: string }[] };
+type NavItem = {
+  label: string;
+  href: string;
+  blurb?: string;
+  columns?: MegaColumn[];
+};
+
+const primaryNav: NavItem[] = [
+  {
+    label: "About",
+    href: "/about",
+    blurb: "Learn about our origins, how we work, our governance, and our role in expanding opportunity.",
+    columns: [
+      {
+        heading: "About the Foundation",
+        links: [
+          { label: "Our story", href: "/about" },
+          { label: "How we work", href: "/programs" },
+          { label: "Governance", href: "/governance" },
+          { label: "Frequently asked questions", href: "/faq" },
+          { label: "Ethics & safeguarding", href: "/ethics" },
+          { label: "News & announcements", href: "/press" },
+        ],
+      },
+      {
+        heading: "People & offices",
+        links: [
+          { label: "Leadership", href: "/governance" },
+          { label: "Hubs & offices", href: "/hubs" },
+          { label: "Careers", href: "/careers" },
+          { label: "Sustainability", href: "/sustainability" },
+          { label: "Contact", href: "/contact" },
+        ],
+      },
+      {
+        heading: "Accountability",
+        links: [
+          { label: "Transparency", href: "/transparency" },
+          { label: "Financials", href: "/financials" },
+          { label: "Annual report", href: "/annual-report" },
+          { label: "Accessibility", href: "/accessibility" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Our Work",
+    href: "/programs",
+    blurb: "Seven priority areas delivered through the Train, Guide, Connect, Scale model.",
+    columns: [
+      {
+        heading: "Programs",
+        links: [
+          { label: "All program areas", href: "/programs" },
+          { label: "Delivery pathways", href: "/programs" },
+          { label: "Innovation hubs", href: "/hubs" },
+          { label: "Resources & toolkits", href: "/resources" },
+        ],
+      },
+      {
+        heading: "Impact",
+        links: [
+          { label: "Our impact", href: "/impact" },
+          { label: "Where we work", href: "/where-we-work" },
+          { label: "Stories & insights", href: "/stories" },
+        ],
+      },
+      {
+        heading: "Work with us",
+        links: [
+          { label: "Partnerships", href: "/partnership" },
+          { label: "Our partners", href: "/partners" },
+          { label: "Get involved", href: "/get-involved" },
+          { label: "Ways to give", href: "/donate" },
+        ],
+      },
+    ],
+  },
   { label: "Impact", href: "/impact" },
   { label: "Where We Work", href: "/where-we-work" },
   { label: "Stories & Insights", href: "/stories" },
@@ -33,6 +109,7 @@ const utilityNav = [
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ];
+
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
