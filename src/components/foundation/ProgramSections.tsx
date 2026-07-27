@@ -6,7 +6,7 @@ import logoTech from "@/assets/brands/alikotech.jpg";
 import logoWash from "@/assets/brands/aliko-wash.png";
 import logoGenshifter from "@/assets/brands/genshifter.jpg";
 import logoLms from "@/assets/brands/aliko-lms.jpg";
-import logoHub from "@/assets/brands/alikohub.jpg";
+import foundationLogo from "@/assets/alikohub-foundation-logo.png";
 
 import {
   Users,
@@ -293,11 +293,22 @@ export function EcosystemArchitectureSection() {
   };
 
   return (
-    <section className="border-t border-border bg-[hsl(var(--warm-surface))] py-20">
-      <div className="container mx-auto px-6">
+    <section className="relative overflow-hidden border-t border-border bg-[hsl(var(--warm-surface))] py-20">
+      {/* Premium ambient wash */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-70"
+        style={{
+          background:
+            "radial-gradient(60% 55% at 50% 35%, hsl(var(--trust-blue) / 0.10), transparent 70%), radial-gradient(45% 40% at 85% 85%, hsl(var(--amber) / 0.10), transparent 70%)",
+        }}
+      />
+      <div className="relative container mx-auto px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Ecosystem Architecture</p>
-          <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <p className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--amber))]/30 bg-[hsl(var(--amber))]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
+            Ecosystem Architecture
+          </p>
+          <h2 className="mt-4 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             The AlikoHub Ecosystem Architecture
           </h2>
           <p className="mt-3 text-base text-muted-foreground">
@@ -307,14 +318,55 @@ export function EcosystemArchitectureSection() {
 
         {/* Orbital diagram */}
         <div className="relative mx-auto mt-14 hidden aspect-square w-full max-w-[820px] md:block">
+          {/* Connector spokes */}
+          <svg viewBox="0 0 820 820" className="absolute inset-0 h-full w-full" aria-hidden>
+            <defs>
+              <linearGradient id="spokeInner" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="hsl(var(--trust-blue))" stopOpacity="0.45" />
+                <stop offset="100%" stopColor="hsl(var(--amber))" stopOpacity="0.2" />
+              </linearGradient>
+            </defs>
+            {inner.map((n, i) => {
+              const a = (-90 + (360 / inner.length) * i) * (Math.PI / 180);
+              return (
+                <line
+                  key={n.label}
+                  x1={410}
+                  y1={410}
+                  x2={410 + Math.cos(a) * 230}
+                  y2={410 + Math.sin(a) * 230}
+                  stroke="url(#spokeInner)"
+                  strokeWidth={1.5}
+                />
+              );
+            })}
+            {outer.map((n, i) => {
+              const a = (-90 + 360 / outer.length / 2 + (360 / outer.length) * i) * (Math.PI / 180);
+              return (
+                <line
+                  key={n.label}
+                  x1={410 + Math.cos(a) * 250}
+                  y1={410 + Math.sin(a) * 250}
+                  x2={410 + Math.cos(a) * 350}
+                  y2={410 + Math.sin(a) * 350}
+                  stroke="hsl(var(--amber))"
+                  strokeOpacity={0.25}
+                  strokeWidth={1}
+                  strokeDasharray="4 5"
+                />
+              );
+            })}
+          </svg>
+
           {/* Rings */}
-          <div className="absolute inset-[6%] rounded-full border border-dashed border-[hsl(var(--trust-blue))]/30" />
-          <div className="absolute inset-[22%] rounded-full border border-[hsl(var(--trust-blue))]/20 bg-gradient-to-br from-[hsl(var(--trust-blue))]/5 to-transparent" />
+          <div className="absolute inset-[6%] rounded-full border border-dashed border-[hsl(var(--amber))]/35" />
+          <div className="absolute inset-[14%] rounded-full border border-[hsl(var(--trust-blue))]/10" />
+          <div className="absolute inset-[22%] rounded-full border border-[hsl(var(--trust-blue))]/25 bg-gradient-to-br from-[hsl(var(--trust-blue))]/8 via-transparent to-[hsl(var(--amber))]/8 shadow-[inset_0_0_60px_-20px_hsl(var(--trust-blue)/0.35)]" />
 
           {/* Orbiting dots on outer ring */}
           <div className="absolute inset-[6%] animate-[spin_40s_linear_infinite]">
-            <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--amber))] shadow-[0_0_0_4px_hsl(var(--amber)/0.15)]" />
-            <span className="absolute right-0 top-1/2 h-2 w-2 translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--trust-blue))]" />
+            <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--amber))] shadow-[0_0_0_5px_hsl(var(--amber)/0.18)]" />
+            <span className="absolute right-0 top-1/2 h-2 w-2 translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--trust-blue))] shadow-[0_0_0_5px_hsl(var(--trust-blue)/0.15)]" />
           </div>
           <div className="absolute inset-[22%] animate-[spin_28s_linear_infinite_reverse]">
             <span className="absolute left-0 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--trust-blue))]/70" />
@@ -322,22 +374,29 @@ export function EcosystemArchitectureSection() {
           </div>
 
           {/* Center node */}
-          <div className="absolute left-1/2 top-1/2 flex h-[28%] w-[28%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[hsl(var(--trust-blue))]/20 bg-card p-4 text-center shadow-[0_20px_60px_-20px_hsl(var(--trust-blue)/0.35)]">
-            <img src={logoHub} alt="AlikoHub logo" className="h-16 w-auto max-w-[92%] object-contain mix-blend-multiply dark:mix-blend-normal dark:rounded dark:bg-white dark:p-1" />
-            <p className="mt-2 px-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
+          <div className="absolute left-1/2 top-1/2 flex h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(var(--trust-blue))]/25 via-transparent to-[hsl(var(--amber))]/25 p-[3px] shadow-[0_30px_80px_-30px_hsl(var(--trust-blue)/0.5)]">
+            <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-white p-5 text-center">
+              <img
+                src={foundationLogo}
+                alt="AlikoHub Foundation logo"
+                className="h-[74%] w-auto max-w-[88%] object-contain"
+              />
+            </div>
           </div>
 
           {/* Inner ring nodes (delivery brands) */}
           {inner.map((n, i) => {
             const pos = placeOn(inner.length, 230, i);
             return (
-              <div key={n.label} className="absolute w-32 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
-                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-[hsl(var(--trust-blue))]/20 bg-white shadow-[0_10px_30px_-12px_hsl(var(--trust-blue)/0.35)]">
-                  {n.logo ? (
-                    <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1" loading="lazy" />
-                  ) : (
-                    <n.icon className="h-9 w-9 text-[hsl(var(--trust-blue))]" aria-hidden />
-                  )}
+              <div key={n.label} className="group absolute w-32 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
+                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(var(--trust-blue))]/30 to-[hsl(var(--amber))]/30 p-[2px] shadow-[0_14px_36px_-14px_hsl(var(--trust-blue)/0.45)] transition-transform duration-300 group-hover:scale-110">
+                  <div className="flex h-full w-full items-center justify-center rounded-full bg-white">
+                    {n.logo ? (
+                      <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1" loading="lazy" />
+                    ) : (
+                      <n.icon className="h-9 w-9 text-[hsl(var(--trust-blue))]" aria-hidden />
+                    )}
+                  </div>
                 </div>
                 <p className="mt-2 font-heading text-[11px] font-semibold text-[hsl(var(--trust-blue))]">{n.label}</p>
                 <p className="text-[9px] font-bold uppercase tracking-wider text-[hsl(var(--amber))]">{n.role}</p>
@@ -349,13 +408,15 @@ export function EcosystemArchitectureSection() {
           {outer.map((n, i) => {
             const pos = placeOn(outer.length, 360, i, -90 + 360 / outer.length / 2);
             return (
-              <div key={n.label} className="absolute w-36 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-border bg-white shadow-[0_8px_24px_-12px_hsl(var(--trust-blue)/0.25)]">
-                  {n.logo ? (
-                    <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1" loading="lazy" />
-                  ) : (
-                    <n.icon className="h-8 w-8 text-[hsl(var(--amber))]" aria-hidden />
-                  )}
+              <div key={n.label} className="group absolute w-36 -translate-x-1/2 -translate-y-1/2 text-center" style={pos}>
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(var(--amber))]/35 to-[hsl(var(--trust-blue))]/20 p-[2px] shadow-[0_10px_28px_-14px_hsl(var(--amber)/0.6)] transition-transform duration-300 group-hover:scale-110">
+                  <div className="flex h-full w-full items-center justify-center rounded-full bg-white">
+                    {n.logo ? (
+                      <img src={n.logo} alt={`${n.label} logo`} className="h-full w-full object-contain p-1" loading="lazy" />
+                    ) : (
+                      <n.icon className="h-8 w-8 text-[hsl(var(--amber))]" aria-hidden />
+                    )}
+                  </div>
                 </div>
                 <p className="mt-2 text-[11px] font-semibold text-foreground leading-tight">{n.label}</p>
                 <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">{n.role}</p>
@@ -366,9 +427,10 @@ export function EcosystemArchitectureSection() {
 
         {/* Mobile fallback: stacked lists */}
         <div className="mt-10 grid gap-6 md:hidden">
-          <div className="rounded-2xl border border-border bg-card p-6 text-center">
-            <img src={logoHub} alt="AlikoHub logo" className="mx-auto h-16 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:rounded dark:bg-white dark:p-1" />
-            <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--amber))]">Resourcefulness Ecosystem</p>
+          <div className="rounded-2xl bg-gradient-to-br from-[hsl(var(--trust-blue))]/25 to-[hsl(var(--amber))]/25 p-[2px] shadow-[0_20px_50px_-25px_hsl(var(--trust-blue)/0.5)]">
+            <div className="rounded-2xl bg-white p-6 text-center">
+              <img src={foundationLogo} alt="AlikoHub Foundation logo" className="mx-auto h-24 w-auto object-contain" />
+            </div>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Inner Ring · Delivery Brands</p>
