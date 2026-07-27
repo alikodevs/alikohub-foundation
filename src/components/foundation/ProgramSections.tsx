@@ -429,9 +429,11 @@ export function EcosystemArchitectureSection() {
             <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Inner Ring · Delivery Brands</p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {inner.map((i) => (
-                <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
-                  {i.logo && (
-                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-20 shrink-0 rounded-lg border border-border bg-card object-contain p-1" loading="lazy" />
+                <li key={i.label} className="flex items-center gap-3 rounded-lg border border-white/40 bg-card/80 p-2 backdrop-blur-sm">
+                  {i.logo ? (
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-12 w-24 shrink-0 rounded-lg object-contain" loading="lazy" />
+                  ) : (
+                    <i.icon className="h-10 w-10 shrink-0 text-[hsl(var(--trust-blue))]" aria-hidden />
                   )}
                   <span>
                     <span className="block font-heading text-sm font-semibold text-[hsl(var(--trust-blue))]">{i.label}</span>
@@ -445,9 +447,11 @@ export function EcosystemArchitectureSection() {
             <p className="text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">Outer Ring · Partner Institutions</p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {outer.map((i) => (
-                <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
-                  {i.logo && (
-                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-20 shrink-0 rounded-lg border border-border bg-card object-contain p-1" loading="lazy" />
+                <li key={i.label} className="flex items-center gap-3 rounded-lg border border-white/40 bg-card/80 p-2 backdrop-blur-sm">
+                  {i.logo ? (
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-20 shrink-0 rounded-lg object-contain" loading="lazy" />
+                  ) : (
+                    <i.icon className="h-8 w-8 shrink-0 text-[hsl(var(--amber))]" aria-hidden />
                   )}
                   <span>
                     <span className="block text-sm font-semibold text-foreground">{i.label}</span>
