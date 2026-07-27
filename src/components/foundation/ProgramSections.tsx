@@ -431,7 +431,7 @@ export function EcosystemArchitectureSection() {
               {inner.map((i) => (
                 <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
                   {i.logo && (
-                    <img src={i.logo} alt={`${i.label} logo`} className="h-14 w-14 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-20 shrink-0 rounded-lg border border-border bg-card object-contain p-1" loading="lazy" />
                   )}
                   <span>
                     <span className="block font-heading text-sm font-semibold text-[hsl(var(--trust-blue))]">{i.label}</span>
@@ -447,7 +447,7 @@ export function EcosystemArchitectureSection() {
               {outer.map((i) => (
                 <li key={i.label} className="flex items-center gap-3 rounded-lg border border-border bg-[hsl(var(--warm-surface))] p-3">
                   {i.logo && (
-                    <img src={i.logo} alt={`${i.label} logo`} className="h-14 w-14 shrink-0 rounded-full border border-border bg-white object-contain p-1" loading="lazy" />
+                    <img src={i.logo} alt={`${i.label} logo`} className="h-10 w-20 shrink-0 rounded-lg border border-border bg-card object-contain p-1" loading="lazy" />
                   )}
                   <span>
                     <span className="block text-sm font-semibold text-foreground">{i.label}</span>
