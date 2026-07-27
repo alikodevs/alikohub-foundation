@@ -374,15 +374,14 @@ export function EcosystemArchitectureSection() {
           </div>
 
           {/* Center node */}
-          <div className="absolute left-1/2 top-1/2 flex h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(var(--trust-blue))]/25 via-transparent to-[hsl(var(--amber))]/25 p-[3px] shadow-[0_30px_80px_-30px_hsl(var(--trust-blue)/0.5)]">
-            <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-white p-5 text-center">
-              <img
-                src={foundationLogo}
-                alt="AlikoHub Foundation logo"
-                className="h-[74%] w-auto max-w-[88%] object-contain"
-              />
-            </div>
+          <div className="absolute left-1/2 top-1/2 flex h-[34%] w-[34%] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+            <img
+              src={foundationLogo}
+              alt="AlikoHub Foundation logo"
+              className="h-full w-full object-contain drop-shadow-[0_20px_40px_hsl(var(--trust-blue)/0.35)]"
+            />
           </div>
+
 
           {/* Inner ring nodes (delivery brands) */}
           {inner.map((n, i) => {
