@@ -239,6 +239,66 @@ export function Navbar() {
           </button>
         </div>
 
+        {/* Mega menu (desktop) */}
+        <AnimatePresence>
+          {openMega && (
+            <motion.div
+              key={openMega}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18 }}
+              onMouseLeave={() => setOpenMega(null)}
+              className="absolute inset-x-0 top-full hidden border-b border-border bg-[hsl(var(--warm-surface))] shadow-[var(--shadow-card-hover)] xl:block"
+            >
+              <div className="container mx-auto grid gap-8 px-6 py-9 lg:grid-cols-[0.9fr_2.4fr]">
+                {primaryNav
+                  .filter((n) => n.label === openMega)
+                  .map((n) => (
+                    <div key={n.label} className="contents">
+                      <div>
+                        <h2 className="font-heading text-xl font-bold text-foreground">{n.label}</h2>
+                        <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">{n.blurb}</p>
+                        <Link
+                          to={n.href}
+                          onClick={() => setOpenMega(null)}
+                          className="mt-4 inline-flex items-center gap-1.5 border-b-2 border-[hsl(var(--amber))] pb-0.5 text-sm font-semibold text-[hsl(var(--trust-blue))]"
+                        >
+                          Explore {n.label.toLowerCase()}
+                          <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                        </Link>
+                      </div>
+                      <div className="grid gap-8 sm:grid-cols-3">
+                        {n.columns?.map((col) => (
+                          <div key={col.heading}>
+                            <p className="font-heading text-sm font-bold text-[hsl(var(--trust-blue))]">
+                              {col.heading}
+                            </p>
+                            <ul className="mt-3 space-y-2.5">
+                              {col.links.map((l) => (
+                                <li key={l.label}>
+                                  <Link
+                                    to={l.href}
+                                    onClick={() => setOpenMega(null)}
+                                    className="text-sm text-foreground/85 underline-offset-4 transition-colors hover:text-[hsl(var(--amber))] hover:underline"
+                                  >
+                                    {l.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+
+
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
