@@ -11,7 +11,7 @@ import {
   FileCheck,
   Scale,
 } from "lucide-react";
-import { board } from "@/config/foundation";
+import { board, leadership } from "@/config/foundation";
 import { LeadershipCarousel } from "@/components/foundation/LeadershipCarousel";
 
 
