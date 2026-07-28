@@ -81,9 +81,15 @@ export default function Careers() {
               href={CAREER_PORTAL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mx-auto flex w-full max-w-[260px] items-center justify-center rounded-2xl bg-white/95 p-6 transition-transform hover:scale-[1.02]"
+              className="group mx-auto flex w-full max-w-[420px] items-center justify-center rounded-3xl bg-white/98 p-7 shadow-2xl shadow-black/10 ring-1 ring-white/60 transition-all hover:scale-[1.02] hover:bg-white hover:shadow-2xl hover:shadow-black/15"
+              aria-label="Open AlikoHub Career Portal"
             >
-              <img src={logoCareer} alt="AlikoHub Career Portal" className="h-auto w-full object-contain" loading="lazy" />
+              <img
+                src={logoCareer}
+                alt="AlikoHub Career Portal"
+                className="h-auto w-full object-contain drop-shadow-sm"
+                loading="lazy"
+              />
             </a>
           </div>
         </Card>
