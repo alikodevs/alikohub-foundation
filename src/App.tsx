@@ -54,6 +54,7 @@ const AdminPipeline = lazy(() => import("./pages/admin/AdminPipeline"));
 const AdminTasks = lazy(() => import("./pages/admin/AdminTasks"));
 const AdminDonations = lazy(() => import("./pages/admin/AdminDonations"));
 const AdminAudience = lazy(() => import("./pages/admin/AdminAudience"));
+const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 
 const queryClient = new QueryClient();
 
