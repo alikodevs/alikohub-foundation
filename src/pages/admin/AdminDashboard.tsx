@@ -1,125 +1,216 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import {
+  Image,
+  Users,
+  Briefcase,
+  GraduationCap,
+  FileImage,
+  Inbox,
+  Contact2,
+  Handshake,
+  HeartHandshake,
+  CheckSquare,
+  Mail,
+  Loader2,
+} from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { supabase } from "@/integrations/supabase/client";
-import { Image, Users, Briefcase, GraduationCap, FileImage } from "lucide-react";
+import { formatCurrency, formatDate, titleCase, type CrmActivity } from "@/hooks/useCrm";
 
-interface Stats {
-  heroCount: number;
-  teamCount: number;
-  servicesCount: number;
-  programsCount: number;
-  mediaCount: number;
+async function countOf(table: string, filter?: { column: string; value: string }) {
+  let query = supabase.from(table as never).select("id", { count: "exact", head: true });
+  if (filter) query = query.eq(filter.column, filter.value);
+  const { count } = await query;
+  return count ?? 0;
 }
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<Stats>({
-    heroCount: 0,
-    teamCount: 0,
-    servicesCount: 0,
-    programsCount: 0,
-    mediaCount: 0,
-  });
-
-  useEffect(() => {
-    async function fetchStats() {
-      const [hero, team, services, programs, media] = await Promise.all([
-        supabase.from("hero_content").select("id", { count: "exact" }),
-        supabase.from("team_members").select("id", { count: "exact" }),
-        supabase.from("services").select("id", { count: "exact" }),
-        supabase.from("programs").select("id", { count: "exact" }),
-        supabase.from("media_library").select("id", { count: "exact" }),
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-dashboard"],
+    queryFn: async () => {
+      const [
+        hero,
+        team,
+        services,
+        programs,
+        media,
+        inquiriesNew,
+        contacts,
+        openDeals,
+        openTasks,
+        subscribers,
+      ] = await Promise.all([
+        countOf("hero_content"),
+        countOf("team_members"),
+        countOf("services"),
+        countOf("programs"),
+        countOf("media_library"),
+        countOf("foundation_inquiries", { column: "status", value: "new" }),
+        countOf("crm_contacts"),
+        countOf("crm_deals", { column: "stage", value: "prospect" }),
+        countOf("crm_tasks", { column: "status", value: "open" }),
+        countOf("newsletter_subscribers", { column: "status", value: "subscribed" }),
       ]);
 
-      setStats({
-        heroCount: hero.count || 0,
-        teamCount: team.count || 0,
-        servicesCount: services.count || 0,
-        programsCount: programs.count || 0,
-        mediaCount: media.count || 0,
-      });
-    }
+      const { data: donations } = await supabase.from("crm_donations").select("amount");
+      const raised = (donations ?? []).reduce((sum, d) => sum + Number(d.amount), 0);
 
-    fetchStats();
-  }, []);
+      const { data: activities } = await supabase
+        .from("crm_activities")
+        .select("*")
+        .order("occurred_at", { ascending: false })
+        .limit(8);
 
-  const statCards = [
-    { title: "Hero Content", count: stats.heroCount, icon: Image, link: "/admin/hero", color: "text-blue-500" },
-    { title: "Team Members", count: stats.teamCount, icon: Users, link: "/admin/team", color: "text-green-500" },
-    { title: "Services", count: stats.servicesCount, icon: Briefcase, link: "/admin/services", color: "text-purple-500" },
-    { title: "Programs", count: stats.programsCount, icon: GraduationCap, link: "/admin/programs", color: "text-orange-500" },
-    { title: "Media Files", count: stats.mediaCount, icon: FileImage, link: "/admin/media", color: "text-pink-500" },
+      return {
+        hero,
+        team,
+        services,
+        programs,
+        media,
+        inquiriesNew,
+        contacts,
+        openDeals,
+        openTasks,
+        subscribers,
+        raised,
+        activities: (activities ?? []) as CrmActivity[],
+      };
+    },
+  });
+
+  const crmCards = [
+    {
+      title: "New inquiries",
+      value: data?.inquiriesNew ?? 0,
+      icon: Inbox,
+      link: "/admin/inquiries",
+    },
+    { title: "Contacts", value: data?.contacts ?? 0, icon: Contact2, link: "/admin/contacts" },
+    { title: "Prospects", value: data?.openDeals ?? 0, icon: Handshake, link: "/admin/pipeline" },
+    { title: "Open tasks", value: data?.openTasks ?? 0, icon: CheckSquare, link: "/admin/tasks" },
+    {
+      title: "Total raised",
+      value: formatCurrency(data?.raised ?? 0),
+      icon: HeartHandshake,
+      link: "/admin/donations",
+    },
+    { title: "Subscribers", value: data?.subscribers ?? 0, icon: Mail, link: "/admin/audience" },
+  ];
+
+  const contentCards = [
+    { title: "Hero Content", value: data?.hero ?? 0, icon: Image, link: "/admin/hero" },
+    { title: "Team Members", value: data?.team ?? 0, icon: Users, link: "/admin/team" },
+    { title: "Services", value: data?.services ?? 0, icon: Briefcase, link: "/admin/services" },
+    {
+      title: "Programs",
+      value: data?.programs ?? 0,
+      icon: GraduationCap,
+      link: "/admin/programs",
+    },
+    { title: "Media Files", value: data?.media ?? 0, icon: FileImage, link: "/admin/media" },
   ];
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
+      <div className="space-y-8">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Welcome to your content management dashboard</p>
+          <p className="mt-1 text-muted-foreground">
+            Relationships, pipeline, and website content in one place.
+          </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {statCards.map((stat) => (
-            <Link key={stat.title} to={stat.link}>
-              <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
-                    {stat.title}
-                  </CardTitle>
-                  <stat.icon className={`h-5 w-5 ${stat.color}`} />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{stat.count}</div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center py-16">
+            <Loader2 className="h-6 w-6 animate-spin text-primary" />
+          </div>
+        ) : (
+          <>
+            <section className="space-y-3">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                CRM
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+                {crmCards.map((stat) => (
+                  <Link key={stat.title} to={stat.link}>
+                    <Card className="h-full transition-shadow hover:shadow-md">
+                      <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle className="text-sm font-medium text-muted-foreground">
+                          {stat.title}
+                        </CardTitle>
+                        <stat.icon className="h-5 w-5 text-primary" />
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold">{stat.value}</div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </section>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          <Card>
-            <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <Link 
-                to="/admin/hero" 
-                className="block p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-              >
-                Edit Hero Section →
-              </Link>
-              <Link 
-                to="/admin/team" 
-                className="block p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-              >
-                Manage Team Members →
-              </Link>
-              <Link 
-                to="/admin/media" 
-                className="block p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-              >
-                Upload Media →
-              </Link>
-            </CardContent>
-          </Card>
+            <section className="space-y-3">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                Website content
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                {contentCards.map((stat) => (
+                  <Link key={stat.title} to={stat.link}>
+                    <Card className="h-full transition-shadow hover:shadow-md">
+                      <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle className="text-sm font-medium text-muted-foreground">
+                          {stat.title}
+                        </CardTitle>
+                        <stat.icon className="h-5 w-5 text-muted-foreground" />
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold">{stat.value}</div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </section>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Getting Started</CardTitle>
-            </CardHeader>
-            <CardContent className="text-muted-foreground space-y-2">
-              <p>Use this dashboard to manage your website content:</p>
-              <ul className="list-disc list-inside space-y-1">
-                <li>Update hero section text and images</li>
-                <li>Add or edit team member profiles</li>
-                <li>Manage services and programs</li>
-                <li>Upload and organize media files</li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Recent activity</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {(data?.activities ?? []).length === 0 ? (
+                  <p className="text-muted-foreground">
+                    No activity yet. Website form submissions appear here automatically.
+                  </p>
+                ) : (
+                  data!.activities.map((activity) => (
+                    <div
+                      key={activity.id}
+                      className="flex items-start justify-between gap-3 rounded-lg border border-border p-3"
+                    >
+                      <div>
+                        <p className="font-medium text-foreground">{activity.subject}</p>
+                        {activity.body && (
+                          <p className="line-clamp-2 text-sm text-muted-foreground">
+                            {activity.body}
+                          </p>
+                        )}
+                      </div>
+                      <div className="shrink-0 text-right">
+                        <Badge variant="secondary">{titleCase(activity.activity_type)}</Badge>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {formatDate(activity.occurred_at)}
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </CardContent>
+            </Card>
+          </>
+        )}
       </div>
     </AdminLayout>
   );

@@ -49,6 +49,11 @@ const AdminServices = lazy(() => import("./pages/admin/AdminServices"));
 const AdminPrograms = lazy(() => import("./pages/admin/AdminPrograms"));
 const AdminMedia = lazy(() => import("./pages/admin/AdminMedia"));
 const AdminInquiries = lazy(() => import("./pages/admin/AdminInquiries"));
+const AdminContacts = lazy(() => import("./pages/admin/AdminContacts"));
+const AdminPipeline = lazy(() => import("./pages/admin/AdminPipeline"));
+const AdminTasks = lazy(() => import("./pages/admin/AdminTasks"));
+const AdminDonations = lazy(() => import("./pages/admin/AdminDonations"));
+const AdminAudience = lazy(() => import("./pages/admin/AdminAudience"));
 
 const queryClient = new QueryClient();
 
@@ -105,6 +110,11 @@ const App = () => (
                 <Route path="/admin/programs" element={<AdminPrograms />} />
                 <Route path="/admin/media" element={<AdminMedia />} />
                 <Route path="/admin/inquiries" element={<AdminInquiries />} />
+                <Route path="/admin/contacts" element={<AdminContacts />} />
+                <Route path="/admin/pipeline" element={<AdminPipeline />} />
+                <Route path="/admin/tasks" element={<AdminTasks />} />
+                <Route path="/admin/donations" element={<AdminDonations />} />
+                <Route path="/admin/audience" element={<AdminAudience />} />
                 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

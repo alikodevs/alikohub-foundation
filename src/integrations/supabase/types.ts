@@ -14,9 +14,333 @@ export type Database = {
   }
   public: {
     Tables: {
+      crm_activities: {
+        Row: {
+          activity_type: Database["public"]["Enums"]["crm_activity_type"]
+          body: string | null
+          contact_id: string | null
+          created_at: string
+          created_by: string | null
+          deal_id: string | null
+          id: string
+          occurred_at: string
+          subject: string
+        }
+        Insert: {
+          activity_type?: Database["public"]["Enums"]["crm_activity_type"]
+          body?: string | null
+          contact_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          deal_id?: string | null
+          id?: string
+          occurred_at?: string
+          subject: string
+        }
+        Update: {
+          activity_type?: Database["public"]["Enums"]["crm_activity_type"]
+          body?: string | null
+          contact_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          deal_id?: string | null
+          id?: string
+          occurred_at?: string
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_activities_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_activities_deal_id_fkey"
+            columns: ["deal_id"]
+            isOneToOne: false
+            referencedRelation: "crm_deals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_contacts: {
+        Row: {
+          contact_type: Database["public"]["Enums"]["crm_contact_type"]
+          created_at: string
+          email: string | null
+          id: string
+          lifecycle_stage: Database["public"]["Enums"]["crm_lifecycle_stage"]
+          name: string
+          notes: string | null
+          organization_id: string | null
+          organization_name: string | null
+          phone: string | null
+          source: string | null
+          tags: string[]
+          updated_at: string
+        }
+        Insert: {
+          contact_type?: Database["public"]["Enums"]["crm_contact_type"]
+          created_at?: string
+          email?: string | null
+          id?: string
+          lifecycle_stage?: Database["public"]["Enums"]["crm_lifecycle_stage"]
+          name: string
+          notes?: string | null
+          organization_id?: string | null
+          organization_name?: string | null
+          phone?: string | null
+          source?: string | null
+          tags?: string[]
+          updated_at?: string
+        }
+        Update: {
+          contact_type?: Database["public"]["Enums"]["crm_contact_type"]
+          created_at?: string
+          email?: string | null
+          id?: string
+          lifecycle_stage?: Database["public"]["Enums"]["crm_lifecycle_stage"]
+          name?: string
+          notes?: string | null
+          organization_id?: string | null
+          organization_name?: string | null
+          phone?: string | null
+          source?: string | null
+          tags?: string[]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_contacts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "crm_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_deals: {
+        Row: {
+          contact_id: string | null
+          created_at: string
+          currency: string
+          expected_close_date: string | null
+          id: string
+          notes: string | null
+          organization_id: string | null
+          owner_id: string | null
+          stage: Database["public"]["Enums"]["crm_deal_stage"]
+          title: string
+          updated_at: string
+          value: number | null
+        }
+        Insert: {
+          contact_id?: string | null
+          created_at?: string
+          currency?: string
+          expected_close_date?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string | null
+          owner_id?: string | null
+          stage?: Database["public"]["Enums"]["crm_deal_stage"]
+          title: string
+          updated_at?: string
+          value?: number | null
+        }
+        Update: {
+          contact_id?: string | null
+          created_at?: string
+          currency?: string
+          expected_close_date?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string | null
+          owner_id?: string | null
+          stage?: Database["public"]["Enums"]["crm_deal_stage"]
+          title?: string
+          updated_at?: string
+          value?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_deals_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_deals_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "crm_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_donations: {
+        Row: {
+          amount: number
+          campaign: string | null
+          contact_id: string | null
+          created_at: string
+          currency: string
+          donated_at: string
+          id: string
+          is_recurring: boolean
+          method: string | null
+          notes: string | null
+          organization_id: string | null
+          receipt_sent: boolean
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          campaign?: string | null
+          contact_id?: string | null
+          created_at?: string
+          currency?: string
+          donated_at?: string
+          id?: string
+          is_recurring?: boolean
+          method?: string | null
+          notes?: string | null
+          organization_id?: string | null
+          receipt_sent?: boolean
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          campaign?: string | null
+          contact_id?: string | null
+          created_at?: string
+          currency?: string
+          donated_at?: string
+          id?: string
+          is_recurring?: boolean
+          method?: string | null
+          notes?: string | null
+          organization_id?: string | null
+          receipt_sent?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_donations_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_donations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "crm_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_organizations: {
+        Row: {
+          country: string | null
+          created_at: string
+          id: string
+          name: string
+          notes: string | null
+          org_type: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          notes?: string | null
+          org_type?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          org_type?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      crm_tasks: {
+        Row: {
+          assigned_to: string | null
+          contact_id: string | null
+          created_at: string
+          created_by: string | null
+          deal_id: string | null
+          details: string | null
+          due_date: string | null
+          id: string
+          priority: Database["public"]["Enums"]["crm_task_priority"]
+          status: Database["public"]["Enums"]["crm_task_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          contact_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          deal_id?: string | null
+          details?: string | null
+          due_date?: string | null
+          id?: string
+          priority?: Database["public"]["Enums"]["crm_task_priority"]
+          status?: Database["public"]["Enums"]["crm_task_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          contact_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          deal_id?: string | null
+          details?: string | null
+          due_date?: string | null
+          id?: string
+          priority?: Database["public"]["Enums"]["crm_task_priority"]
+          status?: Database["public"]["Enums"]["crm_task_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_tasks_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_tasks_deal_id_fkey"
+            columns: ["deal_id"]
+            isOneToOne: false
+            referencedRelation: "crm_deals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       foundation_inquiries: {
         Row: {
           admin_notes: string | null
+          contact_id: string | null
           created_at: string
           email: string
           id: string
@@ -30,6 +354,7 @@ export type Database = {
         }
         Insert: {
           admin_notes?: string | null
+          contact_id?: string | null
           created_at?: string
           email: string
           id?: string
@@ -43,6 +368,7 @@ export type Database = {
         }
         Update: {
           admin_notes?: string | null
+          contact_id?: string | null
           created_at?: string
           email?: string
           id?: string
@@ -54,7 +380,15 @@ export type Database = {
           status?: Database["public"]["Enums"]["inquiry_status"]
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "foundation_inquiries_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "crm_contacts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       hero_content: {
         Row: {
@@ -128,6 +462,36 @@ export type Database = {
           name?: string
           uploaded_by?: string | null
           url?: string
+        }
+        Relationships: []
+      }
+      newsletter_subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string | null
+          source_page: string | null
+          status: Database["public"]["Enums"]["newsletter_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name?: string | null
+          source_page?: string | null
+          status?: Database["public"]["Enums"]["newsletter_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string | null
+          source_page?: string | null
+          status?: Database["public"]["Enums"]["newsletter_status"]
+          updated_at?: string
         }
         Relationships: []
       }
@@ -314,8 +678,34 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      crm_activity_type:
+        | "note"
+        | "call"
+        | "email"
+        | "meeting"
+        | "event"
+        | "form_submission"
+      crm_contact_type:
+        | "donor"
+        | "partner"
+        | "volunteer"
+        | "media"
+        | "beneficiary"
+        | "staff"
+        | "other"
+      crm_deal_stage:
+        | "prospect"
+        | "engaged"
+        | "proposal"
+        | "agreement"
+        | "active"
+        | "declined"
+      crm_lifecycle_stage: "lead" | "engaged" | "active" | "lapsed" | "archived"
+      crm_task_priority: "low" | "medium" | "high"
+      crm_task_status: "open" | "in_progress" | "done" | "cancelled"
       inquiry_status: "new" | "in_review" | "responded" | "archived"
       inquiry_type: "partnership" | "volunteer" | "media" | "general"
+      newsletter_status: "subscribed" | "unsubscribed" | "bounced"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -444,8 +834,37 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      crm_activity_type: [
+        "note",
+        "call",
+        "email",
+        "meeting",
+        "event",
+        "form_submission",
+      ],
+      crm_contact_type: [
+        "donor",
+        "partner",
+        "volunteer",
+        "media",
+        "beneficiary",
+        "staff",
+        "other",
+      ],
+      crm_deal_stage: [
+        "prospect",
+        "engaged",
+        "proposal",
+        "agreement",
+        "active",
+        "declined",
+      ],
+      crm_lifecycle_stage: ["lead", "engaged", "active", "lapsed", "archived"],
+      crm_task_priority: ["low", "medium", "high"],
+      crm_task_status: ["open", "in_progress", "done", "cancelled"],
       inquiry_status: ["new", "in_review", "responded", "archived"],
       inquiry_type: ["partnership", "volunteer", "media", "general"],
+      newsletter_status: ["subscribed", "unsubscribed", "bounced"],
     },
   },
 } as const

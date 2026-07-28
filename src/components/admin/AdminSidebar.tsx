@@ -1,14 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
-import { 
-  LayoutDashboard, 
-  Image, 
-  Users, 
-  Briefcase, 
-  GraduationCap, 
+import {
+  LayoutDashboard,
+  Image,
+  Users,
+  Briefcase,
+  GraduationCap,
   FileImage,
   Inbox,
   LogOut,
-  Home
+  Home,
+  Contact2,
+  Handshake,
+  CheckSquare,
+  HeartHandshake,
+  Building2,
 } from "lucide-react";
 import {
   Sidebar,
@@ -27,15 +32,24 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import alikohubLogo from "@/assets/alikohub-logo.png";
 
-const menuItems = [
+const contentItems = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
   { title: "Hero Section", url: "/admin/hero", icon: Image },
   { title: "Team Members", url: "/admin/team", icon: Users },
   { title: "Services", url: "/admin/services", icon: Briefcase },
   { title: "Programs", url: "/admin/programs", icon: GraduationCap },
   { title: "Media Library", url: "/admin/media", icon: FileImage },
-  { title: "Inquiries", url: "/admin/inquiries", icon: Inbox },
 ];
+
+const crmItems = [
+  { title: "Inquiries", url: "/admin/inquiries", icon: Inbox },
+  { title: "Contacts", url: "/admin/contacts", icon: Contact2 },
+  { title: "Pipeline", url: "/admin/pipeline", icon: Handshake },
+  { title: "Tasks", url: "/admin/tasks", icon: CheckSquare },
+  { title: "Donations", url: "/admin/donations", icon: HeartHandshake },
+  { title: "Audience", url: "/admin/audience", icon: Building2 },
+];
+
 
 export function AdminSidebar() {
   const location = useLocation();
@@ -60,27 +74,30 @@ export function AdminSidebar() {
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Content Management</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={isActive(item.url)}
-                  >
-                    <Link to={item.url}>
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {[
+          { label: "Content Management", items: contentItems },
+          { label: "CRM", items: crmItems },
+        ].map((group) => (
+          <SidebarGroup key={group.label}>
+            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {group.items.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                      <Link to={item.url}>
+                        <item.icon className="h-4 w-4" />
+                        {!collapsed && <span>{item.title}</span>}
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
+
 
       <SidebarFooter className="border-t border-border p-4">
         <SidebarMenu>
