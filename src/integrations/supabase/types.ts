@@ -710,6 +710,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_first_admin: { Args: never; Returns: boolean }
       ensure_profile: { Args: never; Returns: undefined }
       has_role: {
         Args: {
