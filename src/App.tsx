@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/hooks/useAuth";
+import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -103,20 +104,20 @@ const App = () => (
 
                 
                 
-                {/* Admin routes */}
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/hero" element={<AdminHero />} />
-                <Route path="/admin/team" element={<AdminTeam />} />
-                <Route path="/admin/services" element={<AdminServices />} />
-                <Route path="/admin/programs" element={<AdminPrograms />} />
-                <Route path="/admin/media" element={<AdminMedia />} />
-                <Route path="/admin/inquiries" element={<AdminInquiries />} />
-                <Route path="/admin/contacts" element={<AdminContacts />} />
-                <Route path="/admin/pipeline" element={<AdminPipeline />} />
-                <Route path="/admin/tasks" element={<AdminTasks />} />
-                <Route path="/admin/donations" element={<AdminDonations />} />
-                <Route path="/admin/audience" element={<AdminAudience />} />
-                <Route path="/admin/settings" element={<AdminSettings />} />
+                {/* Admin routes (guarded: children never mount for non-admins) */}
+                <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
+                <Route path="/admin/hero" element={<RequireAdmin><AdminHero /></RequireAdmin>} />
+                <Route path="/admin/team" element={<RequireAdmin><AdminTeam /></RequireAdmin>} />
+                <Route path="/admin/services" element={<RequireAdmin><AdminServices /></RequireAdmin>} />
+                <Route path="/admin/programs" element={<RequireAdmin><AdminPrograms /></RequireAdmin>} />
+                <Route path="/admin/media" element={<RequireAdmin><AdminMedia /></RequireAdmin>} />
+                <Route path="/admin/inquiries" element={<RequireAdmin><AdminInquiries /></RequireAdmin>} />
+                <Route path="/admin/contacts" element={<RequireAdmin><AdminContacts /></RequireAdmin>} />
+                <Route path="/admin/pipeline" element={<RequireAdmin><AdminPipeline /></RequireAdmin>} />
+                <Route path="/admin/tasks" element={<RequireAdmin><AdminTasks /></RequireAdmin>} />
+                <Route path="/admin/donations" element={<RequireAdmin><AdminDonations /></RequireAdmin>} />
+                <Route path="/admin/audience" element={<RequireAdmin><AdminAudience /></RequireAdmin>} />
+                <Route path="/admin/settings" element={<RequireAdmin><AdminSettings /></RequireAdmin>} />
                 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

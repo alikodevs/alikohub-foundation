@@ -21,27 +21,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    const resolveRole = async (userId: string) => {
+      const { data } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userId)
+        .eq("role", "admin")
+        .maybeSingle();
+      setIsAdmin(!!data);
+    };
+
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
-        
-        if (session?.user) {
-          // Check if user is admin
-          const { data } = await supabase
-            .from("user_roles")
-            .select("role")
-            .eq("user_id", session.user.id)
-            .eq("role", "admin")
-            .maybeSingle();
-          
-          setIsAdmin(!!data);
-        } else {
-          setIsAdmin(false);
-        }
-        
         setIsLoading(false);
+
+        if (!session?.user) {
+          setIsAdmin(false);
+          return;
+        }
+
+        // Defer Supabase calls out of the auth callback to avoid deadlocks
+        setTimeout(() => {
+          if (event === "SIGNED_IN" || event === "USER_UPDATED") {
+            // Make sure a profile + default role exist for this account
+            supabase.rpc("ensure_profile").then(() => resolveRole(session.user.id));
+          } else {
+            resolveRole(session.user.id);
+          }
+        }, 0);
       }
     );
 
@@ -49,24 +59,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
-      
-      if (session?.user) {
-        supabase
-          .from("user_roles")
-          .select("role")
-          .eq("user_id", session.user.id)
-          .eq("role", "admin")
-          .maybeSingle()
-          .then(({ data }) => {
-            setIsAdmin(!!data);
-          });
-      }
-      
       setIsLoading(false);
+      if (session?.user) resolveRole(session.user.id);
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
 
   const signUp = async (email: string, password: string, displayName?: string) => {
     const { error } = await supabase.auth.signUp({
