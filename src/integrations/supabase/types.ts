@@ -244,6 +244,48 @@ export type Database = {
           },
         ]
       }
+      crm_notification_settings: {
+        Row: {
+          created_at: string
+          digest_frequency: string
+          id: string
+          notifications_enabled: boolean
+          notify_on_donation: boolean
+          notify_on_inquiry: boolean
+          notify_on_newsletter: boolean
+          notify_on_task: boolean
+          recipients: string[]
+          singleton: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          digest_frequency?: string
+          id?: string
+          notifications_enabled?: boolean
+          notify_on_donation?: boolean
+          notify_on_inquiry?: boolean
+          notify_on_newsletter?: boolean
+          notify_on_task?: boolean
+          recipients?: string[]
+          singleton?: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          digest_frequency?: string
+          id?: string
+          notifications_enabled?: boolean
+          notify_on_donation?: boolean
+          notify_on_inquiry?: boolean
+          notify_on_newsletter?: boolean
+          notify_on_task?: boolean
+          recipients?: string[]
+          singleton?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
       crm_organizations: {
         Row: {
           country: string | null
