@@ -6,6 +6,8 @@ import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStr
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+
 import foundationLogo from "@/assets/alikohub-foundation-logo.png";
 
 const footerNav = {
@@ -42,20 +44,38 @@ export function Footer() {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setSubmitting(true);
-    // Placeholder subscribe flow; a mailing-list provider can be wired later.
-    setTimeout(() => {
+
+    const { error } = await supabase.from("newsletter_subscribers").insert({
+      email: email.trim().toLowerCase(),
+      source_page: typeof window !== "undefined" ? window.location.pathname : null,
+    });
+
+    setSubmitting(false);
+
+    if (error) {
+      const alreadySubscribed = error.code === "23505";
       toast({
-        title: "You're on the list",
-        description: "Thanks for subscribing. We'll share program updates a few times a year.",
+        title: alreadySubscribed ? "You're already subscribed" : "Subscription failed",
+        description: alreadySubscribed
+          ? "This email is already on our list. Thank you for your interest."
+          : "Please try again in a moment, or email us directly.",
+        variant: alreadySubscribed ? "default" : "destructive",
       });
-      setEmail("");
-      setSubmitting(false);
-    }, 400);
+      if (alreadySubscribed) setEmail("");
+      return;
+    }
+
+    toast({
+      title: "You're on the list",
+      description: "Thanks for subscribing. We'll share program updates a few times a year.",
+    });
+    setEmail("");
   };
+
 
   return (
     <footer
