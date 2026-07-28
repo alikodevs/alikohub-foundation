@@ -29,7 +29,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .eq("role", "admin")
       .maybeSingle();
     setIsAdmin(!!data);
-  }, [resolveRole]);
+  }, []);
 
   const refreshRole = useCallback(async () => {
     const { data: { user: current } } = await supabase.auth.getUser();
