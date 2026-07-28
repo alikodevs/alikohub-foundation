@@ -38,15 +38,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [resolveRole]);
 
   useEffect(() => {
-    const resolveRoleLocal = async (userId: string) => {
-      const { data } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", userId)
-        .eq("role", "admin")
-        .maybeSingle();
-      setIsAdmin(!!data);
-    };
+    const resolveRoleLocal = resolveRole;
+
+
 
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
