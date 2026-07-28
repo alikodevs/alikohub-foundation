@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/hooks/useAuth";
+import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
