@@ -48,6 +48,7 @@ const crmItems = [
   { title: "Tasks", url: "/admin/tasks", icon: CheckSquare },
   { title: "Donations", url: "/admin/donations", icon: HeartHandshake },
   { title: "Audience", url: "/admin/audience", icon: Building2 },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 
 
