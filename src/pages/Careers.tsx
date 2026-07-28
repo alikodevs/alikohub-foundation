@@ -1,8 +1,12 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Briefcase, HeartHandshake, Globe2, Sparkles, Scale, GraduationCap, Mail } from "lucide-react";
+import { Briefcase, HeartHandshake, Globe2, Sparkles, Scale, GraduationCap, Mail, ArrowUpRight, Search, UserCheck } from "lucide-react";
 import { foundation } from "@/config/foundation";
+import logoCareer from "@/assets/brands/aliko-career-portal.png";
+
+const CAREER_PORTAL_URL = "https://career.alikohub.com/";
+
 
 const values = [
   { icon: HeartHandshake, title: "Community-first", body: "We design with communities, not for them, and we hire people who share that commitment." },
