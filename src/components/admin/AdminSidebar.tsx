@@ -14,6 +14,7 @@ import {
   CheckSquare,
   HeartHandshake,
   Building2,
+  Settings,
 } from "lucide-react";
 import {
   Sidebar,
