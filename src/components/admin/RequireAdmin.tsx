@@ -21,14 +21,11 @@ export function RequireAdmin({ children }: { children: ReactNode }) {
     if (isLoading || !user || isAdmin) return;
     let cancelled = false;
     setClaiming(true);
-    supabase
-      .rpc("claim_first_admin")
-      .then(async ({ data }) => {
-        if (data === true) await refreshRole();
-      })
-      .finally(() => {
-        if (!cancelled) setClaiming(false);
-      });
+    (async () => {
+      const { data } = await supabase.rpc("claim_first_admin");
+      if (data === true) await refreshRole();
+      if (!cancelled) setClaiming(false);
+    })();
     return () => {
       cancelled = true;
     };

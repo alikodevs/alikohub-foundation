@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, ReactNode } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -7,6 +7,7 @@ interface AuthContextType {
   session: Session | null;
   isLoading: boolean;
   isAdmin: boolean;
+  refreshRole: () => Promise<void>;
   signUp: (email: string, password: string, displayName?: string) => Promise<{ error: Error | null }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
@@ -20,8 +21,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const resolveRole = useCallback(async (userId: string) => {
+    const { data } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId)
+      .eq("role", "admin")
+      .maybeSingle();
+    setIsAdmin(!!data);
+  }, []);
+
+  const refreshRole = useCallback(async () => {
+    const { data: { user: current } } = await supabase.auth.getUser();
+    if (current) await resolveRole(current.id);
+    else setIsAdmin(false);
+  }, [resolveRole]);
+
   useEffect(() => {
-    const resolveRole = async (userId: string) => {
+    const resolveRoleLocal = async (userId: string) => {
       const { data } = await supabase
         .from("user_roles")
         .select("role")
@@ -47,9 +64,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setTimeout(() => {
           if (event === "SIGNED_IN" || event === "USER_UPDATED") {
             // Make sure a profile + default role exist for this account
-            supabase.rpc("ensure_profile").then(() => resolveRole(session.user.id));
+            supabase.rpc("ensure_profile").then(() => resolveRoleLocal(session.user.id));
           } else {
-            resolveRole(session.user.id);
+            resolveRoleLocal(session.user.id);
           }
         }, 0);
       }
@@ -60,7 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(session);
       setUser(session?.user ?? null);
       setIsLoading(false);
-      if (session?.user) resolveRole(session.user.id);
+      if (session?.user) resolveRoleLocal(session.user.id);
     });
 
     return () => subscription.unsubscribe();
@@ -101,6 +118,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         session,
         isLoading,
         isAdmin,
+        refreshRole,
         signUp,
         signIn,
         signOut,
