@@ -40,6 +40,27 @@ const ways = [
   { icon: Mail, title: "Checks & wire transfers", body: `Contact ${foundation.contactEmail} for mailing address and wire instructions.` },
 ];
 
+const transparencyLinks = [
+  {
+    to: "/annual-report",
+    icon: FileText,
+    title: "Annual Report",
+    description: "Read our yearly impact narrative, program results, and community stories.",
+  },
+  {
+    to: "/financials",
+    icon: BarChart3,
+    title: "Financials",
+    description: "Review audited financial statements, Form 990, and budget stewardship.",
+  },
+  {
+    to: "/transparency",
+    icon: Eye,
+    title: "Transparency",
+    description: "Explore governance, policies, and how we measure every dollar.",
+  },
+];
+
 export default function Donate() {
   return (
     <PageShell
@@ -152,21 +173,35 @@ export default function Donate() {
       </section>
 
       {/* Transparency */}
-      <section className="rounded-2xl border border-border bg-[hsl(var(--warm-surface))] p-8">
-        <h2 className="font-heading text-xl font-bold text-[hsl(var(--trust-blue))]">Where your dollars go</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The Foundation publishes annual reports, financial summaries, and Form 990 filings on our transparency pages.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-3 text-sm">
-          <Link to="/annual-report" className="font-semibold text-[hsl(var(--trust-blue))] hover:underline">
-            Annual Report →
-          </Link>
-          <Link to="/financials" className="font-semibold text-[hsl(var(--trust-blue))] hover:underline">
-            Financials →
-          </Link>
-          <Link to="/transparency" className="font-semibold text-[hsl(var(--trust-blue))] hover:underline">
-            Transparency →
-          </Link>
+      <section className="rounded-2xl border border-border bg-card p-8 sm:p-10">
+        <div className="max-w-2xl">
+          <h2 className="font-heading text-2xl font-bold text-foreground sm:text-3xl">Where your dollars go</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            The Foundation publishes annual reports, financial summaries, and Form 990 filings on our transparency pages.
+          </p>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {transparencyLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className="group rounded-xl border border-border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-accent">
+                  <link.icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div className="flex-1">
+                  <h3 className="font-heading text-base font-semibold text-foreground">{link.title}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{link.description}</p>
+                </div>
+                <ArrowRight
+                  className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent"
+                  aria-hidden="true"
+                />
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </PageShell>
