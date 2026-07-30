@@ -1,6 +1,22 @@
 import { approach, programPillars, foundation } from "@/config/foundation";
 import { Link } from "react-router-dom";
-import { ArrowRight, Compass, Wrench, Rocket, LineChart, Move } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  ArrowRight,
+  Compass,
+  Wrench,
+  Rocket,
+  LineChart,
+  Move,
+  GraduationCap,
+  Briefcase,
+  Cpu,
+  HeartPulse,
+  Droplets,
+  Lightbulb,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react";
 
 const stageIcons = {
   Listen: Compass,
@@ -58,6 +74,27 @@ export function MissionBand() {
   );
 }
 
+const pillarIcons: Record<string, LucideIcon> = {
+  education: GraduationCap,
+  workforce: Briefcase,
+  technology: Cpu,
+  health: HeartPulse,
+  wash: Droplets,
+  entrepreneurship: Lightbulb,
+  resilience: ShieldCheck,
+};
+
+// Bento spans: index-based hierarchy over a 6-column grid.
+const pillarSpans = [
+  "lg:col-span-3 lg:row-span-2",
+  "lg:col-span-3",
+  "lg:col-span-3",
+  "lg:col-span-2",
+  "lg:col-span-2",
+  "lg:col-span-2",
+  "lg:col-span-6",
+];
+
 export function ProgramPillarsSection() {
   return (
     <section className="border-b border-border py-20">
@@ -81,7 +118,7 @@ export function ProgramPillarsSection() {
             <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid auto-rows-[minmax(0,1fr)] gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {programPillars.map((p, i) => {
             const cycle = [
               { bg: "bg-[hsl(var(--trust-blue))]", fg: "text-white" },
@@ -89,13 +126,45 @@ export function ProgramPillarsSection() {
               { bg: "bg-gradient-to-br from-[hsl(var(--trust-blue))] via-[hsl(var(--navy-light))] to-[hsl(var(--amber))]", fg: "text-white" },
             ];
             const s = cycle[i % 3];
+            const Icon = pillarIcons[p.slug] ?? Compass;
+            const isFeature = i === 0;
             return (
               <article
                 key={p.slug}
-                className={`${s.bg} ${s.fg} group rounded-2xl p-6 shadow-[var(--shadow-card)] transition-transform hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]`}
+                className={cn(
+                  s.bg,
+                  s.fg,
+                  pillarSpans[i],
+                  isFeature && "sm:col-span-2",
+                  i === 6 && "sm:col-span-2",
+                  "group flex flex-col justify-between rounded-2xl p-6 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]",
+                )}
               >
-                <h3 className="font-heading text-lg font-bold">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed opacity-95">{p.summary}</p>
+                <div>
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/25 transition-colors duration-300 group-hover:bg-white/25">
+                    <Icon className={isFeature ? "h-5 w-5" : "h-[18px] w-[18px]"} aria-hidden />
+                  </span>
+                  <h3
+                    className={cn(
+                      "mt-4 font-heading font-bold leading-snug",
+                      isFeature ? "text-2xl sm:text-3xl" : "text-lg",
+                    )}
+                  >
+                    {p.title}
+                  </h3>
+                  <p
+                    className={cn(
+                      "mt-2 leading-relaxed opacity-95",
+                      isFeature ? "max-w-md text-base" : "text-sm",
+                    )}
+                  >
+                    {p.summary}
+                  </p>
+                </div>
+                <span className="mt-6 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider opacity-0 transition-opacity duration-300 group-hover:opacity-90">
+                  Explore
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
+                </span>
               </article>
             );
           })}
@@ -104,6 +173,7 @@ export function ProgramPillarsSection() {
     </section>
   );
 }
+
 
 export function WhereWeWorkPreview() {
   return (
