@@ -1,7 +1,21 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, ShieldCheck, Receipt, Users, GraduationCap, Stethoscope, Droplets, Handshake, Mail } from "lucide-react";
+import {
+  Heart,
+  ShieldCheck,
+  Receipt,
+  Users,
+  GraduationCap,
+  Stethoscope,
+  Droplets,
+  Handshake,
+  Mail,
+  ArrowRight,
+  FileText,
+  BarChart3,
+  Eye,
+} from "lucide-react";
 import { foundation } from "@/config/foundation";
 import { Link } from "react-router-dom";
 
