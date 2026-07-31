@@ -2,16 +2,16 @@ import { foundation } from "@/config/foundation";
 import { StatusAwareCTA } from "./StatusAwareCTA";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar, Globe, LayoutGrid } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HERO_IMG =
   "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=1800&q=85";
 
 const HERO_STATS = [
-  { value: "7", label: "Program areas" },
-  { value: "2", label: "Founding regions" },
-  { value: "2026", label: "Founded" },
+  { value: "7", label: "Program areas", description: "Integrated pillars spanning education, health, entrepreneurship, and innovation.", icon: LayoutGrid },
+  { value: "2", label: "Founding regions", description: "Rooted in the Pacific Northwest and the Horn of Africa.", icon: Globe },
+  { value: "2026", label: "Founded", description: "Launched as an independent nonprofit in 2026.", icon: Calendar },
 ];
 
 export function FoundationHero() {
