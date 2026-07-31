@@ -23,41 +23,83 @@ export default function About() {
       intro="AlikoHub Foundation exists to help communities turn their own resourcefulness into lasting opportunity. We work alongside local leaders, not around them."
       afterContent={<EcosystemArchitectureSection />}
     >
-      {/* Split hero: quick-fact ribbon + documentary photo */}
-      <section className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-stretch">
-        <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] sm:p-8">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
-              At a glance
-            </p>
-            <h2 className="mt-3 font-heading text-2xl font-bold text-foreground sm:text-3xl">
-              {foundation.mission}
+      {/* Split hero: editorial content + documentary photo with stat overlay */}
+      <motion.section
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] sm:p-8 lg:p-10"
+      >
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-stretch lg:gap-12">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex flex-col justify-center py-2"
+          >
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-[hsl(var(--amber))]" aria-hidden />
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[hsl(var(--amber))]">
+                At a glance
+              </p>
+            </div>
+
+            <h2 className="mt-5 font-heading text-3xl font-extrabold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]">
+              Turning local{" "}
+              <span className="text-[hsl(var(--trust-blue))]">resourcefulness</span>{" "}
+              into lasting opportunity.
             </h2>
-            <p className="mt-4 text-sm italic text-muted-foreground">&ldquo;{foundation.tagline}&rdquo;</p>
-          </div>
-          <dl className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {QUICK_FACTS.map((f) => (
-              <div key={f.label} className="rounded-lg border border-border bg-background px-3 py-2.5 text-center">
-                <dt className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{f.label}</dt>
-                <dd className="mt-0.5 font-heading text-sm font-extrabold text-[hsl(var(--trust-blue))]">{f.value}</dd>
-              </div>
-            ))}
-          </dl>
+
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+              {foundation.mission}
+            </p>
+            <p className="mt-4 text-sm italic text-muted-foreground/90">&ldquo;{foundation.tagline}&rdquo;</p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link
+                to="/programs"
+                className="inline-flex items-center gap-2 rounded-xl bg-[hsl(var(--trust-blue))] px-6 py-3 text-sm font-semibold text-white shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)]"
+              >
+                Explore our programs <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+              <Link
+                to="/governance"
+                className="group inline-flex items-center gap-2 rounded-xl border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-[hsl(var(--trust-blue))] hover:text-[hsl(var(--trust-blue))]"
+              >
+                Meet the board
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+              </Link>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="relative min-h-[340px] overflow-hidden rounded-2xl lg:min-h-[460px]"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?auto=format&fit=crop&w=1400&q=85"
+              alt="Community meeting with young African leaders around a table"
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--navy))]/90 via-[hsl(var(--navy))]/25 to-transparent" />
+
+            <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/20 bg-[hsl(var(--navy))]/65 p-4 backdrop-blur-md sm:inset-x-5 sm:bottom-5 sm:p-5">
+              <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+                {QUICK_FACTS.map((f) => (
+                  <div key={f.label}>
+                    <dt className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">{f.label}</dt>
+                    <dd className="mt-1 font-heading text-sm font-extrabold leading-tight text-white">{f.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </motion.div>
         </div>
-        <div className="relative overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card-hover)]">
-          <img
-            src="https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?auto=format&fit=crop&w=1400&q=85"
-            alt="Community meeting with young African leaders around a table"
-            className="h-full min-h-[280px] w-full object-cover"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--navy))]/80 via-transparent to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Community-designed</p>
-            <p className="mt-1 font-heading text-lg font-bold leading-tight">Listen first. Build with, never for.</p>
-          </div>
-        </div>
-      </section>
+      </motion.section>
+
 
       {/* Mission / Vision compact */}
       <section className="mt-10 grid gap-4 lg:grid-cols-2">
