@@ -58,19 +58,39 @@ export function FoundationHero() {
             </Button>
           </div>
 
-          {/* Compact stat ribbon */}
-          <dl className="mt-8 grid grid-cols-3 divide-x divide-border overflow-hidden rounded-xl border border-border bg-card/60 backdrop-blur">
-            {HERO_STATS.map((s) => (
-              <div key={s.label} className="px-4 py-3 text-center">
-                <dt className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                  {s.label}
-                </dt>
-                <dd className="mt-1 font-heading text-lg font-extrabold text-[hsl(var(--trust-blue))]">
-                  {s.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          {/* Floating stat cards */}
+          <div className="mt-8 flex flex-col gap-4 md:mt-10 md:flex-row md:items-start md:justify-start md:gap-0 md:[&>*:not(:first-child)]:-ml-5">
+            {HERO_STATS.map((s, i) => {
+              const Icon = s.icon;
+              const rotations = ["md:-rotate-3", "md:rotate-0", "md:rotate-3"];
+              const zIndexes = ["z-10", "z-20", "z-30"];
+              return (
+                <div
+                  key={s.label}
+                  className={[
+                    "relative flex flex-col gap-2 rounded-2xl border border-[hsl(var(--trust-blue)/0.15)] bg-card/90 bg-gradient-to-br from-[hsl(var(--trust-blue)/0.12)] to-[hsl(var(--amber)/0.10)] p-5 shadow-[var(--shadow-card-hover)] backdrop-blur md:w-48",
+                    rotations[i],
+                    zIndexes[i],
+                  ].join(" ")}
+                >
+                  <div className="flex items-start justify-between">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                      {s.label}
+                    </span>
+                    <div className="rounded-full bg-[hsl(var(--trust-blue))] p-1.5 text-white">
+                      <Icon className="h-4 w-4" aria-hidden />
+                    </div>
+                  </div>
+                  <span className="font-heading text-3xl font-extrabold text-[hsl(var(--trust-blue))]">
+                    {s.value}
+                  </span>
+                  <p className="text-xs leading-relaxed text-muted-foreground">
+                    {s.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
 
           <p className="mt-5 text-xs text-muted-foreground">
             Starting in {foundation.primaryLocations.join(" and ")}.
