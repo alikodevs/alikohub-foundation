@@ -49,8 +49,8 @@ const start = async () => {
     if (!process.env.JWT_SECRET) {
       throw new Error('JWT_SECRET is missing in .env');
     }
-    if (!process.env.DB_NAME || !process.env.DB_USER) {
-      throw new Error('DB_NAME or DB_USER missing in .env');
+    if (!process.env.DATABASE_URL && (!process.env.DB_NAME || !process.env.DB_USER)) {
+      throw new Error('DATABASE_URL or DB_NAME/DB_USER missing in .env');
     }
 
     await connectDB();

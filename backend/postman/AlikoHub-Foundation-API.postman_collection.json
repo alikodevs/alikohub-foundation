@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "alikohub-foundation-api-001",
     "name": "AlikoHub Foundation API",
-    "description": "Backend API for AlikoHub Foundation (Express + Sequelize + MySQL).\n\n## Quick start for frontend\n1. Set `baseUrl` (default `http://localhost:4000`)\n2. Run **Auth → Login** (saves `token` automatically)\n3. Admin requests use Bearer `{{token}}`\n\n## Notes\n- JSON bodies use **camelCase**\n- Admin routes require role `admin`\n- Media upload: form-data field name must be `file`\n- Uploaded files are public at `{{baseUrl}}/uploads/<filename>`\n\n## Local admin (dev)\n- email: `test@alikohub.com`\n- password: `secret12`",
+    "description": "Backend API for AlikoHub Foundation (Express + Sequelize + PostgreSQL on Neon).\n\n## Database\n- PostgreSQL (Neon cloud)\n- Configured via `DATABASE_URL` + `DB_SSL=true` in backend `.env`\n- Not MySQL anymore\n\n## Quick start for frontend\n1. Start backend: `cd backend && npm run dev`\n2. Set `baseUrl` (default `http://localhost:4000`)\n3. Run **Auth → Login** (saves `token` automatically)\n4. Admin requests use Bearer `{{token}}`\n\n## Notes\n- JSON bodies use **camelCase**\n- Admin routes require role `admin`\n- Media upload: form-data field name must be `file`\n- Uploaded files are public at `{{baseUrl}}/uploads/<filename>`\n\n## Admin (dev / Neon)\n- email: `test@alikohub.com`\n- password: `secret12`",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
