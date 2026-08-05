@@ -1,0 +1,958 @@
+{
+  "info": {
+    "_postman_id": "alikohub-foundation-api-001",
+    "name": "AlikoHub Foundation API",
+    "description": "Backend API for AlikoHub Foundation (Express + Sequelize + MySQL).\n\n## Quick start for frontend\n1. Set `baseUrl` (default `http://localhost:4000`)\n2. Run **Auth → Login** (saves `token` automatically)\n3. Admin requests use Bearer `{{token}}`\n\n## Notes\n- JSON bodies use **camelCase**\n- Admin routes require role `admin`\n- Media upload: form-data field name must be `file`\n- Uploaded files are public at `{{baseUrl}}/uploads/<filename>`\n\n## Local admin (dev)\n- email: `test@alikohub.com`\n- password: `secret12`",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:4000" },
+    { "key": "token", "value": "" },
+    { "key": "contactId", "value": "" },
+    { "key": "organizationId", "value": "" },
+    { "key": "dealId", "value": "" },
+    { "key": "taskId", "value": "" },
+    { "key": "donationId", "value": "" },
+    { "key": "inquiryId", "value": "" },
+    { "key": "newsletterId", "value": "" },
+    { "key": "heroId", "value": "" },
+    { "key": "teamId", "value": "" },
+    { "key": "serviceId", "value": "" },
+    { "key": "programId", "value": "" },
+    { "key": "mediaId", "value": "" },
+    { "key": "activityId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/health"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"password\": \"secret12\",\n  \"displayName\": \"New User\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/signup"
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "try {",
+                  "  const json = pm.response.json();",
+                  "  if (json.token) {",
+                  "    pm.collectionVariables.set('token', json.token);",
+                  "  }",
+                  "} catch (e) {}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@alikohub.com\",\n  \"password\": \"secret12\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login",
+            "description": "Saves `token` into collection variable automatically."
+          }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/auth/me"
+          }
+        },
+        {
+          "name": "Claim First Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/auth/claim-first-admin",
+            "description": "Works only if no admin exists yet. Otherwise returns 409."
+          }
+        },
+        {
+          "name": "Admin Check",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/auth/admin-check"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public Forms",
+      "item": [
+        {
+          "name": "Create Inquiry",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inquiryType\": \"volunteer\",\n  \"name\": \"Sara Example\",\n  \"email\": \"sara@example.com\",\n  \"organization\": \"Local Org\",\n  \"message\": \"I want to volunteer with the foundation programs.\",\n  \"sourcePage\": \"/contact\"\n}"
+            },
+            "url": "{{baseUrl}}/api/inquiries",
+            "description": "inquiryType: partnership | volunteer | media | general"
+          }
+        },
+        {
+          "name": "Newsletter Subscribe",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"fan@example.com\",\n  \"name\": \"News Fan\",\n  \"sourcePage\": \"/footer\"\n}"
+            },
+            "url": "{{baseUrl}}/api/newsletter/subscribe",
+            "description": "Duplicate email returns 409."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public CMS",
+      "item": [
+        {
+          "name": "List Active Hero",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/public/hero"
+          }
+        },
+        {
+          "name": "List Active Team",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/public/team"
+          }
+        },
+        {
+          "name": "List Active Services",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/public/services"
+          }
+        },
+        {
+          "name": "List Active Programs",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/public/programs"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Dashboard",
+      "item": [
+        {
+          "name": "Get Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/admin/dashboard"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Inquiries",
+      "item": [
+        {
+          "name": "List Inquiries",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/inquiries?status=",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "inquiries"],
+              "query": [
+                { "key": "status", "value": "", "description": "optional: new|in_review|responded|archived" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Inquiry",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in_review\",\n  \"adminNotes\": \"Follow up next week\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/inquiries/{{inquiryId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Newsletter",
+      "item": [
+        {
+          "name": "List Subscribers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/admin/newsletter"
+          }
+        },
+        {
+          "name": "Update Subscriber Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"unsubscribed\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/newsletter/{{newsletterId}}"
+          }
+        },
+        {
+          "name": "Delete Subscriber",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/admin/newsletter/{{newsletterId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CRM Contacts",
+      "item": [
+        {
+          "name": "List Contacts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/contacts"
+          }
+        },
+        {
+          "name": "Get Contact",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/contacts/{{contactId}}"
+          }
+        },
+        {
+          "name": "Create Contact",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('contactId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Amina Partner\",\n  \"email\": \"amina@ngo.org\",\n  \"phone\": \"+251900000000\",\n  \"organizationName\": \"NGO Example\",\n  \"contactType\": \"partner\",\n  \"lifecycleStage\": \"lead\",\n  \"tags\": [\"website\"],\n  \"source\": \"manual\",\n  \"notes\": \"Met at event\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/contacts"
+          }
+        },
+        {
+          "name": "Update Contact",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lifecycleStage\": \"engaged\",\n  \"notes\": \"Updated notes\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/contacts/{{contactId}}"
+          }
+        },
+        {
+          "name": "Delete Contact",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/contacts/{{contactId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CRM Organizations",
+      "item": [
+        {
+          "name": "List Organizations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/organizations"
+          }
+        },
+        {
+          "name": "Create Organization",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('organizationId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Example Foundation Partner\",\n  \"website\": \"https://example.org\",\n  \"orgType\": \"NGO\",\n  \"country\": \"Ethiopia\",\n  \"notes\": \"Strategic partner\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/organizations"
+          }
+        },
+        {
+          "name": "Update Organization",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"country\": \"Kenya\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/organizations/{{organizationId}}"
+          }
+        },
+        {
+          "name": "Delete Organization",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/organizations/{{organizationId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CRM Deals",
+      "item": [
+        {
+          "name": "List Deals",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/deals"
+          }
+        },
+        {
+          "name": "Create Deal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('dealId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Education Partnership\",\n  \"contactId\": \"{{contactId}}\",\n  \"organizationId\": \"{{organizationId}}\",\n  \"stage\": \"prospect\",\n  \"value\": 10000,\n  \"currency\": \"USD\",\n  \"notes\": \"Initial discussion\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/deals"
+          }
+        },
+        {
+          "name": "Update Deal",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stage\": \"engaged\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/deals/{{dealId}}"
+          }
+        },
+        {
+          "name": "Delete Deal",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/deals/{{dealId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CRM Tasks",
+      "item": [
+        {
+          "name": "List Tasks",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/tasks"
+          }
+        },
+        {
+          "name": "Create Task",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('taskId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Call Sara\",\n  \"details\": \"Discuss volunteer onboarding\",\n  \"contactId\": \"{{contactId}}\",\n  \"dealId\": \"{{dealId}}\",\n  \"dueDate\": \"2026-08-20\",\n  \"status\": \"open\",\n  \"priority\": \"medium\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/tasks"
+          }
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"done\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/tasks/{{taskId}}"
+          }
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/tasks/{{taskId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CRM Donations",
+      "item": [
+        {
+          "name": "List Donations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/donations"
+          }
+        },
+        {
+          "name": "Create Donation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('donationId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contactId\": \"{{contactId}}\",\n  \"amount\": 250,\n  \"currency\": \"USD\",\n  \"donatedAt\": \"2026-08-05\",\n  \"method\": \"bank\",\n  \"campaign\": \"General Fund\",\n  \"isRecurring\": false,\n  \"receiptSent\": false,\n  \"notes\": \"Thank you gift\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/donations"
+          }
+        },
+        {
+          "name": "Update Donation",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiptSent\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/donations/{{donationId}}"
+          }
+        },
+        {
+          "name": "Delete Donation",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/donations/{{donationId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CRM Activities",
+      "item": [
+        {
+          "name": "List Activities",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/activities?contactId={{contactId}}&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "activities"],
+              "query": [
+                { "key": "contactId", "value": "{{contactId}}" },
+                { "key": "dealId", "value": "", "disabled": true },
+                { "key": "limit", "value": "20" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Activity",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contactId\": \"{{contactId}}\",\n  \"dealId\": \"{{dealId}}\",\n  \"activityType\": \"call\",\n  \"subject\": \"Follow-up call\",\n  \"body\": \"Discussed next steps\",\n  \"occurredAt\": \"2026-08-05T10:00:00.000Z\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/activities"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Settings",
+      "item": [
+        {
+          "name": "Get Notification Settings",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/notification-settings"
+          }
+        },
+        {
+          "name": "Update Notification Settings",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notificationsEnabled\": true,\n  \"recipients\": [\"admin@alikohub.org\"],\n  \"notifyOnInquiry\": true,\n  \"notifyOnTask\": false,\n  \"notifyOnDonation\": true,\n  \"notifyOnNewsletter\": false,\n  \"digestFrequency\": \"instant\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/notification-settings"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CMS Hero",
+      "item": [
+        {
+          "name": "List Hero",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/hero"
+          }
+        },
+        {
+          "name": "Create Hero",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('heroId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Building opportunity together\",\n  \"subtitle\": \"AlikoHub Foundation\",\n  \"ctaPrimaryText\": \"Get Involved\",\n  \"ctaPrimaryLink\": \"/contact\",\n  \"ctaSecondaryText\": \"Our Work\",\n  \"ctaSecondaryLink\": \"/programs\",\n  \"backgroundImageUrl\": \"/uploads/example.png\",\n  \"isActive\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/hero"
+          }
+        },
+        {
+          "name": "Update Hero",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated hero title\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/hero/{{heroId}}"
+          }
+        },
+        {
+          "name": "Delete Hero",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/hero/{{heroId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CMS Team",
+      "item": [
+        {
+          "name": "List Team",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/team"
+          }
+        },
+        {
+          "name": "Create Team Member",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('teamId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"role\": \"Program Lead\",\n  \"bio\": \"Works on community programs\",\n  \"imageUrl\": \"/uploads/team.png\",\n  \"linkedinUrl\": \"https://linkedin.com\",\n  \"twitterUrl\": \"\",\n  \"displayOrder\": 1,\n  \"isActive\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/team"
+          }
+        },
+        {
+          "name": "Update Team Member",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"Director\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/team/{{teamId}}"
+          }
+        },
+        {
+          "name": "Delete Team Member",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/team/{{teamId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CMS Services",
+      "item": [
+        {
+          "name": "List Services",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/services"
+          }
+        },
+        {
+          "name": "Create Service",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('serviceId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Mentorship\",\n  \"description\": \"Youth mentorship support\",\n  \"imageUrl\": \"/uploads/service.png\",\n  \"link\": \"/services/mentorship\",\n  \"displayOrder\": 1,\n  \"isActive\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/services"
+          }
+        },
+        {
+          "name": "Update Service",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isActive\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/services/{{serviceId}}"
+          }
+        },
+        {
+          "name": "Delete Service",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/services/{{serviceId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CMS Programs",
+      "item": [
+        {
+          "name": "List Programs",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/programs"
+          }
+        },
+        {
+          "name": "Create Program",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('programId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Community Education\",\n  \"description\": \"Local learning initiatives\",\n  \"imageUrl\": \"/uploads/program.png\",\n  \"features\": [\"Workshops\", \"Mentors\", \"Resources\"],\n  \"link\": \"/programs/education\",\n  \"displayOrder\": 1,\n  \"isActive\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/programs"
+          }
+        },
+        {
+          "name": "Update Program",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayOrder\": 2\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/programs/{{programId}}"
+          }
+        },
+        {
+          "name": "Delete Program",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/programs/{{programId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Media",
+      "item": [
+        {
+          "name": "List Media",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/media"
+          }
+        },
+        {
+          "name": "Upload Media",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('mediaId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": [],
+                  "description": "Required. Field name must be exactly `file`."
+                },
+                {
+                  "key": "name",
+                  "value": "Hero background",
+                  "type": "text"
+                },
+                {
+                  "key": "altText",
+                  "value": "Community photo",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "{{baseUrl}}/api/admin/media",
+            "description": "Use form-data. Select an image for `file`. Response url is like `/uploads/<uuid>.png` → open at `{{baseUrl}}/uploads/...`"
+          }
+        },
+        {
+          "name": "Delete Media",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/media/{{mediaId}}"
+          }
+        }
+      ]
+    }
+  ]
+}
