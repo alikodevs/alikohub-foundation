@@ -32,6 +32,15 @@ app.use('/api/auth/signup', formLimiter);
 app.use('/api/inquiries', formLimiter);
 app.use('/api/newsletter', formLimiter);
 
+app.get('/', (req, res) => {
+  res.json({
+    ok: true,
+    service: 'alikohub-foundation-backend',
+    health: '/api/health',
+    hint: 'This is an API server. Try GET /api/health',
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, service: 'alikohub-foundation-backend' });
 });

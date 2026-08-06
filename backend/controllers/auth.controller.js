@@ -118,39 +118,9 @@ const me = async (req, res) => {
   }
 };
 
-// POST /api/auth/claim-first-admin
-// Only works when NO admin exists yet. Logged-in user becomes the first admin.
-const claimFirstAdmin = async (req, res) => {
-  try {
-    const existingAdmin = await UserRole.findOne({ where: { role: 'admin' } });
-    if (existingAdmin) {
-      return res.status(409).json({ message: 'An admin already exists' });
-    }
-
-    const alreadyAdmin = await UserRole.findOne({
-      where: { userId: req.user.id, role: 'admin' },
-    });
-    if (alreadyAdmin) {
-      const user = await getUserWithRelations(req.user.id);
-      return res.json({ message: 'You are already an admin', user });
-    }
-
-    await UserRole.create({
-      userId: req.user.id,
-      role: 'admin',
-    });
-
-    const user = await getUserWithRelations(req.user.id);
-    return res.json({ message: 'You are now the first admin', user });
-  } catch (err) {
-    console.error('Claim first admin error:', err.message);
-    return res.status(500).json({ message: 'Server error claiming admin' });
-  }
-};
-
 // GET /api/auth/admin-check  (simple test route for requireAdmin)
 const adminCheck = async (req, res) => {
   return res.json({ ok: true, message: 'Admin access confirmed', userId: req.user.id });
 };
 
-module.exports = { signup, login, me, claimFirstAdmin, adminCheck };
+module.exports = { signup, login, me, adminCheck };

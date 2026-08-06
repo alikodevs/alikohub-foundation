@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "alikohub-foundation-api-001",
     "name": "AlikoHub Foundation API",
-    "description": "Backend API for AlikoHub Foundation (Express + Sequelize + PostgreSQL on Neon).\n\n## Database\n- PostgreSQL (Neon cloud)\n- Configured via `DATABASE_URL` + `DB_SSL=true` in backend `.env`\n- Not MySQL anymore\n\n## Quick start for frontend\n1. Start backend: `cd backend && npm run dev`\n2. Set `baseUrl` (default `http://localhost:4000`)\n3. Run **Auth → Login** (saves `token` automatically)\n4. Admin requests use Bearer `{{token}}`\n\n## Notes\n- JSON bodies use **camelCase**\n- Admin routes require role `admin`\n- Media upload: form-data field name must be `file`\n- Uploaded files are public at `{{baseUrl}}/uploads/<filename>`\n\n## Admin (dev / Neon)\n- email: `test@alikohub.com`\n- password: `secret12`",
+    "description": "Backend API for AlikoHub Foundation (Express + Sequelize + PostgreSQL on Neon).\n\n## Database\n- PostgreSQL (Neon cloud)\n- Configured via `DATABASE_URL` + `DB_SSL=true` in backend `.env`\n\n## Quick start for frontend\n1. `cd backend && npm run db:seed:admin && npm run dev`\n2. Set `baseUrl` (default `http://localhost:4000`)\n3. Run **Auth → Login** (saves `token` automatically)\n4. Admin requests use Bearer `{{token}}`\n\n## Notes\n- JSON bodies use **camelCase**\n- Admin routes require role `admin`\n- Media upload: form-data field name must be `file`\n- Uploaded files are public at `{{baseUrl}}/uploads/<filename>`\n- Admin is seeded with `npm run db:seed:admin` (no claim-first-admin API)\n\n## Admin (seeded)\n- email: `admin@alikohub.com`\n- password: `Admin@12345`",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -74,10 +74,10 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"test@alikohub.com\",\n  \"password\": \"secret12\"\n}"
+              "raw": "{\n  \"email\": \"admin@alikohub.com\",\n  \"password\": \"Admin@12345\"\n}"
             },
             "url": "{{baseUrl}}/api/auth/login",
-            "description": "Saves `token` into collection variable automatically."
+            "description": "Saves `token` into collection variable automatically. Run `npm run db:seed:admin` first."
           }
         },
         {
@@ -88,17 +88,6 @@
               { "key": "Authorization", "value": "Bearer {{token}}" }
             ],
             "url": "{{baseUrl}}/api/auth/me"
-          }
-        },
-        {
-          "name": "Claim First Admin",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{token}}" }
-            ],
-            "url": "{{baseUrl}}/api/auth/claim-first-admin",
-            "description": "Works only if no admin exists yet. Otherwise returns 409."
           }
         },
         {
