@@ -3,6 +3,11 @@ const router = express.Router();
 const { protect, requireAdmin } = require('../middleware/auth');
 const { upload } = require('../middleware/upload');
 const admin = require('../controllers/admin.controller');
+const {
+  listSubscribers,
+  exportSubscribers,
+  updateStatus,
+} = require('../controllers/newsletter.controller');
 
 router.use(protect, requireAdmin);
 
@@ -11,9 +16,12 @@ router.get('/dashboard', admin.dashboard);
 router.get('/inquiries', admin.inquiries.list);
 router.patch('/inquiries/:id', admin.inquiries.update);
 
-router.get('/newsletter', admin.newsletter.list);
-router.patch('/newsletter/:id', admin.newsletter.update);
-router.delete('/newsletter/:id', admin.newsletter.remove);
+router.get('/subscribers', listSubscribers);
+router.get('/subscribers/export', exportSubscribers);
+router.patch('/subscribers/:id/status', updateStatus);
+
+router.get('/newsletter', listSubscribers);
+router.patch('/newsletter/:id', (req, res) => updateStatus(req, res));
 
 router.get('/contacts', admin.contacts.list);
 router.get('/contacts/:id', admin.contacts.getOne);

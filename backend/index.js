@@ -10,9 +10,19 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173,http://localhost:8080')
+  .split(',')
+  .map((o) => o.trim());
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   })
 );
@@ -31,6 +41,7 @@ app.use('/api/auth/login', formLimiter);
 app.use('/api/auth/signup', formLimiter);
 app.use('/api/inquiries', formLimiter);
 app.use('/api/newsletter', formLimiter);
+app.use('/api/subscribers', formLimiter);
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, service: 'alikohub-foundation-backend' });
@@ -39,6 +50,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/inquiries', require('./routes/inquiry'));
 app.use('/api/newsletter', require('./routes/newsletter'));
+app.use('/api/subscribers', require('./routes/subscribers'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/public', require('./routes/publicCms'));
 

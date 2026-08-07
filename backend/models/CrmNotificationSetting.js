@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true,
-        unique: true,
       },
       notificationsEnabled: {
         type: DataTypes.BOOLEAN,
@@ -69,6 +68,12 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'crm_notification_settings',
       timestamps: true,
       underscored: true,
+      indexes: [
+        {
+          unique: true,
+          fields: ['singleton'],
+        },
+      ],
     }
   );
 
