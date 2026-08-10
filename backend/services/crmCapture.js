@@ -1,6 +1,6 @@
 const db = require('../models');
 
-const { CrmContact, FoundationInquiry, CrmActivity, NewsletterSubscriber } = db;
+const { CrmContact, FoundationInquiry, CrmActivity, Subscriber } = db;
 
 function mapInquiryTypeToContactType(inquiryType) {
   switch (inquiryType) {
@@ -93,26 +93,38 @@ async function captureInquiry(data) {
 }
 
 /**
- * Subscribe email to newsletter + find/create CRM contact + activity.
- * Throws err.name === 'SequelizeUniqueConstraintError' if already subscribed.
+ * Subscribe email to newsletter + find/create CRM contact.
  */
 async function captureSubscriber(data) {
-  const { email, name = null, sourcePage = null } = data;
+  const { email, source = 'website' } = data;
 
   return db.sequelize.transaction(async (t) => {
     const normalizedEmail = String(email).trim().toLowerCase();
-    const displayName = name || normalizedEmail.split('@')[0];
+    const displayName = normalizedEmail.split('@')[0];
 
-    // 1) Create subscriber (unique email)
-    const subscriber = await NewsletterSubscriber.create(
-      {
-        email: normalizedEmail,
-        name: name || null,
-        sourcePage,
-        status: 'subscribed',
-      },
-      { transaction: t }
-    );
+    // 1) Find or create/reactivate subscriber
+    let subscriber = await Subscriber.findOne({
+      where: { email: normalizedEmail },
+      transaction: t,
+    });
+
+    if (subscriber) {
+      if (subscriber.status === 'unsubscribed') {
+        await subscriber.update(
+          { status: 'active', source: source || subscriber.source },
+          { transaction: t }
+        );
+      }
+    } else {
+      subscriber = await Subscriber.create(
+        {
+          email: normalizedEmail,
+          status: 'active',
+          source: source || 'website',
+        },
+        { transaction: t }
+      );
+    }
 
     // 2) Find or create CRM contact
     let contact = await CrmContact.findOne({
@@ -127,33 +139,12 @@ async function captureSubscriber(data) {
           email: normalizedEmail,
           contactType: 'other',
           lifecycleStage: 'lead',
-          source: sourcePage || 'newsletter',
+          source: source || 'newsletter',
           notes: 'newsletter',
         },
         { transaction: t }
       );
-    } else {
-      const note = contact.notes || '';
-      if (!note.includes('newsletter')) {
-        await contact.update(
-          {
-            notes: note ? `${note}; newsletter` : 'newsletter',
-          },
-          { transaction: t }
-        );
-      }
     }
-
-    // 3) Timeline activity
-    await CrmActivity.create(
-      {
-        contactId: contact.id,
-        activityType: 'form_submission',
-        subject: 'Newsletter subscription',
-        body: sourcePage || 'newsletter',
-      },
-      { transaction: t }
-    );
 
     return { subscriber, contact };
   });
