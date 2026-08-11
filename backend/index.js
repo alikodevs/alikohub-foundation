@@ -70,7 +70,11 @@ const start = async () => {
     if (!process.env.JWT_SECRET) {
       throw new Error('JWT_SECRET is missing in .env');
     }
-    if (!process.env.DATABASE_URL && (!process.env.DB_NAME || !process.env.DB_USER)) {
+    if (
+      !process.env.DATABASE_URL &&
+      !(process.env.DB_NAME && process.env.DB_USER) &&
+      !(process.env.DB_DIALECT === 'mysql' && process.env.DB_NAME)
+    ) {
       throw new Error('DATABASE_URL or DB_NAME/DB_USER missing in .env');
     }
 
