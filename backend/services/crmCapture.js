@@ -108,12 +108,16 @@ async function captureSubscriber(data) {
       transaction: t,
     });
 
+    let isNew = false;
+    let reactivated = false;
+
     if (subscriber) {
       if (subscriber.status === 'unsubscribed') {
         await subscriber.update(
           { status: 'active', source: source || subscriber.source },
           { transaction: t }
         );
+        reactivated = true;
       }
     } else {
       subscriber = await Subscriber.create(
@@ -124,6 +128,7 @@ async function captureSubscriber(data) {
         },
         { transaction: t }
       );
+      isNew = true;
     }
 
     // 2) Find or create CRM contact
@@ -146,7 +151,7 @@ async function captureSubscriber(data) {
       );
     }
 
-    return { subscriber, contact };
+    return { subscriber, contact, isNew, reactivated };
   });
 }
 

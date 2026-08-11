@@ -8,7 +8,7 @@ const { Subscriber } = db;
 // POST /api/subscribers
 const subscribe = async (req, res) => {
   try {
-    const { email, source } = req.body;
+    const { email, source, name } = req.body;
 
     if (!email || !String(email).trim()) {
       return res.status(400).json({ message: 'email is required' });
@@ -21,16 +21,19 @@ const subscribe = async (req, res) => {
     }
 
     const sourceValue = source || req.body.sourcePage || 'website';
+    const nameValue = name ? String(name).trim() : null;
 
-    const { subscriber } = await captureSubscriber({
+    const { subscriber, isNew, reactivated } = await captureSubscriber({
       email: emailValue,
       source: sourceValue,
     });
 
-    // Send welcome email asynchronously without blocking the response
-    sendWelcomeEmail(emailValue).catch((err) => {
-      console.error('[Subscribe] Non-fatal welcome email error:', err.message);
-    });
+    // Thank-you email only for new or reactivated subscribers
+    if (isNew || reactivated) {
+      sendWelcomeEmail(emailValue, { name: nameValue }).catch((err) => {
+        console.error('[Subscribe] Non-fatal thank-you email error:', err.message);
+      });
+    }
 
     return res.status(200).json({
       message: 'Subscribed successfully',
@@ -197,7 +200,10 @@ const updateStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    if (!['active', 'unsubscribed'].includes(status)) {
+    let nextStatus = status;
+    if (nextStatus === 'subscribed') nextStatus = 'active';
+
+    if (!['active', 'unsubscribed'].includes(nextStatus)) {
       return res.status(400).json({ message: 'Invalid status' });
     }
 
@@ -206,7 +212,7 @@ const updateStatus = async (req, res) => {
       return res.status(404).json({ message: 'Subscriber not found' });
     }
 
-    await subscriber.update({ status });
+    await subscriber.update({ status: nextStatus });
 
     return res.json({ message: 'Status updated successfully', data: subscriber });
   } catch (err) {
