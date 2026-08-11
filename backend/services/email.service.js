@@ -3,7 +3,7 @@ const path = require('path');
 const transporter = require('../config/mailer');
 
 /**
- * Send welcome email to new/reactivated subscriber.
+ * Send thank-you / welcome email to a newsletter subscriber.
  * @param {string} email
  * @param {object} [options]
  * @param {string} [options.name]
@@ -13,8 +13,8 @@ async function sendWelcomeEmail(email, options = {}) {
     const templatePath = path.join(__dirname, '../templates/welcome-email.html');
     let htmlContent = '';
 
-    const baseUrl = process.env.APP_URL || 'http://localhost:8080';
-    const websiteUrl = baseUrl.replace(/\/$/, '');
+    const baseUrl = process.env.APP_URL || process.env.CORS_ORIGIN || 'http://localhost:8080';
+    const websiteUrl = String(baseUrl).split(',')[0].trim().replace(/\/$/, '');
     const unsubscribeUrl = `${websiteUrl}/unsubscribe?email=${encodeURIComponent(email)}`;
     const currentYear = new Date().getFullYear().toString();
     const recipientName = options.name ? String(options.name).trim() : 'Friend';
@@ -28,28 +28,49 @@ async function sendWelcomeEmail(email, options = {}) {
         .replace(/{{year}}/g, currentYear);
     } else {
       htmlContent = `
-        <h2>Thank You for Joining Us</h2>
-        <p>We’re excited to welcome you to the AlikoHub Foundation community.</p>
-        <p>By subscribing, you’ll stay connected with our work, programs, and the impact we’re creating through opportunities that empower young people and strengthen communities.</p>
-        <p>Together, we can continue building a future driven by knowledge, innovation, and positive change.</p>
-        <p><a href="${websiteUrl}">Explore Our Impact</a></p>
+        <h2>Thank you for subscribing</h2>
+        <p>Hi ${recipientName},</p>
+        <p>Thank you for subscribing to the AlikoHub Foundation newsletter.</p>
+        <p>We will share updates about our programs, stories, and ways to get involved.</p>
+        <p><a href="${websiteUrl}">Visit our website</a></p>
         <p>With appreciation,<br>The AlikoHub Foundation Team</p>
       `;
     }
 
-    const fromAddress = process.env.EMAIL_FROM || 'AlikoHub Foundation <noreply@alikohub.org>';
+    const textContent = [
+      `Hi ${recipientName},`,
+      '',
+      'Thank you for subscribing to the AlikoHub Foundation newsletter.',
+      'We are glad to have you with us.',
+      '',
+      'You will receive updates about our programs, stories, and ways to get involved.',
+      '',
+      `Visit us: ${websiteUrl}`,
+      `Unsubscribe: ${unsubscribeUrl}`,
+      '',
+      'With appreciation,',
+      'The AlikoHub Foundation Team',
+    ].join('\n');
+
+    const fromAddress =
+      process.env.EMAIL_FROM ||
+      process.env.MAIL_FROM ||
+      'AlikoHub Foundation <noreply@alikohub.org>';
 
     const info = await transporter.sendMail({
       from: fromAddress,
       to: email,
-      subject: 'Welcome to the AlikoHub Foundation Community',
+      subject: 'Thank you for subscribing to AlikoHub Foundation',
+      text: textContent,
       html: htmlContent,
     });
 
-    console.log(`[EmailService] Welcome email dispatched to ${email} (MessageId: ${info.messageId || 'ok'})`);
+    console.log(
+      `[EmailService] Thank-you email sent to ${email} (MessageId: ${info.messageId || 'ok'})`
+    );
     return true;
   } catch (err) {
-    console.error(`[EmailService] Failed to send welcome email to ${email}:`, err.message);
+    console.error(`[EmailService] Failed to send thank-you email to ${email}:`, err.message);
     return false;
   }
 }
