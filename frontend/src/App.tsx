@@ -13,10 +13,7 @@ import NotFound from "./pages/NotFound";
 const About = lazy(() => import("./pages/About"));
 const Programs = lazy(() => import("./pages/Programs"));
 const Partnership = lazy(() => import("./pages/Partnership"));
-const Login = lazy(() => import("./pages/Login"));
-const Signup = lazy(() => import("./pages/Signup"));
-const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
-const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 
 // Foundation pages
 const Impact = lazy(() => import("./pages/Impact"));
@@ -45,15 +42,12 @@ const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 
 // Admin pages
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
-const AdminHero = lazy(() => import("./pages/admin/AdminHero"));
 const AdminTeam = lazy(() => import("./pages/admin/AdminTeam"));
 const AdminServices = lazy(() => import("./pages/admin/AdminServices"));
 const AdminPrograms = lazy(() => import("./pages/admin/AdminPrograms"));
 const AdminMedia = lazy(() => import("./pages/admin/AdminMedia"));
 const AdminInquiries = lazy(() => import("./pages/admin/AdminInquiries"));
-const AdminContacts = lazy(() => import("./pages/admin/AdminContacts"));
 const AdminPipeline = lazy(() => import("./pages/admin/AdminPipeline"));
-const AdminTasks = lazy(() => import("./pages/admin/AdminTasks"));
 const AdminDonations = lazy(() => import("./pages/admin/AdminDonations"));
 const AdminAudience = lazy(() => import("./pages/admin/AdminAudience"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
@@ -74,10 +68,7 @@ const App = () => (
                 <Route path="/about" element={<About />} />
                 <Route path="/programs" element={<Programs />} />
                 <Route path="/partnership" element={<Partnership />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/admin-portal/login" element={<AdminLogin />} />
 
                 {/* Foundation pages */}
                 <Route path="/impact" element={<Impact />} />
@@ -108,15 +99,12 @@ const App = () => (
                 
                 {/* Admin routes (guarded: children never mount for non-admins) */}
                 <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
-                <Route path="/admin/hero" element={<RequireAdmin><AdminHero /></RequireAdmin>} />
                 <Route path="/admin/team" element={<RequireAdmin><AdminTeam /></RequireAdmin>} />
                 <Route path="/admin/services" element={<RequireAdmin><AdminServices /></RequireAdmin>} />
                 <Route path="/admin/programs" element={<RequireAdmin><AdminPrograms /></RequireAdmin>} />
                 <Route path="/admin/media" element={<RequireAdmin><AdminMedia /></RequireAdmin>} />
                 <Route path="/admin/inquiries" element={<RequireAdmin><AdminInquiries /></RequireAdmin>} />
-                <Route path="/admin/contacts" element={<RequireAdmin><AdminContacts /></RequireAdmin>} />
                 <Route path="/admin/pipeline" element={<RequireAdmin><AdminPipeline /></RequireAdmin>} />
-                <Route path="/admin/tasks" element={<RequireAdmin><AdminTasks /></RequireAdmin>} />
                 <Route path="/admin/donations" element={<RequireAdmin><AdminDonations /></RequireAdmin>} />
                 <Route path="/admin/audience" element={<RequireAdmin><AdminAudience /></RequireAdmin>} />
                 <Route path="/admin/settings" element={<RequireAdmin><AdminSettings /></RequireAdmin>} />

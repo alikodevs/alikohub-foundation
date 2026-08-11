@@ -5,6 +5,9 @@ import {
   DeliveryPathwaysSection,
   ProgramDesignPrinciplesSection,
 } from "@/components/foundation/ProgramSections";
+import { usePublicPrograms } from "@/hooks/useCms";
+import { getFullMediaUrl } from "@/lib/utils";
+
 import serviceAcademy from "@/assets/service-academy.jpg";
 import serviceConsultancy from "@/assets/service-consultancy.png";
 import serviceContech from "@/assets/service-contech.png";
@@ -29,7 +32,7 @@ type Pillar = {
 };
 
 // Vibrant, foundation-aligned palettes (blue / amber / sage / terracotta / plum / sky)
-const pillars: Pillar[] = [
+const defaultPillars: Pillar[] = [
   {
     icon: GraduationCap,
     title: "Aliko Academy",
@@ -176,10 +179,44 @@ const pillars: Pillar[] = [
 ];
 
 export default function Programs() {
+  const { data: publicPrograms } = usePublicPrograms();
+
+  const pillars: Pillar[] =
+    publicPrograms && publicPrograms.length > 0
+      ? publicPrograms.map((item: Record<string, unknown>, idx: number) => {
+          const defaultFallback = defaultPillars[idx % defaultPillars.length];
+          const rawImg =
+            (item.imageUrl as string) ||
+            (item.image_url as string) ||
+            (item.image as string);
+
+          let featureList: string[] = [];
+          if (Array.isArray(item.features)) {
+            featureList = item.features as string[];
+          } else if (typeof item.features === "string") {
+            try {
+              featureList = JSON.parse(item.features);
+            } catch {
+              featureList = [];
+            }
+          }
+
+          return {
+            icon: defaultFallback.icon,
+            title: (item.title as string) || defaultFallback.title,
+            description: (item.description as string) || defaultFallback.description,
+            bullets: featureList && featureList.length > 0 ? featureList : defaultFallback.bullets,
+            image: rawImg ? getFullMediaUrl(rawImg) : defaultFallback.image,
+            link: (item.link as string) || defaultFallback.link,
+            theme: defaultFallback.theme,
+          };
+        })
+      : defaultPillars;
+
   return (
     <PageShell
       eyebrow="Our work"
-      title="Seven program areas. One coherent mission."
+      title={`${pillars.length} program areas. One coherent mission.`}
       intro="Integrated pathways across education, health, technology, WASH, and entrepreneurship, delivered through community-designed programs based in Seattle, Washington and Ethiopia."
       afterContent={
         <>
@@ -192,7 +229,7 @@ export default function Programs() {
       {/* Compact overview strip */}
       <section className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
-          { v: "7", l: "Program pillars", c: "text-[hsl(var(--trust-blue))]" },
+          { v: `${pillars.length}`, l: "Program pillars", c: "text-[hsl(var(--trust-blue))]" },
           { v: "3", l: "Delivery pathways", c: "text-[hsl(var(--amber))]" },
           { v: "8", l: "Implementation steps", c: "text-[hsl(var(--terracotta))]" },
           { v: "5", l: "Design principles", c: "text-[hsl(var(--sage))]" },
@@ -221,6 +258,12 @@ export default function Programs() {
                       alt={p.title}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
+                      onError={(e) => {
+                        const raw = p.image;
+                        if (raw && e.currentTarget.src !== window.location.origin + raw) {
+                          e.currentTarget.src = raw;
+                        }
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                   </>
@@ -259,5 +302,3 @@ export default function Programs() {
     </PageShell>
   );
 }
-
-

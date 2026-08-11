@@ -1,34 +1,13 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
-import { authService } from "@/services/auth.service";
-
 export function RequireAdmin({ children }: { children: ReactNode }) {
-  const { user, isLoading, isAdmin, refreshRole } = useAuth();
+  const { user, isLoading, isAdmin } = useAuth();
   const location = useLocation();
-  const [claiming, setClaiming] = useState(false);
 
-  useEffect(() => {
-    if (isLoading || !user || isAdmin) return;
-    let cancelled = false;
-    setClaiming(true);
-    (async () => {
-      try {
-        await authService.claimFirstAdmin();
-        await refreshRole();
-      } catch {
-        // Ignore claim errors if admin already exists
-      }
-      if (!cancelled) setClaiming(false);
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [isLoading, user, isAdmin, refreshRole]);
-
-  if (isLoading || claiming) {
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -37,7 +16,7 @@ export function RequireAdmin({ children }: { children: ReactNode }) {
   }
 
   if (!user) {
-    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+    return <Navigate to="/admin-portal/login" replace state={{ from: location.pathname }} />;
   }
 
   if (!isAdmin) {
@@ -53,4 +32,5 @@ export function RequireAdmin({ children }: { children: ReactNode }) {
 
   return <>{children}</>;
 }
+
 

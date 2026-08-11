@@ -22,8 +22,8 @@ api.interceptors.response.use(
       localStorage.removeItem("auth_token");
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      if (window.location.pathname !== "/login" && window.location.pathname !== "/auth") {
-        window.location.href = "/login";
+      if (window.location.pathname !== "/admin-portal/login" && window.location.pathname !== "/auth") {
+        window.location.href = "/admin-portal/login";
       }
     }
     return Promise.reject(error);

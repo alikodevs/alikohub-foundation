@@ -23,34 +23,34 @@ export const foundation = {
     "AlikoHub Foundation operates as a mission-driven nonprofit committed to transparent governance, equitable programs, and measurable community impact.",
 } as const;
 
-import boniPhoto from "@/assets/team/boni-aliko.jpg";
-import bonsaPhoto from "@/assets/team/bonsa-aliko.jpg";
-import abdiPhoto from "@/assets/team/abdi-aliko.jpg";
-import biniyamPhoto from "@/assets/team/biniyam-birassa.jpg";
-import lensaPhoto from "@/assets/team/lensa-aliko.jpg";
-import baatiiPhoto from "@/assets/team/baatii-aliko.jpg";
-import hannaPhoto from "@/assets/team/hanna-tesfaye.jpg";
-import eyouelPhoto from "@/assets/team/eyouel-berhe.jpg";
+import boniPhoto from "@/assets/team/boni-aliko.png";
+import birassaPhoto from "@/assets/team/birassa-aliko.png";
+import abdiPhoto from "@/assets/team/abdi-birassa.png";
+import biniyamPhoto from "@/assets/team/biniyam-birassa.png";
+import natnaelPhoto from "@/assets/team/natnael-tariku.png";
+import bonsaPhoto from "@/assets/team/bonsa-birassa.jpg";
+import lensaPhoto from "@/assets/team/lensa-aliko.png";
+import baatiPhoto from "@/assets/team/baati-aliko.png";
 
 // Board of Directors.
 export const board = [
   {
-    name: "Boni Aliko",
+    name: "Boni Aliko, PMP",
     role: "Chairman and Director",
     bio: "Founder of the AlikoHub ecosystem, leading strategy, partnerships, and program design across education, health, and workforce development.",
     photo: boniPhoto,
   },
   {
-    name: "Eyouel Berhe, MBA",
-    role: "Treasurer; Board Member",
-    bio: "Oversees financial stewardship, reserves policy, and donor accountability, ensuring every dollar advances the Foundation's mission.",
-    photo: eyouelPhoto,
+    name: "Birassa Aliko",
+    role: "Board Member",
+    bio: "Strategic oversight, leadership guidance, and governance alignment for Foundation initiatives.",
+    photo: birassaPhoto,
   },
   {
-    name: "Hanna Tesfaye",
-    role: "Secretary",
-    bio: "Leads governance, board coordination, and safeguarding oversight, keeping the Foundation accountable to its communities and partners.",
-    photo: hannaPhoto,
+    name: "Natnael Tariku",
+    role: "Board Member & Technical Director",
+    bio: "Oversees technology architecture, program delivery safeguards, and operations monitoring.",
+    photo: natnaelPhoto,
   },
 ] as const;
 
@@ -58,46 +58,52 @@ export const board = [
 // Leadership team.
 export const leadership = [
   {
-    name: "Boni Aliko",
+    name: "Boni Aliko, PMP",
     role: "Founder & Chief Executive Officer",
-    bio: "Sets the Foundation's strategic direction, builds global partnerships, and leads program design across the seven priority areas.",
+    bio: "Sets the Foundation's strategic direction, builds global partnerships, and leads program design across priority areas.",
     photo: boniPhoto,
   },
   {
-    name: "Bonsa Aliko",
-    role: "Chief Operating Officer",
-    bio: "Runs day-to-day operations, finance, and hub delivery, translating strategy into accountable execution on the ground.",
-    photo: bonsaPhoto,
+    name: "Birassa Aliko",
+    role: "Chairman & Director",
+    bio: "Provides strategic guidance, governance, and institutional relationship direction.",
+    photo: birassaPhoto,
   },
   {
-    name: "Abdi Aliko",
+    name: "Abdi Birassa",
     role: "Chief Technology Officer",
-    bio: "Leads technology, digital inclusion infrastructure, and the data systems that power monitoring, learning, and reporting.",
+    bio: "Leads technology, digital inclusion infrastructure, and data systems powering monitoring and reporting.",
     photo: abdiPhoto,
   },
   {
     name: "Biniyam Birassa",
     role: "Program Director",
-    bio: "Oversees program quality across education, workforce, and enterprise tracks, from curriculum design to outcome measurement.",
+    bio: "Oversees program quality across education, workforce, and enterprise tracks.",
     photo: biniyamPhoto,
+  },
+  {
+    name: "Natnael Tariku",
+    role: "Technical Director",
+    bio: "Directs technical implementation, architecture, and innovation delivery.",
+    photo: natnaelPhoto,
+  },
+  {
+    name: "Bonsa Birassa",
+    role: "Chief Operating Officer",
+    bio: "Runs day-to-day operations, finance, and hub delivery, translating strategy into accountable execution.",
+    photo: bonsaPhoto,
   },
   {
     name: "Lensa Aliko",
     role: "Director of Health Programs",
-    bio: "Directs public and digital health work, including health workforce pipelines, mobile health, and WASH-linked initiatives.",
+    bio: "Directs public and digital health work, health workforce pipelines, and WASH-linked initiatives.",
     photo: lensaPhoto,
   },
   {
-    name: "Baatii Aliko",
-    role: "Director of Strategic Partnership & Development",
-    bio: "Builds institutional partnerships, funding relationships, and the collaborations that extend program reach.",
-    photo: baatiiPhoto,
-  },
-  {
-    name: "Hanna Tesfaye",
-    role: "Marketing Manager & Executive Assistant",
-    bio: "Leads communications, brand stewardship, and executive coordination across the Foundation's teams and partners.",
-    photo: hannaPhoto,
+    name: "Baati Aliko",
+    role: "Director of Strategic Partnerships",
+    bio: "Builds institutional partnerships, funding relationships, and collaborations that extend program reach.",
+    photo: baatiPhoto,
   },
 ] as const;
 

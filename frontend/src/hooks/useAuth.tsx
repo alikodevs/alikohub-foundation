@@ -9,7 +9,6 @@ interface AuthContextType {
   isLoading: boolean;
   isAdmin: boolean;
   refreshRole: () => Promise<void>;
-  signUp: (email: string, password: string, displayName?: string) => Promise<{ error: Error | null }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
 }
@@ -52,22 +51,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [fetchMe]);
 
-  const signUp = async (email: string, password: string, displayName?: string) => {
-    try {
-      const data = await authService.signup({ email, password, displayName });
-      localStorage.setItem("auth_token", data.token);
-      localStorage.setItem("token", data.token);
-      setSession({ token: data.token });
-      setUser(data.user);
-      const admin = data.user?.roles?.some((r: { role: string }) => r.role === "admin") ?? false;
-      setIsAdmin(admin);
-      return { error: null };
-    } catch (err: unknown) {
-      const errorMsg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || "Sign up failed";
-      return { error: new Error(errorMsg) };
-    }
-  };
-
   const signIn = async (email: string, password: string) => {
     try {
       const data = await authService.login({ email, password });
@@ -100,7 +83,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isLoading,
         isAdmin,
         refreshRole,
-        signUp,
         signIn,
         signOut,
       }}

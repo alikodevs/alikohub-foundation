@@ -11,9 +11,10 @@ import {
   FileCheck,
   Scale,
 } from "lucide-react";
-import { board, leadership } from "@/config/foundation";
-import { LeadershipCarousel } from "@/components/foundation/LeadershipCarousel";
-
+import { board, leadership as defaultLeadership } from "@/config/foundation";
+import { LeadershipCarousel, Leader } from "@/components/foundation/LeadershipCarousel";
+import { usePublicTeam } from "@/hooks/useCms";
+import { getFullMediaUrl } from "@/lib/utils";
 
 const levels = [
   { icon: Crown, title: "Board of Directors", role: "Strategic Oversight", description: "Sets vision and strategy, approves policy, oversees the President, and safeguards mission alignment." },
@@ -32,6 +33,27 @@ const safeguards = [
 ];
 
 export default function Governance() {
+  const { data: publicTeam } = usePublicTeam();
+
+  const leadershipPeople: Leader[] =
+    publicTeam && publicTeam.length > 0
+      ? publicTeam.map((item: Record<string, unknown>, index: number) => {
+          const defaultFallback = defaultLeadership[index % defaultLeadership.length];
+          const rawImg =
+            (item.imageUrl as string) ||
+            (item.image_url as string) ||
+            (item.image as string) ||
+            (item.photo as string);
+
+          return {
+            name: (item.name as string) || defaultFallback.name,
+            role: (item.role as string) || defaultFallback.role,
+            bio: (item.bio as string) || defaultFallback.bio,
+            photo: rawImg ? getFullMediaUrl(rawImg) : defaultFallback.photo,
+          };
+        })
+      : (defaultLeadership as readonly Leader[]);
+
   return (
     <PageShell
       eyebrow="Governance"
@@ -42,7 +64,7 @@ export default function Governance() {
       <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
           { k: "Directors", v: `${board.length} on Board` },
-          { k: "Leadership", v: `${leadership.length} Executives` },
+          { k: "Leadership", v: `${leadershipPeople.length} Executives` },
           { k: "Structure", v: `${levels.length} Layers` },
           { k: "Safeguards", v: "Board-approved" },
         ].map((s) => (
@@ -58,10 +80,8 @@ export default function Governance() {
 
       {/* Leadership team */}
       <div className="mt-16">
-        <LeadershipCarousel eyebrow="Our people" title="Leadership Team" people={leadership} />
+        <LeadershipCarousel eyebrow="Our people" title="Leadership Team" people={leadershipPeople} />
       </div>
-
-
 
       {/* Operational structure */}
       <section className="mt-16" aria-labelledby="structure">

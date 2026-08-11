@@ -1,7 +1,10 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
 import { EcosystemArchitectureSection } from "@/components/foundation/ProgramSections";
-import { foundation, approach } from "@/config/foundation";
+import { foundation, approach, leadership as defaultLeadership } from "@/config/foundation";
+import { LeadershipCarousel, Leader } from "@/components/foundation/LeadershipCarousel";
+import { usePublicTeam } from "@/hooks/useCms";
+import { getFullMediaUrl } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Compass, Wrench, Rocket, LineChart, Move, MapPin, Users } from "lucide-react";
@@ -12,187 +15,185 @@ const QUICK_FACTS = [
   { label: "Founded", value: "2026" },
   { label: "HQ", value: "Seattle, WA" },
   { label: "Priority region", value: "Ethiopia" },
-  { label: "Program areas", value: "7" },
+  { label: "Focus areas", value: "7 core pillars" },
 ];
 
 export default function About() {
+  const { data: publicTeam } = usePublicTeam();
+
+  const leadershipPeople: Leader[] =
+    publicTeam && publicTeam.length > 0
+      ? publicTeam.map((item: Record<string, unknown>, index: number) => {
+          const defaultFallback = defaultLeadership[index % defaultLeadership.length];
+          const rawImg =
+            (item.imageUrl as string) ||
+            (item.image_url as string) ||
+            (item.image as string) ||
+            (item.photo as string);
+
+          return {
+            name: (item.name as string) || defaultFallback.name,
+            role: (item.role as string) || defaultFallback.role,
+            bio: (item.bio as string) || defaultFallback.bio,
+            photo: rawImg ? getFullMediaUrl(rawImg) : defaultFallback.photo,
+          };
+        })
+      : (defaultLeadership as readonly Leader[]);
+
   return (
     <PageShell
-      eyebrow="About"
-      title="A foundation built on listening."
-      intro="AlikoHub Foundation exists to help communities turn their own resourcefulness into lasting opportunity. We work alongside local leaders, not around them."
-      afterContent={<EcosystemArchitectureSection />}
+      eyebrow="About AlikoHub Foundation"
+      title="Rooted locally. Accountable globally."
+      intro="AlikoHub Foundation is a mission-driven nonprofit committed to expanding equitable access to education, workforce development, technology, public health, WASH, entrepreneurship, and community resilience."
     >
-      {/* Split hero: editorial content + documentary photo with stat overlay */}
-      <motion.section
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] sm:p-8 lg:p-10"
-      >
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-stretch lg:gap-12">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex flex-col justify-center py-2"
-          >
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-[hsl(var(--amber))]" aria-hidden />
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[hsl(var(--amber))]">
-                At a glance
-              </p>
-            </div>
+      {/* Quick-fact bar */}
+      <div className="mb-12 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
+        {QUICK_FACTS.map((fact) => (
+          <div key={fact.label} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{fact.label}</p>
+            <p className="mt-1 font-heading text-sm font-bold text-foreground sm:text-base">{fact.value}</p>
+          </div>
+        ))}
+      </div>
 
-            <h2 className="mt-5 font-heading text-3xl font-extrabold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]">
-              Turning local{" "}
-              <span className="text-[hsl(var(--trust-blue))]">resourcefulness</span>{" "}
-              into lasting opportunity.
+      {/* Identity & separation notice */}
+      <section className="rounded-2xl border border-[hsl(var(--trust-blue))]/25 bg-[hsl(var(--warm-surface))] p-6 sm:p-8">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="max-w-2xl">
+            <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[hsl(var(--trust-blue))]">
+              Organizational Identity
+            </span>
+            <h2 className="mt-1 font-heading text-xl font-bold text-foreground sm:text-2xl">
+              Independent Governance & Mission Integrity
             </h2>
-
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-              {foundation.mission}
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {foundation.separationStatement}
             </p>
-            <p className="mt-4 text-sm italic text-muted-foreground/90">&ldquo;{foundation.tagline}&rdquo;</p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                to="/programs"
-                className="inline-flex items-center gap-2 rounded-xl bg-[hsl(var(--trust-blue))] px-6 py-3 text-sm font-semibold text-white shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)]"
-              >
-                Explore our programs <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-              <Link
-                to="/governance"
-                className="group inline-flex items-center gap-2 rounded-xl border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-[hsl(var(--trust-blue))] hover:text-[hsl(var(--trust-blue))]"
-              >
-                Meet the board
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
-              </Link>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="relative min-h-[340px] overflow-hidden rounded-2xl lg:min-h-[460px]"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?auto=format&fit=crop&w=1400&q=85"
-              alt="Community meeting with young African leaders around a table"
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--navy))]/90 via-[hsl(var(--navy))]/25 to-transparent" />
-
-            <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/20 bg-[hsl(var(--navy))]/65 p-4 backdrop-blur-md sm:inset-x-5 sm:bottom-5 sm:p-5">
-              <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-                {QUICK_FACTS.map((f) => (
-                  <div key={f.label}>
-                    <dt className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">{f.label}</dt>
-                    <dd className="mt-1 font-heading text-sm font-extrabold leading-tight text-white">{f.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </motion.div>
+          </div>
+          <div className="shrink-0">
+            <Link
+              to="/governance"
+              className="inline-flex items-center gap-2 rounded-xl bg-[hsl(var(--trust-blue))] px-5 py-3 text-xs font-bold text-white transition-opacity hover:opacity-90"
+            >
+              Explore Governance & Board <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
-
-      {/* Mission / Vision compact */}
-      <section className="mt-10 grid gap-4 lg:grid-cols-2">
-        <article className="rounded-2xl bg-[hsl(var(--trust-blue))] p-6 text-white shadow-[var(--shadow-card)] transition-transform hover:-translate-y-1">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">Our mission</p>
-          <h3 className="mt-2 font-heading text-xl font-bold">Turning resourcefulness into opportunity.</h3>
-          <p className="mt-3 text-sm leading-relaxed opacity-95">{foundation.mission}</p>
+      {/* Mission & Vision grid */}
+      <section className="mt-14 grid gap-6 md:grid-cols-2">
+        <article className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Our Mission</span>
+          <h2 className="mt-2 font-heading text-2xl font-bold text-foreground">Why We Exist</h2>
+          <p className="mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground">{foundation.mission}</p>
         </article>
-        <article className="rounded-2xl bg-[hsl(var(--amber))] p-6 text-white shadow-[var(--shadow-card)] transition-transform hover:-translate-y-1">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/85">Our vision</p>
-          <h3 className="mt-2 font-heading text-xl font-bold">A future authored locally.</h3>
-          <p className="mt-3 text-sm leading-relaxed opacity-95">{foundation.vision}</p>
+
+        <article className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--trust-blue))]">Our Vision</span>
+          <h2 className="mt-2 font-heading text-2xl font-bold text-foreground">Where We Are Going</h2>
+          <p className="mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground">{foundation.vision}</p>
         </article>
       </section>
 
-      {/* Compact horizontal stepper */}
-      <section className="mt-14">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">How we work</p>
-            <h2 className="mt-2 font-heading text-2xl font-bold text-foreground">Listen. Equip. Implement. Measure. Scale.</h2>
-          </div>
-          <Link to="/programs" className="inline-flex items-center gap-1 text-sm font-semibold text-[hsl(var(--trust-blue))] hover:underline">
-            See it in the programs <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+      {/* Ecosystem Architecture */}
+      <div className="mt-16">
+        <EcosystemArchitectureSection />
+      </div>
+
+      {/* 5-Stage Approach */}
+      <section className="mt-16" aria-labelledby="approach-heading">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Operating Model</span>
+          <h2 id="approach-heading" className="mt-2 font-heading text-2xl font-bold text-foreground sm:text-3xl">
+            Our 5-Stage Approach
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            A practical methodology designed for accountable community outcomes.
+          </p>
         </div>
 
-        <ol className="relative mt-8 grid gap-3 md:grid-cols-5">
-          <div className="absolute left-4 right-4 top-5 hidden h-px bg-gradient-to-r from-[hsl(var(--trust-blue))] via-[hsl(var(--amber))] to-[hsl(var(--trust-blue))] md:block" aria-hidden />
-          {approach.map((s, i) => {
-            const Icon = stageIcons[s.stage as keyof typeof stageIcons];
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {approach.map((step, idx) => {
+            const Icon = stageIcons[step.stage as keyof typeof stageIcons] || Compass;
             return (
-              <motion.li
-                key={s.stage}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="relative rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-card)]"
+              <div
+                key={step.stage}
+                className="relative rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-[var(--shadow-card-hover)]"
               >
-                <div className="flex items-center gap-2">
-                  <span className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full bg-[hsl(var(--trust-blue))] text-white ring-4 ring-background">
-                    <Icon className="h-4 w-4" aria-hidden />
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[hsl(var(--amber))]">
+                    0{idx + 1}
                   </span>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[hsl(var(--amber))]">
-                    Step {i + 1}
-                  </span>
+                  <Icon className="h-5 w-5 text-[hsl(var(--trust-blue))]" />
                 </div>
-                <h3 className="mt-3 font-heading text-base font-bold text-foreground">{s.stage}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{s.meaning}</p>
-              </motion.li>
+                <h3 className="mt-3 font-heading text-base font-bold text-foreground">{step.stage}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{step.meaning}</p>
+              </div>
             );
           })}
-        </ol>
+        </div>
       </section>
 
-      {/* Where + Who compact side-by-side */}
-      <section className="mt-14 grid gap-4 md:grid-cols-2">
-        <Link
-          to="/where-we-work"
-          className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
-        >
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[hsl(var(--trust-blue))] text-white">
-            <MapPin className="h-5 w-5" aria-hidden />
-          </div>
+      {/* Where We Work preview banner */}
+      <section className="mt-16 rounded-2xl border border-border bg-card p-6 sm:p-8">
+        <div className="grid gap-6 md:grid-cols-2 md:items-center">
           <div>
-            <h3 className="font-heading text-lg font-bold text-foreground">Where we start</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Seattle, Washington and Ethiopia. Regions expand only when partnerships and permissions are documented.
-            </p>
-            <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[hsl(var(--trust-blue))]">
-              Where we work <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">
+              <MapPin className="h-3.5 w-3.5" /> Global & Local Presence
             </span>
+            <h2 className="mt-2 font-heading text-xl font-bold text-foreground sm:text-2xl">
+              From Seattle to Local Communities in Ethiopia
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              AlikoHub Foundation combines international nonprofit standards with deep local operational roots in Ethiopia, pairing global donor accountability with authentic community ownership.
+            </p>
           </div>
-        </Link>
+          <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
+            <Link
+              to="/where-we-work"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-xs font-bold text-foreground transition-colors hover:bg-muted"
+            >
+              Where We Work <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/programs"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[hsl(var(--trust-blue))] px-5 py-3 text-xs font-bold text-white transition-opacity hover:opacity-90"
+            >
+              View Programs <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Governance CTA */}
+      <section className="mt-16">
         <Link
           to="/governance"
-          className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
+          className="group block rounded-2xl border border-border bg-[hsl(var(--warm-surface))] p-6 sm:p-8 transition-colors hover:border-[hsl(var(--amber))]/50"
         >
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[hsl(var(--amber))] text-white">
-            <Users className="h-5 w-5" aria-hidden />
-          </div>
-          <div>
-            <h3 className="font-heading text-lg font-bold text-foreground">Who governs us</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              A founding board of three directors provides oversight and safeguards mission alignment.
-            </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[hsl(var(--trust-blue))]">
+                <Users className="h-3.5 w-3.5" /> Governance & Leadership
+              </span>
+              <h3 className="mt-1 font-heading text-lg font-bold text-foreground sm:text-xl">
+                Meet our Board of Directors and Leadership Team
+              </h3>
+              <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
+                Independent board oversight, executive leadership bios, and compliance safeguards.
+              </p>
+            </div>
             <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[hsl(var(--amber))]">
               Meet the board <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
             </span>
           </div>
         </Link>
       </section>
+
+      <div className="mt-14">
+        <LeadershipCarousel eyebrow="Our people" title="Leadership Team" people={leadershipPeople} />
+      </div>
 
       <div className="mt-14">
         <LegalSeparationStrip />

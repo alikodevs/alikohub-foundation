@@ -1,11 +1,5 @@
 import api from "@/lib/api";
 
-export interface SignupDTO {
-  email: string;
-  password: string;
-  displayName?: string;
-}
-
 export interface LoginDTO {
   email: string;
   password: string;
@@ -23,12 +17,9 @@ export interface AuthResponse {
   message?: string;
 }
 
-export const authService = {
-  async signup(data: SignupDTO): Promise<AuthResponse> {
-    const res = await api.post<AuthResponse>("/auth/signup", data);
-    return res.data;
-  },
+export type AuthUser = AuthResponse["user"];
 
+export const authService = {
   async login(data: LoginDTO): Promise<AuthResponse> {
     const res = await api.post<AuthResponse>("/auth/login", data);
     return res.data;
@@ -36,11 +27,6 @@ export const authService = {
 
   async getMe(): Promise<{ user: AuthResponse["user"] }> {
     const res = await api.get<{ user: AuthResponse["user"] }>("/auth/me");
-    return res.data;
-  },
-
-  async claimFirstAdmin(): Promise<{ message: string; user?: AuthResponse["user"] }> {
-    const res = await api.post("/auth/claim-first-admin");
     return res.data;
   },
 

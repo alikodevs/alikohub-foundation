@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
 import {
-  Image,
   Users,
   Briefcase,
   GraduationCap,
   FileImage,
   Inbox,
-  Contact2,
   Handshake,
   HeartHandshake,
-  CheckSquare,
   Mail,
   Loader2,
 } from "lucide-react";
@@ -25,15 +22,12 @@ export default function AdminDashboard() {
 
   const data = dashboardData
     ? {
-        hero: dashboardData.counts?.heroContent ?? 0,
         team: dashboardData.counts?.teamMembers ?? 0,
         services: dashboardData.counts?.services ?? 0,
         programs: dashboardData.counts?.programs ?? 0,
         media: dashboardData.counts?.mediaLibrary ?? 0,
         inquiriesNew: dashboardData.counts?.newInquiries ?? 0,
-        contacts: dashboardData.counts?.crmContacts ?? 0,
         openDeals: dashboardData.counts?.prospectDeals ?? 0,
-        openTasks: dashboardData.counts?.openTasks ?? 0,
         subscribers: dashboardData.counts?.newsletterSubscribed ?? 0,
         raised: dashboardData.raised ?? 0,
         activities: (dashboardData.activities ?? []) as unknown as CrmActivity[],
@@ -47,9 +41,7 @@ export default function AdminDashboard() {
       icon: Inbox,
       link: "/admin/inquiries",
     },
-    { title: "Contacts", value: data?.contacts ?? 0, icon: Contact2, link: "/admin/contacts" },
     { title: "Prospects", value: data?.openDeals ?? 0, icon: Handshake, link: "/admin/pipeline" },
-    { title: "Open tasks", value: data?.openTasks ?? 0, icon: CheckSquare, link: "/admin/tasks" },
     {
       title: "Total raised",
       value: formatCurrency(data?.raised ?? 0),
@@ -60,7 +52,6 @@ export default function AdminDashboard() {
   ];
 
   const contentCards = [
-    { title: "Hero Content", value: data?.hero ?? 0, icon: Image, link: "/admin/hero" },
     { title: "Team Members", value: data?.team ?? 0, icon: Users, link: "/admin/team" },
     { title: "Services", value: data?.services ?? 0, icon: Briefcase, link: "/admin/services" },
     {
@@ -92,7 +83,7 @@ export default function AdminDashboard() {
               <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
                 CRM
               </h2>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {crmCards.map((stat) => (
                   <Link key={stat.title} to={stat.link}>
                     <Card className="h-full transition-shadow hover:shadow-md">
@@ -115,7 +106,7 @@ export default function AdminDashboard() {
               <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
                 Website content
               </h2>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {contentCards.map((stat) => (
                   <Link key={stat.title} to={stat.link}>
                     <Card className="h-full transition-shadow hover:shadow-md">
