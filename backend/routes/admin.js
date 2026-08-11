@@ -59,11 +59,6 @@ router.post('/activities', admin.activities.create);
 router.get('/notification-settings', admin.notificationSettings.get);
 router.patch('/notification-settings', admin.notificationSettings.update);
 
-router.get('/hero', admin.hero.list);
-router.post('/hero', admin.hero.create);
-router.patch('/hero/:id', admin.hero.update);
-router.delete('/hero/:id', admin.hero.remove);
-
 router.get('/team', admin.team.list);
 router.post('/team', admin.team.create);
 router.patch('/team/:id', admin.team.update);

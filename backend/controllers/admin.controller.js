@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const {
   FoundationInquiry,
-  NewsletterSubscriber,
+  Subscriber,
   CrmContact,
   CrmOrganization,
   CrmDeal,
@@ -13,7 +13,6 @@ const {
   CrmTask,
   CrmDonation,
   CrmNotificationSetting,
-  HeroContent,
   TeamMember,
   Service,
   Program,
@@ -25,7 +24,6 @@ const organizations = createCrudController(CrmOrganization);
 const deals = createCrudController(CrmDeal);
 const tasks = createCrudController(CrmTask);
 const donations = createCrudController(CrmDonation);
-const hero = createCrudController(HeroContent);
 const team = createCrudController(TeamMember, {
   order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
 });
@@ -63,45 +61,6 @@ const inquiries = {
       return res.json({ data: row });
     } catch (err) {
       console.error('Admin inquiries update:', err.message);
-      return res.status(500).json({ message: 'Server error' });
-    }
-  },
-};
-
-const newsletter = {
-  list: async (req, res) => {
-    try {
-      const where = {};
-      if (req.query.status) where.status = req.query.status;
-      const data = await NewsletterSubscriber.findAll({
-        where,
-        order: [['createdAt', 'DESC']],
-      });
-      return res.json({ data });
-    } catch (err) {
-      console.error('Admin newsletter list:', err.message);
-      return res.status(500).json({ message: 'Server error' });
-    }
-  },
-  update: async (req, res) => {
-    try {
-      const row = await NewsletterSubscriber.findByPk(req.params.id);
-      if (!row) return res.status(404).json({ message: 'Not found' });
-      await row.update({ status: req.body.status ?? row.status });
-      return res.json({ data: row });
-    } catch (err) {
-      console.error('Admin newsletter update:', err.message);
-      return res.status(500).json({ message: 'Server error' });
-    }
-  },
-  remove: async (req, res) => {
-    try {
-      const row = await NewsletterSubscriber.findByPk(req.params.id);
-      if (!row) return res.status(404).json({ message: 'Not found' });
-      await row.destroy();
-      return res.json({ message: 'Deleted' });
-    } catch (err) {
-      console.error('Admin newsletter delete:', err.message);
       return res.status(500).json({ message: 'Server error' });
     }
   },
@@ -223,7 +182,6 @@ const media = {
 const dashboard = async (req, res) => {
   try {
     const [
-      heroCount,
       teamCount,
       servicesCount,
       programsCount,
@@ -236,7 +194,6 @@ const dashboard = async (req, res) => {
       donations,
       recentActivities,
     ] = await Promise.all([
-      HeroContent.count(),
       TeamMember.count(),
       Service.count(),
       Program.count(),
@@ -245,7 +202,7 @@ const dashboard = async (req, res) => {
       FoundationInquiry.count({ where: { status: 'new' } }),
       CrmDeal.count({ where: { stage: 'prospect' } }),
       CrmTask.count({ where: { status: 'open' } }),
-      NewsletterSubscriber.count({ where: { status: 'subscribed' } }),
+      Subscriber.count({ where: { status: 'active' } }),
       CrmDonation.findAll({ attributes: ['amount'] }),
       CrmActivity.findAll({
         order: [['occurredAt', 'DESC']],
@@ -258,7 +215,6 @@ const dashboard = async (req, res) => {
     return res.json({
       data: {
         counts: {
-          heroContent: heroCount,
           teamMembers: teamCount,
           services: servicesCount,
           programs: programsCount,
@@ -281,13 +237,6 @@ const dashboard = async (req, res) => {
 
 // Public CMS reads (active only) for frontend later
 const publicCms = {
-  hero: async (req, res) => {
-    const data = await HeroContent.findAll({
-      where: { isActive: true },
-      order: [['createdAt', 'DESC']],
-    });
-    return res.json({ data });
-  },
   team: async (req, res) => {
     const data = await TeamMember.findAll({
       where: { isActive: true },
@@ -317,12 +266,10 @@ module.exports = {
   deals,
   tasks,
   donations,
-  hero,
   team,
   services,
   programs,
   inquiries,
-  newsletter,
   activities,
   notificationSettings,
   media,
