@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: { type: DataTypes.STRING, allowNull: false },
       role: { type: DataTypes.STRING, allowNull: true },
+      category: {
+        type: DataTypes.ENUM('staff', 'board'),
+        allowNull: false,
+        defaultValue: 'staff',
+        comment: 'staff = Staff Members, board = Board of Directors',
+      },
       bio: { type: DataTypes.TEXT, allowNull: true },
       imageUrl: { type: DataTypes.STRING, allowNull: true, field: 'image_url' },
       linkedinUrl: { type: DataTypes.STRING, allowNull: true, field: 'linkedin_url' },
