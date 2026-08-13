@@ -16,8 +16,13 @@ const {
   TeamMember,
   Service,
   Program,
+  Story,
+  Resource,
+  Faq,
   MediaLibrary,
 } = db;
+
+const { Op } = db.Sequelize;
 
 const contacts = createCrudController(CrmContact);
 const organizations = createCrudController(CrmOrganization);
@@ -26,12 +31,25 @@ const tasks = createCrudController(CrmTask);
 const donations = createCrudController(CrmDonation);
 const team = createCrudController(TeamMember, {
   order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
+  searchable: ['category'],
 });
 const services = createCrudController(Service, {
   order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
 });
 const programs = createCrudController(Program, {
   order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
+});
+const stories = createCrudController(Story, {
+  order: [['displayOrder', 'ASC'], ['publishedAt', 'DESC'], ['createdAt', 'DESC']],
+  searchable: ['type', 'theme'],
+});
+const resources = createCrudController(Resource, {
+  order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
+  searchable: ['category', 'tag'],
+});
+const faqs = createCrudController(Faq, {
+  order: [['displayOrder', 'ASC'], ['createdAt', 'ASC']],
+  searchable: ['category'],
 });
 
 const inquiries = {
@@ -183,8 +201,14 @@ const dashboard = async (req, res) => {
   try {
     const [
       teamCount,
+      staffCount,
+      boardCount,
       servicesCount,
       programsCount,
+      storiesCount,
+      insightsCount,
+      resourcesCount,
+      faqsCount,
       mediaCount,
       contactsCount,
       newInquiries,
@@ -195,8 +219,14 @@ const dashboard = async (req, res) => {
       recentActivities,
     ] = await Promise.all([
       TeamMember.count(),
+      TeamMember.count({ where: { category: 'staff' } }),
+      TeamMember.count({ where: { category: 'board' } }),
       Service.count(),
       Program.count(),
+      Story.count({ where: { type: 'story' } }),
+      Story.count({ where: { type: 'insight' } }),
+      Resource.count(),
+      Faq.count(),
       MediaLibrary.count(),
       CrmContact.count(),
       FoundationInquiry.count({ where: { status: 'new' } }),
@@ -216,8 +246,14 @@ const dashboard = async (req, res) => {
       data: {
         counts: {
           teamMembers: teamCount,
+          staffMembers: staffCount,
+          boardOfDirectors: boardCount,
           services: servicesCount,
           programs: programsCount,
+          stories: storiesCount,
+          insights: insightsCount,
+          resources: resourcesCount,
+          faqs: faqsCount,
           mediaLibrary: mediaCount,
           crmContacts: contactsCount,
           newInquiries,
@@ -235,15 +271,68 @@ const dashboard = async (req, res) => {
   }
 };
 
-// Public CMS reads (active only) for frontend later
-const publicCms = {
-  team: async (req, res) => {
-    const data = await TeamMember.findAll({
-      where: { isActive: true },
-      order: [['displayOrder', 'ASC']],
+const listPublicStories = async (req, res, typeFilter) => {
+  try {
+    const where = { isActive: true };
+    if (typeFilter) where.type = typeFilter;
+    else if (req.query.type === 'story' || req.query.type === 'insight') {
+      where.type = req.query.type;
+    }
+    if (req.query.theme) where.theme = req.query.theme;
+
+    const data = await Story.findAll({
+      where,
+      order: [['displayOrder', 'ASC'], ['publishedAt', 'DESC'], ['createdAt', 'DESC']],
     });
     return res.json({ data });
-  },
+  } catch (err) {
+    console.error('Public stories list:', err.message);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const getPublicStory = async (req, res, typeFilter) => {
+  try {
+    const key = req.params.idOrSlug;
+    const where = {
+      isActive: true,
+      [Op.or]: [{ id: key }, { slug: key }],
+    };
+    if (typeFilter) where.type = typeFilter;
+
+    const data = await Story.findOne({ where });
+    if (!data) return res.status(404).json({ message: 'Not found' });
+    return res.json({ data });
+  } catch (err) {
+    console.error('Public story get:', err.message);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const listPublicTeam = async (req, res, categoryFilter) => {
+  try {
+    const where = { isActive: true };
+    if (categoryFilter) where.category = categoryFilter;
+    else if (req.query.category === 'staff' || req.query.category === 'board') {
+      where.category = req.query.category;
+    }
+
+    const data = await TeamMember.findAll({
+      where,
+      order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
+    });
+    return res.json({ data });
+  } catch (err) {
+    console.error('Public team list:', err.message);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Public CMS reads (active only) for frontend
+const publicCms = {
+  team: (req, res) => listPublicTeam(req, res, null),
+  teamStaff: (req, res) => listPublicTeam(req, res, 'staff'),
+  teamBoard: (req, res) => listPublicTeam(req, res, 'board'),
   services: async (req, res) => {
     const data = await Service.findAll({
       where: { isActive: true },
@@ -258,6 +347,69 @@ const publicCms = {
     });
     return res.json({ data });
   },
+  stories: (req, res) => listPublicStories(req, res, null),
+  storyOne: (req, res) => getPublicStory(req, res, null),
+  insights: (req, res) => listPublicStories(req, res, 'insight'),
+  insightOne: (req, res) => getPublicStory(req, res, 'insight'),
+  resources: async (req, res) => {
+    try {
+      const where = { isActive: true };
+      if (req.query.category) where.category = req.query.category;
+      if (req.query.tag) where.tag = req.query.tag;
+
+      const data = await Resource.findAll({
+        where,
+        order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
+      });
+      return res.json({ data });
+    } catch (err) {
+      console.error('Public resources list:', err.message);
+      return res.status(500).json({ message: 'Server error' });
+    }
+  },
+  resourceOne: async (req, res) => {
+    try {
+      const key = req.params.idOrSlug;
+      const data = await Resource.findOne({
+        where: {
+          isActive: true,
+          [Op.or]: [{ id: key }, { slug: key }],
+        },
+      });
+      if (!data) return res.status(404).json({ message: 'Not found' });
+      return res.json({ data });
+    } catch (err) {
+      console.error('Public resource get:', err.message);
+      return res.status(500).json({ message: 'Server error' });
+    }
+  },
+  faqs: async (req, res) => {
+    try {
+      const where = { isActive: true };
+      if (req.query.category) where.category = req.query.category;
+
+      const data = await Faq.findAll({
+        where,
+        order: [['displayOrder', 'ASC'], ['createdAt', 'ASC']],
+      });
+      return res.json({ data });
+    } catch (err) {
+      console.error('Public faqs list:', err.message);
+      return res.status(500).json({ message: 'Server error' });
+    }
+  },
+  faqOne: async (req, res) => {
+    try {
+      const data = await Faq.findOne({
+        where: { id: req.params.id, isActive: true },
+      });
+      if (!data) return res.status(404).json({ message: 'Not found' });
+      return res.json({ data });
+    } catch (err) {
+      console.error('Public faq get:', err.message);
+      return res.status(500).json({ message: 'Server error' });
+    }
+  },
 };
 
 module.exports = {
@@ -269,6 +421,9 @@ module.exports = {
   team,
   services,
   programs,
+  stories,
+  resources,
+  faqs,
   inquiries,
   activities,
   notificationSettings,

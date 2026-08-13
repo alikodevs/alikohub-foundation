@@ -4,29 +4,24 @@ const { Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
-  class TeamMember extends Model {
+  class Faq extends Model {
     static associate() {}
   }
 
-  TeamMember.init(
+  Faq.init(
     {
       id: {
         type: DataTypes.STRING(36),
         primaryKey: true,
         defaultValue: () => uuidv4(),
       },
-      name: { type: DataTypes.STRING, allowNull: false },
-      role: { type: DataTypes.STRING, allowNull: true },
       category: {
-        type: DataTypes.ENUM('staff', 'board'),
+        type: DataTypes.ENUM('About', 'Support', 'Accountability', 'Contact'),
         allowNull: false,
-        defaultValue: 'staff',
-        comment: 'staff = Staff Members, board = Board of Directors',
+        defaultValue: 'About',
       },
-      bio: { type: DataTypes.TEXT, allowNull: true },
-      imageUrl: { type: DataTypes.STRING, allowNull: true, field: 'image_url' },
-      linkedinUrl: { type: DataTypes.STRING, allowNull: true, field: 'linkedin_url' },
-      twitterUrl: { type: DataTypes.STRING, allowNull: true, field: 'twitter_url' },
+      question: { type: DataTypes.STRING, allowNull: false },
+      answer: { type: DataTypes.TEXT, allowNull: false },
       displayOrder: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -42,12 +37,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'TeamMember',
-      tableName: 'team_members',
+      modelName: 'Faq',
+      tableName: 'faqs',
       timestamps: true,
       underscored: true,
     }
   );
 
-  return TeamMember;
+  return Faq;
 };
