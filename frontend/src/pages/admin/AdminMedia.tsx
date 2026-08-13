@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "sonner";
+import { getFullMediaUrl } from "@/lib/utils";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -107,21 +108,8 @@ export default function AdminMedia() {
     deleteMutation.mutate(file.id);
   }
 
-  function getBackendBaseUrl(): string {
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
-    return apiUrl.replace(/\/api\/?$/, "");
-  }
-
-  function getFullUrl(url: string): string {
-    if (!url) return "";
-    if (url.startsWith("http")) return url;
-    const baseUrl = getBackendBaseUrl();
-    const cleanUrl = url.startsWith("/") ? url : `/${url}`;
-    return `${baseUrl}${cleanUrl}`;
-  }
-
   function copyUrl(file: MediaItem) {
-    const fullUrl = getFullUrl(file.url);
+    const fullUrl = getFullMediaUrl(file.url);
     navigator.clipboard.writeText(fullUrl);
     setCopiedId(file.id);
     setTimeout(() => setCopiedId(null), 2000);
@@ -129,7 +117,7 @@ export default function AdminMedia() {
   }
 
   function copyHtmlTag(file: MediaItem) {
-    const fullUrl = getFullUrl(file.url);
+    const fullUrl = getFullMediaUrl(file.url);
     const alt = file.altText || file.alt_text || file.name || "";
     const htmlSnippet = `<img src="${fullUrl}" alt="${alt}" />`;
     navigator.clipboard.writeText(htmlSnippet);
@@ -137,6 +125,7 @@ export default function AdminMedia() {
     setTimeout(() => setCopiedHtmlId(null), 2000);
     toast.success("HTML <img> tag copied to clipboard");
   }
+
 
   function formatFileSize(bytes: number | null | undefined): string {
     if (!bytes) return "Unknown size";
@@ -339,7 +328,7 @@ export default function AdminMedia() {
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {filteredFiles.map((file) => {
-              const fullUrl = getFullUrl(file.url);
+              const fullUrl = getFullMediaUrl(file.url);
               const altTextVal = file.altText || file.alt_text;
               const fileTypeVal = file.fileType || file.file_type || file.mimeType;
               const fileSizeVal = file.fileSize || file.file_size || file.size;
@@ -358,12 +347,8 @@ export default function AdminMedia() {
                           src={fullUrl}
                           alt={altTextVal || file.name || "Media asset"}
                           className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                          onError={(e) => {
-                            if (file.url && e.currentTarget.src !== window.location.origin + file.url) {
-                              e.currentTarget.src = file.url;
-                            }
-                          }}
                         />
+
                       ) : (
                         <div className="flex flex-col items-center gap-1 text-muted-foreground">
                           <FileText className="h-10 w-10" />

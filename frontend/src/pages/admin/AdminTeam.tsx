@@ -379,14 +379,9 @@ export default function AdminTeam() {
                             src={getFullMediaUrl(selectedMember.imageUrl || selectedMember.image_url)}
                             alt={selectedMember.name}
                             className="w-full h-full object-cover"
-                            onError={(e) => {
-                              const raw = selectedMember.imageUrl || selectedMember.image_url;
-                              if (raw && e.currentTarget.src !== window.location.origin + raw) {
-                                e.currentTarget.src = raw;
-                              }
-                            }}
                           />
                         ) : (
+
                           <User className="h-10 w-10 text-muted-foreground" />
                         )}
                       </div>

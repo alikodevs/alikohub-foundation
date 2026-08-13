@@ -309,13 +309,8 @@ export default function Programs() {
                         alt={p.title}
                         className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
-                        onError={(e) => {
-                          const raw = p.image;
-                          if (raw && e.currentTarget.src !== window.location.origin + raw) {
-                            e.currentTarget.src = raw;
-                          }
-                        }}
                       />
+
                       <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                     </>
                   )}

@@ -395,14 +395,9 @@ export default function AdminPrograms() {
                             src={getFullMediaUrl(selectedProgram.imageUrl || selectedProgram.image_url)}
                             alt={selectedProgram.title}
                             className="w-full h-full object-cover"
-                            onError={(e) => {
-                              const raw = selectedProgram.imageUrl || selectedProgram.image_url;
-                              if (raw && e.currentTarget.src !== window.location.origin + raw) {
-                                e.currentTarget.src = raw;
-                              }
-                            }}
                           />
                         ) : (
+
                           <div className="w-full h-full flex items-center justify-center text-muted-foreground">
                             <Layers className="h-10 w-10 opacity-40" />
                           </div>

@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
+import { getFullMediaUrl } from "@/lib/utils";
+
 
 /**
  * HomeStorySection
@@ -211,8 +213,9 @@ export function HomeStorySection() {
                   className="relative overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card-hover)]"
                 >
                   <img
-                    src={active.image}
+                    src={getFullMediaUrl(active.image)}
                     alt={active.alt}
+
                     className="aspect-[4/5] h-full w-full object-cover"
                     loading="lazy"
                   />

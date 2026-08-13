@@ -2,7 +2,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePublicHero } from "@/hooks/useCms";
+import { getFullMediaUrl } from "@/lib/utils";
 import heroImg from "@/assets/hero-student.png";
+
 
 export function HeroSection() {
   const { data: heroData } = usePublicHero();
@@ -95,8 +97,9 @@ export function HeroSection() {
             {/* Ambient glow behind image - dark mode only */}
             <div className="absolute -inset-8 rounded-full bg-primary/10 blur-3xl animate-pulse-glow hidden dark:block" />
             <img
-              src={heroContent?.background_image_url || heroImg}
+              src={heroContent?.background_image_url ? getFullMediaUrl(heroContent.background_image_url) : heroImg}
               alt="Happy student representing AlikoHub's mission"
+
               className="relative z-10 w-full drop-shadow-2xl"
               loading="eager"
             />
