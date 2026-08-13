@@ -12,6 +12,9 @@ import {
   HeartHandshake,
   Building2,
   Settings,
+  BookOpen,
+  FileText,
+  HelpCircle,
 } from "lucide-react";
 import {
   Sidebar,
@@ -34,8 +37,12 @@ const contentItems = [
   { title: "Team Members", url: "/admin/team", icon: Users },
   { title: "Services", url: "/admin/services", icon: Briefcase },
   { title: "Programs", url: "/admin/programs", icon: GraduationCap },
+  { title: "Stories & Insights", url: "/admin/stories", icon: BookOpen },
+  { title: "Resources", url: "/admin/resources", icon: FileText },
+  { title: "FAQs", url: "/admin/faqs", icon: HelpCircle },
   { title: "Media Library", url: "/admin/media", icon: FileImage },
 ];
+
 
 const crmItems = [
   { title: "Inquiries", url: "/admin/inquiries", icon: Inbox },

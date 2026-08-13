@@ -84,4 +84,68 @@ export const cmsService = {
     const res = await api.delete(`/admin/programs/${id}`);
     return res.data;
   },
+
+  // Admin Stories
+  async listStories() {
+    const res = await api.get("/admin/stories");
+    return res.data.data;
+  },
+
+  async createStory(data: Record<string, unknown>) {
+    const res = await api.post("/admin/stories", data);
+    return res.data.data;
+  },
+
+  async updateStory(id: string, data: Record<string, unknown>) {
+    const res = await api.patch(`/admin/stories/${id}`, data);
+    return res.data.data;
+  },
+
+  async deleteStory(id: string) {
+    const res = await api.delete(`/admin/stories/${id}`);
+    return res.data;
+  },
+
+  // Admin Resources
+  async listResources() {
+    const res = await api.get("/admin/resources");
+    return res.data.data;
+  },
+
+  async createResource(data: Record<string, unknown>) {
+    const res = await api.post("/admin/resources", data);
+    return res.data.data;
+  },
+
+  async updateResource(id: string, data: Record<string, unknown>) {
+    const res = await api.patch(`/admin/resources/${id}`, data);
+    return res.data.data;
+  },
+
+  async deleteResource(id: string) {
+    const res = await api.delete(`/admin/resources/${id}`);
+    return res.data;
+  },
+
+  // Admin FAQs
+  async listFaqs() {
+    const res = await api.get("/admin/faqs");
+    return res.data.data;
+  },
+
+  async createFaq(data: Record<string, unknown>) {
+    const res = await api.post("/admin/faqs", data);
+    return res.data.data;
+  },
+
+  async updateFaq(id: string, data: Record<string, unknown>) {
+    const res = await api.patch(`/admin/faqs/${id}`, data);
+    return res.data.data;
+  },
+
+  async deleteFaq(id: string) {
+    const res = await api.delete(`/admin/faqs/${id}`);
+    return res.data;
+  },
 };
+

@@ -54,4 +54,25 @@ export const publicService = {
     const res = await api.get("/public/programs");
     return res.data.data;
   },
+
+  async getActiveStories() {
+    const res = await api.get("/public/stories");
+    return res.data.data;
+  },
+
+  async getActiveInsights() {
+    const res = await api.get("/public/insights");
+    return res.data.data;
+  },
+
+  async getActiveResources() {
+    const res = await api.get("/public/resources");
+    return res.data.data;
+  },
+
+  async getActiveFaqs() {
+    const res = await api.get("/public/faqs");
+    return res.data.data;
+  },
 };
+

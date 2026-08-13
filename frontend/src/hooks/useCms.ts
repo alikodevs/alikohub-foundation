@@ -36,6 +36,39 @@ export function usePublicPrograms() {
   });
 }
 
+export function usePublicStories() {
+  return useQuery({
+    queryKey: ["public-stories"],
+    queryFn: publicService.getActiveStories,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function usePublicInsights() {
+  return useQuery({
+    queryKey: ["public-insights"],
+    queryFn: publicService.getActiveInsights,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function usePublicResources() {
+  return useQuery({
+    queryKey: ["public-resources"],
+    queryFn: publicService.getActiveResources,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function usePublicFaqs() {
+  return useQuery({
+    queryKey: ["public-faqs"],
+    queryFn: publicService.getActiveFaqs,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+
 // Admin CMS Hooks
 export function useAdminHero() {
   const queryClient = useQueryClient();
@@ -164,3 +197,102 @@ export function useAdminPrograms() {
 
   return { ...query, save, remove };
 }
+
+export function useAdminStories() {
+  const queryClient = useQueryClient();
+
+  const query = useQuery({
+    queryKey: ["admin-stories"],
+    queryFn: cmsService.listStories,
+  });
+
+  const save = useMutation({
+    mutationFn: ({ id, values }: { id?: string; values: Record<string, unknown> }) =>
+      id ? cmsService.updateStory(id, values) : cmsService.createStory(values),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["admin-stories"] });
+      queryClient.invalidateQueries({ queryKey: ["public-stories"] });
+      queryClient.invalidateQueries({ queryKey: ["public-insights"] });
+      toast.success(variables.id ? "Story updated" : "Story created");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  const remove = useMutation({
+    mutationFn: cmsService.deleteStory,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-stories"] });
+      queryClient.invalidateQueries({ queryKey: ["public-stories"] });
+      queryClient.invalidateQueries({ queryKey: ["public-insights"] });
+      toast.success("Story deleted");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  return { ...query, save, remove };
+}
+
+export function useAdminResources() {
+  const queryClient = useQueryClient();
+
+  const query = useQuery({
+    queryKey: ["admin-resources"],
+    queryFn: cmsService.listResources,
+  });
+
+  const save = useMutation({
+    mutationFn: ({ id, values }: { id?: string; values: Record<string, unknown> }) =>
+      id ? cmsService.updateResource(id, values) : cmsService.createResource(values),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["admin-resources"] });
+      queryClient.invalidateQueries({ queryKey: ["public-resources"] });
+      toast.success(variables.id ? "Resource updated" : "Resource created");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  const remove = useMutation({
+    mutationFn: cmsService.deleteResource,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-resources"] });
+      queryClient.invalidateQueries({ queryKey: ["public-resources"] });
+      toast.success("Resource deleted");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  return { ...query, save, remove };
+}
+
+export function useAdminFaqs() {
+  const queryClient = useQueryClient();
+
+  const query = useQuery({
+    queryKey: ["admin-faqs"],
+    queryFn: cmsService.listFaqs,
+  });
+
+  const save = useMutation({
+    mutationFn: ({ id, values }: { id?: string; values: Record<string, unknown> }) =>
+      id ? cmsService.updateFaq(id, values) : cmsService.createFaq(values),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["admin-faqs"] });
+      queryClient.invalidateQueries({ queryKey: ["public-faqs"] });
+      toast.success(variables.id ? "FAQ updated" : "FAQ created");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  const remove = useMutation({
+    mutationFn: cmsService.deleteFaq,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-faqs"] });
+      queryClient.invalidateQueries({ queryKey: ["public-faqs"] });
+      toast.success("FAQ deleted");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  return { ...query, save, remove };
+}
+

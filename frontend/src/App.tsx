@@ -45,12 +45,16 @@ const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminTeam = lazy(() => import("./pages/admin/AdminTeam"));
 const AdminServices = lazy(() => import("./pages/admin/AdminServices"));
 const AdminPrograms = lazy(() => import("./pages/admin/AdminPrograms"));
+const AdminStories = lazy(() => import("./pages/admin/AdminStories"));
+const AdminResources = lazy(() => import("./pages/admin/AdminResources"));
+const AdminFaqs = lazy(() => import("./pages/admin/AdminFaqs"));
 const AdminMedia = lazy(() => import("./pages/admin/AdminMedia"));
 const AdminInquiries = lazy(() => import("./pages/admin/AdminInquiries"));
 const AdminPipeline = lazy(() => import("./pages/admin/AdminPipeline"));
 const AdminDonations = lazy(() => import("./pages/admin/AdminDonations"));
 const AdminAudience = lazy(() => import("./pages/admin/AdminAudience"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
+
 
 const queryClient = new QueryClient();
 
@@ -102,12 +106,16 @@ const App = () => (
                 <Route path="/admin/team" element={<RequireAdmin><AdminTeam /></RequireAdmin>} />
                 <Route path="/admin/services" element={<RequireAdmin><AdminServices /></RequireAdmin>} />
                 <Route path="/admin/programs" element={<RequireAdmin><AdminPrograms /></RequireAdmin>} />
+                <Route path="/admin/stories" element={<RequireAdmin><AdminStories /></RequireAdmin>} />
+                <Route path="/admin/resources" element={<RequireAdmin><AdminResources /></RequireAdmin>} />
+                <Route path="/admin/faqs" element={<RequireAdmin><AdminFaqs /></RequireAdmin>} />
                 <Route path="/admin/media" element={<RequireAdmin><AdminMedia /></RequireAdmin>} />
                 <Route path="/admin/inquiries" element={<RequireAdmin><AdminInquiries /></RequireAdmin>} />
                 <Route path="/admin/pipeline" element={<RequireAdmin><AdminPipeline /></RequireAdmin>} />
                 <Route path="/admin/donations" element={<RequireAdmin><AdminDonations /></RequireAdmin>} />
                 <Route path="/admin/audience" element={<RequireAdmin><AdminAudience /></RequireAdmin>} />
                 <Route path="/admin/settings" element={<RequireAdmin><AdminSettings /></RequireAdmin>} />
+
                 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
