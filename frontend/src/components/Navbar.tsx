@@ -30,32 +30,23 @@ const primaryNav: NavItem[] = [
     label: "The Foundation",
     href: "/about",
     blurb:
-      "Who we are, how we are governed, and the standards we hold ourselves to as an independent African-rooted foundation.",
+      "Who we are, how we are governed, and the standards we hold ourselves to as an independent foundation.",
     columns: [
       {
-        heading: "Identity",
+        heading: "Identity & Governance",
         links: [
           { label: "Origins & mandate", href: "/about" },
           { label: "Board & leadership", href: "/governance" },
           { label: "Ethics & safeguarding", href: "/ethics" },
-          { label: "Questions we get asked", href: "/faq" },
-        ],
-      },
-      {
-        heading: "Presence",
-        links: [
-          { label: "Hubs & offices", href: "/hubs" },
-          { label: "Work with our team", href: "/careers" },
           { label: "Sustainability commitments", href: "/sustainability" },
-          { label: "Reach the Foundation", href: "/contact" },
         ],
       },
       {
-        heading: "Accountability",
+        heading: "Accountability & Media",
         links: [
-          { label: "How we report", href: "/transparency" },
           { label: "Finances & stewardship", href: "/financials" },
           { label: "Annual review", href: "/annual-report" },
+          { label: "Questions we get asked", href: "/faq" },
           { label: "Newsroom", href: "/press" },
         ],
       },
@@ -65,43 +56,29 @@ const primaryNav: NavItem[] = [
     label: "What We Deliver",
     href: "/programs",
     blurb:
-      "Priority areas delivered end to end through the Train, Guide, Connect, Scale model.",
+      "Priority areas delivered end to end through our evidence-based, community-led initiatives.",
     columns: [
       {
-        heading: "Delivery",
+        heading: "Delivery & Presence",
         links: [
           { label: "Priority areas", href: "/programs" },
           { label: "Innovation hubs", href: "/hubs" },
-          { label: "Toolkits & guides", href: "/resources" },
-        ],
-      },
-      {
-        heading: "Evidence",
-        links: [
-          { label: "Results & targets", href: "/impact" },
           { label: "Places we operate", href: "/where-we-work" },
-          { label: "Field stories", href: "/stories" },
         ],
       },
       {
-        heading: "Collaborate",
+        heading: "Collaborate & Resources",
         links: [
-          { label: "Institutional partnerships", href: "/partnership" },
+          { label: "Toolkits & guides", href: "/resources" },
           { label: "Who we work with", href: "/partners" },
-          { label: "Individual involvement", href: "/get-involved" },
-          { label: "Ways to give", href: "/donate" },
         ],
       },
     ],
   },
-
   { label: "Impact", href: "/impact" },
-  { label: "Where We Work", href: "/where-we-work" },
   { label: "Stories & Insights", href: "/stories" },
-  { label: "Partnerships", href: "/partnership" },
   { label: "Get Involved", href: "/get-involved" },
 ];
-
 
 const utilityNav = [
   { label: "Resources", href: "/resources" },
@@ -320,18 +297,33 @@ export function Navbar() {
             >
               <div className="container mx-auto flex flex-col gap-1 px-6 py-6">
                 {primaryNav.map((link) => (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    className={`block rounded-md px-3 py-2.5 text-sm font-semibold transition-colors ${
-                      isActive(link.href)
-                        ? "bg-secondary text-primary"
-                        : "text-foreground hover:bg-secondary"
-                    }`}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
+                  <div key={link.href}>
+                    <Link
+                      to={link.href}
+                      className={`block rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                        isActive(link.href)
+                          ? "bg-secondary text-primary"
+                          : "text-foreground hover:bg-secondary"
+                      }`}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                    {link.columns && (
+                      <div className="my-1 ml-4 space-y-1 border-l border-border/70 pl-3">
+                        {link.columns.flatMap((col) => col.links).map((sub) => (
+                          <Link
+                            key={sub.href}
+                            to={sub.href}
+                            className="block rounded-md px-2 py-1 text-xs text-muted-foreground hover:bg-secondary hover:text-primary"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
                 <div className="mt-2 border-t border-border pt-2">
                   {utilityNav.map((link) => (

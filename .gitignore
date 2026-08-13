@@ -5,6 +5,8 @@ node_modules/
 # Production builds
 uploads/
 **/uploads/
+dist/
+**/dist/
 
 # Environment variables
 .env
