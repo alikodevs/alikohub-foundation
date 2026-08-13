@@ -11,7 +11,7 @@ import {
   FileCheck,
   Scale,
 } from "lucide-react";
-import { board, leadership as defaultLeadership } from "@/config/foundation";
+import { board } from "@/config/foundation";
 import { LeadershipCarousel, Leader } from "@/components/foundation/LeadershipCarousel";
 import { usePublicTeam } from "@/hooks/useCms";
 import { getFullMediaUrl } from "@/lib/utils";
@@ -37,8 +37,7 @@ export default function Governance() {
 
   const leadershipPeople: Leader[] =
     publicTeam && publicTeam.length > 0
-      ? publicTeam.map((item: Record<string, unknown>, index: number) => {
-          const defaultFallback = defaultLeadership[index % defaultLeadership.length];
+      ? publicTeam.map((item: Record<string, unknown>) => {
           const rawImg =
             (item.imageUrl as string) ||
             (item.image_url as string) ||
@@ -46,13 +45,13 @@ export default function Governance() {
             (item.photo as string);
 
           return {
-            name: (item.name as string) || defaultFallback.name,
-            role: (item.role as string) || defaultFallback.role,
-            bio: (item.bio as string) || defaultFallback.bio,
-            photo: rawImg ? getFullMediaUrl(rawImg) : defaultFallback.photo,
+            name: (item.name as string) || "",
+            role: (item.role as string) || "",
+            bio: (item.bio as string) || "",
+            photo: rawImg ? getFullMediaUrl(rawImg) : "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
           };
         })
-      : (defaultLeadership as readonly Leader[]);
+      : [];
 
   return (
     <PageShell
@@ -79,9 +78,11 @@ export default function Governance() {
       <LeadershipCarousel eyebrow="Leadership" title="Chair and Governing Board" people={board} />
 
       {/* Leadership team */}
-      <div className="mt-16">
-        <LeadershipCarousel eyebrow="Our people" title="Leadership Team" people={leadershipPeople} />
-      </div>
+      {leadershipPeople.length > 0 && (
+        <div className="mt-16">
+          <LeadershipCarousel eyebrow="Our people" title="Leadership Team" people={leadershipPeople} />
+        </div>
+      )}
 
       {/* Operational structure */}
       <section className="mt-16" aria-labelledby="structure">
