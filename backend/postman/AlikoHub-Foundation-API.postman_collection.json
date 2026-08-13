@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "alikohub-foundation-api-001",
     "name": "AlikoHub Foundation API",
-    "description": "Backend API for AlikoHub Foundation (Express + Sequelize + MySQL).\n\n## For frontend teammate (integration only)\n1. Backend running: `cd backend && npm run dev`\n2. Import this collection into Postman\n3. `baseUrl` = `http://localhost:4000` (or deployed URL)\n4. Public CMS needs NO token\n5. Admin routes: run Auth → Login first (saves `{{token}}`)\n\n## Admin login (seeded)\n- email: `admin@alikohub.com`\n- password: `Admin@12345`\n\n## Frontend page → public endpoint map\n| Page | Endpoint |\n|---|---|\n| Governance (staff) | `GET /api/public/team/staff` |\n| Governance (board) | `GET /api/public/team/board` |\n| Team (all / filter) | `GET /api/public/team?category=staff\\|board` |\n| Stories | `GET /api/public/stories` |\n| Insights | `GET /api/public/insights` |\n| Resources | `GET /api/public/resources` |\n| FAQ | `GET /api/public/faqs` |\n| Programs | `GET /api/public/programs` |\n| Services | `GET /api/public/services` |\n\n## Images (IMPORTANT)\n- There is NO standalone Image model or `/images` API.\n- Photos live on each entity as `imageUrl` (camelCase JSON).\n- `TeamMember.imageUrl` → staff / board photos\n- `Story.imageUrl` → story / insight cards\n- `Program.imageUrl` / `Service.imageUrl` → program / service cards\n- Upload via Admin Media, then copy `{{baseUrl}}/uploads/<filename>` into `imageUrl`\n- Or use a full external URL (`https://...`)\n\n## Team categories\n- `staff` = Staff Members\n- `board` = Board of Directors\n\n## Story types\n- `story` | `insight`\n\n## Resource categories\n- `briefs` | `evidence` | `curricula` | `policies`\n\n## FAQ categories\n- `About` | `Support` | `Accountability` | `Contact`\n\n## Response shape\n- List: `{ \"data\": [ ... ] }`\n- One: `{ \"data\": { ... } }`\n\n## Seeds (from backend folder)\n- `npm run db:seed:admin`\n- `npm run db:seed:team`\n- `npm run db:seed:stories`\n- `npm run db:seed:resources`\n- `npm run db:seed:faqs`\n\n## Notes\n- JSON bodies use camelCase\n- No claim-first-admin API\n- Newsletter: `POST /api/subscribers`\n- Media upload form-data field name: `file`",
+    "description": "Backend API for AlikoHub Foundation (Express + Sequelize + MySQL).\n\n## For frontend teammate (integration only)\n1. Backend running: `cd backend && npm run dev`\n2. Import this collection into Postman\n3. `baseUrl` = `http://localhost:4000` (or deployed URL)\n4. Public CMS needs NO token\n5. Admin routes: run Auth → Login first (saves `{{token}}`)\n\n## Admin login (seeded)\n- email: `admin@alikohub.com`\n- password: `Admin@12345`\n\n## Frontend page → public endpoint map\n| Page | Endpoint |\n|---|---|\n| Governance (board) | `GET /api/public/board` |\n| Governance (staff) | `GET /api/public/staff` |\n| Stories | `GET /api/public/stories` |\n| Insights | `GET /api/public/insights` |\n| Resources | `GET /api/public/resources` |\n| FAQ | `GET /api/public/faqs` |\n| Programs | `GET /api/public/programs` |\n| Services | `GET /api/public/services` |\n\n## Board & Staff (IMPORTANT)\n- There is NO Team model anymore.\n- Use separate models/endpoints: **Board** and **Staff**.\n- Photos live on each person as `imageUrl`.\n\n## Images\n- No standalone Image API.\n- `Board.imageUrl` / `Staff.imageUrl` / `Story.imageUrl` / `Program.imageUrl` / `Service.imageUrl`\n- Upload via Admin Media, then paste `{{baseUrl}}/uploads/<filename>` into `imageUrl`\n\n## Story types\n- `story` | `insight`\n\n## Resource categories\n- `briefs` | `evidence` | `curricula` | `policies`\n\n## FAQ categories\n- `About` | `Support` | `Accountability` | `Contact`\n\n## Response shape\n- List: `{ \"data\": [ ... ] }`\n- One: `{ \"data\": { ... } }`\n\n## Seeds\n- `npm run db:seed:admin`\n- `npm run db:seed:board`\n- `npm run db:seed:staff`\n- `npm run db:seed:stories`\n- `npm run db:seed:resources`\n- `npm run db:seed:faqs`\n\n## Notes\n- JSON bodies use camelCase\n- No claim-first-admin API\n- Newsletter: `POST /api/subscribers`\n- Media upload form-data field name: `file`",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -43,10 +43,6 @@
       "value": ""
     },
     {
-      "key": "teamId",
-      "value": ""
-    },
-    {
       "key": "serviceId",
       "value": ""
     },
@@ -72,6 +68,14 @@
     },
     {
       "key": "activityId",
+      "value": ""
+    },
+    {
+      "key": "boardId",
+      "value": ""
+    },
+    {
+      "key": "staffId",
       "value": ""
     }
   ],
@@ -233,44 +237,35 @@
       "name": "Public CMS",
       "item": [
         {
-          "name": "List Active Team",
+          "name": "List Active Board",
           "request": {
             "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/public/team?category=",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "public",
-                "team"
-              ],
-              "query": [
-                {
-                  "key": "category",
-                  "value": "",
-                  "description": "optional: staff (Staff Members) | board (Board of Directors)"
-                }
-              ]
-            },
-            "description": "All active team members. Optional `?category=staff|board`. Each item includes `imageUrl`."
+            "url": "{{baseUrl}}/api/public/board",
+            "description": "Board of Directors. Frontend: Governance board. Includes imageUrl."
           }
         },
         {
-          "name": "List Staff Members",
+          "name": "Get One Board Member",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/api/public/team/staff",
-            "description": "Staff Members only. Frontend: Governance staff/leadership. Includes `imageUrl`."
+            "url": "{{baseUrl}}/api/public/board/{{boardId}}",
+            "description": "Single board member by id."
           }
         },
         {
-          "name": "List Board of Directors",
+          "name": "List Active Staff",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/api/public/team/board",
-            "description": "Board of Directors only. Frontend: Governance board. Includes `imageUrl`."
+            "url": "{{baseUrl}}/api/public/staff",
+            "description": "Staff Members. Frontend: Governance staff/leadership. Includes imageUrl."
+          }
+        },
+        {
+          "name": "Get One Staff Member",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/public/staff/{{staffId}}",
+            "description": "Single staff member by id."
           }
         },
         {
@@ -410,7 +405,7 @@
           }
         }
       ],
-      "description": "No auth. Use for public frontend pages. Photos are `imageUrl` on each item (no standalone Image API)."
+      "description": "No auth. Board and Staff are separate models/endpoints (no /team). Photos are imageUrl on each person."
     },
     {
       "name": "Admin Dashboard",
@@ -1086,10 +1081,11 @@
       ]
     },
     {
-      "name": "Admin CMS Team",
+      "name": "Admin CMS Board",
+      "description": "Auth required. Board of Directors model. Set imageUrl for photo.",
       "item": [
         {
-          "name": "List Team",
+          "name": "List Board",
           "request": {
             "method": "GET",
             "header": [
@@ -1098,34 +1094,30 @@
                 "value": "Bearer {{token}}"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/admin/team?category=",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "admin",
-                "team"
-              ],
-              "query": [
-                {
-                  "key": "category",
-                  "value": "",
-                  "description": "optional: staff | board"
-                }
-              ]
-            }
+            "url": "{{baseUrl}}/api/admin/board"
           }
         },
         {
-          "name": "Create Staff Member",
+          "name": "Get Board Member",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/board/{{boardId}}"
+          }
+        },
+        {
+          "name": "Create Board Member",
           "event": [
             {
               "listen": "test",
               "script": {
                 "exec": [
-                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('teamId', j.data.id); } catch(e){}"
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('boardId', j.data.id); } catch(e){}"
                 ]
               }
             }
@@ -1144,46 +1136,14 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"role\": \"Program Lead\",\n  \"category\": \"staff\",\n  \"bio\": \"Works on community programs\",\n  \"imageUrl\": \"/uploads/team.png\",\n  \"linkedinUrl\": \"https://linkedin.com\",\n  \"twitterUrl\": \"\",\n  \"displayOrder\": 1,\n  \"isActive\": true\n}"
+              "raw": "{\n  \"name\": \"Alex Board\",\n  \"role\": \"Board Member\",\n  \"bio\": \"Provides strategic oversight and mission alignment.\",\n  \"imageUrl\": \"/uploads/board.png\",\n  \"linkedinUrl\": \"https://linkedin.com\",\n  \"displayOrder\": 1,\n  \"isActive\": true\n}"
             },
-            "url": "{{baseUrl}}/api/admin/team",
-            "description": "Create Staff Member. `category` must be `staff`. `imageUrl` = photo URL."
+            "url": "{{baseUrl}}/api/admin/board",
+            "description": "Create a Board of Directors member. imageUrl = photo URL."
           }
         },
         {
-          "name": "Create Board Director",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('teamId', j.data.id); } catch(e){}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Alex Board\",\n  \"role\": \"Board Member\",\n  \"category\": \"board\",\n  \"bio\": \"Provides strategic oversight and mission alignment.\",\n  \"imageUrl\": \"/uploads/board.png\",\n  \"linkedinUrl\": \"https://linkedin.com\",\n  \"displayOrder\": 1,\n  \"isActive\": true\n}"
-            },
-            "url": "{{baseUrl}}/api/admin/team",
-            "description": "Create Board Director. `category` must be `board`. `imageUrl` = photo URL."
-          }
-        },
-        {
-          "name": "Update Team Member",
+          "name": "Update Board Member",
           "request": {
             "method": "PATCH",
             "header": [
@@ -1198,14 +1158,13 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"category\": \"board\",\n  \"role\": \"Director\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80\"\n}"
+              "raw": "{\n  \"role\": \"Director\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80\"\n}"
             },
-            "url": "{{baseUrl}}/api/admin/team/{{teamId}}",
-            "description": "Patch any TeamMember fields including `imageUrl` and `category` (`staff`|`board`)."
+            "url": "{{baseUrl}}/api/admin/board/{{boardId}}"
           }
         },
         {
-          "name": "Delete Team Member",
+          "name": "Delete Board Member",
           "request": {
             "method": "DELETE",
             "header": [
@@ -1214,11 +1173,108 @@
                 "value": "Bearer {{token}}"
               }
             ],
-            "url": "{{baseUrl}}/api/admin/team/{{teamId}}"
+            "url": "{{baseUrl}}/api/admin/board/{{boardId}}"
           }
         }
-      ],
-      "description": "Auth required. `category`: `staff` | `board`. Set `imageUrl` for the person photo."
+      ]
+    },
+    {
+      "name": "Admin CMS Staff",
+      "description": "Auth required. Staff Members model. Set imageUrl for photo.",
+      "item": [
+        {
+          "name": "List Staff",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/staff"
+          }
+        },
+        {
+          "name": "Get Staff Member",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/staff/{{staffId}}"
+          }
+        },
+        {
+          "name": "Create Staff Member",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try { const j = pm.response.json(); if (j.data && j.data.id) pm.collectionVariables.set('staffId', j.data.id); } catch(e){}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"role\": \"Program Lead\",\n  \"bio\": \"Works on community programs\",\n  \"imageUrl\": \"/uploads/staff.png\",\n  \"linkedinUrl\": \"https://linkedin.com\",\n  \"twitterUrl\": \"\",\n  \"displayOrder\": 1,\n  \"isActive\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/staff",
+            "description": "Create a Staff Member. imageUrl = photo URL."
+          }
+        },
+        {
+          "name": "Update Staff Member",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"Director of Programs\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/staff/{{staffId}}"
+          }
+        },
+        {
+          "name": "Delete Staff Member",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/staff/{{staffId}}"
+          }
+        }
+      ]
     },
     {
       "name": "Admin CMS Services",

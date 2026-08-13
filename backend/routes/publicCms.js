@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { publicCms } = require('../controllers/admin.controller');
 
-router.get('/team', publicCms.team);
-router.get('/team/staff', publicCms.teamStaff);
-router.get('/team/board', publicCms.teamBoard);
+router.get('/board', publicCms.board);
+router.get('/board/:id', publicCms.boardOne);
+router.get('/staff', publicCms.staff);
+router.get('/staff/:id', publicCms.staffOne);
+
 router.get('/services', publicCms.services);
 router.get('/programs', publicCms.programs);
 

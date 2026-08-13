@@ -13,7 +13,8 @@
     "db:seed:stories": "node scripts/seed-stories.js",
     "db:seed:resources": "node scripts/seed-resources.js",
     "db:seed:faqs": "node scripts/seed-faqs.js",
-    "db:seed:team": "node scripts/seed-team.js"
+    "db:seed:board": "node scripts/seed-board.js",
+    "db:seed:staff": "node scripts/seed-staff.js"
   },
   "keywords": [],
   "author": "",
