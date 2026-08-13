@@ -74,6 +74,24 @@ router.post('/programs', admin.programs.create);
 router.patch('/programs/:id', admin.programs.update);
 router.delete('/programs/:id', admin.programs.remove);
 
+router.get('/stories', admin.stories.list);
+router.get('/stories/:id', admin.stories.getOne);
+router.post('/stories', admin.stories.create);
+router.patch('/stories/:id', admin.stories.update);
+router.delete('/stories/:id', admin.stories.remove);
+
+router.get('/resources', admin.resources.list);
+router.get('/resources/:id', admin.resources.getOne);
+router.post('/resources', admin.resources.create);
+router.patch('/resources/:id', admin.resources.update);
+router.delete('/resources/:id', admin.resources.remove);
+
+router.get('/faqs', admin.faqs.list);
+router.get('/faqs/:id', admin.faqs.getOne);
+router.post('/faqs', admin.faqs.create);
+router.patch('/faqs/:id', admin.faqs.update);
+router.delete('/faqs/:id', admin.faqs.remove);
+
 router.get('/media', admin.media.list);
 router.post('/media', upload.single('file'), admin.media.create);
 router.delete('/media/:id', admin.media.remove);

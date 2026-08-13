@@ -9,7 +9,11 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "db:seed:admin": "node scripts/seed-admin.js"
+    "db:seed:admin": "node scripts/seed-admin.js",
+    "db:seed:stories": "node scripts/seed-stories.js",
+    "db:seed:resources": "node scripts/seed-resources.js",
+    "db:seed:faqs": "node scripts/seed-faqs.js",
+    "db:seed:team": "node scripts/seed-team.js"
   },
   "keywords": [],
   "author": "",
