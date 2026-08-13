@@ -1,15 +1,47 @@
 import { PageShell } from "@/components/foundation/PageShell";
-import { FileText, BarChart3, BookOpen, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { FileText, BarChart3, BookOpen, ShieldCheck, ArrowUpRight, Download } from "lucide-react";
 import { foundation } from "@/config/foundation";
+import { usePublicResources } from "@/hooks/useCms";
+import { getFullMediaUrl } from "@/lib/utils";
 
-const categories = [
-  { icon: FileText, title: "Program Briefs", body: "Short summaries of each program area: objectives, delivery model, partners, and expected outcomes.", accent: "hsl(var(--trust-blue))", tag: "Briefs" },
-  { icon: BarChart3, title: "Research & Evaluation", body: "Independent evaluations, monitoring reports, and applied research from our hubs and partners.", accent: "hsl(var(--amber))", tag: "Evidence" },
-  { icon: BookOpen, title: "Open Curricula", body: "Course outlines and learning materials that partners can adapt for their own communities.", accent: "hsl(160,55%,42%)", tag: "Curricula" },
-  { icon: ShieldCheck, title: "Policies & Safeguards", body: "Safeguarding, data protection, code of conduct, and financial governance documents.", accent: "hsl(280,45%,55%)", tag: "Policies" },
-];
+const ACCENT_MAP: Record<string, string> = {
+  briefs: "hsl(var(--trust-blue))",
+  evidence: "hsl(var(--amber))",
+  curricula: "hsl(160,55%,42%)",
+  policies: "hsl(280,45%,55%)",
+};
+
+const ICON_MAP: Record<string, typeof FileText> = {
+  briefs: FileText,
+  evidence: BarChart3,
+  curricula: BookOpen,
+  policies: ShieldCheck,
+};
 
 export default function Resources() {
+  const { data: dbResources, isLoading } = usePublicResources();
+
+  const resources = (dbResources || []).map((item: Record<string, unknown>, idx: number) => {
+    const categoryKey = ((item.category as string) || "").toLowerCase();
+    const icon = ICON_MAP[categoryKey] || FileText;
+    const accent = (item.accent as string) || ACCENT_MAP[categoryKey] || "hsl(var(--trust-blue))";
+    const file = (item.fileUrl as string) || (item.file_url as string);
+    const external = (item.externalUrl as string) || (item.external_url as string);
+    const directLink = file ? getFullMediaUrl(file) : external || null;
+
+    return {
+      icon,
+      title: (item.title as string) || "Untitled Resource",
+      body: (item.description as string) || "",
+      tag: (item.tag as string) || (item.category as string) || "Resource",
+      accent,
+      link: directLink,
+    };
+  });
+
+
+  const collectionsCount = new Set(resources.map((r) => r.tag)).size;
+
   return (
     <PageShell
       eyebrow="Resources"
@@ -18,9 +50,9 @@ export default function Resources() {
     >
       <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
-          { k: "Libraries", v: "4 collections" },
-          { k: "License", v: "Adaptable" },
-          { k: "Access", v: "On request" },
+          { k: "Resources", v: `${resources.length} items` },
+          { k: "Collections", v: `${collectionsCount} categories` },
+          { k: "Access", v: "Open / On request" },
           { k: "Language", v: "English" },
         ].map((s) => (
           <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
@@ -31,9 +63,9 @@ export default function Resources() {
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
-        {categories.map((c) => (
+        {resources.map((c, idx) => (
           <article
-            key={c.title}
+            key={`${c.title}-${idx}`}
             className="group overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)]"
           >
             <div className="h-1.5 w-full" style={{ background: c.accent }} aria-hidden />
@@ -47,13 +79,25 @@ export default function Resources() {
                   <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{c.tag}</span>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
-                <a
-                  href={`mailto:${foundation.contactEmail}?subject=${encodeURIComponent(`Request: ${c.title}`)}`}
-                  className="mt-3 inline-flex items-center gap-1 text-xs font-semibold hover:underline"
-                  style={{ color: c.accent }}
-                >
-                  Request materials <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                </a>
+                {c.link ? (
+                  <a
+                    href={c.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-1 text-xs font-semibold hover:underline"
+                    style={{ color: c.accent }}
+                  >
+                    <Download className="h-3.5 w-3.5" aria-hidden /> Download / Access Resource
+                  </a>
+                ) : (
+                  <a
+                    href={`mailto:${foundation.contactEmail}?subject=${encodeURIComponent(`Request: ${c.title}`)}`}
+                    className="mt-3 inline-flex items-center gap-1 text-xs font-semibold hover:underline"
+                    style={{ color: c.accent }}
+                  >
+                    Request materials <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                  </a>
+                )}
               </div>
             </div>
           </article>
@@ -62,3 +106,4 @@ export default function Resources() {
     </PageShell>
   );
 }
+

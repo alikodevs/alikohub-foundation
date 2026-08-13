@@ -8,11 +8,6 @@ import {
 import { usePublicPrograms } from "@/hooks/useCms";
 import { getFullMediaUrl } from "@/lib/utils";
 
-import serviceAcademy from "@/assets/service-academy.jpg";
-import serviceConsultancy from "@/assets/service-consultancy.png";
-import serviceContech from "@/assets/service-contech.png";
-import serviceEvents from "@/assets/service-events.jpg";
-import serviceAlikowash from "@/assets/service-alikowash.png";
 
 type Pillar = {
   icon: typeof GraduationCap;
@@ -30,153 +25,6 @@ type Pillar = {
     border: string;    // card border accent
   };
 };
-
-// Vibrant, foundation-aligned palettes (blue / amber / sage / terracotta / plum / sky)
-const defaultPillars: Pillar[] = [
-  {
-    icon: GraduationCap,
-    title: "Aliko Academy",
-    description: "Career-driven learning powered by a purpose-built LMS, delivering market-aligned training across technology, business, and STEM.",
-    bullets: [
-      "AI, Machine Learning, Data Analytics, Cloud Computing",
-      "Software Development, Databases, Testing",
-      "Finance, Accounting, Design, Marketing",
-      "Academic preparation and language learning",
-    ],
-    image: serviceAcademy,
-    theme: {
-      ring: "bg-[hsl(var(--trust-blue))]",
-      chip: "bg-white/20",
-      chipFg: "text-white",
-      dot: "bg-[hsl(var(--trust-blue))]",
-      link: "text-[hsl(var(--trust-blue))]",
-      border: "border-[hsl(var(--trust-blue)/0.35)]",
-    },
-  },
-  {
-    icon: Heart,
-    title: "Digital Health & One Health",
-    description: "Strengthening public health systems and climate resilience by preparing youth for emerging roles in health technology and surveillance.",
-    bullets: [
-      "Public health workforce pipelines",
-      "Mobile health for prevention and behavior change",
-      "Health data analytics and population health",
-      "Climate-linked and zoonotic disease monitoring",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=80",
-    theme: {
-      ring: "bg-[hsl(var(--terracotta))]",
-      chip: "bg-white/20",
-      chipFg: "text-white",
-      dot: "bg-[hsl(var(--terracotta))]",
-      link: "text-[hsl(var(--terracotta))]",
-      border: "border-[hsl(var(--terracotta)/0.35)]",
-    },
-  },
-  {
-    icon: Cpu,
-    title: "STEM & Engineering",
-    description: "Preparing youth for roles in infrastructure, energy, construction technology, and sustainable development with industry-standard tools.",
-    bullets: [
-      "Engineering fundamentals and digital design",
-      "Modeling, simulation, and GIS",
-      "Civil, electrical, mechanical, and architectural fields",
-      "Applied problem-solving aligned with employer expectations",
-    ],
-    image: serviceContech,
-    theme: {
-      ring: "bg-[hsl(var(--plum))]",
-      chip: "bg-white/20",
-      chipFg: "text-white",
-      dot: "bg-[hsl(var(--plum))]",
-      link: "text-[hsl(var(--plum))]",
-      border: "border-[hsl(var(--plum)/0.35)]",
-    },
-  },
-  {
-    icon: Briefcase,
-    title: "Consultancy & Career Services",
-    description: "Guiding youth through personalized career pathways and connecting them to employers, investors, and public sector partners.",
-    bullets: [
-      "Career advice, skill assessment, resume building",
-      "Employer and talent matchmaking",
-      "Investor forums and innovation challenges",
-      "Government and private sector partnership spaces",
-    ],
-    image: serviceConsultancy,
-    theme: {
-      ring: "bg-[hsl(var(--amber))]",
-      chip: "bg-white/25",
-      chipFg: "text-white",
-      dot: "bg-[hsl(var(--amber))]",
-      link: "text-[hsl(25,90%,32%)]",
-      border: "border-[hsl(var(--amber)/0.4)]",
-    },
-  },
-  {
-    icon: CalendarDays,
-    title: "Events & Ecosystem Building",
-    description: "Industry matchmaking, innovation forums, and ecosystem-building engagements that connect learners to real opportunity.",
-    bullets: [
-      "Investor forums and innovation challenges",
-      "Industry matchmaking events",
-      "Ecosystem-building engagements",
-      "Government and private sector partnership spaces",
-    ],
-    image: serviceEvents,
-    theme: {
-      ring: "bg-[hsl(var(--sky))]",
-      chip: "bg-white/20",
-      chipFg: "text-white",
-      dot: "bg-[hsl(var(--sky))]",
-      link: "text-[hsl(var(--sky))]",
-      border: "border-[hsl(var(--sky)/0.35)]",
-    },
-  },
-  {
-    icon: Droplets,
-    title: "Aliko WASH",
-    description: "Water, sanitation, and hygiene solutions driving public health impact and community resilience across Africa.",
-    bullets: [
-      "Clean water access and infrastructure",
-      "Sanitation systems and hygiene education",
-      "Community health and disease prevention",
-      "Sustainable WASH technology solutions",
-    ],
-    image: serviceAlikowash,
-    link: "https://alikowash.lovable.app/",
-    theme: {
-      ring: "bg-gradient-to-br from-[hsl(var(--trust-blue))] to-[hsl(var(--sky))]",
-      chip: "bg-white/25",
-      chipFg: "text-white",
-      dot: "bg-[hsl(var(--trust-blue))]",
-      link: "text-[hsl(var(--trust-blue))]",
-      border: "border-[hsl(var(--trust-blue)/0.35)]",
-    },
-  },
-  {
-    icon: Leaf,
-    title: "Community Resilience",
-    description: "Climate adaptation, food security, and social cohesion programs that help communities adapt, recover, and thrive.",
-    bullets: [
-      "Climate-smart agriculture and food systems",
-      "Local disaster preparedness and response",
-      "Youth leadership and civic participation",
-      "Cross-sector partnerships with governments and NGOs",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
-    theme: {
-      ring: "bg-[hsl(var(--sage))]",
-      chip: "bg-white/25",
-      chipFg: "text-white",
-      dot: "bg-[hsl(var(--sage))]",
-      link: "text-[hsl(var(--sage))]",
-      border: "border-[hsl(var(--sage)/0.4)]",
-    },
-  },
-];
 
 const THEMES = [
   {
@@ -228,6 +76,7 @@ const THEMES = [
     border: "border-[hsl(var(--sage)/0.4)]",
   },
 ];
+
 
 export default function Programs() {
   const { data: publicPrograms } = usePublicPrograms();

@@ -2,17 +2,7 @@ import { PageShell } from "@/components/foundation/PageShell";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { HelpCircle, Mail } from "lucide-react";
 import { foundation } from "@/config/foundation";
-
-const faqs = [
-  { cat: "About", q: "What does AlikoHub Foundation do?", a: "We build pathways for youth through education, workforce development, technology, health, water and sanitation, entrepreneurship, and community resilience programs, designed with the communities we serve." },
-  { cat: "About", q: "Where does the Foundation work?", a: "Our operating base is Seattle, Washington in the United States, with active program work in Ethiopia. We partner globally, but scale is disciplined and community-led." },
-  { cat: "About", q: "How is the Foundation different from AlikoHub the company?", a: "The Foundation is a nonprofit with independent governance, finances, and program accountability. It operates separately from any commercial AlikoHub entity." },
-  { cat: "Support", q: "How can I support the Foundation?", a: "You can partner with us, volunteer expertise, or contribute financially. Visit Get Involved or Partnerships to begin a conversation." },
-  { cat: "Support", q: "Is my contribution tax-deductible?", a: "AlikoHub Foundation is a 501(c)(3) nonprofit. Contributions are tax-deductible to the fullest extent allowed by law. Consult your tax advisor for your specific situation." },
-  { cat: "Accountability", q: "How do you measure impact?", a: "We define outcomes with communities and partners, collect proportionate data, protect participant privacy, and publish results in our Annual Report and Impact page." },
-  { cat: "Accountability", q: "How do you protect participant data and safety?", a: "Safeguarding is a board-level responsibility. We follow data-minimization, consent, and protection practices described in our Ethics and Privacy pages." },
-  { cat: "Contact", q: "How can I contact the Foundation?", a: `Email ${foundation.contactEmail} or use the Contact page. Media and partnership inquiries are routed to the appropriate team.` },
-];
+import { usePublicFaqs } from "@/hooks/useCms";
 
 const catAccent: Record<string, string> = {
   About: "hsl(var(--trust-blue))",
@@ -22,6 +12,17 @@ const catAccent: Record<string, string> = {
 };
 
 export default function FAQ() {
+  const { data: dbFaqs, isLoading } = usePublicFaqs();
+
+  const faqs = (dbFaqs || []).map((item: Record<string, unknown>) => ({
+    cat: (item.category as string) || "About",
+    q: (item.question as string) || "Untitled Question",
+    a: (item.answer as string) || "",
+  }));
+
+  const categoriesCount = new Set(faqs.map((f) => f.cat)).size;
+
+
   return (
     <PageShell
       eyebrow="Help"
@@ -31,7 +32,7 @@ export default function FAQ() {
       <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:inline-grid sm:w-fit">
         {[
           { k: "Questions", v: `${faqs.length} answered` },
-          { k: "Categories", v: `${Object.keys(catAccent).length} topics` },
+          { k: "Categories", v: `${categoriesCount} topics` },
         ].map((s) => (
           <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
@@ -44,7 +45,7 @@ export default function FAQ() {
         <Accordion type="single" collapsible className="space-y-3">
           {faqs.map((f, i) => (
             <AccordionItem
-              key={f.q}
+              key={`${f.q}-${i}`}
               value={`item-${i}`}
               className="overflow-hidden rounded-2xl border border-border bg-card"
             >
@@ -52,7 +53,7 @@ export default function FAQ() {
                 <div className="flex flex-1 items-start gap-3 text-left">
                   <span
                     className="mt-1 shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white"
-                    style={{ background: catAccent[f.cat] }}
+                    style={{ background: catAccent[f.cat] || "hsl(var(--trust-blue))" }}
                   >
                     {f.cat}
                   </span>
@@ -83,3 +84,4 @@ export default function FAQ() {
     </PageShell>
   );
 }
+
