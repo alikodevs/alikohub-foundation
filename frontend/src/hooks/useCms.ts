@@ -12,6 +12,22 @@ export function usePublicHero() {
   });
 }
 
+export function usePublicBoard() {
+  return useQuery({
+    queryKey: ["public-board"],
+    queryFn: publicService.getActiveBoard,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function usePublicStaff() {
+  return useQuery({
+    queryKey: ["public-staff"],
+    queryFn: publicService.getActiveStaff,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
 export function usePublicTeam() {
   return useQuery({
     queryKey: ["public-team"],
@@ -102,6 +118,72 @@ export function useAdminHero() {
   return { ...query, save, remove };
 }
 
+export function useAdminBoard() {
+  const queryClient = useQueryClient();
+
+  const query = useQuery({
+    queryKey: ["admin-board"],
+    queryFn: cmsService.listBoard,
+  });
+
+  const save = useMutation({
+    mutationFn: ({ id, values }: { id?: string; values: Record<string, unknown> }) =>
+      id ? cmsService.updateBoard(id, values) : cmsService.createBoard(values),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["admin-board"] });
+      queryClient.invalidateQueries({ queryKey: ["public-board"] });
+      toast.success(variables.id ? "Board member updated" : "Board member added");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  const remove = useMutation({
+    mutationFn: cmsService.deleteBoard,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-board"] });
+      queryClient.invalidateQueries({ queryKey: ["public-board"] });
+      toast.success("Board member deleted");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  return { ...query, save, remove };
+}
+
+export function useAdminStaff() {
+  const queryClient = useQueryClient();
+
+  const query = useQuery({
+    queryKey: ["admin-staff"],
+    queryFn: cmsService.listStaff,
+  });
+
+  const save = useMutation({
+    mutationFn: ({ id, values }: { id?: string; values: Record<string, unknown> }) =>
+      id ? cmsService.updateStaff(id, values) : cmsService.createStaff(values),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["admin-staff"] });
+      queryClient.invalidateQueries({ queryKey: ["public-staff"] });
+      queryClient.invalidateQueries({ queryKey: ["public-team"] });
+      toast.success(variables.id ? "Staff member updated" : "Staff member added");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  const remove = useMutation({
+    mutationFn: cmsService.deleteStaff,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-staff"] });
+      queryClient.invalidateQueries({ queryKey: ["public-staff"] });
+      queryClient.invalidateQueries({ queryKey: ["public-team"] });
+      toast.success("Staff member deleted");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  return { ...query, save, remove };
+}
+
 export function useAdminTeam() {
   const queryClient = useQueryClient();
 
@@ -116,6 +198,8 @@ export function useAdminTeam() {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["admin-team"] });
       queryClient.invalidateQueries({ queryKey: ["public-team"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-staff"] });
+      queryClient.invalidateQueries({ queryKey: ["public-staff"] });
       toast.success(variables.id ? "Team member updated" : "Team member added");
     },
     onError: (err: Error) => toast.error(err.message),
@@ -126,6 +210,8 @@ export function useAdminTeam() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-team"] });
       queryClient.invalidateQueries({ queryKey: ["public-team"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-staff"] });
+      queryClient.invalidateQueries({ queryKey: ["public-staff"] });
       toast.success("Team member deleted");
     },
     onError: (err: Error) => toast.error(err.message),

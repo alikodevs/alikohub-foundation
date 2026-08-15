@@ -22,24 +22,66 @@ export const cmsService = {
     return res.data;
   },
 
-  // Admin Team
+  // Admin Board
+  async listBoard() {
+    const res = await api.get("/admin/board");
+    return res.data.data;
+  },
+
+  async createBoard(data: Record<string, unknown>) {
+    const res = await api.post("/admin/board", data);
+    return res.data.data;
+  },
+
+  async updateBoard(id: string, data: Record<string, unknown>) {
+    const res = await api.patch(`/admin/board/${id}`, data);
+    return res.data.data;
+  },
+
+  async deleteBoard(id: string) {
+    const res = await api.delete(`/admin/board/${id}`);
+    return res.data;
+  },
+
+  // Admin Staff
+  async listStaff() {
+    const res = await api.get("/admin/staff");
+    return res.data.data;
+  },
+
+  async createStaff(data: Record<string, unknown>) {
+    const res = await api.post("/admin/staff", data);
+    return res.data.data;
+  },
+
+  async updateStaff(id: string, data: Record<string, unknown>) {
+    const res = await api.patch(`/admin/staff/${id}`, data);
+    return res.data.data;
+  },
+
+  async deleteStaff(id: string) {
+    const res = await api.delete(`/admin/staff/${id}`);
+    return res.data;
+  },
+
+  // Admin Team (legacy alias to staff)
   async listTeam() {
-    const res = await api.get("/admin/team");
+    const res = await api.get("/admin/staff");
     return res.data.data;
   },
 
   async createTeam(data: Record<string, unknown>) {
-    const res = await api.post("/admin/team", data);
+    const res = await api.post("/admin/staff", data);
     return res.data.data;
   },
 
   async updateTeam(id: string, data: Record<string, unknown>) {
-    const res = await api.patch(`/admin/team/${id}`, data);
+    const res = await api.patch(`/admin/staff/${id}`, data);
     return res.data.data;
   },
 
   async deleteTeam(id: string) {
-    const res = await api.delete(`/admin/team/${id}`);
+    const res = await api.delete(`/admin/staff/${id}`);
     return res.data;
   },
 

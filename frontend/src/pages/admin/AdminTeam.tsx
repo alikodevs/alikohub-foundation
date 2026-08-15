@@ -15,6 +15,8 @@ import {
   Calendar,
   ExternalLink,
   Users,
+  Crown,
+  UserCheck,
 } from "lucide-react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { Button } from "@/components/ui/button";
@@ -45,7 +47,8 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Card, CardContent } from "@/components/ui/card";
-import { useAdminTeam } from "@/hooks/useCms";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAdminBoard, useAdminStaff } from "@/hooks/useCms";
 import { MediaPicker, getFullMediaUrl } from "@/components/admin/MediaPicker";
 
 const teamSchema = z.object({
@@ -81,8 +84,14 @@ interface TeamMember {
 }
 
 export default function AdminTeam() {
-  const { data: membersData, isLoading, save, remove } = useAdminTeam();
-  const members = (membersData || []) as TeamMember[];
+  const [activeTab, setActiveTab] = useState<"board" | "staff">("board");
+
+  const boardQuery = useAdminBoard();
+  const staffQuery = useAdminStaff();
+
+  const activeQuery = activeTab === "board" ? boardQuery : staffQuery;
+  const members = (activeQuery.data || []) as TeamMember[];
+  const isLoading = activeQuery.isLoading;
 
   // Sidebar / Drawer States
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -158,7 +167,7 @@ export default function AdminTeam() {
       is_active: data.isActive,
     };
 
-    save.mutate(
+    activeQuery.save.mutate(
       { id: selectedMember?.id, values: payload as unknown as Record<string, unknown> },
       {
         onSuccess: (res) => {
@@ -180,7 +189,7 @@ export default function AdminTeam() {
 
   async function deleteMember(member: TeamMember) {
     if (!confirm(`Are you sure you want to delete "${member.name}"?`)) return;
-    remove.mutate(member.id, {
+    activeQuery.remove.mutate(member.id, {
       onSuccess: () => {
         if (selectedMember?.id === member.id) {
           setIsDrawerOpen(false);
@@ -189,163 +198,191 @@ export default function AdminTeam() {
     });
   }
 
+  const renderTable = (items: TeamMember[]) => (
+    <Card className="overflow-hidden">
+      <CardContent className="p-0">
+        {isLoading ? (
+          <div className="flex justify-center py-16">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        ) : items.length === 0 ? (
+          <div className="py-16 text-center text-muted-foreground flex flex-col items-center gap-2">
+            <Users className="h-12 w-12 text-muted-foreground/40" />
+            <p className="font-semibold text-foreground">
+              No {activeTab === "board" ? "board members" : "staff members"} added yet
+            </p>
+            <p className="text-sm">
+              Click "Add {activeTab === "board" ? "Board Member" : "Staff Member"}" to create a profile.
+            </p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Member</TableHead>
+                  <TableHead>Role / Position</TableHead>
+                  <TableHead>Links</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Joined</TableHead>
+                  <TableHead className="w-[60px] text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {items.map((member) => {
+                  const imagePath = member.imageUrl || member.image_url;
+                  const avatarUrl = getFullMediaUrl(imagePath);
+                  const isActive = member.isActive ?? member.is_active ?? true;
+                  const createdDate = member.createdAt || member.created_at;
+
+                  return (
+                    <TableRow key={member.id} className="hover:bg-muted/50 transition">
+                      {/* Member (Avatar + Name) */}
+                      <TableCell className="font-medium">
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-full overflow-hidden bg-muted border flex-shrink-0 flex items-center justify-center">
+                            {imagePath ? (
+                              <img
+                                src={avatarUrl}
+                                alt={member.name}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  if (imagePath && e.currentTarget.src !== window.location.origin + imagePath) {
+                                    e.currentTarget.src = imagePath;
+                                  }
+                                }}
+                              />
+                            ) : (
+                              <User className="h-4 w-4 text-muted-foreground" />
+                            )}
+                          </div>
+                          <span className="font-semibold text-foreground truncate max-w-[180px]">
+                            {member.name}
+                          </span>
+                        </div>
+                      </TableCell>
+
+                      {/* Role / Position */}
+                      <TableCell className="text-muted-foreground">
+                        {member.role || "—"}
+                      </TableCell>
+
+                      {/* Links / Contact */}
+                      <TableCell>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          {member.linkedinUrl || member.linkedin_url ? (
+                            <a
+                              href={member.linkedinUrl || member.linkedin_url || "#"}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="hover:text-primary transition"
+                              title="LinkedIn profile"
+                            >
+                              <Linkedin className="h-4 w-4" />
+                            </a>
+                          ) : null}
+                          {member.twitterUrl || member.twitter_url ? (
+                            <a
+                              href={member.twitterUrl || member.twitter_url || "#"}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="hover:text-primary transition"
+                              title="Twitter/X profile"
+                            >
+                              <Twitter className="h-4 w-4" />
+                            </a>
+                          ) : null}
+                          {!member.linkedinUrl && !member.linkedin_url && !member.twitterUrl && !member.twitter_url && (
+                            <span className="text-xs text-muted-foreground/60">—</span>
+                          )}
+                        </div>
+                      </TableCell>
+
+                      {/* Status */}
+                      <TableCell>
+                        <Badge variant={isActive ? "default" : "secondary"}>
+                          {isActive ? "Active" : "Inactive"}
+                        </Badge>
+                      </TableCell>
+
+                      {/* Created/Joined */}
+                      <TableCell className="text-xs text-muted-foreground">
+                        {createdDate ? new Date(createdDate).toLocaleDateString() : "—"}
+                      </TableCell>
+
+                      {/* Actions Three-Dot Menu */}
+                      <TableCell className="text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <MoreVertical className="h-4 w-4" />
+                              <span className="sr-only">Open actions</span>
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end" className="w-36">
+                            <DropdownMenuItem onClick={() => openViewDrawer(member)}>
+                              <Eye className="mr-2 h-4 w-4 text-muted-foreground" />
+                              View
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => deleteMember(member)}
+                              className="text-destructive focus:text-destructive"
+                            >
+                              <Trash2 className="mr-2 h-4 w-4" />
+                              Delete
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+
   return (
     <AdminLayout>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Team Members</h1>
+            <h1 className="text-3xl font-bold text-foreground">Team & Governance</h1>
             <p className="text-muted-foreground mt-1">
-              Manage team profiles, roles, and public display settings
+              Manage Board of Directors and Staff members separately
             </p>
           </div>
           <Button onClick={openCreateDrawer} className="w-full sm:w-auto">
-            <Plus className="mr-2 h-4 w-4" /> Add Team Member
+            <Plus className="mr-2 h-4 w-4" />
+            Add {activeTab === "board" ? "Board Member" : "Staff Member"}
           </Button>
         </div>
 
-        {/* Responsive Table */}
-        <Card className="overflow-hidden">
-          <CardContent className="p-0">
-            {isLoading ? (
-              <div className="flex justify-center py-16">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              </div>
-            ) : members.length === 0 ? (
-              <div className="py-16 text-center text-muted-foreground flex flex-col items-center gap-2">
-                <Users className="h-12 w-12 text-muted-foreground/40" />
-                <p className="font-semibold text-foreground">No team members added yet</p>
-                <p className="text-sm">Click "Add Team Member" to create your first team profile.</p>
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Member</TableHead>
-                      <TableHead>Role / Position</TableHead>
-                      <TableHead>Links</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Joined</TableHead>
-                      <TableHead className="w-[60px] text-right">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {members.map((member) => {
-                      const imagePath = member.imageUrl || member.image_url;
-                      const avatarUrl = getFullMediaUrl(imagePath);
-                      const isActive = member.isActive ?? member.is_active ?? true;
-                      const createdDate = member.createdAt || member.created_at;
+        {/* Board vs Staff Tabs */}
+        <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as "board" | "staff")}>
+          <TabsList className="grid w-full grid-cols-2 sm:w-[400px]">
+            <TabsTrigger value="board" className="flex items-center gap-2">
+              <Crown className="h-4 w-4" />
+              Board of Directors
+            </TabsTrigger>
+            <TabsTrigger value="staff" className="flex items-center gap-2">
+              <UserCheck className="h-4 w-4" />
+              Staff & Leadership
+            </TabsTrigger>
+          </TabsList>
 
-                      return (
-                        <TableRow key={member.id} className="hover:bg-muted/50 transition">
-                          {/* Member (Avatar + Name) */}
-                          <TableCell className="font-medium">
-                            <div className="flex items-center gap-3">
-                              <div className="w-9 h-9 rounded-full overflow-hidden bg-muted border flex-shrink-0 flex items-center justify-center">
-                                {imagePath ? (
-                                  <img
-                                    src={avatarUrl}
-                                    alt={member.name}
-                                    className="w-full h-full object-cover"
-                                    onError={(e) => {
-                                      if (imagePath && e.currentTarget.src !== window.location.origin + imagePath) {
-                                        e.currentTarget.src = imagePath;
-                                      }
-                                    }}
-                                  />
-                                ) : (
-                                  <User className="h-4 w-4 text-muted-foreground" />
-                                )}
-                              </div>
-                              <span className="font-semibold text-foreground truncate max-w-[180px]">
-                                {member.name}
-                              </span>
-                            </div>
-                          </TableCell>
+          <TabsContent value="board" className="mt-4">
+            {renderTable((boardQuery.data || []) as TeamMember[])}
+          </TabsContent>
 
-                          {/* Role / Position */}
-                          <TableCell className="text-muted-foreground">
-                            {member.role || "—"}
-                          </TableCell>
-
-                          {/* Links / Contact */}
-                          <TableCell>
-                            <div className="flex items-center gap-2 text-muted-foreground">
-                              {member.linkedinUrl || member.linkedin_url ? (
-                                <a
-                                  href={member.linkedinUrl || member.linkedin_url || "#"}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  className="hover:text-primary transition"
-                                  title="LinkedIn profile"
-                                >
-                                  <Linkedin className="h-4 w-4" />
-                                </a>
-                              ) : null}
-                              {member.twitterUrl || member.twitter_url ? (
-                                <a
-                                  href={member.twitterUrl || member.twitter_url || "#"}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  className="hover:text-primary transition"
-                                  title="Twitter/X profile"
-                                >
-                                  <Twitter className="h-4 w-4" />
-                                </a>
-                              ) : null}
-                              {!member.linkedinUrl && !member.linkedin_url && !member.twitterUrl && !member.twitter_url && (
-                                <span className="text-xs text-muted-foreground/60">—</span>
-                              )}
-                            </div>
-                          </TableCell>
-
-                          {/* Status */}
-                          <TableCell>
-                            <Badge variant={isActive ? "default" : "secondary"}>
-                              {isActive ? "Active" : "Inactive"}
-                            </Badge>
-                          </TableCell>
-
-                          {/* Created/Joined */}
-                          <TableCell className="text-xs text-muted-foreground">
-                            {createdDate ? new Date(createdDate).toLocaleDateString() : "—"}
-                          </TableCell>
-
-                          {/* Actions Three-Dot Menu */}
-                          <TableCell className="text-right">
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon" className="h-8 w-8">
-                                  <MoreVertical className="h-4 w-4" />
-                                  <span className="sr-only">Open actions</span>
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end" className="w-36">
-                                <DropdownMenuItem onClick={() => openViewDrawer(member)}>
-                                  <Eye className="mr-2 h-4 w-4 text-muted-foreground" />
-                                  View
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                  onClick={() => deleteMember(member)}
-                                  className="text-destructive focus:text-destructive"
-                                >
-                                  <Trash2 className="mr-2 h-4 w-4" />
-                                  Delete
-                                </DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+          <TabsContent value="staff" className="mt-4">
+            {renderTable((staffQuery.data || []) as TeamMember[])}
+          </TabsContent>
+        </Tabs>
 
         {/* Right-Side Details / Edit Drawer (Sheet) */}
         <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
@@ -355,14 +392,14 @@ export default function AdminTeam() {
                 <SheetTitle className="text-xl">
                   {isEditMode
                     ? selectedMember
-                      ? "Edit Team Member"
-                      : "Add New Team Member"
-                    : "Member Profile"}
+                      ? `Edit ${activeTab === "board" ? "Board" : "Staff"} Member`
+                      : `Add New ${activeTab === "board" ? "Board" : "Staff"} Member`
+                    : `${activeTab === "board" ? "Board" : "Staff"} Member Profile`}
                 </SheetTitle>
                 <SheetDescription>
                   {isEditMode
                     ? "Modify details below and click Save Changes to apply."
-                    : "Detailed view of the team member profile."}
+                    : "Detailed view of profile."}
                 </SheetDescription>
               </SheetHeader>
 
@@ -381,7 +418,6 @@ export default function AdminTeam() {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-
                           <User className="h-10 w-10 text-muted-foreground" />
                         )}
                       </div>
@@ -389,9 +425,12 @@ export default function AdminTeam() {
                       <p className="text-sm text-primary font-medium mt-0.5">
                         {selectedMember.role || "No title assigned"}
                       </p>
-                      <div className="mt-2">
+                      <div className="mt-2 flex items-center gap-2">
                         <Badge variant={selectedMember.isActive ?? selectedMember.is_active ?? true ? "default" : "secondary"}>
                           {selectedMember.isActive ?? selectedMember.is_active ?? true ? "Active Profile" : "Inactive"}
+                        </Badge>
+                        <Badge variant="outline">
+                          {activeTab === "board" ? "Board Member" : "Staff Member"}
                         </Badge>
                       </div>
                     </div>
@@ -489,7 +528,7 @@ export default function AdminTeam() {
                           <FormItem>
                             <FormLabel>Role / Title</FormLabel>
                             <FormControl>
-                              <Input placeholder="e.g. Program Lead" {...field} />
+                              <Input placeholder={activeTab === "board" ? "e.g. Board Chair" : "e.g. Program Lead"} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -633,9 +672,9 @@ export default function AdminTeam() {
                   <Button
                     type="submit"
                     form="drawer-team-form"
-                    disabled={save.isPending || (Boolean(selectedMember) && !isDirty)}
+                    disabled={activeQuery.save.isPending || (Boolean(selectedMember) && !isDirty)}
                   >
-                    {save.isPending ? (
+                    {activeQuery.save.isPending ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Saving...
@@ -655,3 +694,4 @@ export default function AdminTeam() {
     </AdminLayout>
   );
 }
+

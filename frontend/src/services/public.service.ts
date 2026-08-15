@@ -40,8 +40,28 @@ export const publicService = {
     return res.data.data;
   },
 
+  async getActiveBoard() {
+    const res = await api.get("/public/board");
+    return res.data.data;
+  },
+
+  async getActiveBoardById(id: string) {
+    const res = await api.get(`/public/board/${id}`);
+    return res.data.data;
+  },
+
+  async getActiveStaff() {
+    const res = await api.get("/public/staff");
+    return res.data.data;
+  },
+
+  async getActiveStaffById(id: string) {
+    const res = await api.get(`/public/staff/${id}`);
+    return res.data.data;
+  },
+
   async getActiveTeam() {
-    const res = await api.get("/public/team");
+    const res = await api.get("/public/staff");
     return res.data.data;
   },
 

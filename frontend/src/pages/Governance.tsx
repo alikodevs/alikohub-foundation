@@ -11,9 +11,8 @@ import {
   FileCheck,
   Scale,
 } from "lucide-react";
-import { board } from "@/config/foundation";
 import { LeadershipCarousel, Leader } from "@/components/foundation/LeadershipCarousel";
-import { usePublicTeam } from "@/hooks/useCms";
+import { usePublicBoard, usePublicStaff } from "@/hooks/useCms";
 import { getFullMediaUrl } from "@/lib/utils";
 
 const levels = [
@@ -33,25 +32,40 @@ const safeguards = [
 ];
 
 export default function Governance() {
-  const { data: publicTeam } = usePublicTeam();
+  const { data: boardData } = usePublicBoard();
+  const { data: staffData } = usePublicStaff();
 
-  const leadershipPeople: Leader[] =
-    publicTeam && publicTeam.length > 0
-      ? publicTeam.map((item: Record<string, unknown>) => {
-          const rawImg =
-            (item.imageUrl as string) ||
-            (item.image_url as string) ||
-            (item.image as string) ||
-            (item.photo as string);
+  const boardPeople: Leader[] =
+    (boardData || []).map((item: Record<string, unknown>) => {
+      const rawImg =
+        (item.imageUrl as string) ||
+        (item.image_url as string) ||
+        (item.image as string) ||
+        (item.photo as string);
 
-          return {
-            name: (item.name as string) || "",
-            role: (item.role as string) || "",
-            bio: (item.bio as string) || "",
-            photo: rawImg ? getFullMediaUrl(rawImg) : "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-          };
-        })
-      : [];
+      return {
+        name: (item.name as string) || "",
+        role: (item.role as string) || "",
+        bio: (item.bio as string) || "",
+        photo: rawImg ? getFullMediaUrl(rawImg) : "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      };
+    });
+
+  const staffPeople: Leader[] =
+    (staffData || []).map((item: Record<string, unknown>) => {
+      const rawImg =
+        (item.imageUrl as string) ||
+        (item.image_url as string) ||
+        (item.image as string) ||
+        (item.photo as string);
+
+      return {
+        name: (item.name as string) || "",
+        role: (item.role as string) || "",
+        bio: (item.bio as string) || "",
+        photo: rawImg ? getFullMediaUrl(rawImg) : "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      };
+    });
 
   return (
     <PageShell
@@ -62,8 +76,8 @@ export default function Governance() {
       {/* Compact governance ribbon */}
       <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
         {[
-          { k: "Directors", v: `${board.length} on Board` },
-          { k: "Leadership", v: `${leadershipPeople.length} Executives` },
+          { k: "Board", v: `${boardPeople.length} Directors` },
+          { k: "Staff & Leadership", v: `${staffPeople.length} Members` },
           { k: "Structure", v: `${levels.length} Layers` },
           { k: "Safeguards", v: "Board-approved" },
         ].map((s) => (
@@ -74,13 +88,13 @@ export default function Governance() {
         ))}
       </div>
 
-      {/* Board */}
-      <LeadershipCarousel eyebrow="Leadership" title="Chair and Governing Board" people={board} />
+      {/* Board of Directors */}
+      <LeadershipCarousel eyebrow="Leadership" title="Chair and Governing Board" people={boardPeople} />
 
-      {/* Leadership team */}
-      {leadershipPeople.length > 0 && (
+      {/* Staff & Leadership team below Board */}
+      {staffPeople.length > 0 && (
         <div className="mt-16">
-          <LeadershipCarousel eyebrow="Our people" title="Leadership Team" people={leadershipPeople} />
+          <LeadershipCarousel eyebrow="Our Team" title="Leadership & Staff" people={staffPeople} />
         </div>
       )}
 

@@ -24,90 +24,81 @@ export const foundation = {
 } as const;
 
 import boniPhoto from "@/assets/team/boni-aliko.png";
-import birassaPhoto from "@/assets/team/birassa-aliko.png";
+import bonsaPhoto from "@/assets/team/bonsa-birassa.jpg";
 import abdiPhoto from "@/assets/team/abdi-birassa.png";
 import biniyamPhoto from "@/assets/team/biniyam-birassa.png";
-import natnaelPhoto from "@/assets/team/natnael-tariku.png";
-import bonsaPhoto from "@/assets/team/bonsa-birassa.jpg";
 import lensaPhoto from "@/assets/team/lensa-aliko.png";
-import baatiPhoto from "@/assets/team/baati-aliko.png";
+import baatiiPhoto from "@/assets/team/baati-aliko.png";
+const hannaPhoto = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80";
+const eyouelPhoto = "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80";
 
 // Board of Directors.
 export const board = [
   {
-    name: "Boni Aliko, PMP",
+    name: "Boni Aliko",
     role: "Chairman and Director",
     bio: "Founder of the AlikoHub ecosystem, leading strategy, partnerships, and program design across education, health, and workforce development.",
     photo: boniPhoto,
   },
   {
-    name: "Birassa Aliko",
-    role: "Board Member",
-    bio: "Strategic oversight, leadership guidance, and governance alignment for Foundation initiatives.",
-    photo: birassaPhoto,
+    name: "Eyouel Berhe, MBA",
+    role: "Treasurer; Board Member",
+    bio: "Oversees financial stewardship, reserves policy, and donor accountability, ensuring every dollar advances the Foundation's mission.",
+    photo: eyouelPhoto,
   },
   {
-    name: "Natnael Tariku",
-    role: "Board Member & Technical Director",
-    bio: "Oversees technology architecture, program delivery safeguards, and operations monitoring.",
-    photo: natnaelPhoto,
+    name: "Hanna Tesfaye",
+    role: "Secretary",
+    bio: "Leads governance, board coordination, and safeguarding oversight, keeping the Foundation accountable to its communities and partners.",
+    photo: hannaPhoto,
   },
 ] as const;
-
 
 // Leadership team.
 export const leadership = [
   {
-    name: "Boni Aliko, PMP",
+    name: "Boni Aliko",
     role: "Founder & Chief Executive Officer",
-    bio: "Sets the Foundation's strategic direction, builds global partnerships, and leads program design across priority areas.",
+    bio: "Sets the Foundation's strategic direction, builds global partnerships, and leads program design across the seven priority areas.",
     photo: boniPhoto,
   },
   {
-    name: "Birassa Aliko",
-    role: "Chairman & Director",
-    bio: "Provides strategic guidance, governance, and institutional relationship direction.",
-    photo: birassaPhoto,
+    name: "Bonsa Aliko",
+    role: "Chief Operating Officer",
+    bio: "Runs day-to-day operations, finance, and hub delivery, translating strategy into accountable execution on the ground.",
+    photo: bonsaPhoto,
   },
   {
-    name: "Abdi Birassa",
+    name: "Abdi Aliko",
     role: "Chief Technology Officer",
-    bio: "Leads technology, digital inclusion infrastructure, and data systems powering monitoring and reporting.",
+    bio: "Leads technology, digital inclusion infrastructure, and the data systems that power monitoring, learning, and reporting.",
     photo: abdiPhoto,
   },
   {
     name: "Biniyam Birassa",
     role: "Program Director",
-    bio: "Oversees program quality across education, workforce, and enterprise tracks.",
+    bio: "Oversees program quality across education, workforce, and enterprise tracks, from curriculum design to outcome measurement.",
     photo: biniyamPhoto,
-  },
-  {
-    name: "Natnael Tariku",
-    role: "Technical Director",
-    bio: "Directs technical implementation, architecture, and innovation delivery.",
-    photo: natnaelPhoto,
-  },
-  {
-    name: "Bonsa Birassa",
-    role: "Chief Operating Officer",
-    bio: "Runs day-to-day operations, finance, and hub delivery, translating strategy into accountable execution.",
-    photo: bonsaPhoto,
   },
   {
     name: "Lensa Aliko",
     role: "Director of Health Programs",
-    bio: "Directs public and digital health work, health workforce pipelines, and WASH-linked initiatives.",
+    bio: "Directs public and digital health work, including health workforce pipelines, mobile health, and WASH-linked initiatives.",
     photo: lensaPhoto,
   },
   {
-    name: "Baati Aliko",
-    role: "Director of Strategic Partnerships",
-    bio: "Builds institutional partnerships, funding relationships, and collaborations that extend program reach.",
-    photo: baatiPhoto,
+    name: "Baatii Aliko",
+    role: "Director of Strategic Partnership & Development",
+    bio: "Builds institutional partnerships, funding relationships, and the collaborations that extend program reach.",
+    photo: baatiiPhoto,
+  },
+  {
+    name: "Hanna Tesfaye",
+    role: "Marketing Manager & Executive Assistant",
+    bio: "Leads communications, brand stewardship, and executive coordination across the Foundation's teams and partners.",
+    photo: hannaPhoto,
   },
 ] as const;
-
-
 
 // Program pillars aligned with the mission statement.
 export const programPillars = [
@@ -157,9 +148,28 @@ export const programPillars = [
 
 // Approach model: Listen → Equip → Implement → Measure → Scale.
 export const approach = [
-  { stage: "Listen", meaning: "Begin with community priorities. Design with, not for." },
-  { stage: "Equip", meaning: "Provide skills, tools, infrastructure, technical support, and access to networks." },
-  { stage: "Implement", meaning: "Deliver practical initiatives through accountable local and global partnerships." },
-  { stage: "Measure", meaning: "Define outcomes, collect proportionate data, protect privacy, and learn from results." },
-  { stage: "Scale", meaning: "Expand what works responsibly while adapting to place, culture, and capacity." },
+  {
+    stage: "Listen",
+    meaning: "Begin with community priorities. Design with, not for.",
+  },
+  {
+    stage: "Equip",
+    meaning:
+      "Provide skills, tools, infrastructure, technical support, and access to networks.",
+  },
+  {
+    stage: "Implement",
+    meaning:
+      "Deliver practical initiatives through accountable local and global partnerships.",
+  },
+  {
+    stage: "Measure",
+    meaning:
+      "Define outcomes, collect proportionate data, protect privacy, and learn from results.",
+  },
+  {
+    stage: "Scale",
+    meaning:
+      "Expand what works responsibly while adapting to place, culture, and capacity.",
+  },
 ] as const;

@@ -22,7 +22,7 @@ export default function AdminDashboard() {
 
   const data = dashboardData
     ? {
-        team: dashboardData.counts?.teamMembers ?? 0,
+        team: (dashboardData.counts?.staffMembers ?? 0) + (dashboardData.counts?.boardOfDirectors ?? 0) || (dashboardData.counts?.teamMembers ?? 0),
         services: dashboardData.counts?.services ?? 0,
         programs: dashboardData.counts?.programs ?? 0,
         media: dashboardData.counts?.mediaLibrary ?? 0,
