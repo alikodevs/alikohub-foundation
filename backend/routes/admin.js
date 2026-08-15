@@ -59,10 +59,17 @@ router.post('/activities', admin.activities.create);
 router.get('/notification-settings', admin.notificationSettings.get);
 router.patch('/notification-settings', admin.notificationSettings.update);
 
-router.get('/team', admin.team.list);
-router.post('/team', admin.team.create);
-router.patch('/team/:id', admin.team.update);
-router.delete('/team/:id', admin.team.remove);
+router.get('/board', admin.board.list);
+router.get('/board/:id', admin.board.getOne);
+router.post('/board', admin.board.create);
+router.patch('/board/:id', admin.board.update);
+router.delete('/board/:id', admin.board.remove);
+
+router.get('/staff', admin.staff.list);
+router.get('/staff/:id', admin.staff.getOne);
+router.post('/staff', admin.staff.create);
+router.patch('/staff/:id', admin.staff.update);
+router.delete('/staff/:id', admin.staff.remove);
 
 router.get('/services', admin.services.list);
 router.post('/services', admin.services.create);

@@ -1,19 +1,11 @@
 const db = require('../models');
 
-async function ensureTeamCategoryColumn() {
+async function dropLegacyTeamTable() {
   try {
-    const qi = db.sequelize.getQueryInterface();
-    const table = await qi.describeTable('team_members');
-    if (!table.category) {
-      await qi.addColumn('team_members', 'category', {
-        type: db.Sequelize.ENUM('staff', 'board'),
-        allowNull: false,
-        defaultValue: 'staff',
-      });
-      console.log('Added team_members.category (staff | board)');
-    }
+    await db.sequelize.getQueryInterface().dropTable('team_members');
+    console.log('Dropped legacy team_members table');
   } catch (err) {
-    // Ignore if table is brand new / not ready; sync already covered creation.
+    // Table may already be gone.
   }
 }
 
@@ -27,7 +19,7 @@ const connectDB = async () => {
 
     // Plain sync creates missing tables. Avoid { alter: true } — can break on unique indexes.
     await db.sequelize.sync();
-    await ensureTeamCategoryColumn();
+    await dropLegacyTeamTable();
     console.log('All tables synced!');
   } catch (err) {
     console.error(`${label} connection failed:`, err.message);

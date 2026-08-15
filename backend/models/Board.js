@@ -4,11 +4,11 @@ const { Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
-  class TeamMember extends Model {
+  class Board extends Model {
     static associate() {}
   }
 
-  TeamMember.init(
+  Board.init(
     {
       id: {
         type: DataTypes.STRING(36),
@@ -17,12 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: { type: DataTypes.STRING, allowNull: false },
       role: { type: DataTypes.STRING, allowNull: true },
-      category: {
-        type: DataTypes.ENUM('staff', 'board'),
-        allowNull: false,
-        defaultValue: 'staff',
-        comment: 'staff = Staff Members, board = Board of Directors',
-      },
       bio: { type: DataTypes.TEXT, allowNull: true },
       imageUrl: { type: DataTypes.STRING, allowNull: true, field: 'image_url' },
       linkedinUrl: { type: DataTypes.STRING, allowNull: true, field: 'linkedin_url' },
@@ -42,12 +36,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'TeamMember',
-      tableName: 'team_members',
+      modelName: 'Board',
+      tableName: 'boards',
       timestamps: true,
       underscored: true,
     }
   );
 
-  return TeamMember;
+  return Board;
 };

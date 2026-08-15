@@ -13,7 +13,8 @@ const {
   CrmTask,
   CrmDonation,
   CrmNotificationSetting,
-  TeamMember,
+  Board,
+  Staff,
   Service,
   Program,
   Story,
@@ -29,9 +30,11 @@ const organizations = createCrudController(CrmOrganization);
 const deals = createCrudController(CrmDeal);
 const tasks = createCrudController(CrmTask);
 const donations = createCrudController(CrmDonation);
-const team = createCrudController(TeamMember, {
+const board = createCrudController(Board, {
   order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
-  searchable: ['category'],
+});
+const staff = createCrudController(Staff, {
+  order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
 });
 const services = createCrudController(Service, {
   order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
@@ -200,7 +203,6 @@ const media = {
 const dashboard = async (req, res) => {
   try {
     const [
-      teamCount,
       staffCount,
       boardCount,
       servicesCount,
@@ -218,9 +220,8 @@ const dashboard = async (req, res) => {
       donations,
       recentActivities,
     ] = await Promise.all([
-      TeamMember.count(),
-      TeamMember.count({ where: { category: 'staff' } }),
-      TeamMember.count({ where: { category: 'board' } }),
+      Staff.count(),
+      Board.count(),
       Service.count(),
       Program.count(),
       Story.count({ where: { type: 'story' } }),
@@ -245,7 +246,6 @@ const dashboard = async (req, res) => {
     return res.json({
       data: {
         counts: {
-          teamMembers: teamCount,
           staffMembers: staffCount,
           boardOfDirectors: boardCount,
           services: servicesCount,
@@ -309,30 +309,38 @@ const getPublicStory = async (req, res, typeFilter) => {
   }
 };
 
-const listPublicTeam = async (req, res, categoryFilter) => {
+const listPublicPeople = async (Model, req, res, label) => {
   try {
-    const where = { isActive: true };
-    if (categoryFilter) where.category = categoryFilter;
-    else if (req.query.category === 'staff' || req.query.category === 'board') {
-      where.category = req.query.category;
-    }
-
-    const data = await TeamMember.findAll({
-      where,
+    const data = await Model.findAll({
+      where: { isActive: true },
       order: [['displayOrder', 'ASC'], ['createdAt', 'DESC']],
     });
     return res.json({ data });
   } catch (err) {
-    console.error('Public team list:', err.message);
+    console.error(`Public ${label} list:`, err.message);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const getPublicPerson = async (Model, req, res, label) => {
+  try {
+    const data = await Model.findOne({
+      where: { id: req.params.id, isActive: true },
+    });
+    if (!data) return res.status(404).json({ message: 'Not found' });
+    return res.json({ data });
+  } catch (err) {
+    console.error(`Public ${label} get:`, err.message);
     return res.status(500).json({ message: 'Server error' });
   }
 };
 
 // Public CMS reads (active only) for frontend
 const publicCms = {
-  team: (req, res) => listPublicTeam(req, res, null),
-  teamStaff: (req, res) => listPublicTeam(req, res, 'staff'),
-  teamBoard: (req, res) => listPublicTeam(req, res, 'board'),
+  board: (req, res) => listPublicPeople(Board, req, res, 'board'),
+  boardOne: (req, res) => getPublicPerson(Board, req, res, 'board'),
+  staff: (req, res) => listPublicPeople(Staff, req, res, 'staff'),
+  staffOne: (req, res) => getPublicPerson(Staff, req, res, 'staff'),
   services: async (req, res) => {
     const data = await Service.findAll({
       where: { isActive: true },
@@ -418,7 +426,8 @@ module.exports = {
   deals,
   tasks,
   donations,
-  team,
+  board,
+  staff,
   services,
   programs,
   stories,
