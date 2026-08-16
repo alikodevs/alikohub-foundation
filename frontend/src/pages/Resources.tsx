@@ -48,19 +48,6 @@ export default function Resources() {
       title="Practical, shareable knowledge."
       intro="Program briefs, evaluations, curricula, and policies for partners, funders, and communities working alongside us."
     >
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
-        {[
-          { k: "Resources", v: `${resources.length} items` },
-          { k: "Collections", v: `${collectionsCount} categories` },
-          { k: "Access", v: "Open / On request" },
-          { k: "Language", v: "English" },
-        ].map((s) => (
-          <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
-            <p className="mt-1 font-heading text-sm font-bold text-foreground">{s.v}</p>
-          </div>
-        ))}
-      </div>
 
       <div className="grid gap-5 md:grid-cols-2">
         {resources.map((c, idx) => (

@@ -73,20 +73,7 @@ export default function Governance() {
       title="Accountable by design."
       intro="AlikoHub Foundation is governed by a board of directors and a multi-layered operational structure that pairs centralized leadership with strong local ownership."
     >
-      {/* Compact governance ribbon */}
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
-        {[
-          { k: "Board", v: `${boardPeople.length} Directors` },
-          { k: "Staff & Leadership", v: `${staffPeople.length} Members` },
-          { k: "Structure", v: `${levels.length} Layers` },
-          { k: "Safeguards", v: "Board-approved" },
-        ].map((s) => (
-          <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
-            <p className="mt-1 font-heading text-sm font-bold text-foreground">{s.v}</p>
-          </div>
-        ))}
-      </div>
+   
 
       {/* Board of Directors */}
       <LeadershipCarousel eyebrow="Leadership" title="Chair and Governing Board" people={boardPeople} />

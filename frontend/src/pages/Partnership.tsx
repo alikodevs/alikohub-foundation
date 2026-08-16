@@ -1,9 +1,20 @@
 import { PageShell } from "@/components/foundation/PageShell";
 import { LegalSeparationStrip } from "@/components/foundation/LegalSeparationStrip";
 import { InquiryForm } from "@/components/foundation/InquiryForm";
-import { PartnershipTiers, WaysToSupport, PartnerVoices } from "@/components/foundation/PartnershipEnhancements";
+import {
+  PartnershipTiers,
+  WaysToSupport,
+  PartnerVoices,
+} from "@/components/foundation/PartnershipEnhancements";
 import { foundation } from "@/config/foundation";
-import { Building2, Users, Handshake, GraduationCap, CheckCircle2, Mail, ArrowRight } from "lucide-react";
+import {
+  Building2,
+  Users,
+  Handshake,
+  GraduationCap,
+  CheckCircle2,
+  Mail,
+} from "lucide-react";
 
 const partnerTypes = [
   {
@@ -40,10 +51,26 @@ const principles = [
 ];
 
 const steps = [
-  { n: "01", title: "Introduce", body: "Share a brief about your organization and the collaboration you have in mind." },
-  { n: "02", title: "Explore", body: "A short discovery conversation to test alignment and community fit." },
-  { n: "03", title: "Design", body: "Co-design scope, roles, safeguarding, and measurement together." },
-  { n: "04", title: "Launch", body: "Formalize the partnership with a documented agreement and clear milestones." },
+  {
+    n: "01",
+    title: "Introduce",
+    body: "Share a brief about your organization and the collaboration you have in mind.",
+  },
+  {
+    n: "02",
+    title: "Explore",
+    body: "A short discovery conversation to test alignment and community fit.",
+  },
+  {
+    n: "03",
+    title: "Design",
+    body: "Co-design scope, roles, safeguarding, and measurement together.",
+  },
+  {
+    n: "04",
+    title: "Launch",
+    body: "Formalize the partnership with a documented agreement and clear milestones.",
+  },
 ];
 
 export default function Partnership() {
@@ -53,109 +80,155 @@ export default function Partnership() {
       title="Partner with a foundation that listens first."
       intro="We are building a small number of deep, accountable partnerships rather than many shallow ones. If our missions align, we would like to hear from you."
     >
-      {/* Compact ribbon */}
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:inline-grid sm:w-fit">
-        {[
-          { k: "Partner types", v: "4 pathways" },
-          { k: "Onboarding", v: "4-step process" },
-        ].map((s) => (
-          <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
-            <p className="mt-1 font-heading text-sm font-bold text-foreground">{s.v}</p>
-          </div>
-        ))}
-      </div>
+      <section aria-labelledby="pathways-heading">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
+          Who we work with
+        </p>
+        <h2
+          id="pathways-heading"
+          className="mt-2 font-heading text-2xl font-semibold text-foreground"
+        >
+          Four partnership pathways
+        </h2>
 
-      {/* Who we partner with */}
-      <section>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Who we work with</p>
-          <h2 className="mt-2 font-heading text-2xl font-semibold text-foreground">Four partnership pathways</h2>
-        </div>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {partnerTypes.map((p) => (
+        {/* 2×2 icon-centered card grid — reference style */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          {partnerTypes.map((p, i) => (
             <article
               key={p.title}
-              className="group overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
+              className={`group flex flex-col items-start rounded-2xl border border-border p-7 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)] ${
+                i === 1
+                  ? "bg-[hsl(var(--warm-surface))] ring-1 ring-border"
+                  : "bg-card"
+              }`}
             >
-              <div className="h-1.5 w-full" style={{ background: p.accent }} aria-hidden />
-              <div className="flex gap-4 p-6">
-                <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-white"
-                  style={{ background: p.accent }}
-                >
-                  <p.icon className="h-5 w-5" aria-hidden />
-                </div>
-                <div>
-                  <h3 className="font-heading text-base font-semibold text-foreground">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-                </div>
+              {/* Icon container — solid accent background, white icon */}
+              <div
+                className="flex h-12 w-12 items-center justify-center rounded-xl text-white"
+                style={{ background: p.accent }}
+              >
+                <p.icon className="h-6 w-6" aria-hidden />
               </div>
+
+              {/* Title */}
+              <h3 className="mt-5 font-heading text-base font-bold text-foreground">
+                {p.title}
+              </h3>
+
+              {/* Description */}
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {p.body}
+              </p>
             </article>
           ))}
         </div>
       </section>
 
-      {/* Onboarding steps */}
-      <section className="mt-16">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">How it works</p>
-          <h2 className="mt-2 font-heading text-2xl font-semibold text-foreground">From first conversation to launch</h2>
-        </div>
-        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s, i) => (
-            <div key={s.n} className="relative rounded-xl border border-border bg-card p-5">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center justify-center rounded-full bg-[hsl(var(--trust-blue))] px-2.5 py-0.5 text-[10px] font-bold text-white">
+      {/* ── How it works — process timeline ──────────────────────────────────── */}
+      {/* Communicates momentum: Introduce → Explore → Design → Launch */}
+      <section className="mt-16" aria-labelledby="process-heading">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
+          How it works
+        </p>
+        <h2
+          id="process-heading"
+          className="mt-2 font-heading text-2xl font-semibold text-foreground"
+        >
+          From first conversation to launch
+        </h2>
+
+        <div className="relative mt-10">
+          {/* Connector line — desktop only, sits behind the numbered circles */}
+          <div
+            className="absolute left-5 right-5 top-[19px] hidden h-px bg-border lg:block"
+            aria-hidden
+          />
+
+          <div className="grid gap-8 lg:grid-cols-4">
+            {steps.map((s) => (
+              <div
+                key={s.n}
+                className="flex gap-4 lg:flex-col lg:items-center lg:gap-3 lg:text-center"
+              >
+                {/* Numbered circle — sits above the connector line via z-10 + ring */}
+                <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[hsl(var(--trust-blue))] font-heading text-sm font-bold text-white ring-4 ring-background">
                   {s.n}
-                </span>
-                <h3 className="font-heading text-sm font-semibold text-foreground">{s.title}</h3>
+                </div>
+                <div>
+                  <h3 className="font-heading text-base font-semibold text-foreground">
+                    {s.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    {s.body}
+                  </p>
+                </div>
               </div>
-              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{s.body}</p>
-              {i < steps.length - 1 && (
-                <ArrowRight className="absolute -right-3 top-1/2 hidden h-4 w-4 -translate-y-1/2 text-[hsl(var(--amber))] lg:block" aria-hidden />
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Principles */}
-      <section className="mt-16">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Our commitments</p>
-          <h2 className="mt-2 font-heading text-2xl font-semibold text-foreground">Partnership principles</h2>
-        </div>
-        <ul className="mt-6 grid gap-3 md:grid-cols-2">
-          {principles.map((p) => (
-            <li
-              key={p}
-              className="flex items-start gap-3 rounded-xl border border-border bg-card p-4 text-sm text-foreground"
-            >
-              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[hsl(var(--amber))]" aria-hidden />
-              <span>{p}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
+      {/* ── Partnership levels — structured rows (from PartnershipEnhancements) ── */}
       <PartnershipTiers />
+
+      {/* ── Beyond funding — lightweight list (from PartnershipEnhancements) ───── */}
       <WaysToSupport />
+
+      {/* ── Our commitments — trust / governance container ───────────────────── */}
+      {/* A single highlighted block that communicates: "here is how we operate." */}
+      <section className="mt-16" aria-labelledby="commitments-heading">
+        <div className="rounded-xl border border-[hsl(var(--trust-blue))]/20 bg-[hsl(var(--warm-surface))] p-7 sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
+            Our commitments
+          </p>
+          <h2
+            id="commitments-heading"
+            className="mt-2 font-heading text-2xl font-semibold text-foreground"
+          >
+            Partnership principles
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            These are the operating principles that govern every partnership we
+            enter.
+          </p>
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+            {principles.map((p) => (
+              <li
+                key={p}
+                className="flex items-start gap-3 text-sm text-foreground"
+              >
+                <CheckCircle2
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[hsl(var(--amber))]"
+                  aria-hidden
+                />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── Partner voices — editorial testimonials (from PartnershipEnhancements) */}
       <PartnerVoices />
 
-
-      {/* Inquiry */}
+      {/* ── Inquiry — final conversion point ─────────────────────────────────── */}
       <section className="mt-16" aria-labelledby="partnership-inquiry">
         <div className="rounded-2xl border border-[hsl(var(--trust-blue))]/25 bg-[hsl(var(--warm-surface))] p-8 lg:p-10">
           <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">Start a conversation</p>
-              <h2 id="partnership-inquiry" className="mt-2 font-heading text-2xl font-semibold text-foreground">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(var(--amber))]">
+                Start a conversation
+              </p>
+              <h2
+                id="partnership-inquiry"
+                className="mt-2 font-heading text-2xl font-semibold text-foreground"
+              >
                 Tell us about the partnership you have in mind.
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Share a brief about your organization, the community you serve, and the collaboration you envision. A
-                member of our team will respond personally.
+                Share a brief about your organization, the community you serve,
+                and the collaboration you envision. A member of our team will
+                respond personally.
               </p>
               <a
                 href={`mailto:${foundation.contactEmail}?subject=Partnership%20Inquiry`}
@@ -166,7 +239,11 @@ export default function Partnership() {
               </a>
             </div>
             <div className="rounded-xl border border-border bg-card p-6">
-              <InquiryForm sourcePage="/partnership" defaultType="partnership" lockType />
+              <InquiryForm
+                sourcePage="/partnership"
+                defaultType="partnership"
+                lockType
+              />
             </div>
           </div>
         </div>

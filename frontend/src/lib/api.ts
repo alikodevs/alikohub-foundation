@@ -7,7 +7,8 @@ const api = axios.create({
 
 // Interceptor: Attach bearer token to request
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("auth_token") || localStorage.getItem("token");
+  const token =
+    localStorage.getItem("auth_token") || localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -18,16 +19,22 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+    if (
+      error.response &&
+      (error.response.status === 401 || error.response.status === 403)
+    ) {
       localStorage.removeItem("auth_token");
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      if (window.location.pathname !== "/admin-portal/login" && window.location.pathname !== "/auth") {
+      if (
+        window.location.pathname !== "/admin-portal/login" &&
+        window.location.pathname !== "/auth"
+      ) {
         window.location.href = "/admin-portal/login";
       }
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;

@@ -7,7 +7,12 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getFullMediaUrl(url?: string | null): string {
   if (!url) return "";
-  if (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("data:") || url.startsWith("blob:")) {
+  if (
+    url.startsWith("http://") ||
+    url.startsWith("https://") ||
+    url.startsWith("data:") ||
+    url.startsWith("blob:")
+  ) {
     return url;
   }
   const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
@@ -15,4 +20,3 @@ export function getFullMediaUrl(url?: string | null): string {
   const cleanUrl = url.startsWith("/") ? url : `/${url}`;
   return `${baseUrl}${cleanUrl}`;
 }
-

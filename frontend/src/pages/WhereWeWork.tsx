@@ -45,20 +45,6 @@ export default function WhereWeWork() {
       title="Rooted in place. Connected globally."
       intro="The Foundation is based in Seattle, Washington and delivers priority programs in Ethiopia. Every initiative is locally led and community-designed, with a delivery model built to travel as partnerships grow."
     >
-      {/* Compact footprint ribbon */}
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
-        {[
-          { k: "Headquarters", v: "Seattle, WA" },
-          { k: "Priority region", v: "Ethiopia" },
-          { k: "Delivery model", v: "Locally led" },
-          { k: "Alignment", v: "AU 2063 · UN SDGs" },
-        ].map((s) => (
-          <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
-            <p className="mt-1 font-heading text-sm font-bold text-foreground">{s.v}</p>
-          </div>
-        ))}
-      </div>
 
       {/* Image-anchored anchors */}
       <div className="grid gap-6 md:grid-cols-2">

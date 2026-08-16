@@ -17,19 +17,6 @@ export default function Ethics() {
       title="Integrity is a design choice, not a disclaimer."
       intro="Our commitments to safety, dignity, and honesty shape how we design programs, choose partners, handle data, and communicate results."
     >
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
-        {[
-          { k: "Principles", v: `${principles.length} commitments` },
-          { k: "Oversight", v: "Board-approved" },
-          { k: "Data", v: "Minimized & consented" },
-          { k: "Reporting", v: "Honest & complete" },
-        ].map((s) => (
-          <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
-            <p className="mt-1 font-heading text-sm font-bold text-foreground">{s.v}</p>
-          </div>
-        ))}
-      </div>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {principles.map((p) => (

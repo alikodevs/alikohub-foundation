@@ -40,18 +40,6 @@ export default function Stories() {
       title="Human stories. Practical insights."
       intro="Field reports, program notes, and community narratives from across our hubs, published with consent and grounded in evidence."
     >
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-3">
-        {[
-          { k: "Stories", v: `${stories.length} published` },
-          { k: "Publishing", v: "With consent" },
-          { k: "Grounded in", v: "Field evidence" },
-        ].map((s) => (
-          <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
-            <p className="mt-1 font-heading text-sm font-bold text-foreground">{s.v}</p>
-          </div>
-        ))}
-      </div>
 
       <div className="grid gap-6 md:grid-cols-3">
         {stories.map((t, idx) => (

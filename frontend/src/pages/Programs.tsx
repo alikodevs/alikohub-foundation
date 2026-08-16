@@ -125,20 +125,6 @@ export default function Programs() {
         </>
       }
     >
-      {/* Compact overview strip */}
-      <section className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {[
-          { v: `${pillars.length}`, l: "Program pillars", c: "text-[hsl(var(--trust-blue))]" },
-          { v: "3", l: "Delivery pathways", c: "text-[hsl(var(--amber))]" },
-          { v: "8", l: "Implementation steps", c: "text-[hsl(var(--terracotta))]" },
-          { v: "5", l: "Design principles", c: "text-[hsl(var(--sage))]" },
-        ].map((s) => (
-          <div key={s.l} className="rounded-xl border border-border bg-card px-4 py-3 text-center shadow-[var(--shadow-card)]">
-            <div className={`font-heading text-2xl font-extrabold ${s.c}`}>{s.v}</div>
-            <div className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{s.l}</div>
-          </div>
-        ))}
-      </section>
 
       {pillars.length > 0 ? (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">

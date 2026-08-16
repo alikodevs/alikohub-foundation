@@ -17,19 +17,6 @@ export default function Sustainability() {
       title="Built to last, not just to launch."
       intro="A model designed to thrive beyond initial grant funding, ensuring long-term continuity, financial independence, and community-driven growth."
     >
-      <div className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-3 sm:p-4 sm:grid-cols-4">
-        {[
-          { k: "Levers", v: `${models.length} revenue streams` },
-          { k: "Design", v: "Diversified" },
-          { k: "Time horizon", v: "Long-term continuity" },
-          { k: "Ownership", v: "Community-driven" },
-        ].map((s) => (
-          <div key={s.k} className="rounded-xl bg-[hsl(var(--warm-surface))] px-4 py-3">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--amber))]">{s.k}</p>
-            <p className="mt-1 font-heading text-sm font-bold text-foreground">{s.v}</p>
-          </div>
-        ))}
-      </div>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {models.map((m) => (
